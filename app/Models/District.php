@@ -15,7 +15,7 @@ class District extends Model
     use WithData;
     use HasUlids;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','province_id'];
     protected string $dataClass = DistrictData::class;
 
     public function neighborhoods(): HasMany

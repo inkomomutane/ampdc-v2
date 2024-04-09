@@ -1,0 +1,120 @@
+
+.v-select {
+    position: relative;
+    font-family: inherit;
+    @apply bg-slate-50 dark:bg-slate-600
+    rounded border-gray-300
+    dark:border-gray-500
+    dark:border-[1px]
+    text-sm
+    dark:placeholder-gray-400
+    dark:text-sm
+    dark:text-white
+    ;
+}
+
+
+.vs__selected-options {
+    @apply flex flex-wrap items-center w-full  px-3 relative   ;
+    padding: .25rem;
+}
+
+
+.vs__clear {
+    fill: var(--vs-controls-color);
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    margin-right: 8px;
+    @apply text-gray-600 dark:text-gray-50 text-sm;
+}
+
+.vs__dropdown-menu {
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    top: calc(100% - var(--vs-border-width));
+    left: 0;
+    z-index: var(--vs-dropdown-z-index);
+    padding: 5px 0;
+    margin: 0;
+    width: 100%;
+    max-height: var(--vs-dropdown-max-height);
+    min-width: var(--vs-dropdown-min-width);
+    overflow-y: auto;
+    box-shadow: var(--vs-dropdown-box-shadow);
+    border: var(--vs-border-width) var(--vs-border-style) var(--vs-border-color);
+    border-top-style: none;
+    border-radius: 0 0 var(--vs-border-radius) var(--vs-border-radius);
+    text-align: left;
+    list-style: none;
+    background: var(--vs-dropdown-bg);
+
+    @apply dark:text-white  dark:bg-slate-900;
+}
+
+.vs__no-options {
+    text-align: center
+}
+
+.vs__dropdown-option {
+    line-height: 1.42857143;
+    display: block;
+    padding: var(--vs-dropdown-option-padding);
+    clear: both;
+    color: var(--vs-dropdown-option-color);
+    white-space: nowrap;
+    cursor: pointer;
+    @apply py-2.5;
+}
+
+.vs__dropdown-option--highlight {
+    @apply bg-slate-700 hover:bg-slate-600 rounded-[2px] text-white dark:bg-gray-500 dark:hover:bg-slate-400
+}
+
+.vs__selected {
+    display: flex;
+    align-items: center;
+    border: var(--vs-selected-border-width) var(--vs-selected-border-style) var(--vs-selected-border-color);
+    border-radius: var(--vs-border-radius);
+    line-height: var(--vs-line-height);
+    margin: 4px 2px 0;
+    padding: 0 .25em;
+    z-index: 0;
+    @apply text-gray-800 dark:text-white;
+}
+
+
+.vs__search, .vs__search:focus {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    line-height: var(--vs-line-height);
+    font-size: var(--vs-font-size);
+    border: 1px solid transparent;
+    border-left: none;
+    outline: none;
+    margin: 4px 0 0;
+    padding: 0 7px;
+    background: none;
+    box-shadow: none;
+    width: 0;
+    max-width: 100%;
+    flex-grow: 1;
+    z-index: 1;
+    @apply text-gray-600;
+}
+
+.vs__search::-moz-placeholder {
+    @apply text-gray-600 dark:text-gray-400 text-sm
+}
+
+.vs__dropdown-toggle {
+    height: auto;
+    padding: 0.35rem;
+}
+
+.vs__search, .vs__selected, .vs__search:focus {
+    margin: 0;
+}

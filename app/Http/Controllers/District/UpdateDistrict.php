@@ -14,7 +14,7 @@ class UpdateDistrict
     {
         $validated = request()?->validate([
             'name' => ['required', Rule::unique(District::class, 'name')->ignore($district->id, 'id')],
-            'province_id' => 'required|numeric',
+            'province_id' => 'required',
         ]);
 
         try {

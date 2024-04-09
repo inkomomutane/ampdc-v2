@@ -2,30 +2,34 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-import { Provinces } from "@/types";
+import { Neighborhoods } from "@/types";
 import { ref, watch, PropType } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
-import CreateProvince from "./CreateProvince.vue";
-import EditProvince from "./EditProvince.vue";
-import DeleteProvince from "./DeleteProvince.vue";
+import CreateNeighborhood from "./CreateNeighborhood.vue";
+import EditNeighborhood from "./EditNeighborhood.vue";
+import DeleteNeighborhood from "./DeleteNeighborhood.vue";
 
 const props = defineProps({
-    provinces: {
-        type: Object as PropType<Provinces>,
+    neighborhoods: {
+        type: Object as PropType<Neighborhoods>,
+        required: true,
+    },
+    districts: {
+        type: Array<App.Data.DistrictData>,
         required: true,
     },
     search: String,
     messages: Object as PropType<FlasherResponse>,
 });
 
-const links = ref(props.provinces.links);
+const links = ref(props.neighborhoods.links);
 
-const editingProvinceTrigger = ref(false);
-const editingProvince = ref<App.Data.ProvinceData | null>(null);
+const editingNeighborhoodTrigger = ref(false);
+const editingNeighborhood = ref<App.Data.NeighborhoodData | null>(null);
 
-const deletingProvinceTrigger = ref(false);
-const deletingProvince = ref<App.Data.ProvinceData | null>(null);
+const deletingNeighborhoodTrigger = ref(false);
+const deletingNeighborhood = ref<App.Data.NeighborhoodData | null>(null);
 
 const searchTerm = ref("");
 
@@ -42,7 +46,7 @@ watch(
 );
 
 watch(
-    () => props.provinces.links,
+    () => props.neighborhoods.links,
     (value) => {
         links.value = value;
     }
@@ -50,40 +54,40 @@ watch(
 
 watch(searchTerm, (value) => {
     router.visit(
-        route("province.list", {
+        route("neighborhood.list", {
             search: value ?? "",
         }),
         {
-            only: ["provinces"],
+            only: ["neighborhoods"],
             replace: false,
             preserveState: true,
         }
     );
 });
 
-function openEditProvinceModal(province: App.Data.ProvinceData) {
-    editingProvince.value = province;
-    editingProvinceTrigger.value = true;
+function openEditNeighborhoodModal(neighborhood: App.Data.NeighborhoodData) {
+    editingNeighborhood.value = neighborhood;
+    editingNeighborhoodTrigger.value = true;
 }
 
-function closeEditProvinceModal() {
-    editingProvince.value = null;
-    editingProvinceTrigger.value = false;
+function closeEditNeighborhoodModal() {
+    editingNeighborhood.value = null;
+    editingNeighborhoodTrigger.value = false;
 }
 
-function openDeleteProvinceModal(province: App.Data.ProvinceData) {
-    deletingProvince.value = province;
-    deletingProvinceTrigger.value = true;
+function openDeleteNeighborhoodModal(neighborhood: App.Data.NeighborhoodData) {
+    deletingNeighborhood.value = neighborhood;
+    deletingNeighborhoodTrigger.value = true;
 }
 
-function closeDeleteProvinceModal() {
-    deletingProvince.value = null;
-    deletingProvinceTrigger.value = false;
+function closeDeleteNeighborhoodModal() {
+    deletingNeighborhood.value = null;
+    deletingNeighborhoodTrigger.value = false;
 }
 </script>
 
 <template>
-    <Head title="Províncias" />
+    <Head title="Neighborhoods" />
     <AuthenticatedLayout>
         <template v-slot:content>
             <div class="mx-auto max-w-screen-xl">
@@ -130,7 +134,7 @@ function closeDeleteProvinceModal() {
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
                         >
-                            <CreateProvince />
+                            <CreateNeighborhood :districts="props.districts" />
                         </div>
                     </div>
                     <div class="overflow-x-auto">
@@ -146,7 +150,12 @@ function closeDeleteProvinceModal() {
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
-                                            Nome da província
+                                            Nome do bairro
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        <div class="flex items-center">
+                                            Nome do destrito
                                         </div>
                                     </th>
                                     <th scope="col" class="px-4 py-3">
@@ -160,26 +169,28 @@ function closeDeleteProvinceModal() {
                             <tbody>
                                 <tr
                                     class="border-b dark:border-gray-700"
-                                    v-for="province in provinces.data"
-                                    :key="province.id as number"
+                                    v-for="neighborhood in neighborhoods.data"
+                                    :key="(neighborhood.id)"
                                 >
                                     <th
                                         scope="row"
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                     >
-                                        {{ province.id }}
+                                        {{ neighborhood.id }}
                                     </th>
 
                                     <td class="px-4 py-3">
-                                        {{ province.name }}
+                                        {{ neighborhood.name }}
+                                    </td>
+
+                                    <td class="px-4 py-3">
+                                        {{ neighborhood.district?.name }}
                                     </td>
 
                                     <td class="px-4 py-3 w-32">
                                         <button
                                             type="button"
-                                            @click="
-                                                openEditProvinceModal(province)
-                                            "
+                                            @click="openEditNeighborhoodModal(neighborhood)"
                                             class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                         >
                                             <svg
@@ -214,9 +225,7 @@ function closeDeleteProvinceModal() {
                                         <button
                                             type="button"
                                             @click="
-                                                openDeleteProvinceModal(
-                                                    province
-                                                )
+                                                openDeleteNeighborhoodModal(neighborhood)
                                             "
                                             class="flex items-center justify-center text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                         >
@@ -259,8 +268,8 @@ function closeDeleteProvinceModal() {
                             <span
                                 class="font-semibold text-gray-900 dark:text-white"
                                 >{{
-                                    `${provinces.meta.from ?? 0}-${
-                                        provinces.meta.to ?? 0
+                                    `${neighborhoods.meta.from ?? 0}-${
+                                        neighborhoods.meta.to ?? 0
                                     }`
                                 }}</span
                             >
@@ -268,7 +277,7 @@ function closeDeleteProvinceModal() {
                             <span
                                 class="font-semibold text-gray-900 dark:text-white"
                             >
-                                {{ provinces.meta.total }}</span
+                                {{ neighborhoods.meta.total }}</span
                             >
                         </span>
                         <ul class="inline-flex items-stretch -space-x-px">
@@ -331,17 +340,18 @@ function closeDeleteProvinceModal() {
                     </nav>
                 </div>
             </div>
-            <EditProvince
-                v-if="editingProvince"
-                :province="editingProvince"
-                :openModal="editingProvinceTrigger"
-                :close="closeEditProvinceModal"
+            <EditNeighborhood
+                v-if="editingNeighborhood"
+                :neighborhood="editingNeighborhood"
+                :openModal="editingNeighborhoodTrigger"
+                :close="closeEditNeighborhoodModal"
+                :districts="props.districts"
             />
-            <DeleteProvince
-                v-if="deletingProvince"
-                :province="deletingProvince"
-                :openModal="deletingProvinceTrigger"
-                :close="closeDeleteProvinceModal"
+            <DeleteNeighborhood
+                v-if="deletingNeighborhood"
+                :neighborhood="deletingNeighborhood"
+                :openModal="deletingNeighborhoodTrigger"
+                :close="closeDeleteNeighborhoodModal"
             />
         </template>
     </AuthenticatedLayout>

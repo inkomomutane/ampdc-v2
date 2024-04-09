@@ -16,7 +16,7 @@ class CreateNeighborhood
     {
         return [
             'name' => 'required|unique:neighborhoods,name',
-            'district_id' => 'required|numeric',
+            'district_id' => 'required',
         ];
     }
 

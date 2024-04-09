@@ -5,6 +5,10 @@ import { createApp, h, DefineComponent } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
+import VueSelect from "vs-vue3-select";
+import "vs-vue3-select/dist/vs-vue3-select.css";
+import "@/components/select/select.css";
+
 
 import.meta.glob(["../images/**", "../fonts/**"]);
 const appName = import.meta.env.VITE_APP_NAME || "Donations";
@@ -20,6 +24,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .component("v-select", VueSelect)
             .mount(el);
     },
     progress: {

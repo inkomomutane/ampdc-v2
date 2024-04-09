@@ -14,7 +14,7 @@ class Neighborhood extends Model
     use WithData;
     use HasUlids;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','district_id'];
     protected string $dataClass = NeighborhoodData::class;
 
     public function district(): BelongsTo

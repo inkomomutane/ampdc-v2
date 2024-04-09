@@ -17,7 +17,7 @@ class UpdateNeighborhood
     {
         $validated = request()?->validate([
             'name' => ['required', Rule::unique(Neighborhood::class, 'name')->ignore($neighborhood->id, 'id')],
-            'district_id' => 'required|numeric',
+            'district_id' => 'required',
         ]);
 
         try {

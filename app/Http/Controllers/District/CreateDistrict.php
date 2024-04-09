@@ -17,7 +17,7 @@ class CreateDistrict
     {
         return [
             'name' => 'required|unique:districts,name',
-            'province_id' => 'required|numeric',
+            'province_id' => 'required',
         ];
     }
 

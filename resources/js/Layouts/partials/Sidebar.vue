@@ -30,7 +30,7 @@ const inactiveClass = ref(
             <div class="flex items-start justify-start mt-8 ml-3">
                 <Link href="/" class="flex items-center">
                     <img :src="logo" class="w-12" />
-                    <span class="text-white text-2xl font-bold mx-2">SISB</span>
+                    <span class="text-white text-2xl font-bold mx-2">VBG</span>
                 </Link>
             </div>
 
@@ -70,6 +70,19 @@ const inactiveClass = ref(
                             : inactiveClass,
                     ]"
                     :href="route('organization.list')"
+                >
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 36 36" preserveAspectRatio="xMidYMid meet" fill="currentColor"><title>organization-solid</title><polygon points="9.8 18.8 26.2 18.8 26.2 21.88 27.8 21.88 27.8 17.2 18.8 17.2 18.8 14 17.2 14 17.2 17.2 8.2 17.2 8.2 21.88 9.8 21.88 9.8 18.8" class="clr-i-solid clr-i-solid-path-1"></polygon><rect x="2" y="23" width="14" height="10" rx="2" ry="2" class="clr-i-solid clr-i-solid-path-2"></rect><rect x="20" y="23" width="14" height="10" rx="2" ry="2" class="clr-i-solid clr-i-solid-path-3"></rect><rect x="11" y="3" width="14" height="10" rx="2" ry="2" class="clr-i-solid clr-i-solid-path-4"></rect><rect x="0" y="0" width="36" height="36" fill-opacity="0"></rect></svg>
+
+                    <span class="mx-4 font-bold text-base">Organizações</span>
+                </Link>
+                <Link
+                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
+                    :class="[
+                        route().current('province.list')
+                            ? activeClass
+                            : inactiveClass,
+                    ]"
+                    :href="route('province.list')"
                 >
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 36 36" preserveAspectRatio="xMidYMid meet" fill="currentColor"><title>organization-solid</title><polygon points="9.8 18.8 26.2 18.8 26.2 21.88 27.8 21.88 27.8 17.2 18.8 17.2 18.8 14 17.2 14 17.2 17.2 8.2 17.2 8.2 21.88 9.8 21.88 9.8 18.8" class="clr-i-solid clr-i-solid-path-1"></polygon><rect x="2" y="23" width="14" height="10" rx="2" ry="2" class="clr-i-solid clr-i-solid-path-2"></rect><rect x="20" y="23" width="14" height="10" rx="2" ry="2" class="clr-i-solid clr-i-solid-path-3"></rect><rect x="11" y="3" width="14" height="10" rx="2" ry="2" class="clr-i-solid clr-i-solid-path-4"></rect><rect x="0" y="0" width="36" height="36" fill-opacity="0"></rect></svg>
 
