@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('provinces', function (Blueprint $table) {
+        Schema::create('provinces', static function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name');
             $table->timestamps();
