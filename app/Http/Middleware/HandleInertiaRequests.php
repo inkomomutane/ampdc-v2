@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Data\RoleData;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\Role;
 use Tightenco\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
@@ -36,6 +38,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'messages' => flash()->render([], 'array'),
+            'roles' => RoleData::collection(Role::all()),
             '_token' => csrf_token(),
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),

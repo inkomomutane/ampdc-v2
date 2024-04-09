@@ -43,11 +43,17 @@ export interface Neighborhoods extends Omit<PaginatedData, "data"> {
     data: Array<App.Data.NeighborhoodData>;
 }
 
+export interface Users extends Omit<PaginatedData, "data"> {
+    data: Array<App.Data.UserData>;
+}
+
 
 export interface User {
     id: number;
     name: string;
     email: string;
+    contact: string;
+    active: boolean;
     email_verified_at: string;
 }
 

@@ -18,14 +18,27 @@ declare namespace App.Data {
         id: string | null;
         name: string | null;
     };
+    export type RoleData = {
+        id: string | null;
+        name: string | null;
+    };
     export type UserData = {
         id: string | null;
         name: string | null;
         email: string | null;
+        contact: string | null;
+        active: boolean | null;
+        role: App.Data.RoleData | any | null;
     };
 }
 declare namespace App.Enums {
-    export type CampaignEnum = "ACTIVE" | "PENDING" | "COMPLETED" | "SUSPENDED";
-    export type CampaignPaymentMethodEnum = "M_PESA";
-    export type CampaignPriorityEnum = "LOW" | "MEDIUM" | "HIGH" | "URGENT";
+    export type CaseProgressStatus =
+        | "Reportado"
+        | "Encaminhado"
+        | "Resolvido"
+        | "Encerrado"
+        | "Reaberto"
+        | "Rejeitado"
+        | "Pendente"
+        | "Em andamento";
 }

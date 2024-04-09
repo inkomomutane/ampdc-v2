@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Modal from "@/Components/Modal.vue";
+import Modal from "@/components/Modal.vue";
 import { useForm } from "@inertiajs/vue3";
-import { PropType } from "vue";
+import { PropType, ref } from "vue";
 
 const props = defineProps({
     user: {
@@ -18,13 +18,16 @@ const props = defineProps({
     },
 });
 
+const statusInput = ref();
+
 const form = useForm({
     id: props.user.id,
+    status: !props.user.active,
 });
 
 const deleteUser = () => {
     form.delete(
-        route("core.user.delete", {
+        route("user.status", {
             user: props.user.id,
         }),
         {
@@ -33,7 +36,7 @@ const deleteUser = () => {
                 form.reset();
                 props.close();
             },
-        },
+        }
     );
 };
 </script>
@@ -61,13 +64,27 @@ const deleteUser = () => {
                 <span class="sr-only">Fechar</span>
             </button>
             <div class="px-6 py-6 lg:px-8">
-                <h1 class="flex">Deseja excluir esse usuário?</h1>
                 <form class="space-y-6" @submit.prevent="deleteUser">
+                    <input
+                        v-bind:ref="statusInput"
+                        :hidden="true"
+                        name="status"
+                        v-model="form.status"
+                    />
+
                     <button
                         type="submit"
-                        class="w-full mt-8 text-white focus:ring-4 focus:outline-none font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-800 dark:focus:ring-slate-200 bg-red-500 hover:bg-red-600 focus:ring-red-300"
+                        :class="
+                            props.user.active
+                                ? ' bg-red-500 hover:bg-red-600  focus:ring-red-300'
+                                : 'bg-blue-500 hover:bg-blue-600  focus:ring-blue-300'
+                        "
+                        class="w-full mt-8 text-white focus:ring-4 focus:outline-none font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-800 dark:focus:ring-slate-200"
                     >
-                        <span>Excluir esse usuário.</span>
+                        <span v-if="props.user.active"
+                            >Bloquear conta deste usuário.</span
+                        >
+                        <span v-else>Habilitar conta deste usuário.</span>
                     </button>
                 </form>
             </div>

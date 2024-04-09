@@ -1,6 +1,7 @@
 <?php
 
 
+
 use App\Http\Controllers\District\CreateDistrict;
 use App\Http\Controllers\District\DeleteDistrict;
 use App\Http\Controllers\District\GetDistricts;
@@ -18,6 +19,10 @@ use App\Http\Controllers\Province\CreateProvince;
 use App\Http\Controllers\Province\DeleteProvince;
 use App\Http\Controllers\Province\GetProvinces;
 use App\Http\Controllers\Province\UpdateProvince;
+use App\Http\Controllers\User\CreateUser;
+use App\Http\Controllers\User\DeleteUser;
+use App\Http\Controllers\User\GetUsers;
+use App\Http\Controllers\User\UpdateUser;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -73,6 +78,12 @@ Route::middleware('auth')->group(function () {
     Route::match(['put','patch'],'/neighborhood/{neighborhood}/update', UpdateNeighborhood::class)->name('neighborhood.update');
     Route::delete('/neighborhood/{neighborhood}/delete', DeleteNeighborhood::class)->name('neighborhood.delete');
 
+
+    #--- User Routes ---#
+    Route::get('/dashboard/users', GetUsers::class)->name('user.all');
+    Route::post('/dashboard/user', CreateUser::class)->name('user.store');
+    Route::match(['put', 'patch'], '/dashboard/user/{user}', UpdateUser::class)->name('user.update');
+    Route::delete('/dashboard/user/{user}', DeleteUser::class)->name('user.status');
 });
 
 require __DIR__.'/auth.php';

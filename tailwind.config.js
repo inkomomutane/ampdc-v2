@@ -21,7 +21,7 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                sans: ['Lato', ...defaultTheme.fontFamily.sans],
+                sans: ['Jost', ...defaultTheme.fontFamily.sans],
             },
             keyframes: {
                 "accordion-down": {

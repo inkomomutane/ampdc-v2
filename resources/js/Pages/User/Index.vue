@@ -1,23 +1,17 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
+import Avatar from "primevue/avatar";
 
 import { Users } from "@/types/index";
-import { PropType, ref, watch } from "vue";
-import Flasher from "@/helprs";
+import { ref, watch, PropType } from "vue";
+import Flasher, { tooltip } from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import CreateUser from "./CreateUser.vue";
 import EditUser from "./EditUser.vue";
 import DeleteUser from "./DeleteUser.vue";
-import Avatar from "@/shadcn/components/ui/avatar/Avatar.vue";
 
 const props = defineProps({
-    modules: {
-        type: Object as PropType<
-            App.Data.StructuredCompanyModulePermissionData[]
-        >,
-        required: true,
-    },
     users: {
         type: Object as PropType<Users>,
         required: true,
@@ -42,29 +36,29 @@ watch(
         value?.envelopes.forEach((element) => {
             Flasher.flash(
                 element.notification.type,
-                element.notification.message,
+                element.notification.message
             );
         });
-    },
+    }
 );
 
 watch(
     () => props.users.links,
     (value) => {
         links.value = value;
-    },
+    }
 );
 
 watch(searchTerm, (value) => {
     router.visit(
-        route("core.user.all", {
+        route("user.all", {
             search: value ?? "",
         }),
         {
             only: ["users"],
             replace: false,
             preserveState: true,
-        },
+        }
     );
 });
 
@@ -87,40 +81,13 @@ function closeDeleteUserModal() {
     deletingUser.value = null;
     deletingUserTrigger.value = false;
 }
-
-const treeData = [
-    {
-        id: 1,
-        name: "Node 1",
-        children: [
-            {
-                id: 2,
-                name: "Node 1.1",
-            },
-            {
-                id: 3,
-                name: "Node 1.2",
-                children: [
-                    {
-                        id: 4,
-                        name: "Node 1.2.1",
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        id: 5,
-        name: "Node 2",
-    },
-];
 </script>
 
 <template>
-    <Head title="Usuários da empresa" />
+    <Head title="User do imóvel" />
     <AuthenticatedLayout>
         <template v-slot:content>
-            <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+            <div class="mx-auto max-w-screen-xl">
                 <!-- Start coding here -->
                 <div
                     class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded overflow-hidden"
@@ -130,7 +97,7 @@ const treeData = [
                     >
                         <div class="w-full md:w-1/2">
                             <form class="flex items-center">
-                                <label class="sr-only" for="simple-search"
+                                <label for="simple-search" class="sr-only"
                                     >Pesquisar</label
                                 >
                                 <div class="relative w-full">
@@ -145,18 +112,18 @@ const treeData = [
                                             xmlns="http://www.w3.org/2000/svg"
                                         >
                                             <path
-                                                clip-rule="evenodd"
-                                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                                                 fill-rule="evenodd"
+                                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                clip-rule="evenodd"
                                             />
                                         </svg>
                                     </div>
                                     <input
+                                        type="text"
                                         id="simple-search"
                                         v-model="searchTerm"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500"
                                         placeholder="Pesquisar..."
-                                        type="text"
                                     />
                                 </div>
                             </form>
@@ -164,10 +131,9 @@ const treeData = [
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
                         >
-                            <CreateUser :modules="modules" />
+                            <CreateUser />
                         </div>
                     </div>
-
                     <div class="overflow-x-auto">
                         <table
                             class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
@@ -176,48 +142,55 @@ const treeData = [
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
                             >
                                 <tr>
-                                    <th class="px-4 py-3" scope="col">
+                                    <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
                                             Avatar
                                         </div>
                                     </th>
-                                    <th class="px-4 py-3" scope="col">
+                                    <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
                                             Nome
                                         </div>
                                     </th>
-                                    <th class="px-4 py-3" scope="col">
+                                    <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
                                             Email
                                         </div>
                                     </th>
-                                    <th class="px-4 py-3" scope="col">
+                                    <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
-                                            Empresa
+                                            Previlêgio
                                         </div>
                                     </th>
-
-                                    <th class="px-4 py-3" scope="col">
+                                    <th scope="col" class="px-4 py-3">
+                                        <div class="flex items-center">
+                                            Estado do usuário
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
                                         Editar
                                     </th>
-                                    <th class="px-4 py-3" scope="col">
+                                    <th scope="col" class="px-4 py-3">
                                         Excluir
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="user in users.data"
-                                    :key="user.id ?? undefined"
                                     class="border-b dark:border-gray-700"
+                                    v-for="user in users.data"
+                                    :key="(user.id)"
                                 >
                                     <th
-                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                         scope="row"
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                     >
-                                        <Avatar>
+                                        <span
+                                            class="bg-gray-300  text-gray-700 dark:bg-gray-900 dark:text-white p-3 rounded-md"
+
+                                        >
                                             {{ user.name?.charAt(0) }}
-                                        </Avatar>
+                                        </span>
                                     </th>
 
                                     <td class="px-4 py-3">
@@ -227,30 +200,45 @@ const treeData = [
                                     <td class="px-4 py-3">
                                         {{ user.email }}
                                     </td>
+
                                     <td class="px-4 py-3">
-                                        {{ user.company.name ?? "" }}
+                                        {{ user.role?.name }}
+                                    </td>
+
+                                    <td class="px-4 py-3">
+                                        <span
+                                            v-if="user.active"
+                                            class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
+                                            >Activo</span
+                                        >
+
+                                        <span
+                                            v-else
+                                            class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"
+                                            >Inactivo</span
+                                        >
                                     </td>
 
                                     <td class="px-4 py-3 w-32">
                                         <button
-                                            class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                             type="button"
                                             @click="openEditUserModal(user)"
+                                            class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                         >
                                             <svg
-                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
                                                 height="24"
                                                 viewBox="0 0 24 24"
-                                                width="24"
-                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
                                             >
                                                 <path
                                                     class="fill-current text-gray-100"
+                                                    opacity="0.3"
+                                                    fill-rule="evenodd"
                                                     clip-rule="evenodd"
                                                     d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
                                                     fill="black"
-                                                    fill-rule="evenodd"
-                                                    opacity="0.3"
                                                 />
                                                 <path
                                                     class="fill-current text-gray-100"
@@ -267,29 +255,40 @@ const treeData = [
                                     </td>
                                     <td class="px-4 py-3 justify-end w-32">
                                         <button
-                                            class="bg-red-500 hover:bg-red-700 flex items-center justify-center text-white focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                             type="button"
                                             @click="openDeleteUserModal(user)"
+                                            class="flex items-center justify-center text-white focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
+                                            :class="
+                                                user.active
+                                                    ? ' bg-red-500 hover:bg-red-700 '
+                                                    : ' bg-blue-500 hover:bg-blue-700 '
+                                            "
                                         >
                                             <svg
-                                                aria-hidden="true"
-                                                fill="currentColor"
-                                                height="24"
-                                                viewBox="0 0 24 24"
-                                                width="24"
+                                                v-if="user.active"
                                                 xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                fill="currentColor"
+                                                viewBox="0 0 16 16"
                                             >
                                                 <path
-                                                    d="M21.07 5.23c-1.61-.16-3.22-.28-4.84-.37v-.01l-.22-1.3c-.15-.92-.37-2.3-2.71-2.3h-2.62c-2.33 0-2.55 1.32-2.71 2.29l-.21 1.28c-.93.06-1.86.12-2.79.21l-2.04.2c-.42.04-.72.41-.68.82.04.41.4.71.82.67l2.04-.2c5.24-.52 10.52-.32 15.82.21h.08c.38 0 .71-.29.75-.68a.766.766 0 00-.69-.82z"
-                                                ></path>
-                                                <path
-                                                    d="M19.23 8.14c-.24-.25-.57-.39-.91-.39H5.68c-.34 0-.68.14-.91.39-.23.25-.36.59-.34.94l.62 10.26c.11 1.52.25 3.42 3.74 3.42h6.42c3.49 0 3.63-1.89 3.74-3.42l.62-10.25c.02-.36-.11-.7-.34-.95z"
-                                                    opacity=".399"
-                                                ></path>
-                                                <path
-                                                    clip-rule="evenodd"
-                                                    d="M9.58 17a.75.75 0 01.75-.75h3.33a.75.75 0 010 1.5h-3.33a.75.75 0 01-.75-.75zM8.75 13a.75.75 0 01.75-.75h5a.75.75 0 010 1.5h-5a.75.75 0 01-.75-.75z"
                                                     fill-rule="evenodd"
+                                                    d="M1.093 3.093c-.465 4.275.885 7.46 2.513 9.589a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.32 11.32 0 0 0 1.733-1.525L1.093 3.093zm12.215 8.215L3.128 1.128A61.369 61.369 0 0 1 5.073.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.483 3.626-.332 6.491-1.551 8.616zm.338 3.046-13-13 .708-.708 13 13-.707.707z"
+                                                ></path>
+                                            </svg>
+
+                                            <svg
+                                                v-else
+                                                width="24"
+                                                height="24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor"
+                                                stroke="none"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    d="M11.488 21.754c.294.157.663.156.957-.001 8.012-4.304 8.581-12.713 8.574-15.104a.988.988 0 0 0-.596-.903l-8.05-3.566a1.005 1.005 0 0 0-.813.001L3.566 5.747a.99.99 0 0 0-.592.892c-.034 2.379.445 10.806 8.514 15.115zM8.674 10.293l2.293 2.293 4.293-4.293 1.414 1.414-5.707 5.707-3.707-3.707 1.414-1.414z"
                                                 ></path>
                                             </svg>
                                         </button>
@@ -299,8 +298,8 @@ const treeData = [
                         </table>
                     </div>
                     <nav
-                        aria-label="Table navigation"
                         class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+                        aria-label="Table navigation"
                     >
                         <span
                             class="text-sm font-normal text-gray-500 dark:text-gray-400"
@@ -327,36 +326,36 @@ const treeData = [
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                             >
                                 <Link
-                                    class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                     href=""
-                                    >&laquo; Previous
-                                </Link>
+                                    class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                    >&laquo; Previous</Link
+                                >
                             </li>
                             <li v-else>
                                 <Link
-                                    :href="links[0].url ?? ''"
                                     class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                    >&laquo; Previous
-                                </Link>
+                                    :href="links[0].url ?? ''"
+                                    >&laquo; Previous</Link
+                                >
                             </li>
                             <li
                                 v-for="link in links.slice(1, -1)"
                                 :key="link.label"
                             >
                                 <Link
+                                    class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                     v-if="!link.active"
                                     :href="link.url ?? ''"
-                                    class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                     >{{ link.label }}
                                 </Link>
                                 <span
+                                    class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                     v-else
                                     :class="`${
                                         link.active
                                             ? 'bg-gray-700 dark:bg-slate-600 text-white dark:text-slate-100'
                                             : ''
                                     }`"
-                                    class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                     >{{ link.label }}</span
                                 >
                             </li>
@@ -374,8 +373,8 @@ const treeData = [
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                             >
                                 <Link :href="links.slice(-1)[0].url ?? ''"
-                                    >Next &raquo;
-                                </Link>
+                                    >Next &raquo;</Link
+                                >
                             </li>
                         </ul>
                     </nav>
@@ -383,16 +382,15 @@ const treeData = [
             </div>
             <EditUser
                 v-if="editingUser"
-                :close="closeEditUserModal"
-                :modules="modules"
-                :openModal="editingUserTrigger"
                 :user="editingUser"
+                :openModal="editingUserTrigger"
+                :close="closeEditUserModal"
             />
             <DeleteUser
                 v-if="deletingUser"
-                :close="closeDeleteUserModal"
-                :openModal="deletingUserTrigger"
                 :user="deletingUser"
+                :openModal="deletingUserTrigger"
+                :close="closeDeleteUserModal"
             />
         </template>
     </AuthenticatedLayout>
