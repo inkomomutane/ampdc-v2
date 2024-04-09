@@ -21,7 +21,7 @@ class ListOrganizationsController extends Controller
     public function handle(?string $term= null){
        return  OrganizationData::collection(Organization::query()
             ->when($term, function (Builder $query) use ($term) {
-                $query->where('name','like',"%${term}%");
+                $query->whereAny(['name','services'],'like',"%${term}%");
             })
             ->paginate(12)->withQueryString());
     }

@@ -73,7 +73,7 @@ const createOrganization = () => {
                     Editar organização
                 </h3>
                 <form class="space-y-6" @submit.prevent="createOrganization">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 gap-2">
                         <div>
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -97,15 +97,16 @@ const createOrganization = () => {
                                 for="name"
                             >Serviços da organização</label
                             >
-                            <input
+                            <textarea
                                 id="services"
                                 ref="servicesInput"
                                 v-model="form.services"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 name="services"
                                 placeholder="Serviços da organização"
-                                type="text"
-                            />
+                                rows="4"
+                            >
+                            </textarea>
                             <InputError :message="form.errors.services" />
                         </div>
                     </div>
