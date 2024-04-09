@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Neighborhood;
 
 use App\Models\Neighborhood;
+use Illuminate\Http\Request;
 
 class CreateNeighborhood
 {
@@ -20,7 +21,7 @@ class CreateNeighborhood
         ];
     }
 
-    public function __invoke(\Request $request)
+    public function __invoke(Request $request)
     {
         $validated = $request->validate($this->rules());
         $this->handle($validated);

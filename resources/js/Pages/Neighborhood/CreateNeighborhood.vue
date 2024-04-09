@@ -29,7 +29,7 @@ const form = useForm({
 });
 
 const createNeighborhood = () => {
-    form.post(route("beighborhood.store"), {
+    form.post(route("neighborhood.store"), {
         preserveScroll: true,
         onSuccess: () => {
             form.reset();

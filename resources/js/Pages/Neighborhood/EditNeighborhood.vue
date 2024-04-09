@@ -27,7 +27,7 @@ const nomeInput = ref<String | any>(props.neighborhood.name);
 
 const form = useForm({
     id: props.neighborhood.id,
-    nome: props.neighborhood.name,
+    name: props.neighborhood.name,
     district_id: props.neighborhood.district.id,
 });
 
@@ -87,14 +87,14 @@ const updateNeighborhood = () => {
                         <input
                             type="text"
                             name="nome"
-                            v-model="form.nome"
+                            v-model="form.name"
                             ref="nomeInput"
                             id="nome"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Nome do neighborhood"
                         />
                         <span class="text-medium text-red-500 font-medium">{{
-                            form.errors.nome
+                            form.errors.name
                         }}</span>
                     </div>
                     <div>
