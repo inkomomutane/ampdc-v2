@@ -31,6 +31,9 @@ export interface Organizations extends Omit<PaginatedData, "data"> {
     data: Array<App.Data.OrganizationData>;
 }
 
+export interface Provinces extends Omit<PaginatedData, "data"> {
+    data: Array<App.Data.ProvinceData>;
+}
 
 export interface User {
     id: number;

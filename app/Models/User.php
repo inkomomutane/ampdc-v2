@@ -48,8 +48,4 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function campaigns(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Campaign::class, 'posted_by_id');
-    }
 }

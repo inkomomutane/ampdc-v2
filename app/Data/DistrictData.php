@@ -9,7 +9,7 @@ use Spatie\LaravelData\Lazy;
 class DistrictData extends Data
 {
     public function __construct(
-      public ?int $id,
+      public ?string $id,
       public ?string $name,
       public Lazy|null|ProvinceData $province,
     ) {}
