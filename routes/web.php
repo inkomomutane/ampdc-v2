@@ -23,6 +23,10 @@ use App\Http\Controllers\User\CreateUser;
 use App\Http\Controllers\User\DeleteUser;
 use App\Http\Controllers\User\GetUsers;
 use App\Http\Controllers\User\UpdateUser;
+use App\Http\Controllers\ViolenceType\DeleteViolenceTypeController;
+use App\Http\Controllers\ViolenceType\ListViolenceTypesController;
+use App\Http\Controllers\ViolenceType\StoreViolenceTypeController;
+use App\Http\Controllers\ViolenceType\UpdateViolenceTypeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,12 +41,21 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
 
-Route::get('/', static fn() => redirect()->route('dashboard') );
+Route::get('/', static fn() => redirect()->route('victim.register') );
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return Inertia::render('Register',[
+        'organizations' => \App\Data\OrganizationData::collection(\App\Models\Organization::all()),
+        'violenceTypes' => \App\Data\ViolenceTypeData::collection(\App\Models\ViolenceType::all()),
+        'neighborhoods' => \App\Data\NeighborhoodData::collection(\App\Models\Neighborhood::all()),
+    ]);
+})->middleware(['auth', 'verified'])->name('victim.register');
 
 Route::middleware('auth')->group(function () {
 
@@ -84,6 +97,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/user', CreateUser::class)->name('user.store');
     Route::match(['put', 'patch'], '/dashboard/user/{user}', UpdateUser::class)->name('user.update');
     Route::delete('/dashboard/user/{user}', DeleteUser::class)->name('user.status');
+
+    #--- Violence Type Routes ViolenceType---#
+    Route::get('/violenceType/list', ListViolenceTypesController::class)->name('violenceType.list');
+    Route::post('/violenceType/store', StoreViolenceTypeController::class)->name('violenceType.store');
+    Route::match(['put','patch'],'/violenceType/{violenceType}/update', UpdateViolenceTypeController::class)->name('violenceType.update');
+    Route::delete('/violenceType/{violenceType}/delete', DeleteViolenceTypeController::class)->name('violenceType.delete');
 });
 
 require __DIR__.'/auth.php';

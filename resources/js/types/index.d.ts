@@ -47,6 +47,9 @@ export interface Users extends Omit<PaginatedData, "data"> {
     data: Array<App.Data.UserData>;
 }
 
+export interface ViolenceTypes extends Omit<PaginatedData, "data"> {
+    data: Array<App.Data.ViolenceTypeData>;
+}
 
 export interface User {
     id: number;

@@ -144,9 +144,7 @@ function closeDeleteDistrictModal() {
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
                             >
                                 <tr>
-                                    <th scope="col" class="px-4 py-3">
-                                        <div class="flex items-center">Id</div>
-                                    </th>
+
                                     <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
                                             Nome do distrito
@@ -171,12 +169,6 @@ function closeDeleteDistrictModal() {
                                     v-for="district in districts.data"
                                     :key="district.id"
                                 >
-                                    <th
-                                        scope="row"
-                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        {{ district.id }}
-                                    </th>
 
                                     <td class="px-4 py-3">
                                         {{ district.name }}

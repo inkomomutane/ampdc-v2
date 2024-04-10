@@ -6,7 +6,7 @@ import logo from "@images/logo.png";
 
 <template>
     <div
-        class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-green-300 dark:bg-gray-900"
+        class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-slate-300 dark:bg-gray-900"
     >
         <div>
             <Link href="/">

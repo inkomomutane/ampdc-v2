@@ -111,7 +111,7 @@ const createDistrict = () => {
             ></path>
         </svg>
 
-        <span class="mx-4">Nova cidade</span>
+        <span class="mx-4">Adicionar distrito</span>
     </button>
 
     <Modal :show="addDistrict" @close="closeCreateDistrictModal">
@@ -140,7 +140,7 @@ const createDistrict = () => {
                 <h3
                     class="mb-4 text-xl font-medium text-gray-900 dark:text-white"
                 >
-                    Nova cidade
+                    Novo distrito
                 </h3>
                 <form class="space-y-6" @submit.prevent="createDistrict">
                     <div>
