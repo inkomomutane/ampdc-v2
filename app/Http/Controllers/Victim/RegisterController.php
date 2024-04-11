@@ -43,13 +43,13 @@ class RegisterController extends Controller
                 'contact' => $data['contact'],
             ]);
 
-            if(!$request->input('required_forwards')) {
+            if($request->input('required_forwards') === false || $request->input('required_forwards') === null) {
                 VictimCasesHistory::create([
                     'victim_id' => $victim->id,
                     'organization_id' => organization()->id,
                     'case_registered_by_id' => auth()->user()->id,
                     'progress_status' =>  CaseProgressStatus::IN_PROGRESS,
-                    'progress_details' => '',
+                    'case_details' => $victim->violence_details,
                     'case_updated_by_id' => auth()->user()->id,
                     'violence_type_id' => $victim->violence_type_id,
                     'is_forwarded' => false,

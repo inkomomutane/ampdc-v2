@@ -5,6 +5,9 @@ import InputError from "@components/InputError.vue";
 import {PropType, watch} from "vue";
 import {FlasherResponse} from "@flasher/flasher";
 import Flasher from "@/helprs";
+import NeighborhoodData = App.Data.NeighborhoodData;
+import ViolenceTypeData = App.Data.ViolenceTypeData;
+import OrganizationData = App.Data.OrganizationData;
 
 const props = defineProps({
    neighborhoods: {
@@ -160,7 +163,7 @@ const registerCase = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="violence_type_id"
-                                >Tipo de violência sofrida</label
+                                >Causa da morte</label
                             >
                             <v-select
                                 v-model="form.violence_type_id"
@@ -168,7 +171,7 @@ const registerCase = () => {
                                     (option: ViolenceTypeData) => option.name
                                 "
                                 :options="violenceTypes"
-                                placeholder="Tipo de violência sofrida"
+                                placeholder="Causa da morte"
                                 :reduce="(unit: ViolenceTypeData) => unit.id"
                                 label="violence_type_id"
                             ></v-select>

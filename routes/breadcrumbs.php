@@ -143,7 +143,7 @@ Breadcrumbs::for('user.status', function (BreadcrumbTrail $trail) {
 
 Breadcrumbs::for('violenceType.list', function (BreadcrumbTrail $trail) {
     $trail->parent('victim.register');
-    $trail->push('Tipos de Violência', route('violenceType.list'));
+    $trail->push('Causas de uma morte', route('violenceType.list'));
 });
 
 Breadcrumbs::for('violenceType.store', function (BreadcrumbTrail $trail) {

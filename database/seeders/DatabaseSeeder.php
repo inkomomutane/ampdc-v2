@@ -23,12 +23,30 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         Organization::updateOrInsert([
-            'id' => '01HV6YQR7YGEMPYH4K2V0526J1'
+            'id' => '01hv77xvhb4n8xfx36k1z1khjn'
         ],[
-            'id' => '01HV6YQR7YGEMPYH4K2V0526J1',
+            'id' => '01hv77xvhb4n8xfx36k1z1khjn',
             'name' => 'AMPDC',
             'services' => ''
         ]);
+
+        Organization::updateOrInsert([
+            'id' => '01hv77rt2sezjeq1a057zj8jf9'
+        ],[
+            'id' => '01hv77rt2sezjeq1a057zj8jf9',
+            'name' => 'MISAU',
+            'services' => ''
+        ]);
+
+
+        Organization::updateOrInsert([
+            'id' => '01hv77tpehwaj6znhzemqqwtmq'
+        ],[
+            'id' => '01hv77tpehwaj6znhzemqqwtmq',
+            'name' => 'Muleide',
+            'services' => ''
+        ]);
+
 
       User::updateOrInsert([
             'id' => '01hv1bd7wmatmqfyqqtecpj6v7'
@@ -37,7 +55,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
-            'organization_id' => '01HV6YQR7YGEMPYH4K2V0526J1'
+            'organization_id' => '01hv77xvhb4n8xfx36k1z1khjn'
         ]);
 
 

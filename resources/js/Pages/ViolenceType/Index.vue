@@ -151,7 +151,7 @@ function closeDeleteViolenceTypeModal() {
                                     </th>
                                     <th class="px-4 py-3" scope="col">
                                         <div class="flex items-center">
-                                            Nome
+                                            Causa
                                         </div>
                                     </th>
                                     <th class="px-4 py-3" scope="col">

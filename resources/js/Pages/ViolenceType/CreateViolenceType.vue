@@ -66,7 +66,7 @@ const createViolenceType = () => {
                 fill="currentColor"
             />
         </svg>
-        <span class="mx-4">Adicionar tipo de violência</span>
+        <span class="mx-4">Adicionar causa de morte</span>
     </button>
 
     <Modal :show="addViolenceType" @close="closeCreateViolenceTypeModal">
@@ -95,7 +95,7 @@ const createViolenceType = () => {
                 <h3
                     class="mb-4 text-xl font-medium text-gray-900 dark:text-white"
                 >
-                    Tipo de violência
+                    Causa de uma morte
                 </h3>
                 <form class="space-y-6" @submit.prevent="createViolenceType">
                     <div class="grid grid-cols-1 gap-2">
@@ -103,7 +103,7 @@ const createViolenceType = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                                >Tipo de violência
+                                >  Causa de uma morte
                             </label>
                             <input
                                 id="name"
@@ -111,7 +111,7 @@ const createViolenceType = () => {
                                 v-model="form.name"
                                 name="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Tipo de violência"
+                                placeholder="Causa de uma morte"
                                 type="text"
                             />
                             <InputError :message="form.errors.name" />

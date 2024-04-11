@@ -207,7 +207,7 @@ const inactiveClass = ref(
                     </svg>
 
                     <span class="mx-4 font-medium text-base"
-                        >Tipo de violência</span
+                        >Causas de morte</span
                     >
                 </Link>
 

@@ -20,7 +20,7 @@ class ForwardCasesListener
                 'organization_id' => $organization->id,
                 'case_registered_by_id' => $event->createdBy->id,
                 'progress_status' => CaseProgressStatus::FORWARDED,
-                'progress_details' => '',
+                'case_details' => $event->victim->violence_details,
                 'case_updated_by_id' => $event->updatedBy->id,
                 'violence_type_id' => $event->victim->violence_type_id,
                 'is_forwarded' => true,

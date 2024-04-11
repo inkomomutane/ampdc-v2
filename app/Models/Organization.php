@@ -19,16 +19,19 @@ class Organization extends Model
 
     public function cases() : HasMany
     {
-        return $this->hasMany(VictimCasesHistory::class);
+        return $this->hasMany(VictimCasesHistory::class, 'organization_id')
+            ->where('is_forwarded', false);
     }
 
     public function receivedCases() :HasMany
     {
-        return $this->hasMany(VictimCasesHistory::class);
+        return $this->hasMany(VictimCasesHistory::class, 'forwarded_to_organization_id')
+            ->where('is_forwarded', true);
     }
 
     public function forwardedCases() :HasMany
     {
-        return $this->hasMany(VictimCasesHistory::class);
+        return $this->hasMany(VictimCasesHistory::class, 'forwarded_from_organization_id')
+            ->where('is_forwarded', true);
     }
 }
