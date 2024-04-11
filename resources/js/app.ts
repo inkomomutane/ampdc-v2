@@ -9,7 +9,6 @@ import VueSelect from "vs-vue3-select";
 import "vs-vue3-select/dist/vs-vue3-select.css";
 import "@/components/select/select.css";
 
-
 import.meta.glob(["../images/**", "../fonts/**"]);
 const appName = import.meta.env.VITE_APP_NAME || "Donations";
 

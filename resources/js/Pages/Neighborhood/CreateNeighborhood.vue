@@ -166,8 +166,8 @@ const createNeighborhood = () => {
                         <v-select
                             v-model="form.district_id"
                             :get-option-label="
-                                    (option: DistrictData) => option.name
-                                "
+                                (option: DistrictData) => option.name
+                            "
                             :options="districts"
                             placeholder="Selecionar distrito"
                             :reduce="(district: DistrictData) => district.id"

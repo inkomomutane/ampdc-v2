@@ -23,11 +23,14 @@ use App\Http\Controllers\User\CreateUser;
 use App\Http\Controllers\User\DeleteUser;
 use App\Http\Controllers\User\GetUsers;
 use App\Http\Controllers\User\UpdateUser;
+use App\Http\Controllers\Victim\GetForwardedVictimCasesController;
+use App\Http\Controllers\Victim\GetReceivedVictimCasesController;
+use App\Http\Controllers\Victim\GetVictimCasesController;
+use App\Http\Controllers\Victim\RegisterController;
 use App\Http\Controllers\ViolenceType\DeleteViolenceTypeController;
 use App\Http\Controllers\ViolenceType\ListViolenceTypesController;
 use App\Http\Controllers\ViolenceType\StoreViolenceTypeController;
 use App\Http\Controllers\ViolenceType\UpdateViolenceTypeController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -49,9 +52,9 @@ Auth::routes([
 
 Route::get('/', static fn() => redirect()->route('victim.register') );
 
-Route::get('/dashboard', function () {
+Route::get('/dashboard', static function () {
     return Inertia::render('Register',[
-        'organizations' => \App\Data\OrganizationData::collection(\App\Models\Organization::all()),
+        'organizations' => \App\Data\OrganizationData::collection(\App\Models\Organization::whereNot('id',organization()->id)->get()),
         'violenceTypes' => \App\Data\ViolenceTypeData::collection(\App\Models\ViolenceType::all()),
         'neighborhoods' => \App\Data\NeighborhoodData::collection(\App\Models\Neighborhood::all()),
     ]);
@@ -103,6 +106,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/violenceType/store', StoreViolenceTypeController::class)->name('violenceType.store');
     Route::match(['put','patch'],'/violenceType/{violenceType}/update', UpdateViolenceTypeController::class)->name('violenceType.update');
     Route::delete('/violenceType/{violenceType}/delete', DeleteViolenceTypeController::class)->name('violenceType.delete');
+
+
+    #--- Victims ---#
+
+    Route::post('/victim/register/case', RegisterController::class)->name('victim.register.case');
+    Route::get('/victims/cases',GetVictimCasesController::class)->name('victim.cases.list');
+    Route::get('/victims/received-cases', GetReceivedVictimCasesController::class)->name('victim.received.cases.list');
+    Route::get('/victims/forwarded-cases', GetForwardedVictimCasesController::class)->name('victim.forwarded.cases.list');
+
+
 });
 
 require __DIR__.'/auth.php';

@@ -5,9 +5,9 @@ import { useForm } from "@inertiajs/vue3";
 import InputError from "@/components/InputError.vue";
 
 const props = defineProps({
-    violenceType : {
+    violenceType: {
         type: Object as PropType<App.Data.ViolenceTypeData>,
-        required :true
+        required: true,
     },
     close: {
         type: Function,
@@ -17,14 +17,10 @@ const props = defineProps({
         type: Boolean,
         required: true,
     },
-})
+});
 
 const nameInput = ref<any>(props.violenceType?.name);
 const descriptionInput = ref<any>(props.violenceType?.description);
-
-
-
-
 
 const form = useForm({
     id: props.violenceType?.id,
@@ -33,15 +29,17 @@ const form = useForm({
 });
 
 const createViolenceType = () => {
-    form.patch(route("violenceType.update",{
-        violenceType: props.violenceType.id
-    }), {
-        preserveScroll: true,
-        onSuccess: () => props.close(),
-        onError: () => nameInput.value.focus(),
-    });
+    form.patch(
+        route("violenceType.update", {
+            violenceType: props.violenceType.id,
+        }),
+        {
+            preserveScroll: true,
+            onSuccess: () => props.close(),
+            onError: () => nameInput.value.focus(),
+        },
+    );
 };
-
 </script>
 <template>
     <Modal :show="props.openModal" @close="props.close">
@@ -78,7 +76,7 @@ const createViolenceType = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Tipo de violência</label
+                                >Tipo de violência</label
                             >
                             <input
                                 id="name"
@@ -95,7 +93,7 @@ const createViolenceType = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Descrição</label
+                                >Descrição</label
                             >
                             <textarea
                                 id="description"

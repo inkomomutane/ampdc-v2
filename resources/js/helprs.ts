@@ -3,7 +3,7 @@ import flasher from "@flasher/flasher";
 const Flasher = flasher;
 Flasher.addTheme("flasher", {
     render: function (envelope) {
-        var notification = envelope.notification;
+        const notification = envelope.notification;
         switch (notification.type) {
             case FlahserType.success:
                 return success(notification.message);

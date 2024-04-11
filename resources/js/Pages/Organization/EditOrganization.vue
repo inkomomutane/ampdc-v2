@@ -5,9 +5,9 @@ import { useForm } from "@inertiajs/vue3";
 import InputError from "@/components/InputError.vue";
 
 const props = defineProps({
-    organization : {
+    organization: {
         type: Object as PropType<App.Data.OrganizationData>,
-        required :true
+        required: true,
     },
     close: {
         type: Function,
@@ -17,14 +17,10 @@ const props = defineProps({
         type: Boolean,
         required: true,
     },
-})
+});
 
 const nameInput = ref<any>(props.organization?.name);
 const servicesInput = ref<any>(props.organization?.services);
-
-
-
-
 
 const form = useForm({
     id: props.organization?.id,
@@ -33,15 +29,17 @@ const form = useForm({
 });
 
 const createOrganization = () => {
-    form.patch(route("organization.update",{
-        organization: props.organization.id
-    }), {
-        preserveScroll: true,
-        onSuccess: () => props.close(),
-        onError: () => nameInput.value.focus(),
-    });
+    form.patch(
+        route("organization.update", {
+            organization: props.organization.id,
+        }),
+        {
+            preserveScroll: true,
+            onSuccess: () => props.close(),
+            onError: () => nameInput.value.focus(),
+        },
+    );
 };
-
 </script>
 <template>
     <Modal :show="props.openModal" @close="props.close">
@@ -78,7 +76,7 @@ const createOrganization = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Nome da organização</label
+                                >Nome da organização</label
                             >
                             <input
                                 id="name"
@@ -95,7 +93,7 @@ const createOrganization = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Serviços da organização</label
+                                >Serviços da organização</label
                             >
                             <textarea
                                 id="services"

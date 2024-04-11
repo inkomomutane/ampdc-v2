@@ -36,7 +36,7 @@ const deleteUser = () => {
                 form.reset();
                 props.close();
             },
-        }
+        },
     );
 };
 </script>

@@ -21,5 +21,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(125);
+
+        // add helper organization() == auth()->user()->organization
+
+        if (!function_exists('organization')) {
+            function organization(): \App\Models\Organization
+            {
+                return auth()->user()->organization;
+            }
+        }
     }
 }

@@ -3,11 +3,17 @@ import Modal from "@/components/Modal.vue";
 import { useForm } from "@inertiajs/vue3";
 import { PropType, ref } from "vue";
 import RoleData = App.Data.RoleData;
+import OrganizationData = App.Data.OrganizationData;
+import InputError from "@components/InputError.vue";
 
 const props = defineProps({
     user: {
         type: Object as PropType<App.Data.UserData>,
         required: true,
+    },
+    organizations : {
+        type : Array<OrganizationData>,
+        required:true
     },
     close: {
         type: Function,
@@ -29,6 +35,7 @@ const form = useForm({
     email: props.user.email,
     contact: props.user.contact,
     role: props.user.role?.id,
+    organization_id: props.user.organization?.id,
 });
 
 const updateUser = () => {
@@ -44,7 +51,7 @@ const updateUser = () => {
             },
             onError: () => nameInput.value.focus(),
             onFinish: () => form.reset(),
-        }
+        },
     );
 };
 </script>
@@ -153,7 +160,7 @@ const updateUser = () => {
                                 :get-option-label="
                                     (option: RoleData) => option.name
                                 "
-                                :options="($page.props.roles as any)"
+                                :options="$page.props.roles as any"
                                 placeholder="Previlêgio"
                                 :reduce="(role: RoleData) => role.id"
                                 label="role"
@@ -162,6 +169,24 @@ const updateUser = () => {
                                 class="text-medium text-red-500 font-semibold"
                                 >{{ form.errors.role }}</span
                             >
+                        </div>
+                        <div class="md:col-span-2">
+                            <label
+                                for="organization"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >Organização</label
+                            >
+                            <v-select
+                                v-model="form.organization_id"
+                                :get-option-label="
+                                    (option: OrganizationData) => option.name
+                                "
+                                :options="organizations"
+                                placeholder="Organização"
+                                :reduce="(organization: OrganizationData) => organization.id"
+                                label="organization"
+                            ></v-select>
+                            <InputError :message="form.errors.organization_id" />
                         </div>
                     </div>
 

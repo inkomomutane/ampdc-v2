@@ -4,7 +4,15 @@ import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import InputError from "@/components/InputError.vue";
 import RoleData = App.Data.RoleData;
+import OrganizationData = App.Data.OrganizationData;
 
+
+const props = defineProps({
+    organizations : {
+        type : Array<OrganizationData>,
+        required:true
+    },
+})
 const addUser = ref(false);
 const nameInput = ref();
 const emailInput = ref();
@@ -24,6 +32,7 @@ const form = useForm({
     email: "",
     contact: "",
     role: null,
+    organization_id: null,
 });
 
 const createUser = () => {
@@ -166,12 +175,30 @@ const createUser = () => {
                                 :get-option-label="
                                     (option: RoleData) => option.name
                                 "
-                                :options="($page.props.roles as any)"
+                                :options="$page.props.roles as any"
                                 placeholder="Previlêgio"
                                 :reduce="(role: RoleData) => role.id"
                                 label="role"
                             ></v-select>
                             <InputError :message="form.errors.role" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label
+                                for="organization"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >Organização</label
+                            >
+                            <v-select
+                                v-model="form.organization_id"
+                                :get-option-label="
+                                    (option: OrganizationData) => option.name
+                                "
+                                :options="organizations"
+                                placeholder="Organização"
+                                :reduce="(organization: OrganizationData) => organization.id"
+                                label="organization"
+                            ></v-select>
+                            <InputError :message="form.errors.organization_id" />
                         </div>
                     </div>
                     <button

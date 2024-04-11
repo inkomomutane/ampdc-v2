@@ -11,11 +11,11 @@ class VictimData extends Data
     public function __construct(
         public string $name,
         public int $age,
-        public string $date_of_birth,
+        public ?string $date_of_birth,
         public NeighborhoodData|Lazy|null $neighborhood,
         public ViolenceTypeData|Lazy|null $violenceType,
-        public string $violence_details,
-        public string $contact,
+        public ?string $violence_details,
+        public ?string $contact,
     ) {}
 
     public static function fromModel(Victim $victim): self

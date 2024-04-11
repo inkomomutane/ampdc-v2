@@ -44,7 +44,7 @@ const updateNeighborhood = () => {
             },
             onError: () => nomeInput.value.focus(),
             onFinish: () => form.reset(),
-        }
+        },
     );
 };
 </script>
@@ -107,8 +107,8 @@ const updateNeighborhood = () => {
                         <v-select
                             v-model="form.district_id"
                             :get-option-label="
-                                    (option: DistrictData) => option.name
-                                "
+                                (option: DistrictData) => option.name
+                            "
                             :options="districts"
                             placeholder="Selecionar distrito"
                             :reduce="(district: DistrictData) => district.id"

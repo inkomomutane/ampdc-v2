@@ -18,12 +18,14 @@ class UpdateUser
             'email' => ['required', 'string', 'email', Rule::unique(User::class, 'email')->ignore($user->id, 'id')],
             'contact' => ['nullable', 'string'],
             'role' => ['required', 'exists:roles,id'],
+            'organization_id' => 'required|exists:organizations,id'
         ]);
 
         try {
             $user->name = $validated['name'];
             $user->email = $validated['email'];
             $user->contact = $validated['contact'];
+            $user->organization_id = $validated['organization_id'];
             $user->syncRoles($validated['role'])
                 ->save();
 

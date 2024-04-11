@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
-import Avatar from "primevue/avatar";
 
 import { Users } from "@/types/index";
 import { ref, watch, PropType } from "vue";
@@ -10,11 +9,16 @@ import { FlasherResponse } from "@flasher/flasher";
 import CreateUser from "./CreateUser.vue";
 import EditUser from "./EditUser.vue";
 import DeleteUser from "./DeleteUser.vue";
+import OrganizationData = App.Data.OrganizationData;
 
 const props = defineProps({
     users: {
         type: Object as PropType<Users>,
         required: true,
+    },
+    organizations : {
+        type : Array<OrganizationData>,
+        required:true
     },
     search: String,
     messages: Object as PropType<FlasherResponse>,
@@ -36,17 +40,17 @@ watch(
         value?.envelopes.forEach((element) => {
             Flasher.flash(
                 element.notification.type,
-                element.notification.message
+                element.notification.message,
             );
         });
-    }
+    },
 );
 
 watch(
     () => props.users.links,
     (value) => {
         links.value = value;
-    }
+    },
 );
 
 watch(searchTerm, (value) => {
@@ -58,7 +62,7 @@ watch(searchTerm, (value) => {
             only: ["users"],
             replace: false,
             preserveState: true,
-        }
+        },
     );
 });
 
@@ -131,7 +135,7 @@ function closeDeleteUserModal() {
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
                         >
-                            <CreateUser />
+                            <CreateUser :organizations="organizations" />
                         </div>
                     </div>
                     <div class="overflow-x-auto">
@@ -179,15 +183,14 @@ function closeDeleteUserModal() {
                                 <tr
                                     class="border-b dark:border-gray-700"
                                     v-for="user in users.data"
-                                    :key="(user.id)"
+                                    :key="user.id"
                                 >
                                     <th
                                         scope="row"
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                     >
                                         <span
-                                            class="bg-gray-300  text-gray-700 dark:bg-gray-900 dark:text-white p-3 rounded-md"
-
+                                            class="bg-gray-300 text-gray-700 dark:bg-gray-900 dark:text-white p-3 rounded-md"
                                         >
                                             {{ user.name?.charAt(0) }}
                                         </span>
@@ -383,6 +386,7 @@ function closeDeleteUserModal() {
             <EditUser
                 v-if="editingUser"
                 :user="editingUser"
+                :organizations="organizations"
                 :openModal="editingUserTrigger"
                 :close="closeEditUserModal"
             />

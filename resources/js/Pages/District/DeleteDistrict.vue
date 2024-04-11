@@ -35,7 +35,7 @@ const deleteDistrict = () => {
                 props.close();
             },
             onFinish: () => form.reset(),
-        }
+        },
     );
 };
 </script>

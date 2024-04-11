@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('victim_cases_histories', static function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('case_code');
             $table->foreignUlid('victim_id')->constrained('victims');
             $table->foreignUlid('case_registered_by_id')->constrained('users');
             $table->enum('progress_status', App\Enums\CaseProgressStatus::getValues());
@@ -23,6 +22,9 @@ return new class extends Migration
             $table->json('case_modified_fields')->nullable();
             $table->foreignUlid('organization_id')->nullable()->constrained('organizations');
             $table->foreignUlid('violence_type_id')->nullable()->constrained('violence_types');
+            $table->foreignUlid('forwarded_to_organization_id')->nullable()->constrained('organizations');
+            $table->foreignUlid('forwarded_from_organization_id')->nullable()->constrained('organizations');
+            $table->boolean('is_forwarded')->default(false);
             $table->timestamps();
         });
     }

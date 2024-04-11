@@ -35,7 +35,7 @@ const deleteNeighborhood = () => {
                 props.close();
             },
             onFinish: () => form.reset(),
-        }
+        },
     );
 };
 </script>

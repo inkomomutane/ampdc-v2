@@ -18,6 +18,7 @@ class CreateUser
             'email' => $userData['email'],
             'contact' => $userData['contact'],
             'password' => Hash::make('12345678'),
+            'organization_id' => $userData['organization_id'],
         ]);
         /** @var User $user */
         $user = User::whereId($user->id)->first();
@@ -32,6 +33,7 @@ class CreateUser
             'email' => ['required', 'string', 'email', 'unique:users,email'],
             'contact' => ['nullable', 'string'],
             'role' => ['required', 'exists:roles,id'],
+            'organization_id' => 'required|exists:organizations,id'
         ];
     }
 

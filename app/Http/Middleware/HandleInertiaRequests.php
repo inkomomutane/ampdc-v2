@@ -39,6 +39,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'messages' => flash()->render([], 'array'),
             'roles' => RoleData::collection(Role::all()),
+            'organization' => organization(),
             '_token' => csrf_token(),
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),

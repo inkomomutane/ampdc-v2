@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\User;
+use App\Data\OrganizationData;
 use App\Data\UserData;
+use App\Models\Organization;
 use App\Models\User;
 use Auth;
 use Inertia\Inertia;
@@ -27,6 +29,7 @@ class GetUsers
     {
         return Inertia::render('User/Index', [
             'users' => $this->handle(request()->search),
+            'organizations' => OrganizationData::collection(Organization::all())
         ]);
     }
 }

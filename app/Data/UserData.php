@@ -16,6 +16,7 @@ class UserData extends Data
         public readonly ?string $contact,
         public readonly ?bool $active,
         public readonly RoleData|null|Lazy $role,
+        public readonly OrganizationData|null|Lazy $organization,
     ) {
     }
 
@@ -28,6 +29,7 @@ class UserData extends Data
             contact: $user->contact,
             active: $user->active,
             role: Lazy::whenLoaded('roles',$user, fn() => $user->roles?->first()?->getData()),
+            organization: Lazy::whenLoaded('organization',$user, fn() => $user->organization?->getData()),
         );
     }
 }

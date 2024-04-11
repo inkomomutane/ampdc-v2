@@ -11,14 +11,6 @@ class Victim extends Model
 {
     use HasFactory;
     use HasUlids;
-    //            $table->ulid('id')->primary();
-    //            $table->string('name')->nullable();
-    //            $table->unsignedInteger('age')->nullable();
-    //            $table->date('date_of_birth')->nullable();
-    //            $table->foreignUlid('neighborhood_id')->nullable()->constrained('neighborhoods');
-    //            $table->foreignUlid('violence_type_id')->nullable()->constrained('violence_types');
-    //            $table->text('violence_details')->nullable();
-    //            $table->string('contact')->nullable();
 
     protected $fillable = [
         'name',

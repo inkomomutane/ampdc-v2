@@ -35,7 +35,7 @@ const deleteProvince = () => {
                 props.close();
             },
             onFinish: () => form.reset(),
-        }
+        },
     );
 };
 </script>

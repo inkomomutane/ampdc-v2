@@ -172,8 +172,8 @@ const createDistrict = () => {
                         <v-select
                             v-model="form.province_id"
                             :get-option-label="
-                                    (option: ProvinceData) => option.name
-                                "
+                                (option: ProvinceData) => option.name
+                            "
                             :options="provinces"
                             placeholder="Selecionar província"
                             :reduce="(province: ProvinceData) => province.id"

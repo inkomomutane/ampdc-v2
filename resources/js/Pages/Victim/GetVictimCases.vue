@@ -1,31 +1,23 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
-
-import { Provinces } from "@/types";
+import { VictimCasesHistories } from "@/types";
 import { ref, watch, PropType } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
-import CreateProvince from "./CreateProvince.vue";
-import EditProvince from "./EditProvince.vue";
-import DeleteProvince from "./DeleteProvince.vue";
+import {CaseProgressStatus} from "@/types/casestatus";
+
 
 const props = defineProps({
-    provinces: {
-        type: Object as PropType<Provinces>,
+    cases: {
+        type: Object as PropType<VictimCasesHistories>,
         required: true,
     },
     search: String,
     messages: Object as PropType<FlasherResponse>,
 });
 
-const links = ref(props.provinces.links);
-
-const editingProvinceTrigger = ref(false);
-const editingProvince = ref<App.Data.ProvinceData | null>(null);
-
-const deletingProvinceTrigger = ref(false);
-const deletingProvince = ref<App.Data.ProvinceData | null>(null);
+const links = ref(props.cases.links);
 
 const searchTerm = ref("");
 
@@ -42,7 +34,7 @@ watch(
 );
 
 watch(
-    () => props.provinces.links,
+    () => props.cases.links,
     (value) => {
         links.value = value;
     },
@@ -50,38 +42,37 @@ watch(
 
 watch(searchTerm, (value) => {
     router.visit(
-        route("province.list", {
+        route("victim.cases.list", {
             search: value ?? "",
         }),
         {
-            only: ["provinces"],
+            only: ["cases"],
             replace: false,
             preserveState: true,
         },
     );
 });
 
-function openEditProvinceModal(province: App.Data.ProvinceData) {
-    editingProvince.value = province;
-    editingProvinceTrigger.value = true;
-}
+const progressCasesColor = (status: CaseProgressStatus)  => {
 
-function closeEditProvinceModal() {
-    editingProvince.value = null;
-    editingProvinceTrigger.value = false;
-}
-
-function openDeleteProvinceModal(province: App.Data.ProvinceData) {
-    deletingProvince.value = province;
-    deletingProvinceTrigger.value = true;
-}
-
-function closeDeleteProvinceModal() {
-    deletingProvince.value = null;
-    deletingProvinceTrigger.value = false;
-}
+    switch (status) {
+        case CaseProgressStatus.FORWARDED:
+            return "bg-blue-500";
+        case CaseProgressStatus.PENDING:
+            return "bg-yellow-500";
+        case CaseProgressStatus.IN_PROGRESS:
+            return "bg-blue-500";
+        case CaseProgressStatus.SOLVED:
+            return "bg-green-500";
+        case CaseProgressStatus.CLOSED:
+            return "bg-red-500";
+        case CaseProgressStatus.REJECTED:
+            return "bg-red-500";
+        default:
+            return "bg-gray-500";
+    }
+};
 </script>
-
 <template>
     <Head title="Províncias" />
     <AuthenticatedLayout>
@@ -130,7 +121,7 @@ function closeDeleteProvinceModal() {
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
                         >
-                            <CreateProvince />
+                            <button>Baixar a base em excel</button>
                         </div>
                     </div>
                     <div class="overflow-x-auto">
@@ -143,7 +134,17 @@ function closeDeleteProvinceModal() {
                                 <tr>
                                     <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
-                                            Nome da província
+                                            Nome da vítima
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        <div class="flex items-center">
+                                            Organização
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        <div class="flex items-center">
+                                            Estado do caso
                                         </div>
                                     </th>
                                     <th scope="col" class="px-4 py-3">
@@ -157,19 +158,27 @@ function closeDeleteProvinceModal() {
                             <tbody>
                                 <tr
                                     class="border-b dark:border-gray-700"
-                                    v-for="province in provinces.data"
-                                    :key="province.id as number"
+                                    v-for="victimCase in cases.data"
+                                    :key="victimCase.id ?? ''"
                                 >
                                     <td class="px-4 py-3">
-                                        {{ province.name }}
+                                        {{ victimCase.victim.name }}
+                                    </td>
+                                    <td class="px-4 py-3" >
+                                        {{ victimCase.organization.name }}
+                                    </td>
+                                    <td class="px-4 py-3">
+                                         <span
+                                             :class="progressCasesColor(victimCase.progressStatus)"
+                                             class="px-4 p-1 text-white font-semibold"
+                                         >
+                                                {{ victimCase.progressStatus }}
+                                            </span>
                                     </td>
 
                                     <td class="px-4 py-3 w-32">
                                         <button
                                             type="button"
-                                            @click="
-                                                openEditProvinceModal(province)
-                                            "
                                             class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                         >
                                             <svg
@@ -203,11 +212,6 @@ function closeDeleteProvinceModal() {
                                     <td class="px-4 py-3 justify-end w-32">
                                         <button
                                             type="button"
-                                            @click="
-                                                openDeleteProvinceModal(
-                                                    province,
-                                                )
-                                            "
                                             class="flex items-center justify-center text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                         >
                                             <svg
@@ -249,8 +253,8 @@ function closeDeleteProvinceModal() {
                             <span
                                 class="font-semibold text-gray-900 dark:text-white"
                                 >{{
-                                    `${provinces.meta.from ?? 0}-${
-                                        provinces.meta.to ?? 0
+                                    `${cases.meta.from ?? 0}-${
+                                        cases.meta.to ?? 0
                                     }`
                                 }}</span
                             >
@@ -258,7 +262,7 @@ function closeDeleteProvinceModal() {
                             <span
                                 class="font-semibold text-gray-900 dark:text-white"
                             >
-                                {{ provinces.meta.total }}</span
+                                {{ cases.meta.total }}</span
                             >
                         </span>
                         <ul class="inline-flex items-stretch -space-x-px">
@@ -321,18 +325,6 @@ function closeDeleteProvinceModal() {
                     </nav>
                 </div>
             </div>
-            <EditProvince
-                v-if="editingProvince"
-                :province="editingProvince"
-                :openModal="editingProvinceTrigger"
-                :close="closeEditProvinceModal"
-            />
-            <DeleteProvince
-                v-if="deletingProvince"
-                :province="deletingProvince"
-                :openModal="deletingProvinceTrigger"
-                :close="closeDeleteProvinceModal"
-            />
         </template>
     </AuthenticatedLayout>
 </template>

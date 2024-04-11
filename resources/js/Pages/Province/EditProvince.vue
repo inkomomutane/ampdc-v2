@@ -38,7 +38,7 @@ const updateProvince = () => {
             },
             onError: () => nameInput.value.focus(),
             onFinish: () => form.reset(),
-        }
+        },
     );
 };
 </script>

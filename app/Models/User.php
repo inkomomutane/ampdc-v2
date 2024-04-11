@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Data\UserData;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -18,6 +19,8 @@ class User extends Authenticatable
 
     protected string $dataClass = UserData::class;
 
+    protected $with = ['roles','organization'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +32,7 @@ class User extends Authenticatable
         'password',
         'active',
         'contact',
+        'organization_id'
     ];
 
     /**
@@ -51,4 +55,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
 }

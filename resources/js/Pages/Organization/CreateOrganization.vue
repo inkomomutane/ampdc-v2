@@ -4,8 +4,6 @@ import { PropType, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import InputError from "@/components/InputError.vue";
 
-
-
 const addOrganization = ref(false);
 const nameInput = ref();
 const servicesInput = ref();
@@ -31,7 +29,6 @@ const createOrganization = () => {
         onError: () => nameInput.value.focus(),
     });
 };
-
 </script>
 <template>
     <button
@@ -115,7 +112,6 @@ const createOrganization = () => {
                                 v-model="form.name"
                                 name="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-
                                 placeholder="Nome da organização"
                                 type="text"
                             />
@@ -125,7 +121,7 @@ const createOrganization = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Serviços da organização</label
+                                >Serviços da organização</label
                             >
                             <textarea
                                 id="services"

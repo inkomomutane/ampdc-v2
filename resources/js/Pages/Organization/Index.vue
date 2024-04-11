@@ -38,10 +38,11 @@ watch(
                 element.notification.message,
             );
         });
-    },{
-        immediate :true,
-        deep: true
-    }
+    },
+    {
+        immediate: true,
+        deep: true,
+    },
 );
 
 watch(
@@ -83,7 +84,6 @@ function closeDeleteOrganizationModal() {
     deletingOrganization.value = null;
     deletingOrganizationTrigger.value = false;
 }
-
 </script>
 
 <template>
@@ -147,9 +147,7 @@ function closeDeleteOrganizationModal() {
                             >
                                 <tr>
                                     <th class="px-4 py-3" scope="col">
-                                        <div class="flex items-center">
-                                            #
-                                        </div>
+                                        <div class="flex items-center">#</div>
                                     </th>
                                     <th class="px-4 py-3" scope="col">
                                         <div class="flex items-center">
@@ -180,7 +178,9 @@ function closeDeleteOrganizationModal() {
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                         scope="row"
                                     >
-                                        <span class="rounded-full bg-slate-50 text-black text-center">
+                                        <span
+                                            class="rounded-full bg-slate-50 text-black text-center"
+                                        >
                                             {{ organization.name?.charAt(0) }}
                                         </span>
                                     </th>
@@ -196,7 +196,11 @@ function closeDeleteOrganizationModal() {
                                         <button
                                             class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                             type="button"
-                                            @click="openEditOrganizationModal(organization)"
+                                            @click="
+                                                openEditOrganizationModal(
+                                                    organization,
+                                                )
+                                            "
                                         >
                                             <svg
                                                 fill="none"
@@ -230,7 +234,11 @@ function closeDeleteOrganizationModal() {
                                         <button
                                             class="bg-red-500 hover:bg-red-700 flex items-center justify-center text-white focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                             type="button"
-                                            @click="openDeleteOrganizationModal(organization)"
+                                            @click="
+                                                openDeleteOrganizationModal(
+                                                    organization,
+                                                )
+                                            "
                                         >
                                             <svg
                                                 aria-hidden="true"
