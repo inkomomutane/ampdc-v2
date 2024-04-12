@@ -21,7 +21,6 @@ const breadcrumbs = computed(() =>
 
         <div class="flex-1 flex flex-col overflow-hidden">
             <Header />
-
             <main
                 class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900"
             >
@@ -68,6 +67,7 @@ const breadcrumbs = computed(() =>
                             </ol>
                         </nav>
                     </div>
+                    <slot name="banner" />
                     <slot name="content" />
                 </div>
             </main>

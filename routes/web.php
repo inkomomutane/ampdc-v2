@@ -19,16 +19,19 @@ use App\Http\Controllers\Province\CreateProvince;
 use App\Http\Controllers\Province\DeleteProvince;
 use App\Http\Controllers\Province\GetProvinces;
 use App\Http\Controllers\Province\UpdateProvince;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\User\CreateUser;
 use App\Http\Controllers\User\DeleteUser;
 use App\Http\Controllers\User\GetUsers;
 use App\Http\Controllers\User\UpdateUser;
+use App\Http\Controllers\Victim\EditDataOfVictimCaseController;
 use App\Http\Controllers\Victim\ExportVictimCasesController;
 use App\Http\Controllers\Victim\GetDataOfVictimCaseController;
 use App\Http\Controllers\Victim\GetForwardedVictimCasesController;
 use App\Http\Controllers\Victim\GetReceivedVictimCasesController;
 use App\Http\Controllers\Victim\GetVictimCasesController;
 use App\Http\Controllers\Victim\RegisterController;
+use App\Http\Controllers\Victim\UpdateDataOfVictimCaseController;
 use App\Http\Controllers\ViolenceType\DeleteViolenceTypeController;
 use App\Http\Controllers\ViolenceType\ListViolenceTypesController;
 use App\Http\Controllers\ViolenceType\StoreViolenceTypeController;
@@ -119,6 +122,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/victims/forwarded-cases', GetForwardedVictimCasesController::class)->name('victim.forwarded.cases.list');
     Route::get('/export/victims/{type}/cases', ExportVictimCasesController::class)->name('export.victims.cases');
     Route::get('/show/victimCase/{case}/info', GetDataOfVictimCaseController::class)->name('victim.case.info');
+    Route::get('/show/victimCase/{case}/edit', EditDataOfVictimCaseController::class)->name('victim.case.edit');
+    Route::match(['put','patch','post'],'/update/victimCase/{case}', UpdateDataOfVictimCaseController::class)->name('victim.case.update');
+
+
+    #--- Reports ---#
+
+    Route::get('/dashboard/reports', ReportsController::class)->name('dashboard.reports');
 
 });
 

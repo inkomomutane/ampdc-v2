@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Diglactic\Breadcrumbs\Breadcrumbs;
+use Illuminate\Support\Facades\Route as RouteFacade;
+use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 class AppServiceProvider extends ServiceProvider
 {

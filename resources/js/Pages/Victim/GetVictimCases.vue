@@ -201,9 +201,12 @@ const exportCases = () => {
                                         </Link>
                                     </td>
                                     <td class="px-4 py-3 w-32">
-                                        <button
+                                        <Link
+                                            :href="route('victim.case.edit',{
+                                                case: victimCase.id
+                                            })"
                                             type="button"
-                                            class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
+                                            class="flex w-fit items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -231,7 +234,7 @@ const exportCases = () => {
                                                     fill="black"
                                                 />
                                             </svg>
-                                        </button>
+                                        </Link>
                                     </td>
                                 </tr>
                             </tbody>

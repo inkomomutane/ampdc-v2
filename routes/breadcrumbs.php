@@ -3,8 +3,11 @@
 use App\Models\District;
 use App\Models\Neighborhood;
 use App\Models\Organization;
+use App\Models\VictimCasesHistory;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
+use Illuminate\Support\Facades\Route;
+
 
 Breadcrumbs::for('victim.register', function (BreadcrumbTrail $trail) {
     $trail->push('Registo', route('victim.register'));
@@ -181,14 +184,38 @@ Breadcrumbs::for('victim.forwarded.cases.list', function (BreadcrumbTrail $trail
     $trail->push('Casos Encaminhados', route('victim.forwarded.cases.list'));
 });
 
-Breadcrumbs::for('export.victims.cases', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
-    $trail->push('Exportar Casos', route('export.victims.cases'));
-});
 
-Breadcrumbs::for('victim.case.info', function (BreadcrumbTrail $trail,\App\Models\VictimCasesHistory $case) {
-    $trail->parent('victim.register');
+
+Breadcrumbs::for('victim.case.info', function (BreadcrumbTrail $trail, VictimCasesHistory $case) {
+
+    if($case->is_forwarded && $case->forwarded_to_organization_id === auth()->user()->organization_id){
+        $trail->parent('victim.received.cases.list');
+    }else if($case->is_forwarded && $case->forwarded_from_organization_id === auth()->user()->organization_id){
+        $trail->parent('victim.forwarded.cases.list');
+    }
+    else{
+        $trail->parent('victim.cases.list');
+    }
+
     $trail->push('Informação do caso - ' . $case->case_code, route('victim.case.info',[
         'case' => $case
     ]));
+});
+
+Breadcrumbs::for('victim.case.edit', static function (BreadcrumbTrail $trail, VictimCasesHistory $case) {
+    if($case->is_forwarded && $case->forwarded_to_organization_id === auth()->user()->organization_id){
+        $trail->parent('victim.received.cases.list');
+    }else if($case->is_forwarded && $case->forwarded_from_organization_id === auth()->user()->organization_id){
+        $trail->parent('victim.forwarded.cases.list');
+    }
+    else{
+        $trail->parent('victim.cases.list');
+    }
+    $trail->push('Editar caso - ' . $case->case_code, route('victim.case.edit',[
+        'case' => $case
+    ]));
+});
+
+Breadcrumbs::for('dashboard.reports', function (BreadcrumbTrail $trail) {
+    $trail->push('Relatórios', route('dashboard.reports'));
 });

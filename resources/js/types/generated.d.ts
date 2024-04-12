@@ -40,7 +40,7 @@ declare namespace App.Data {
         caseDetails: string | null;
         progressDetails: string | null;
         caseUpdatedBy: App.Data.UserData;
-        caseModifiedFields: string | null;
+        caseModifiedFields: Array<any> | null;
         organization: App.Data.OrganizationData;
         violence_type_id: string;
         forwardedToOrganization: App.Data.OrganizationData | any | null;

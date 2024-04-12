@@ -90,7 +90,7 @@ function closeDeleteViolenceTypeModal() {
     <Head title="Organizações da empresa" />
     <AuthenticatedLayout>
         <template v-slot:content>
-            <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+            <div class="mx-auto max-w-screen-xl">
                 <!-- Start coding here -->
                 <div
                     class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded overflow-hidden"

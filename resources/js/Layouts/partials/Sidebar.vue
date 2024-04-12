@@ -41,6 +41,28 @@ const inactiveClass = ref(
             <nav class="mt-10">
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
+                    :href="route('dashboard.reports')"
+                    :class="[
+                        route().current('dashboard.reports')
+                            ? activeClass
+                            : inactiveClass,
+                    ]"
+                >
+                    <svg
+                        class="w-5 h-5"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                    >
+                        <!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+                        <path
+                            d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zM160 224c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm128-64V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V160c0-17.7 14.3-32 32-32s32 14.3 32 32zm64 32c17.7 0 32 14.3 32 32v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32zM480 96V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V96c0-17.7 14.3-32 32-32s32 14.3 32 32z"
+                        ></path>
+                    </svg>
+                    <span class="mx-4 font-medium text-base">Estatísticas</span>
+                </Link>
+                <Link
+                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
                     :class="[
                         route().current('victim.register')
                             ? activeClass
@@ -98,6 +120,15 @@ const inactiveClass = ref(
                         ></path>
                     </svg>
                     <span class="mx-4 font-medium text-base">Casos</span>
+                </Link>
+                <Link
+                     v-if="route().current('victim.case.edit') ||route().current('victim.case.info') "
+                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
+                    href=""
+                    :class="activeClass"
+                >
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" fill="currentColor"><path d="M1280 1056c0 53-43 96-96 96-32 0-62-16-80-43L877 768h-45v132l247 411c6 10 9 21 9 33 0 35-29 64-64 64H832v272c0 62-50 112-112 112H560c-61 0-112-50-112-112v-272H256c-35 0-64-29-64-64 0-12 3-23 9-33l247-411V768h-45l-227 341c-18 27-48 43-80 43-53 0-96-43-96-96 0-19 6-38 16-53l256-384c40-59 102-107 176-107h384c74 0 136 48 176 107l256 384c10 15 16 34 16 53zM864 256c0 124-100 224-224 224S416 380 416 256 516 32 640 32s224 100 224 224z"></path></svg>
+                    <span class="mx-4 font-medium text-base">Caso</span>
                 </Link>
 
                 <Link
@@ -166,24 +197,7 @@ const inactiveClass = ref(
                     <span class="mx-4 font-medium text-base">Recebidos</span>
                 </Link>
 
-                <Link
-                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
-                    href="#"
-                    :class="inactiveClass"
-                >
-                    <svg
-                        class="w-5 h-5"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                    >
-                        <!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
-                        <path
-                            d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zM160 224c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm128-64V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V160c0-17.7 14.3-32 32-32s32 14.3 32 32zm64 32c17.7 0 32 14.3 32 32v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32zM480 96V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V96c0-17.7 14.3-32 32-32s32 14.3 32 32z"
-                        ></path>
-                    </svg>
-                    <span class="mx-4 font-medium text-base">Estatísticas</span>
-                </Link>
+
 
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"

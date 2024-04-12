@@ -19,7 +19,7 @@ class VictimCasesHistoryData extends  Data
         public ?string $caseDetails,
         public ?string $progressDetails,
         public UserData $caseUpdatedBy,
-        public ?string $caseModifiedFields,
+        public ?array $caseModifiedFields,
         public OrganizationData $organization,
         public string $violence_type_id,
         public OrganizationData|Lazy|null $forwardedToOrganization,

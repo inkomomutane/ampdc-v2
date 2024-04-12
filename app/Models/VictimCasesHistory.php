@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\LaravelData\WithData;
 
 class VictimCasesHistory extends Model
 {
     use HasFactory;
     use HasUlids;
+    use WithData;
 
     protected $with = [
         'victim',
@@ -23,9 +25,12 @@ class VictimCasesHistory extends Model
         'fromOrganization'
     ];
 
+    protected string  $dataClass = \App\Data\VictimCasesHistoryData::class;
+
     protected $casts = [
         'is_forwarded' => 'boolean',
-        'progress_status' => CaseProgressStatus::class
+        'progress_status' => CaseProgressStatus::class,
+        'case_modified_fields' => 'array',
     ];
 protected $fillable = [
     'victim_id',
