@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 import { VictimCasesHistories } from "@/types";
 import { ref, watch, PropType } from "vue";
-import Flasher from "@/helprs";
+import Flasher, {progressCasesColor} from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import {CaseProgressStatus} from "@/types/casestatus";
 
@@ -53,25 +53,7 @@ watch(searchTerm, (value) => {
     );
 });
 
-const progressCasesColor = (status: CaseProgressStatus)  => {
 
-    switch (status) {
-        case CaseProgressStatus.FORWARDED:
-            return "bg-blue-500";
-        case CaseProgressStatus.PENDING:
-            return "bg-yellow-500";
-        case CaseProgressStatus.IN_PROGRESS:
-            return "bg-blue-500";
-        case CaseProgressStatus.SOLVED:
-            return "bg-green-500";
-        case CaseProgressStatus.CLOSED:
-            return "bg-red-500";
-        case CaseProgressStatus.REJECTED:
-            return "bg-red-500";
-        default:
-            return "bg-gray-500";
-    }
-};
 
 const exportCases = () => {
 
@@ -158,6 +140,11 @@ const exportCases = () => {
                                 <tr>
                                     <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
+                                            Código do caso
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        <div class="flex items-center">
                                             Nome da vítima
                                         </div>
                                     </th>
@@ -172,10 +159,10 @@ const exportCases = () => {
                                         </div>
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        Editar
+                                        Visualizar
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        Excluir
+                                        Editar
                                     </th>
                                 </tr>
                             </thead>
@@ -185,6 +172,9 @@ const exportCases = () => {
                                     v-for="victimCase in cases.data"
                                     :key="victimCase.id ?? ''"
                                 >
+                                    <td class="px-4 py-3 font-semibold text-decoration underline">
+                                        {{ victimCase.caseCode }}
+                                    </td>
                                     <td class="px-4 py-3">
                                         {{ victimCase.victim.name }}
                                     </td>
@@ -199,7 +189,17 @@ const exportCases = () => {
                                                 {{ victimCase.progressStatus }}
                                             </span>
                                     </td>
-
+                                    <td class="px-4 py-3 w-32">
+                                        <Link
+                                            :href="route('victim.case.info',{
+                                                case: victimCase.id
+                                            })"
+                                            type="button"
+                                            class="flex w-fit items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
+                                        >
+                                            <svg width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. --><path d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"></path></svg>
+                                        </Link>
+                                    </td>
                                     <td class="px-4 py-3 w-32">
                                         <button
                                             type="button"
@@ -229,35 +229,6 @@ const exportCases = () => {
                                                     class="fill-current text-gray-100"
                                                     d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
                                                     fill="black"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </td>
-                                    <td class="px-4 py-3 justify-end w-32">
-                                        <button
-                                            type="button"
-                                            class="flex items-center justify-center text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="24"
-                                                height="24"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                            >
-                                                <path
-                                                    class="fill-current text-gray-100"
-                                                    d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
-                                                />
-                                                <path
-                                                    class="fill-current text-gray-100"
-                                                    opacity="0.5"
-                                                    d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
-                                                />
-                                                <path
-                                                    class="fill-current text-gray-100"
-                                                    opacity="0.5"
-                                                    d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
                                                 />
                                             </svg>
                                         </button>

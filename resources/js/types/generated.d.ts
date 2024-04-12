@@ -33,6 +33,7 @@ declare namespace App.Data {
     };
     export type VictimCasesHistoryData = {
         id: string | null;
+        caseCode: string;
         victim: App.Data.VictimData;
         caseRegisteredBy: App.Data.UserData;
         progressStatus: App.Enums.CaseProgressStatus;
@@ -61,4 +62,15 @@ declare namespace App.Data {
         description: string | null;
     };
 }
-
+declare namespace App.Enums {
+    export enum CaseProgressStatus {
+        "REPORTED" = "Reportado",
+        "FORWARDED" = "Encaminhado",
+        "SOLVED" = "Resolvido",
+        "CLOSED" = "Encerrado",
+        "REOPENED" = "Reaberto",
+        "REJECTED" = "Rejeitado",
+        "PENDING" = "Pendente",
+        "IN_PROGRESS" = "Em andamento",
+    }
+}

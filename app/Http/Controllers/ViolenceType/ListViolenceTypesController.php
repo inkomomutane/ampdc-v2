@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\ViolenceType;
 
-use App\Data\OrganizationData;
 use App\Data\ViolenceTypeData;
 use App\Http\Controllers\Controller;
-use App\Models\Organization;
 use App\Models\ViolenceType;
 use Illuminate\Database\Eloquent\Builder;
 use Inertia\Inertia;
@@ -23,7 +21,7 @@ class ListViolenceTypesController extends Controller
     public function handle(?string $term= null){
        return  ViolenceTypeData::collection(ViolenceType::query()
             ->when($term, function (Builder $query) use ($term) {
-                $query->whereAny(['name','description'],'like',"%${term}%");
+                $query->whereAny(['name','description'],'like',"%$term%");
             })
             ->paginate(12)->withQueryString());
     }

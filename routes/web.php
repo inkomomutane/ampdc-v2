@@ -24,6 +24,7 @@ use App\Http\Controllers\User\DeleteUser;
 use App\Http\Controllers\User\GetUsers;
 use App\Http\Controllers\User\UpdateUser;
 use App\Http\Controllers\Victim\ExportVictimCasesController;
+use App\Http\Controllers\Victim\GetDataOfVictimCaseController;
 use App\Http\Controllers\Victim\GetForwardedVictimCasesController;
 use App\Http\Controllers\Victim\GetReceivedVictimCasesController;
 use App\Http\Controllers\Victim\GetVictimCasesController;
@@ -112,12 +113,12 @@ Route::middleware('auth')->group(function () {
     #--- Victims ---#
 
     Route::post('/victim/register/case', RegisterController::class)->name('victim.register.case');
+
     Route::get('/victims/cases',GetVictimCasesController::class)->name('victim.cases.list');
     Route::get('/victims/received-cases', GetReceivedVictimCasesController::class)->name('victim.received.cases.list');
     Route::get('/victims/forwarded-cases', GetForwardedVictimCasesController::class)->name('victim.forwarded.cases.list');
-
     Route::get('/export/victims/{type}/cases', ExportVictimCasesController::class)->name('export.victims.cases');
-
+    Route::get('/show/victimCase/{case}/info', GetDataOfVictimCaseController::class)->name('victim.case.info');
 
 });
 

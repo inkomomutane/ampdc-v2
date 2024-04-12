@@ -12,6 +12,7 @@ class VictimCasesHistoryData extends  Data
 {
     public function __construct(
         public ?string $id,
+        public string $caseCode,
         public VictimData $victim,
         public UserData $caseRegisteredBy,
         public CaseProgressStatus $progressStatus,
@@ -30,6 +31,7 @@ class VictimCasesHistoryData extends  Data
     {
         return new self(
             id: $victimCasesHistory->id,
+            caseCode: $victimCasesHistory->case_code,
             victim: VictimData::fromModel($victimCasesHistory->victim),
             caseRegisteredBy: UserData::fromModel($victimCasesHistory->caseRegisteredBy),
             progressStatus: $victimCasesHistory->progress_status,

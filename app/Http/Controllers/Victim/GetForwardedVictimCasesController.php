@@ -25,10 +25,10 @@ class GetForwardedVictimCasesController extends Controller
         return  VictimCasesHistoryData::collection(
             VictimCasesHistory::query()
                 ->when($term, function (Builder $query) use ($term) {
-                    $query->whereAny(['progress_status','case_details'],'like',"%${term}%");
+                    $query->whereAny(['progress_status','case_details','case_code'],'like',"%$term%");
                 })
                 ->orWhereRelation('victim',function(Builder $query) use ($term){
-                    $query->whereAny(['name','age','contact','violence_details'],'like',"%${term}%");
+                    $query->whereAny(['name','age','contact','violence_details'],'like',"%$term%");
                 })
                 ->forwardedCases($organization)
                 ->paginate(12)->withQueryString());

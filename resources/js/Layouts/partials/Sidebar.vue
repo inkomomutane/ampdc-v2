@@ -33,7 +33,7 @@ const inactiveClass = ref(
                 <Link href="/" class="flex items-center">
                     <img :src="logo" class="w-12" />
                     <span class="text-white text-2xl font-medium mx-2"
-                        >VBG</span
+                        >DBF</span
                     >
                 </Link>
             </div>

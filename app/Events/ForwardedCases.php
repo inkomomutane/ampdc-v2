@@ -23,7 +23,8 @@ class ForwardedCases
         public Collection $organizations,
         public  User $createdBy,
         public User $updatedBy,
-        public Organization $fromOrganization
+        public Organization $fromOrganization,
+        public string $caseCode
     )
     {
         //

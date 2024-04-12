@@ -29,6 +29,7 @@ class VictimCasesHistory extends Model
     ];
 protected $fillable = [
     'victim_id',
+    'case_code', // 'case_code' is not in the migration file
     'case_registered_by_id',
     'progress_status',
     'case_details',
@@ -73,9 +74,10 @@ public function organization() : BelongsTo
     }
 
 
-    public  function scopeNonForwarded(Builder $query) :void
+    public  function scopeNonForwarded(Builder $query,Organization $organization) :void
     {
-        $query->whereIsForwarded(false);
+        $query->whereIsForwarded(false)
+            ->where('organization_id', $organization->id);
     }
 
     public function scopeForwardedCases(Builder $query,Organization $organization) :void

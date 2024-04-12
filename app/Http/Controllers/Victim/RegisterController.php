@@ -30,8 +30,10 @@ class RegisterController extends Controller
     {
         $data = $request->validate($this->rules());
 
+
         \DB::beginTransaction();
         try {
+            $code  = incrementCode();
 
             $victim = Victim::create([
                 'name' => $data['name'],
@@ -53,6 +55,7 @@ class RegisterController extends Controller
                     'case_updated_by_id' => auth()->user()->id,
                     'violence_type_id' => $victim->violence_type_id,
                     'is_forwarded' => false,
+                    'case_code' => $code
                 ]);
             }
 
@@ -67,7 +70,8 @@ class RegisterController extends Controller
                 $organizations,
                 $request->user(),
                 $request->user(),
-                auth()->user()->organization
+                auth()->user()->organization,
+                $code
             ));
 
             \DB::commit();

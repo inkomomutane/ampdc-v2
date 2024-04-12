@@ -166,3 +166,29 @@ Breadcrumbs::for('violenceType.delete', function (BreadcrumbTrail $trail,\App\Mo
 });
 
 
+Breadcrumbs::for('victim.cases.list', function (BreadcrumbTrail $trail) {
+    $trail->parent('victim.register');
+    $trail->push('Casos', route('victim.cases.list'));
+});
+
+Breadcrumbs::for('victim.received.cases.list', function (BreadcrumbTrail $trail) {
+    $trail->parent('victim.register');
+    $trail->push('Casos Recebidos', route('victim.received.cases.list'));
+});
+
+Breadcrumbs::for('victim.forwarded.cases.list', function (BreadcrumbTrail $trail) {
+    $trail->parent('victim.register');
+    $trail->push('Casos Encaminhados', route('victim.forwarded.cases.list'));
+});
+
+Breadcrumbs::for('export.victims.cases', function (BreadcrumbTrail $trail) {
+    $trail->parent('victim.register');
+    $trail->push('Exportar Casos', route('export.victims.cases'));
+});
+
+Breadcrumbs::for('victim.case.info', function (BreadcrumbTrail $trail,\App\Models\VictimCasesHistory $case) {
+    $trail->parent('victim.register');
+    $trail->push('Informação do caso - ' . $case->case_code, route('victim.case.info',[
+        'case' => $case
+    ]));
+});

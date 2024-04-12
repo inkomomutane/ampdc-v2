@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('victim_cases_histories', static function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->string('case_code');
             $table->foreignUlid('victim_id')->constrained('victims');
             $table->foreignUlid('case_registered_by_id')->constrained('users');
             $table->enum('progress_status', App\Enums\CaseProgressStatus::getValues());

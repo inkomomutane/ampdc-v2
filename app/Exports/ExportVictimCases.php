@@ -42,6 +42,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
         ]);
         if($this->type === 'cases'){
             $this->cases =  $this->case->cases->map(fn(VictimCasesHistory $case) => [
+                $case->case_code,
                 $case->victim->name,
                 $case->victim->violenceType->name,
                 $case->victim->age,
@@ -54,6 +55,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
         }
        else if($this->type === 'forwarded'){
             $this->cases = $this->case->forwardedCases->map(fn(VictimCasesHistory $case) => [
+                $case->case_code,
                 $case->victim->name,
                 $case->victim->violenceType->name,
                 $case->victim->age,
@@ -66,6 +68,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
         }
       else  if($this->type === 'received'){
             $this->cases = $this->case->receivedCases->map(fn(VictimCasesHistory $case) => [
+                $case->case_code,
                 $case->victim->name,
                 $case->victim->violenceType->name,
                 $case->victim->age,
@@ -95,6 +98,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
     public function headings(): array
     {
         return [
+            'Código do caso',
             'Nome da vítima',
             'Causa da morte',
             'Idade',
@@ -114,18 +118,18 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
     {
         $sheet->setTitle( 'Casos de vitimas');
         $length = count($this->cases)  + 1;
-        $sheet->getStyle('A1:H1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:H1')->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('A1:H1')->getAlignment()->setVertical('center');
-        $sheet->getStyle("A1:H$length")->getBorders()->getAllBorders()->setBorderStyle('thin');
-        $sheet->getStyle('A1:H1')->getBorders()->getAllBorders()->setBorderStyle('medium');
+        $sheet->getStyle('A1:I1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:I1')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A1:I1')->getAlignment()->setVertical('center');
+        $sheet->getStyle("A1:I$length")->getBorders()->getAllBorders()->setBorderStyle('thin');
+        $sheet->getStyle('A1:I1')->getBorders()->getAllBorders()->setBorderStyle('medium');
     }
 
     public function columnFormats(): array
     {
         return [
-            'C' => NumberFormat::FORMAT_NUMBER,
-            'G' => NumberFormat::FORMAT_DATE_DDMMYYYY,
+            'D' => NumberFormat::FORMAT_NUMBER,
+            'H' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 

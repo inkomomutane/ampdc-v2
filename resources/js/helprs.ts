@@ -1,5 +1,6 @@
 import { FlahserType } from "./types/index.d";
 import flasher from "@flasher/flasher";
+import {CaseProgressStatus} from "@/types/casestatus";
 const Flasher = flasher;
 Flasher.addTheme("flasher", {
     render: function (envelope) {
@@ -72,4 +73,25 @@ export const tooltip = (message: string, className: string = "ml-5") => {
 
         class: `bg-slate-950 dark:bg-slate-100 ${className} rounded `,
     };
+};
+
+
+export const progressCasesColor = (status: CaseProgressStatus)  => {
+
+    switch (status) {
+        case CaseProgressStatus.FORWARDED:
+            return "bg-blue-500";
+        case CaseProgressStatus.PENDING:
+            return "bg-yellow-500";
+        case CaseProgressStatus.IN_PROGRESS:
+            return "bg-blue-500";
+        case CaseProgressStatus.SOLVED:
+            return "bg-green-500";
+        case CaseProgressStatus.CLOSED:
+            return "bg-red-500";
+        case CaseProgressStatus.REJECTED:
+            return "bg-red-500";
+        default:
+            return "bg-gray-500";
+    }
 };
