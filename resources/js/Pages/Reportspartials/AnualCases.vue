@@ -12,7 +12,7 @@ import {
     Filler
 } from 'chart.js'
 import {PropType} from "vue";
-
+import {ulid} from "ulidx";
 const props = defineProps({
     chartData: {
         required: true,
@@ -91,7 +91,7 @@ const chartOptions = {
        </div>
       <div class="p-4 h-72 dark:text-white">
           <Line
-              id="my-chart-id"
+              :id="ulid()"
               :options="chartOptions"
               :data="chartData"
           />

@@ -15,12 +15,19 @@ const props = defineProps({
     },
     receivedCasesCount : {
         type:Object
+    },
+    causeOfDeath : {
+        type:Object
+    },
+    neighborhoodDeaths : {
+        type:Object
     }
 });
 
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import AnualCases from "@/Pages/Reportspartials/AnualCases.vue";
 import DashboardCardData from "@/Pages/Reportspartials/DashboardCardData.vue";
+import DeathCauseChart from "@/Pages/Reportspartials/DeathCauseChart.vue";
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 </script>
@@ -96,14 +103,18 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
                 <div
                     class=" relative  overflow-hidden"
                 >
-                    <div class="grid gap-4">
+                    <div class="grid gap-4 mb-6">
                         <AnualCases :chart-data="props.casesCountArrayByYear" />
                     </div>
 
-                    <div class="grid grid-cols-3 my-4 gap-4">
+                    <div class="grid sm:grid-cols-2  xl:grid-cols-3 my-6 gap-6">
                         <DashboardCardData :value="casesCount" label="Casos registados"/>
                         <DashboardCardData :value="forwardedCasesCount" label="Casos encaminhados"/>
                         <DashboardCardData :value="receivedCasesCount" label="Casos recebidos"/>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <DeathCauseChart label="Gráfico por causa da morte" :causes="causeOfDeath.labels"  :causes-count="causeOfDeath.values" />
+                        <DeathCauseChart label="Gráfico por bor bairros" :causes="neighborhoodDeaths.labels"  :causes-count="neighborhoodDeaths.values" />
                     </div>
                 </div>
             </div>
