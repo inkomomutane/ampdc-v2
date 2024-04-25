@@ -187,9 +187,10 @@ class DatabaseSeeder extends Seeder
 
             if($forwarded){
                 for ($j = 0; $j < fake()->numberBetween(0,$organizationsCount) ; $j++) {
+                    $toOrg = $orgs->random()->id;
                     VictimCasesHistory::create([
                         'victim_id' => $victim->id,
-                        'organization_id' => $baseOrg->id,
+                        'organization_id' => $toOrg,
                         'case_registered_by_id' => $baseUser->id,
                         'progress_status' => collect([
                             CaseProgressStatus::FORWARDED,
@@ -201,7 +202,7 @@ class DatabaseSeeder extends Seeder
                         'case_updated_by_id' => $baseUser->id,
                         'violence_type_id' => $victim->violence_type_id,
                         'forwarded_from_organization_id' => $baseOrg->id,
-                        'forwarded_to_organization_id' => $orgs->random()->id,
+                        'forwarded_to_organization_id' => $toOrg,
                         'is_forwarded' => true,
                         'case_code' => $code,
                     ]);

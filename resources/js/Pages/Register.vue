@@ -75,11 +75,11 @@ const registerCase = () => {
                         <h1
                             class="text-2xl font-semibold text-gray-900 dark:text-white"
                         >
-                            Registar um caso de violência
+                            Registar um caso de feminicídio
                         </h1>
                         <p class="text-sm text-gray-900 dark:text-white">
                             Preencha o formulário abaixo para registar um caso
-                            de violência.
+                            de feminicídio.
                         </p>
                     </div>
                 </div>
@@ -124,7 +124,7 @@ const registerCase = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="contact"
-                                    >Contacto</label
+                                    >Contacto do parente/pessoa próxima</label
                                 >
                                 <input
                                     id="contact"
@@ -132,7 +132,7 @@ const registerCase = () => {
                                     v-model="form.contact"
                                     name="contact"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    placeholder="Contacto"
+                                    placeholder="Contacto do parente/pessoa próxima"
                                     type="text"
                                 />
                                 <InputError :message="form.errors.contact" />
@@ -182,7 +182,7 @@ const registerCase = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="violence_details"
-                                >Detalhes da violência</label
+                                >Detalhes do crime</label
                             >
                             <textarea
                                 id="violence_details"
@@ -190,7 +190,7 @@ const registerCase = () => {
                                 v-model="form.violence_details"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 name="violence_details"
-                                placeholder="Detalhes da violência"
+                                placeholder="Detalhes do crime"
                                 rows="4"
                             >
                             </textarea>
