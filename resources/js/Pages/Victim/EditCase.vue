@@ -7,7 +7,15 @@ import {FlasherResponse} from "@flasher/flasher";
 import Flasher, {progressCasesColor} from "@/helprs";
 import NeighborhoodData = App.Data.NeighborhoodData;
 import ViolenceTypeData = App.Data.ViolenceTypeData;
-import {CaseProgressStatus, KeyPair} from "@/types/casestatus";
+import {
+    CaseProgressStatus,
+    CivilState,
+    Gender,
+    getArrayFromEnum,
+    KeyPair,
+    PeriodOfViolenceAct
+} from "@/types/casestatus";
+import OrganizationData = App.Data.OrganizationData;
 
 const props = defineProps({
     neighborhoods: {
@@ -43,6 +51,9 @@ const props = defineProps({
         required: true,
     },
 });
+const genderOptions = getArrayFromEnum(Gender);
+const civilStateOptions = getArrayFromEnum(CivilState);
+const periodOfViolenceActOptions = getArrayFromEnum(PeriodOfViolenceAct);
 
 const form = useForm({
     name: props.victimCase?.victim.name,
@@ -61,6 +72,14 @@ const form = useForm({
     forward_to_organization: props.victimCase?.forwardedToOrganization?.id,
     is_violence_caused_death: props.victimCase?.isViolenceCausedDeath,
 });
+
+const onCliqueRequiredForwards = () => {
+    form.requires_forwards = !form.requires_forwards;
+};
+
+const onCliqueIsViolenceCausedDeath = () => {
+    form.is_violence_caused_death = !form.is_violence_caused_death;
+};
 
 const updateCaseData = () => {
     form.post(route('victim.case.update', {
@@ -266,48 +285,47 @@ watch(
                                     :message="form.errors.period_of_violence_act"
                                 />
                             </div>
-                            <div>
-                                <label
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                    for="violence_incident_location_id"
-                                >Local onde ocorreu a violência</label
-                                >
-                                <v-select
-                                    v-model="form.violence_incident_location_id"
-                                    :get-option-label="
-                                    (violence_incident_location: App.Data.BaseDataClass) => violence_incident_location.name
-                                "
-                                    :options="violenceLocations"
-                                    placeholder="Local onde ocorreu a violência"
-                                    :reduce="(violence_incident_location: App.Data.BaseDataClass) => violence_incident_location.id"
-                                    label="violence_incident_location_id"
-                                ></v-select>
-                                <InputError
-                                    :message="form.errors.violence_incident_location_id"
-                                />
-                            </div>
-                            <div>
-                                <label
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                    for="supposed_reason_of_violence_id"
-                                >Suposto motivo da violência</label
-                                >
-                                <v-select
-                                    v-model="form.supposed_reason_of_violence_id"
-                                    :get-option-label="
-                                    (violence_incident_location: App.Data.BaseDataClass) => violence_incident_location.name
-                                "
-                                    :options="supposedReasonsOfViolence"
-                                    placeholder="Suposto motivo da violência"
-                                    :reduce="(supposed_reason_of_violence: App.Data.BaseDataClass) => supposed_reason_of_violence.id"
-                                    label="violence_incident_location_id"
-                                ></v-select>
-                                <InputError
-                                    :message="form.errors.supposed_reason_of_violence_id"
-                                />
-                            </div>
                         </div>
-
+                        <div>
+                            <label
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="violence_incident_location_id"
+                            >Local onde ocorreu a violência</label
+                            >
+                            <v-select
+                                v-model="form.violence_incident_location_id"
+                                :get-option-label="
+                                    (violence_incident_location: App.Data.BaseDataClass) => violence_incident_location.name
+                                "
+                                :options="violenceLocations"
+                                placeholder="Local onde ocorreu a violência"
+                                :reduce="(violence_incident_location: App.Data.BaseDataClass) => violence_incident_location.id"
+                                label="violence_incident_location_id"
+                            ></v-select>
+                            <InputError
+                                :message="form.errors.violence_incident_location_id"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="supposed_reason_of_violence_id"
+                            >Suposto motivo da violência</label
+                            >
+                            <v-select
+                                v-model="form.supposed_reason_of_violence_id"
+                                :get-option-label="
+                                    (violence_incident_location: App.Data.BaseDataClass) => violence_incident_location.name
+                                "
+                                :options="supposedReasonsOfViolence"
+                                placeholder="Suposto motivo da violência"
+                                :reduce="(supposed_reason_of_violence: App.Data.BaseDataClass) => supposed_reason_of_violence.id"
+                                label="violence_incident_location_id"
+                            ></v-select>
+                            <InputError
+                                :message="form.errors.supposed_reason_of_violence_id"
+                            />
+                        </div>
                         <div class="col-span-2">
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -363,13 +381,13 @@ watch(
                             />
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
-                            >A violência resultou em morte?</label
+                            >Necessita de encaminhamento?</label
                             >
                             <InputError
                                 :message="form.errors.is_violence_caused_death"
                             />
                         </div>
-                        <div class="col-span-2" v-if="form.is_violence_caused_death">
+                        <div class="col-span-2" v-if="form.requires_forwards">
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="forward_to_organizations"

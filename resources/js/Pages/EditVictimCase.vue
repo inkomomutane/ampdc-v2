@@ -56,6 +56,8 @@ const onCliqueRequiredForwards = () => {
     form.requires_forwards = !form.requires_forwards;
 };
 
+
+
 const registerCase = () => {
     form.post(route("victim.register.case"), {
         preserveScroll: true,

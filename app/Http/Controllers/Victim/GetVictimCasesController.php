@@ -29,7 +29,6 @@ class GetVictimCasesController extends  Controller
             ->orWhereRelation('victim',function(Builder $query) use ($term){
                 $query->whereAny(['name','age','contact','violence_details'],'like',"%$term%");
             })
-            ->nonForwarded($organization)
             ->paginate(12)->withQueryString());
     }
 }

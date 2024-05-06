@@ -30,7 +30,6 @@ class GetForwardedVictimCasesController extends Controller
                 ->orWhereRelation('victim',function(Builder $query) use ($term){
                     $query->whereAny(['name','age','contact','violence_details'],'like',"%$term%");
                 })
-                ->forwardedCases($organization)
                 ->paginate(12)->withQueryString());
     }
 }

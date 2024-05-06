@@ -41,24 +41,24 @@ class ReportsController extends Controller
 
        if($type === 'cases'){
            return (object) [
-               'total' =>  VictimCase::whereYear('created_at',$year)->nonForwarded(auth()->user()->organization)->count(),
-               'done' =>    VictimCase::whereYear('created_at',$year)->nonForwarded(auth()->user()->organization)->whereProgressStatus(CaseProgressStatus::SOLVED->value)->count(),
-               'pending' => VictimCase::whereYear('created_at',$year)->nonForwarded(auth()->user()->organization)->whereNot('progress_status','<=>',CaseProgressStatus::SOLVED->value )->count()
+               'total' =>  VictimCase::whereYear('created_at',$year)->count(),
+               'done' =>    VictimCase::whereYear('created_at',$year)->whereProgressStatus(CaseProgressStatus::SOLVED->value)->count(),
+               'pending' => VictimCase::whereYear('created_at',$year)->whereNot('progress_status','<=>',CaseProgressStatus::SOLVED->value )->count()
            ];
        }
 
         if($type === 'forwarded'){
             return (object) [
-                'total' =>  VictimCase::whereYear('created_at',$year)->forwardedCases(auth()->user()->organization)->count(),
-                'done' =>    VictimCase::whereYear('created_at',$year)->forwardedCases(auth()->user()->organization)->whereProgressStatus(CaseProgressStatus::SOLVED->value)->count(),
-                'pending' => VictimCase::whereYear('created_at',$year)->forwardedCases(auth()->user()->organization)->whereNot('progress_status','<=>',CaseProgressStatus::SOLVED->value )->count()
+                'total' =>  VictimCase::whereYear('created_at',$year)->count(),
+                'done' =>    VictimCase::whereYear('created_at',$year)->whereProgressStatus(CaseProgressStatus::SOLVED->value)->count(),
+                'pending' => VictimCase::whereYear('created_at',$year)->whereNot('progress_status','<=>',CaseProgressStatus::SOLVED->value )->count()
             ];
         }
 
         return (object) [
-            'total' =>  VictimCase::whereYear('created_at',$year)->receivedCases(auth()->user()->organization)->count(),
-            'done' =>    VictimCase::whereYear('created_at',$year)->receivedCases(auth()->user()->organization)->whereProgressStatus(CaseProgressStatus::SOLVED->value)->count(),
-            'pending' => VictimCase::whereYear('created_at',$year)->receivedCases(auth()->user()->organization)->whereNot('progress_status','<=>',CaseProgressStatus::SOLVED->value )->count()
+            'total' =>  VictimCase::whereYear('created_at',$year)->count(),
+            'done' =>    VictimCase::whereYear('created_at',$year)->whereProgressStatus(CaseProgressStatus::SOLVED->value)->count(),
+            'pending' => VictimCase::whereYear('created_at',$year)->whereNot('progress_status','<=>',CaseProgressStatus::SOLVED->value )->count()
         ];
     }
 
@@ -71,7 +71,7 @@ class ReportsController extends Controller
         foreach ($causes as $cause) {
             $causeCases->put($cause->name,VictimCase::whereOrganizationId(organization()->id)->whereYear('created_at',$year)
             ->whereViolenceTypeId($cause->id)
-                ->nonForwarded(auth()->user()->organization)
+
                 ->count());
         }
 
@@ -91,7 +91,7 @@ class ReportsController extends Controller
                 VictimCase::
                 whereOrganizationId(organization()->id)->whereYear('created_at',$year)
                 ->whereRelation('victim.neighborhood','id',$cause->id)
-                    ->nonForwarded(auth()->user()->organization)
+
                     ->count())
 
             ;

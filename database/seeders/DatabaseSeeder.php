@@ -7,11 +7,14 @@ use App\Enums\CaseProgressStatus;
 use App\Models\District;
 use App\Models\Neighborhood;
 use App\Models\Organization;
+use App\Models\Perpetrator;
 use App\Models\Province;
 use App\Models\Role;
+use App\Models\SupposedReasonOfViolence;
 use App\Models\User;
 use App\Models\Victim;
 use App\Models\VictimCase;
+use App\Models\ViolenceIncidentLocation;
 use App\Models\ViolenceType;
 use Hash;
 use Illuminate\Database\Seeder;
@@ -137,17 +140,70 @@ class DatabaseSeeder extends Seeder
             'id' => '01hv76yj1fcx11dssx0j30bkw0'
         ],[
             'id' => '01hv76yj1fcx11dssx0j30bkw0',
-            'name' => 'Espancamento',
-            'description' => 'Espancamento'
+            'name' => 'Física',
         ]);
 
         ViolenceType::updateOrInsert([
             'id' => '01hv76zgjexawh7dqca2k9snv0'
         ],[
             'id' => '01hv76zgjexawh7dqca2k9snv0',
-            'name' => 'Asfixia',
-            'description' => 'Asfixia'
+            'name' => 'Psicológica',
         ]);
+
+        ViolenceType::updateOrInsert([
+            'id' => '01hvgctxffvmgbxm026batvhmp'
+        ],[
+            'id' => '01hvgctxffvmgbxm026batvhmp',
+            'name' => 'Sexual'
+            ]
+        );
+
+        Perpetrator::updateOrInsert([
+            'id' => '01hv76zgjexawh7dqca2k9snv0'
+        ],[
+            'id' => '01hv76zgjexawh7dqca2k9snv0',
+            'name' => 'Desconhecido',
+        ]);
+
+
+        Perpetrator::updateOrInsert([
+            'id' => '01hx7csmacgsh902kq2fzfwjc6'
+        ],[
+            'id' => '01hx7csmacgsh902kq2fzfwjc6',
+            'name' => 'Marido',
+        ]);
+
+        Perpetrator::updateOrInsert([
+            'id' => '01hx7ct385qn157pjgjtw82hb9'
+        ],[
+            'id' => '01hx7ct385qn157pjgjtw82hb9',
+            'name' => 'Namorado',
+        ]);
+
+        SupposedReasonOfViolence::updateOrInsert([
+            'id' => '01hx7cvxbpk04skcac2rwgkxqt'
+        ],[
+            'id' => '01hx7cvxbpk04skcac2rwgkxqt',
+            'name' => 'Ciúmes',
+        ]);
+
+        ViolenceIncidentLocation::updateOrInsert([
+            'id' => '01hx7cxq1k1yte0x19r8hygnfj'
+        ],[
+            'id' => '01hx7cxq1k1yte0x19r8hygnfj',
+            'name' => 'Casa',
+        ]);
+
+        ViolenceIncidentLocation::updateOrInsert([
+            'id' => '01hx7cydw3w43x231mt7666706'
+        ],[
+            'id' => '01hx7cydw3w43x231mt7666706',
+            'name' => 'Rua',
+        ]);
+
+
+
+
 
         #--- Seeder de dados de testo todos seeder devem ser feitos de 1 de Janeiro de 2024 a te a data actual---#
 

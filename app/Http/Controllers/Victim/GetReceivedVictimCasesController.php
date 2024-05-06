@@ -29,7 +29,7 @@ class GetReceivedVictimCasesController extends  Controller
             })
             ->orWhereRelation('victim',function(Builder $query) use ($term){
                 $query->whereAny(['name','age','contact','violence_details'],'like',"%$term%");
-            })->receivedCases($organization)
+            })
             ->paginate(12)->withQueryString());
     }
 }
