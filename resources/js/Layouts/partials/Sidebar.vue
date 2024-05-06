@@ -59,7 +59,7 @@ const inactiveClass = ref(
                             d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zM160 224c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm128-64V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V160c0-17.7 14.3-32 32-32s32 14.3 32 32zm64 32c17.7 0 32 14.3 32 32v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32zM480 96V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V96c0-17.7 14.3-32 32-32s32 14.3 32 32z"
                         ></path>
                     </svg>
-                    <span class="mx-4 font-medium text-base">Estatísticas</span>
+                    <span class="mx-4 font-medium text-sm">Estatísticas</span>
                 </Link>
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
@@ -86,7 +86,7 @@ const inactiveClass = ref(
                         </g>
                     </svg>
 
-                    <span class="mx-4 font-medium text-base">Registo</span>
+                    <span class="mx-4 font-medium text-sm">Registo</span>
                 </Link>
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
@@ -119,7 +119,7 @@ const inactiveClass = ref(
                             opacity=".4"
                         ></path>
                     </svg>
-                    <span class="mx-4 font-medium text-base">Casos</span>
+                    <span class="mx-4 font-medium text-sm">Casos</span>
                 </Link>
                 <Link
                      v-if="route().current('victim.case.edit') ||route().current('victim.case.info') "
@@ -128,7 +128,7 @@ const inactiveClass = ref(
                     :class="activeClass"
                 >
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" fill="currentColor"><path d="M1280 1056c0 53-43 96-96 96-32 0-62-16-80-43L877 768h-45v132l247 411c6 10 9 21 9 33 0 35-29 64-64 64H832v272c0 62-50 112-112 112H560c-61 0-112-50-112-112v-272H256c-35 0-64-29-64-64 0-12 3-23 9-33l247-411V768h-45l-227 341c-18 27-48 43-80 43-53 0-96-43-96-96 0-19 6-38 16-53l256-384c40-59 102-107 176-107h384c74 0 136 48 176 107l256 384c10 15 16 34 16 53zM864 256c0 124-100 224-224 224S416 380 416 256 516 32 640 32s224 100 224 224z"></path></svg>
-                    <span class="mx-4 font-medium text-base">Caso</span>
+                    <span class="mx-4 font-medium text-sm">Caso</span>
                 </Link>
 
                 <Link
@@ -162,7 +162,7 @@ const inactiveClass = ref(
                             opacity=".4"
                         ></path>
                     </svg>
-                    <span class="mx-4 font-medium text-base"
+                    <span class="mx-4 font-medium text-sm"
                         >Encaminhamento</span
                     >
                 </Link>
@@ -194,7 +194,7 @@ const inactiveClass = ref(
                             opacity=".4"
                         ></path>
                     </svg>
-                    <span class="mx-4 font-medium text-base">Recebidos</span>
+                    <span class="mx-4 font-medium text-sm">Recebidos</span>
                 </Link>
 
 
@@ -220,7 +220,7 @@ const inactiveClass = ref(
                         ></path>
                     </svg>
 
-                    <span class="mx-4 font-medium text-base"
+                    <span class="mx-4 font-medium text-sm"
                         >Causas de morte</span
                     >
                 </Link>
@@ -264,7 +264,7 @@ const inactiveClass = ref(
                         ></path>
                     </svg>
 
-                    <span class="mx-4 font-medium text-base">Usuários</span>
+                    <span class="mx-4 font-medium text-sm">Usuários</span>
                 </Link>
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
@@ -325,7 +325,7 @@ const inactiveClass = ref(
                         ></rect>
                     </svg>
 
-                    <span class="mx-4 font-medium text-base">Organizações</span>
+                    <span class="mx-4 font-medium text-sm">Organizações</span>
                 </Link>
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
@@ -348,7 +348,7 @@ const inactiveClass = ref(
                         ></path>
                     </svg>
 
-                    <span class="mx-4 font-medium text-base">Províncias</span>
+                    <span class="mx-4 font-medium text-sm">Províncias</span>
                 </Link>
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
@@ -371,7 +371,7 @@ const inactiveClass = ref(
                         ></path>
                     </svg>
 
-                    <span class="mx-4 font-medium text-base">Distritos</span>
+                    <span class="mx-4 font-medium text-sm">Distritos</span>
                 </Link>
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
@@ -392,7 +392,7 @@ const inactiveClass = ref(
                             d="M9 19H12V12.9416L8 9.45402L4 12.9416V19H7V15H9V19ZM21 21H3C2.44772 21 2 20.5523 2 20V12.4868C2 12.1978 2.12501 11.9229 2.34282 11.733L6 8.54435V4C6 3.44772 6.44772 3 7 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21ZM16 11V13H18V11H16ZM16 15V17H18V15H16ZM16 7V9H18V7H16ZM12 7V9H14V7H12Z"
                         ></path>
                     </svg>
-                    <span class="mx-4 font-medium text-base">Bairros</span>
+                    <span class="mx-4 font-medium text-sm">Bairros</span>
                 </Link>
                 <!--                -->
             </nav>

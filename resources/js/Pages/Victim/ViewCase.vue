@@ -26,11 +26,11 @@ const props = defineProps({
         required: false,
     },
     victimCase: {
-        type: Object as PropType<App.Data.VictimCasesHistoryData>,
+        type: Object as PropType<App.Data.VictimCaseData>,
         required: true,
     },
     caseOnOtherOrganizations: {
-        type: Array<App.Data.VictimCasesHistoryData>,
+        type: Array<App.Data.VictimCaseData>,
         required: true,
     },
 });

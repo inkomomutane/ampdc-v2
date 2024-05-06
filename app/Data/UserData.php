@@ -28,8 +28,8 @@ class UserData extends Data
             email: $user->email,
             contact: $user->contact,
             active: $user->active,
-            role: Lazy::whenLoaded('roles',$user, fn() => $user->roles?->first()?->getData()),
-            organization: Lazy::whenLoaded('organization',$user, fn() => $user->organization?->getData()),
+            role: Lazy::whenLoaded('roles',$user,static fn() => $user->roles?->first()?->getData()),
+            organization: Lazy::whenLoaded('organization',$user, static fn() => $user->organization?->getData()),
         );
     }
 }

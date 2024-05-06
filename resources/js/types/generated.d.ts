@@ -1,4 +1,8 @@
 declare namespace App.Data {
+    export type BaseDataClass = {
+        id: string | null;
+        name: string | null;
+    };
     export type DistrictData = {
         id: string | null;
         name: string | null;
@@ -31,29 +35,35 @@ declare namespace App.Data {
         role: App.Data.RoleData | any | null;
         organization: App.Data.OrganizationData | any | null;
     };
-    export type VictimCasesHistoryData = {
+    export type VictimCaseData = {
         id: string | null;
-        caseCode: string;
-        victim: App.Data.VictimData;
-        caseRegisteredBy: App.Data.UserData;
+        caseCode: string | null;
+        victim: App.Data.VictimData | any;
+        violenceType: App.Data.ViolenceTypeData | any;
+        perpetrator: App.Data.BaseDataClass | any;
+        periodOfViolenceAct: App.Enums.PeriodOfViolenceAct;
+        violenceIncidentLocation: App.Data.BaseDataClass | any;
+        supposedReasonOfViolence: App.Data.BaseDataClass | any;
+        violenceDetails: any;
+        isViolenceCausedDeath: boolean;
         progressStatus: App.Enums.CaseProgressStatus;
-        caseDetails: string | null;
-        progressDetails: string | null;
-        caseUpdatedBy: App.Data.UserData;
-        caseModifiedFields: Array<any> | null;
-        organization: App.Data.OrganizationData;
-        violence_type_id: string;
-        forwardedToOrganization: App.Data.OrganizationData | any | null;
-        forwardedFromOrganization: App.Data.OrganizationData | any | null;
-        isForwarded: boolean;
+        updatedFields: any;
+        organization: App.Data.OrganizationData | any;
+        forwardedToOrganization: App.Data.OrganizationData | any;
+        forwardedFromOrganization: App.Data.OrganizationData | any;
+        isTerminated: boolean;
+        conclusion: string;
+        caseRegisteredBy: App.Data.UserData | any;
+        caseUpdatedBy: App.Data.UserData | any;
     };
     export type VictimData = {
         name: string;
         age: number;
         date_of_birth: string | null;
+        civilState: App.Enums.CivilState | null;
+        gender: App.Enums.Gender | null;
         neighborhood: App.Data.NeighborhoodData | any | null;
         violenceType: App.Data.ViolenceTypeData | any | null;
-        violence_details: string | null;
         contact: string | null;
     };
     export type ViolenceTypeData = {
@@ -63,14 +73,5 @@ declare namespace App.Data {
     };
 }
 declare namespace App.Enums {
-    export enum CaseProgressStatus {
-        "REPORTED" = "Reportado",
-        "FORWARDED" = "Encaminhado",
-        "SOLVED" = "Resolvido",
-        "CLOSED" = "Encerrado",
-        "REOPENED" = "Reaberto",
-        "REJECTED" = "Rejeitado",
-        "PENDING" = "Pendente",
-        "IN_PROGRESS" = "Em andamento",
-    }
+
 }

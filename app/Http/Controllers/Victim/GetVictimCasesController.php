@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Victim;
 
-use App\Data\VictimCasesHistoryData;
+use App\Data\VictimCaseData;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
-use App\Models\VictimCasesHistory;
+use App\Models\VictimCase;
 use Illuminate\Database\Eloquent\Builder;
 use Inertia\Inertia;
 
@@ -22,7 +22,7 @@ class GetVictimCasesController extends  Controller
     }
 
     public function handle( Organization $organization,?string $term= null){
-        return  VictimCasesHistoryData::collection(VictimCasesHistory::query()
+        return  VictimCaseData::collection(VictimCase::query()
             ->when($term, function (Builder $query) use ($term) {
                 $query->whereAny(['progress_status','case_details','case_code'],'like',"%$term%");
             })

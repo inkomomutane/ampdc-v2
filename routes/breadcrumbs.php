@@ -3,7 +3,7 @@
 use App\Models\District;
 use App\Models\Neighborhood;
 use App\Models\Organization;
-use App\Models\VictimCasesHistory;
+use App\Models\VictimCase;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 use Illuminate\Support\Facades\Route;
@@ -186,7 +186,7 @@ Breadcrumbs::for('victim.forwarded.cases.list', function (BreadcrumbTrail $trail
 
 
 
-Breadcrumbs::for('victim.case.info', function (BreadcrumbTrail $trail, VictimCasesHistory $case) {
+Breadcrumbs::for('victim.case.info', function (BreadcrumbTrail $trail, VictimCase $case) {
 
     if($case->is_forwarded && $case->forwarded_to_organization_id === auth()->user()->organization_id){
         $trail->parent('victim.received.cases.list');
@@ -202,7 +202,7 @@ Breadcrumbs::for('victim.case.info', function (BreadcrumbTrail $trail, VictimCas
     ]));
 });
 
-Breadcrumbs::for('victim.case.edit', static function (BreadcrumbTrail $trail, VictimCasesHistory $case) {
+Breadcrumbs::for('victim.case.edit', static function (BreadcrumbTrail $trail, VictimCase $case) {
     if($case->is_forwarded && $case->forwarded_to_organization_id === auth()->user()->organization_id){
         $trail->parent('victim.received.cases.list');
     }else if($case->is_forwarded && $case->forwarded_from_organization_id === auth()->user()->organization_id){

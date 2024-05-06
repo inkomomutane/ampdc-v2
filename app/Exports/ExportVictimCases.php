@@ -4,7 +4,7 @@ namespace App\Exports;
 
 
 use App\Models\Organization;
-use App\Models\VictimCasesHistory;
+use App\Models\VictimCase;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -41,7 +41,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
             'receivedCases.toOrganization',
         ]);
         if($this->type === 'cases'){
-            $this->cases =  $this->case->cases->map(fn(VictimCasesHistory $case) => [
+            $this->cases =  $this->case->cases->map(fn(VictimCase $case) => [
                 $case->case_code,
                 $case->victim->name,
                 $case->victim->violenceType->name,
@@ -54,7 +54,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
             ])->toArray();
         }
        else if($this->type === 'forwarded'){
-            $this->cases = $this->case->forwardedCases->map(fn(VictimCasesHistory $case) => [
+            $this->cases = $this->case->forwardedCases->map(fn(VictimCase $case) => [
                 $case->case_code,
                 $case->victim->name,
                 $case->victim->violenceType->name,
@@ -67,7 +67,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
             ])->toArray();
         }
       else  if($this->type === 'received'){
-            $this->cases = $this->case->receivedCases->map(fn(VictimCasesHistory $case) => [
+            $this->cases = $this->case->receivedCases->map(fn(VictimCase $case) => [
                 $case->case_code,
                 $case->victim->name,
                 $case->victim->violenceType->name,

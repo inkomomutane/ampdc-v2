@@ -11,7 +11,7 @@ use App\Models\Province;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Victim;
-use App\Models\VictimCasesHistory;
+use App\Models\VictimCase;
 use App\Models\ViolenceType;
 use Hash;
 use Illuminate\Database\Seeder;
@@ -151,63 +151,63 @@ class DatabaseSeeder extends Seeder
 
         #--- Seeder de dados de testo todos seeder devem ser feitos de 1 de Janeiro de 2024 a te a data actual---#
 
-        for ($i = 0; $i < 300 ; $i++) {
-            $victim =  Victim::create([
-                'name' => fake()->name,
-                'violence_details' => fake()->realText(),
-                'violence_type_id' => ViolenceType::all()->random()->id,
-                'neighborhood_id' => Neighborhood::all()->random()->id,
-                'contact' => fake()->phoneNumber(),
-                'age' => fake()->numberBetween(17,90),
-            ]);
-            $organizationsCount = Organization::count();
-
-            $baseUser = User::first();
-            $baseOrg = $baseUser->organization;
-            $orgs = Organization::whereNot('id',$baseOrg->id)->get();
-            $forwarded = fake()->boolean();
-            $code =  incrementCode();
-
-            VictimCasesHistory::create([
-                'victim_id' => $victim->id,
-                'organization_id' => $baseOrg->id,
-                'case_registered_by_id' => $baseUser->id,
-                'progress_status' =>  collect([
-                    CaseProgressStatus::PENDING,
-                    CaseProgressStatus::IN_PROGRESS,
-                    CaseProgressStatus::SOLVED,
-                ])->random(),
-                'case_details' => $victim->violence_details,
-                'case_updated_by_id' => $baseUser->id,
-                'violence_type_id' => $victim->violence_type_id,
-                'is_forwarded' => false,
-                'case_code' => $code,
-                'created_at' => fake()->dateTimeBetween(now()->firstOfYear(),now())
-            ]);
-
-            if($forwarded){
-                for ($j = 0; $j < fake()->numberBetween(0,$organizationsCount) ; $j++) {
-                    $toOrg = $orgs->random()->id;
-                    VictimCasesHistory::create([
-                        'victim_id' => $victim->id,
-                        'organization_id' => $toOrg,
-                        'case_registered_by_id' => $baseUser->id,
-                        'progress_status' => collect([
-                            CaseProgressStatus::FORWARDED,
-                            CaseProgressStatus::PENDING,
-                            CaseProgressStatus::IN_PROGRESS,
-                            CaseProgressStatus::SOLVED,
-                        ])->random(),
-                        'case_details' => $victim->violence_details,
-                        'case_updated_by_id' => $baseUser->id,
-                        'violence_type_id' => $victim->violence_type_id,
-                        'forwarded_from_organization_id' => $baseOrg->id,
-                        'forwarded_to_organization_id' => $toOrg,
-                        'is_forwarded' => true,
-                        'case_code' => $code,
-                    ]);
-                }
-            }
-        }
+//        for ($i = 0; $i < 300 ; $i++) {
+//            $victim =  Victim::create([
+//                'name' => fake()->name,
+//                'violence_details' => fake()->realText(),
+//                'violence_type_id' => ViolenceType::all()->random()->id,
+//                'neighborhood_id' => Neighborhood::all()->random()->id,
+//                'contact' => fake()->phoneNumber(),
+//                'age' => fake()->numberBetween(17,90),
+//            ]);
+//            $organizationsCount = Organization::count();
+//
+//            $baseUser = User::first();
+//            $baseOrg = $baseUser->organization;
+//            $orgs = Organization::whereNot('id',$baseOrg->id)->get();
+//            $forwarded = fake()->boolean();
+//            $code =  incrementCode();
+//
+//            VictimCase::create([
+//                'victim_id' => $victim->id,
+//                'organization_id' => $baseOrg->id,
+//                'case_registered_by_id' => $baseUser->id,
+//                'progress_status' =>  collect([
+//                    CaseProgressStatus::PENDING,
+//                    CaseProgressStatus::IN_PROGRESS,
+//                    CaseProgressStatus::SOLVED,
+//                ])->random(),
+//                'case_details' => $victim->violence_details,
+//                'case_updated_by_id' => $baseUser->id,
+//                'violence_type_id' => $victim->violence_type_id,
+//                'is_forwarded' => false,
+//                'case_code' => $code,
+//                'created_at' => fake()->dateTimeBetween(now()->firstOfYear(),now())
+//            ]);
+//
+//            if($forwarded){
+//                for ($j = 0; $j < fake()->numberBetween(0,$organizationsCount) ; $j++) {
+//                    $toOrg = $orgs->random()->id;
+//                    VictimCase::create([
+//                        'victim_id' => $victim->id,
+//                        'organization_id' => $toOrg,
+//                        'case_registered_by_id' => $baseUser->id,
+//                        'progress_status' => collect([
+//                            CaseProgressStatus::FORWARDED,
+//                            CaseProgressStatus::PENDING,
+//                            CaseProgressStatus::IN_PROGRESS,
+//                            CaseProgressStatus::SOLVED,
+//                        ])->random(),
+//                        'case_details' => $victim->violence_details,
+//                        'case_updated_by_id' => $baseUser->id,
+//                        'violence_type_id' => $victim->violence_type_id,
+//                        'forwarded_from_organization_id' => $baseOrg->id,
+//                        'forwarded_to_organization_id' => $toOrg,
+//                        'is_forwarded' => true,
+//                        'case_code' => $code,
+//                    ]);
+//                }
+//            }
+//        }
     }
 }

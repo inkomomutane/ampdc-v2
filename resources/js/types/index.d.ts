@@ -52,7 +52,7 @@ export interface ViolenceTypes extends Omit<PaginatedData, "data"> {
 }
 
 export interface VictimCasesHistories extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.VictimCasesHistoryData>;
+    data: Array<App.Data.VictimCaseData>;
 }
 
 export interface User {

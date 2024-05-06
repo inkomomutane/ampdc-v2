@@ -62,6 +62,9 @@ Route::get('/dashboard', static function () {
         'organizations' => \App\Data\OrganizationData::collection(\App\Models\Organization::whereNot('id',organization()->id)->get()),
         'violenceTypes' => \App\Data\ViolenceTypeData::collection(\App\Models\ViolenceType::all()),
         'neighborhoods' => \App\Data\NeighborhoodData::collection(\App\Models\Neighborhood::all()),
+        'perpetratorTypes' => \App\Data\BaseDataClass::collection(\App\Models\Perpetrator::all()),
+        'violenceLocations' => \App\Data\BaseDataClass::collection(\App\Models\ViolenceIncidentLocation::all()),
+        'supposedReasonsOfViolence' => \App\Data\BaseDataClass::collection(\App\Models\SupposedReasonOfViolence::all()),
     ]);
 })->middleware(['auth', 'verified'])->name('victim.register');
 

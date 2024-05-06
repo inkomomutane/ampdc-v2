@@ -21,7 +21,7 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                sans: ['Jost', ...defaultTheme.fontFamily.sans],
+                sans: ['Lexend Deca', ...defaultTheme.fontFamily.sans],
             },
             keyframes: {
                 "accordion-down": {

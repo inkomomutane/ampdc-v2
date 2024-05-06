@@ -7,7 +7,7 @@ use App\Events\ForwardedCases;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Models\Victim;
-use App\Models\VictimCasesHistory;
+use App\Models\VictimCase;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -46,7 +46,7 @@ class RegisterController extends Controller
             ]);
 
             if($request->input('required_forwards') === false || $request->input('required_forwards') === null) {
-                VictimCasesHistory::create([
+                VictimCase::create([
                     'victim_id' => $victim->id,
                     'organization_id' => organization()->id,
                     'case_registered_by_id' => auth()->user()->id,

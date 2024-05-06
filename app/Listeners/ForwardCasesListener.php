@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Enums\CaseProgressStatus;
 use App\Events\ForwardedCases;
 use App\Models\Organization;
-use App\Models\VictimCasesHistory;
+use App\Models\VictimCase;
 
 class ForwardCasesListener
 {
@@ -14,7 +14,7 @@ class ForwardCasesListener
      */
     public function handle(ForwardedCases $event): void
     {
-        $event->organizations->each(fn(Organization $organization) => VictimCasesHistory::create([
+        $event->organizations->each(fn(Organization $organization) => VictimCase::create([
             'victim_id' => $event->victim->id,
             'organization_id' => $organization->id,
             'case_registered_by_id' => $event->createdBy->id,

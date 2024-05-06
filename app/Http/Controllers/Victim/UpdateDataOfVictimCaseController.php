@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Victim;
 
 use App\Enums\CaseProgressStatus;
 use App\Http\Controllers\Controller;
-use App\Models\VictimCasesHistory;
+use App\Models\VictimCase;
 use DB;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class UpdateDataOfVictimCaseController extends Controller
     /**
      * @throws Exception
      */
-    public function __invoke(VictimCasesHistory $case, Request $request)
+    public function __invoke(VictimCase $case, Request $request)
     {
         $validated = $request->validate($this->rules());
         DB::beginTransaction();
