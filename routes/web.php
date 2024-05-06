@@ -24,6 +24,10 @@ use App\Http\Controllers\Province\DeleteProvince;
 use App\Http\Controllers\Province\GetProvinces;
 use App\Http\Controllers\Province\UpdateProvince;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\SupposedReasonOfViolence\DeleteSupposedReasonOfViolenceController;
+use App\Http\Controllers\SupposedReasonOfViolence\ListSupposedReasonOfViolencesController;
+use App\Http\Controllers\SupposedReasonOfViolence\StoreSupposedReasonOfViolenceController;
+use App\Http\Controllers\SupposedReasonOfViolence\UpdateSupposedReasonOfViolenceController;
 use App\Http\Controllers\User\CreateUser;
 use App\Http\Controllers\User\DeleteUser;
 use App\Http\Controllers\User\GetUsers;
@@ -125,10 +129,15 @@ Route::middleware('auth')->group(function () {
     Route::match(['put','patch'],'/perpetrator/{perpetrator}/update', UpdatePerpetratorController::class)->name('perpetrator.update');
     Route::delete('/perpetrator/{perpetrator}/delete', DeletePerpetratorController::class)->name('perpetrator.delete');
 
+
+    #--- supposedReasonOfViolences Routes ---#
+    Route::get('/supposedReasonOfViolences/list', ListSupposedReasonOfViolencesController::class)->name('supposedReasonOfViolence.list');
+    Route::post('/supposedReasonOfViolence/store', StoreSupposedReasonOfViolenceController::class)->name('supposedReasonOfViolence.store');
+    Route::match(['put','patch'],'/supposedReasonOfViolence/{supposedReasonOfViolence}/update', UpdateSupposedReasonOfViolenceController::class)->name('supposedReasonOfViolence.update');
+    Route::delete('/supposedReasonOfViolence/{supposedReasonOfViolence}/delete', DeleteSupposedReasonOfViolenceController::class)->name('supposedReasonOfViolence.delete');
+
     #--- Victims ---#
-
     Route::post('/victim/register/case', RegisterController::class)->name('victim.register.case');
-
     Route::get('/victims/cases',GetVictimCasesController::class)->name('victim.cases.list');
     Route::get('/victims/received-cases', GetReceivedVictimCasesController::class)->name('victim.received.cases.list');
     Route::get('/victims/forwarded-cases', GetForwardedVictimCasesController::class)->name('victim.forwarded.cases.list');

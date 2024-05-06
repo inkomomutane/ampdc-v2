@@ -5,7 +5,7 @@ namespace App\Data;
 use Spatie\LaravelData\Data;
 
 /** @typescript */
-class PerpetratorData extends Data
+class SupposedReasonOfViolenceData extends Data
 {
     public function __construct(
         public readonly ?string  $id,

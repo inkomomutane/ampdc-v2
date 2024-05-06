@@ -30,6 +30,10 @@ declare namespace App.Data {
         id: string | null;
         name: string | null;
     };
+    export type SupposedReasonOfViolenceData = {
+        id: string | null;
+        name: string | null;
+    };
     export type UserData = {
         id: string | null;
         name: string | null;
