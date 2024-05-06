@@ -16,12 +16,13 @@ class GetDataOfVictimCaseController extends  Controller
             'organizations' => \App\Data\OrganizationData::collection(\App\Models\Organization::all()),
             'violenceTypes' => \App\Data\ViolenceTypeData::collection(\App\Models\ViolenceType::all()),
             'neighborhoods' => \App\Data\NeighborhoodData::collection(\App\Models\Neighborhood::all()),
+            'perpetratorTypes' => \App\Data\BaseDataClass::collection(\App\Models\Perpetrator::all()),
+            'violenceLocations' => \App\Data\BaseDataClass::collection(\App\Models\ViolenceIncidentLocation::all()),
+            'supposedReasonsOfViolence' => \App\Data\BaseDataClass::collection(\App\Models\SupposedReasonOfViolence::all()),
             'caseOnOtherOrganizations' => VictimCaseData::collection(
                 VictimCase::query()
-                    ->with(['victim.neighborhood'])
                     ->where('victim_id',$case->victim_id)
                     ->whereCaseCode($case->case_code)
-                    ->where('id','!=',$case->id)
                     ->get()
             )
         ]);
