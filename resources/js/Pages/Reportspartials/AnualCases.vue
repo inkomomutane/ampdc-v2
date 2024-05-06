@@ -21,67 +21,48 @@ const props = defineProps({
 })
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale,PointElement,Filler)
 
-const chartData = {
-    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-    datasets: [
-        {
-            label: 'Casos',
-            data: props.chartData,
-            borderColor:[
-                'rgba(54, 162, 235)',
-            ],
-            pointBackgroundColor: [
+const series = [{
+    name: 'Casos',
+    data: props.chartData,
+}];
 
-                'rgba(54, 162, 235, 0.9)',
-            ],
-           backgroundColor:  [
-                'rgba(54, 162, 235, 0.2)',
-           ],
-            borderWidth: 1,
-            fill: true,
-            tension: 0.4,
-            labelColor: 'rgba(54, 162, 235)',
-        },
-
-    ],
-
-}
-const chartOptions = {
-    responsive: true,
-    legend: {
-        display: false
+const options = {
+    chart: {
+        id: ulid(),
+        toolbar: {
+            autoSelected: "pan",
+            show: false
+        }
     },
-    labels: {
-        display: false
+    stroke: {
+        curve: 'smooth',
     },
-    maintainAspectRatio: false,
-    backgroundColor: [
-        'rgba(255, 99, 132, 0.5)',
-    ],
-    plugins: {
-       filler: {
-           propagate: true,
-         },
+    grid: {
+        clipMarkers: false,
+        yaxis: {
+            lines: {
+                show: true
+            }
+        }
     },
-    scales: {
-        x: {
-            grid: {
-                display: true,
-            },
-            ticks: {
-                color: 'rgba(0,0,0,0.5)',
-            },
-        },
-        y: {
-            grid: {
-                display: true,
-            },
-            ticks: {
-                color: 'rgba(0,0,0,0.5)',
-            },
-        },
+    dataLabels: {
+        enabled: false
+    },
+    fill: {
+        gradient: {
+            enabled: true,
+            opacityFrom: 0.55,
+            opacityTo: 0
+        }
+    },
+    markers: {
+        size: 5,
+        strokeWidth: 3
+    },
+    xaxis: {
+        categories: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
     }
-}
+};
 </script>
 
 <template>
@@ -90,11 +71,7 @@ const chartOptions = {
            <h2 class="text-lg font-medium text-gray-800 dark:text-gray-100 mb-2">Casos anuais</h2>
        </div>
       <div class="p-4 h-72 dark:text-white">
-          <Line
-              :id="ulid()"
-              :options="chartOptions"
-              :data="chartData"
-          />
+          <apexchart height="288px"  type="area" :options="options" :series="series"></apexchart>
       </div>
    </div>
 </template>

@@ -19,38 +19,19 @@ const props = defineProps({
     }
 })
 
-const chartData = {
-    labels: props.causes,
-    datasets:[
-        {
-            label: 'Causa das mortes',
-            data:props.causesCount,
-            borderColor:[
-                'rgba(54, 162, 235)',
-            ],
-            backgroundColor:  [
-                'rgba(54, 162, 235, 0.6)',
-            ],
-        }
-    ]
-};
-const chartOptions = {
-    plugins: {
-        filler: {
-            propagate: true,
-        },
+
+const options = {
+    xaxis:{
+        categories: props.causes
     },
-    scales: {
-        y: {
-            grid: {
-                display: true,
-            },
-            ticks: {
-                color: 'rgba(0,0,0,0.5)',
-            }
-        },
-    }
+
 };
+const series = [
+    {
+        name: 'Tipos de violência',
+        data:props.causesCount
+    }
+];
 
 </script>
 <template>
@@ -59,11 +40,7 @@ const chartOptions = {
             <h2 class="text-lg font-medium text-gray-800 dark:text-gray-100 mb-2">{{ label }}</h2>
         </div>
         <div class="p-4 h-72 dark:text-white">
-            <Bar
-                :id="ulid()"
-                :options="chartOptions"
-                :data="chartData"
-            />
+            <apexchart height="288px"  type="bar" :options="options" :series="series"></apexchart>
         </div>
     </div>
 
