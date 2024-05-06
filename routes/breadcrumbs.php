@@ -146,28 +146,23 @@ Breadcrumbs::for('user.status', function (BreadcrumbTrail $trail) {
 
 Breadcrumbs::for('violenceType.list', function (BreadcrumbTrail $trail) {
     $trail->parent('victim.register');
-    $trail->push('Causas de uma morte', route('violenceType.list'));
+    $trail->push('Tipos de violência', route('violenceType.list'));
 });
 
-Breadcrumbs::for('violenceType.store', function (BreadcrumbTrail $trail) {
-    $trail->parent('violenceType.list');
-    $trail->push('Registo', route('violenceType.store'));
+Breadcrumbs::for('perpetrator.list', function (BreadcrumbTrail $trail) {
+    $trail->parent('victim.register');
+    $trail->push('Perpetradores', route('perpetrator.list'));
 });
 
-Breadcrumbs::for('violenceType.update', function (BreadcrumbTrail $trail, \App\Models\ViolenceType  $violenceType) {
-    $trail->parent('violenceType.list');
-    $trail->push('Actualizar', route('violenceType.update',[
-        'violenceType' => $violenceType
-    ]));
+Breadcrumbs::for('supposedReasonOfViolence.list', function (BreadcrumbTrail $trail) {
+    $trail->parent('victim.register');
+    $trail->push('Motivos que causam violência', route('supposedReasonOfViolence.list'));
 });
 
-Breadcrumbs::for('violenceType.delete', function (BreadcrumbTrail $trail,\App\Models\ViolenceType  $violenceType) {
-    $trail->parent('violenceType.list');
-    $trail->push('Eliminar', route('violenceType.delete',[
-        'violenceType' => $violenceType
-    ]));
+Breadcrumbs::for('violenceIncidentLocation.list', function (BreadcrumbTrail $trail) {
+    $trail->parent('victim.register');
+    $trail->push('Locais de violência', route('violenceIncidentLocation.list'));
 });
-
 
 Breadcrumbs::for('victim.cases.list', function (BreadcrumbTrail $trail) {
     $trail->parent('victim.register');

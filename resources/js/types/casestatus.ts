@@ -33,7 +33,7 @@ export function getArrayFromEnum(enumObject: any) {
 
     return Object.keys(enumObject).map(e => {
         let f : KeyPair = {
-            key: e,
+            key: enumObject[e],
             value: enumObject[e]
         };
         return f;

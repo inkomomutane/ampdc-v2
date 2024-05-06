@@ -28,7 +28,7 @@ class VictimCaseData extends  Data
         public readonly OrganizationData|Lazy  $forwardedToOrganization,
         public readonly OrganizationData|Lazy  $forwardedFromOrganization,
         public readonly bool   $isTerminated,
-        public readonly string $conclusion,
+        public readonly ?string $conclusion,
         public readonly UserData|Lazy $caseRegisteredBy,
         public readonly UserData|Lazy $caseUpdatedBy,
     ) {}

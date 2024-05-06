@@ -14,24 +14,6 @@ class RegisterController extends Controller
 {
     public function rules(): array
     {
-
-        /**
-         * name: "",
-         * age: "",
-         * gender: null,
-         * civil_state: null,
-         * neighborhood_id: null,
-         * contact: "",
-         * requires_forwards: false,
-         * violence_type_id: null,
-         * perpetrator_id:null,
-         * period_of_violence_act: null,
-         * violence_incident_location_id: null,
-         * supposed_reason_of_violence_id: null,
-         * violence_details: "",
-         * forward_to_organization: null,
-         * is_violence_caused_death: false
-         */
         return [
             'name' => 'required|string',
             'age' => 'required|integer',
@@ -61,9 +43,8 @@ class RegisterController extends Controller
             $victim = Victim::create([
                 'name' => $data['name'],
                 'age' => $data['age'],
-                'date_of_birth' => $data['date_of_birth'],
+                'date_of_birth' => now()->subYears($data['age'] ?? 0),
                 'neighborhood_id' => $data['neighborhood_id'],
-                'violence_type_id' => $data['violence_type_id'],
                 'violence_details' => $data['violence_details'],
                 'contact' => $data['contact'],
             ]);
@@ -76,7 +57,7 @@ class RegisterController extends Controller
                 'progress_status' =>  CaseProgressStatus::IN_PROGRESS,
                 'violence_details' => $victim->violence_details,
                 'case_updated_by_id' => auth()->user()->id,
-                'violence_type_id' => $victim->violence_type_id,
+                 'violence_type_id' => $data['violence_type_id'],
                 'perpetrator_id' => $data['perpetrator_id'],
                 'period_of_violence_act' => $data['period_of_violence_act'],
                 'violence_incident_location_id' => $data['violence_incident_location_id'],
@@ -90,6 +71,7 @@ class RegisterController extends Controller
                 $case->refresh();
                 $case->update([
                     'forwarded_to_organization_id' => $data['forward_to_organization'],
+                    'forwarded_from_organization_id' => organization()->id,
                 ]);
             }
 
@@ -97,8 +79,7 @@ class RegisterController extends Controller
             flash()->addSuccess('Case registado com sucesso');
 
         } catch (\Exception $e) {
-
-            #throw  $e;
+            throw  $e;
             \DB::rollBack();
             flash()->addError('Erro ao registar caso');
         }

@@ -28,28 +28,30 @@ class UpdateDataOfVictimCaseController extends Controller
                 'neighborhood_id' => $case->victim->neighborhood_id,
                 'neighborhood' => $case->victim->neighborhood->name, // Add this line
                 'violence_type_id' => $case->violence_type_id,
-                'violence_type' => $case->victim->violenceType->name, // Add this line
-                'violence_details' => $case->case_details,
+                'violence_type' => $case->violenceType->name, // Add this line
+                'violence_details' => $case->violence_details,
                 'contact' => $case->victim->contact,
                 'status' => $case->progress_status,
             ];
 
-            if(is_array($case->case_modified_fields) && count($case->case_modified_fields) > 0){
-                $case->case_modified_fields  = array_merge($case->case_modified_fields,[$oldData]);
+            if(is_array($case->updated_fields) && count($case->updated_fields) > 0){
+                $case->updated_fields  = array_merge($case->updated_fields,[$oldData]);
             }
             else{
-                $case->case_modified_fields = [$oldData];
+                $case->updated_fields = [$oldData];
             }
 
             $case->victim->neighborhood_id = $validated['neighborhood_id'];
             $case->victim->name = $validated['name'];
             $case->victim->age = $validated['age'];
             $case->violence_type_id = $validated['violence_type_id'];
-            $case->victim->violence_type_id = $validated['violence_type_id'];
-            $case->case_details = $validated['violence_details'];
+            $case->updated_fields = $validated['violence_details'];
             $case->victim->contact = $validated['contact'];
             $case->progress_status = $validated['status'];
+
+
             $case->save();
+
             $case->victim->save();
             DB::commit();
             flash()->addSuccess('Caso actualizado com sucesso');
@@ -58,7 +60,6 @@ class UpdateDataOfVictimCaseController extends Controller
             flash()->addError('Erro ao actualizar caso');
             throw $e;
         }
-
         return redirect()->route('victim.case.edit',[
             'case' => $case->id
         ]);

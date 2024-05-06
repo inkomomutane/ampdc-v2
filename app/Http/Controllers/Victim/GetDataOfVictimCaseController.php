@@ -18,7 +18,7 @@ class GetDataOfVictimCaseController extends  Controller
             'neighborhoods' => \App\Data\NeighborhoodData::collection(\App\Models\Neighborhood::all()),
             'caseOnOtherOrganizations' => VictimCaseData::collection(
                 VictimCase::query()
-                    ->with(['victim.neighborhood','victim.neighborhood'])
+                    ->with(['victim.neighborhood'])
                     ->where('victim_id',$case->victim_id)
                     ->whereCaseCode($case->case_code)
                     ->where('id','!=',$case->id)

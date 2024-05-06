@@ -86,6 +86,7 @@ const onCliqueIsViolenceCausedDeath = () => {
 const registerCase = () => {
     form.post(route("victim.register.case"), {
         preserveScroll: true,
+        preserveState: true,
         onSuccess: () => {
             form.reset();
         },

@@ -3,9 +3,9 @@
 namespace App\Exports;
 
 
+use App\Enums\Gender;
 use App\Models\Organization;
 use App\Models\VictimCase;
-use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -23,68 +23,19 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
     public function __construct(public Organization $case,public string $type = 'cases')
     {
-        $case->load([
-          'forwardedCases.victim.neighborhood',
-            'forwardedCases.victim.violenceType',
-            'forwardedCases.organization',
-            'forwardedCases.fromOrganization',
-            'forwardedCases.toOrganization',
-            'cases.victim.neighborhood',
-            'cases.victim.violenceType',
-            'cases.organization',
-            'cases.fromOrganization',
-            'cases.toOrganization',
-            'receivedCases.victim.violenceType',
-            'receivedCases.victim.neighborhood',
-            'receivedCases.organization',
-            'receivedCases.fromOrganization',
-            'receivedCases.toOrganization',
-        ]);
+
         if($this->type === 'cases'){
-            $this->cases =  $this->case->cases->map(fn(VictimCase $case) => [
-                $case->case_code,
-                $case->victim->name,
-                $case->victim->violenceType->name,
-                $case->victim->age,
-                $case->victim->neighborhood->name,
-                $case->organization->name,
-                $case->progress_status->value,
-                Date::dateTimeToExcel($case->created_at),
-                $case->case_details
-            ])->toArray();
+            $this->cases =  $this->case->cases->map(fn(VictimCase $case) => $this->getCaseArray($case))->toArray();
         }
        else if($this->type === 'forwarded'){
-            $this->cases = $this->case->forwardedCases->map(fn(VictimCase $case) => [
-                $case->case_code,
-                $case->victim->name,
-                $case->victim->violenceType->name,
-                $case->victim->age,
-                $case->victim->neighborhood->name,
-                $case->organization->name,
-                $case->progress_status->value,
-                Date::dateTimeToExcel($case->created_at),
-                $case->case_details
-            ])->toArray();
+            $this->cases = $this->case->forwardedCases->map(fn(VictimCase $case) => $this->getCaseArray($case))->toArray();
         }
       else  if($this->type === 'received'){
-            $this->cases = $this->case->receivedCases->map(fn(VictimCase $case) => [
-                $case->case_code,
-                $case->victim->name,
-                $case->victim->violenceType->name,
-                $case->victim->age,
-                $case->victim->neighborhood->name,
-                $case->organization->name,
-                $case->progress_status->value,
-                Date::dateTimeToExcel($case->created_at),
-                $case->case_details
-            ])->toArray();
+            $this->cases = $this->case->receivedCases->map(fn(VictimCase $case) => $this->getCaseArray($case))->toArray();
         }
         else {
             $this->cases = [];
         }
-
-
-
     }
 
     /**
@@ -95,18 +46,47 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
         return $this->cases;
     }
 
+    private function getCaseArray(VictimCase $case): array
+    {
+      return [
+            $case->case_code,
+            $case->victim->name,
+            $case->victim->gender->value,
+            $case->victim->civil_state->value,
+            $case->violenceType->name,
+            ($case->victim->gender === Gender::FEMALE && $case->is_violence_caused_death) ? 'Sim' : 'Não',
+            $case->perpetrator->name,
+            $case->supposedReasonOfViolence->name,
+            $case->violenceIncidentLocation->name,
+            $case->victim->date_of_birth->age,
+            $case->victim->neighborhood->name,
+            $case->organization->name,
+            $case->progress_status->value,
+            Date::dateTimeToExcel($case->created_at),
+            $case->violence_details,
+            $case->conclusion
+        ];
+    }
+
     public function headings(): array
     {
         return [
             'Código do caso',
             'Nome da vítima',
-            'Causa da morte',
+            'Sexo',
+            'Estado civíl',
+            'Tipo de violência',
+            'É um caso de feminicídio?',
+            'Perpetrador',
+            'Suposto motivo',
+            'Local do incidente',
             'Idade',
             'Bairro',
             'Organização que esta a tratar o caso',
             'Estado do caso',
             'Data de registo',
             'Detalhes do caso',
+            'Conclusão do caso'
         ];
     }
 
@@ -118,18 +98,18 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
     {
         $sheet->setTitle( 'Casos de vitimas');
         $length = count($this->cases)  + 1;
-        $sheet->getStyle('A1:I1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:I1')->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('A1:I1')->getAlignment()->setVertical('center');
-        $sheet->getStyle("A1:I$length")->getBorders()->getAllBorders()->setBorderStyle('thin');
-        $sheet->getStyle('A1:I1')->getBorders()->getAllBorders()->setBorderStyle('medium');
+        $sheet->getStyle('A1:P1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:P1')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A1:P1')->getAlignment()->setVertical('center');
+        $sheet->getStyle("A1:P$length")->getBorders()->getAllBorders()->setBorderStyle('thin');
+        $sheet->getStyle('A1:P1')->getBorders()->getAllBorders()->setBorderStyle('medium');
     }
 
     public function columnFormats(): array
     {
         return [
-            'D' => NumberFormat::FORMAT_NUMBER,
-            'H' => NumberFormat::FORMAT_DATE_DDMMYYYY,
+            'J' => NumberFormat::FORMAT_NUMBER,
+            'N' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 

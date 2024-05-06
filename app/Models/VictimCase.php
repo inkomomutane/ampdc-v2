@@ -19,17 +19,32 @@ class VictimCase extends Model
 
     public string $dataClass = VictimCaseData::class;
 
+    protected $with = [
+        'victim',
+        'perpetrator',
+        'organization',
+        'caseRegisteredBy',
+        'caseUpdatedBy',
+        'violenceType',
+        'violenceIncidentLocation',
+        'supposedReasonOfViolence',
+        'forwardedFromOrganization',
+        'forwardedToOrganization'
+    ];
+
     public $casts = [
         'period_of_violence_act' => PeriodOfViolenceAct::class,
         'progress_status' => CaseProgressStatus::class,
         'is_violence_caused_death' => 'boolean',
         'is_terminated' => 'boolean',
         'updated_fields' => 'array',
+        'date_of_birth' => 'date'
     ];
 
     protected $fillable = [
         'case_code',
         'victim_id',
+        'date_of_birth',
         'violence_type_id',
         'perpetrator_id',
         'period_of_violence_act',
