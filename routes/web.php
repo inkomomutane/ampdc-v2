@@ -14,6 +14,10 @@ use App\Http\Controllers\Organization\DeleteOrganizationController;
 use App\Http\Controllers\Organization\ListOrganizationsController;
 use App\Http\Controllers\Organization\StoreOrganizationController;
 use App\Http\Controllers\Organization\UpdateOrganizationController;
+use App\Http\Controllers\Perpetrator\DeletePerpetratorController;
+use App\Http\Controllers\Perpetrator\ListPerpetratorsController;
+use App\Http\Controllers\Perpetrator\StorePerpetratorController;
+use App\Http\Controllers\Perpetrator\UpdatePerpetratorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Province\CreateProvince;
 use App\Http\Controllers\Province\DeleteProvince;
@@ -115,6 +119,11 @@ Route::middleware('auth')->group(function () {
     Route::match(['put','patch'],'/violenceType/{violenceType}/update', UpdateViolenceTypeController::class)->name('violenceType.update');
     Route::delete('/violenceType/{violenceType}/delete', DeleteViolenceTypeController::class)->name('violenceType.delete');
 
+    #--- Perpetrator Routes ---#
+    Route::get('/perpetrators/list', ListPerpetratorsController::class)->name('perpetrator.list');
+    Route::post('/perpetrator/store', StorePerpetratorController::class)->name('perpetrator.store');
+    Route::match(['put','patch'],'/perpetrator/{perpetrator}/update', UpdatePerpetratorController::class)->name('perpetrator.update');
+    Route::delete('/perpetrator/{perpetrator}/delete', DeletePerpetratorController::class)->name('perpetrator.delete');
 
     #--- Victims ---#
 

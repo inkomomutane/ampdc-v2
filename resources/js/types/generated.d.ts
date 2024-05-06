@@ -18,6 +18,10 @@ declare namespace App.Data {
         name: string | null;
         services: string | null;
     };
+    export type PerpetratorData = {
+        id: string | null;
+        name: string | null;
+    };
     export type ProvinceData = {
         id: string | null;
         name: string | null;
@@ -63,7 +67,6 @@ declare namespace App.Data {
         civilState: App.Enums.CivilState | null;
         gender: App.Enums.Gender | null;
         neighborhood: App.Data.NeighborhoodData | any | null;
-        violenceType: App.Data.ViolenceTypeData | any | null;
         contact: string | null;
     };
     export type ViolenceTypeData = {
@@ -73,5 +76,29 @@ declare namespace App.Data {
     };
 }
 declare namespace App.Enums {
-
+    export enum CaseProgressStatus {
+        "REPORTED" = "Reportado",
+        "FORWARDED" = "Encaminhado",
+        "SOLVED" = "Resolvido",
+        "CLOSED" = "Encerrado",
+        "REOPENED" = "Reaberto",
+        "REJECTED" = "Rejeitado",
+        "PENDING" = "Pendente",
+        "IN_PROGRESS" = "Em andamento",
+    }
+    export enum CivilState {
+        "SINGLE" = "solteiro",
+        "MARRIED" = "casado",
+        "DIVORCED" = "divorciado",
+        "WIDOWER" = "viúvo",
+    }
+    export enum Gender {
+        "FEMALE" = "Feminino",
+        "MALE" = "Masculino",
+    }
+    export enum PeriodOfViolenceAct {
+        "MORNING" = "Manhã",
+        "AFTERNOON" = "Tarde",
+        "NIGHT" = "Noite",
+    }
 }
