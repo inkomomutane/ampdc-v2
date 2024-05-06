@@ -73,6 +73,10 @@ declare namespace App.Data {
         neighborhood: App.Data.NeighborhoodData | any | null;
         contact: string | null;
     };
+    export type ViolenceIncidentLocationData = {
+        id: string | null;
+        name: string | null;
+    };
     export type ViolenceTypeData = {
         id: string | null;
         name: string | null;

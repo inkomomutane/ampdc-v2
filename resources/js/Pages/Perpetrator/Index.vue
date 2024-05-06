@@ -87,7 +87,7 @@ function closeDeletePerpetratorModal() {
 </script>
 
 <template>
-    <Head title="Organizações da empresa" />
+    <Head title="Perpetradores de violência" />
     <AuthenticatedLayout>
         <template v-slot:content>
             <div class="mx-auto max-w-screen-xl">

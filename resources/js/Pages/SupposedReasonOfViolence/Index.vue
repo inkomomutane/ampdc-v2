@@ -87,7 +87,7 @@ function closeDeleteSupposedReasonOfViolenceModal() {
 </script>
 
 <template>
-    <Head title="Organizações da empresa" />
+    <Head title="Supostos motivos de violência" />
     <AuthenticatedLayout>
         <template v-slot:content>
             <div class="mx-auto max-w-screen-xl">

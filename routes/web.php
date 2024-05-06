@@ -40,6 +40,10 @@ use App\Http\Controllers\Victim\GetReceivedVictimCasesController;
 use App\Http\Controllers\Victim\GetVictimCasesController;
 use App\Http\Controllers\Victim\RegisterController;
 use App\Http\Controllers\Victim\UpdateDataOfVictimCaseController;
+use App\Http\Controllers\ViolenceIncidentLocation\DeleteViolenceIncidentLocationController;
+use App\Http\Controllers\ViolenceIncidentLocation\ListViolenceIncidentLocationsController;
+use App\Http\Controllers\ViolenceIncidentLocation\StoreViolenceIncidentLocationController;
+use App\Http\Controllers\ViolenceIncidentLocation\UpdateViolenceIncidentLocationController;
 use App\Http\Controllers\ViolenceType\DeleteViolenceTypeController;
 use App\Http\Controllers\ViolenceType\ListViolenceTypesController;
 use App\Http\Controllers\ViolenceType\StoreViolenceTypeController;
@@ -135,6 +139,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/supposedReasonOfViolence/store', StoreSupposedReasonOfViolenceController::class)->name('supposedReasonOfViolence.store');
     Route::match(['put','patch'],'/supposedReasonOfViolence/{supposedReasonOfViolence}/update', UpdateSupposedReasonOfViolenceController::class)->name('supposedReasonOfViolence.update');
     Route::delete('/supposedReasonOfViolence/{supposedReasonOfViolence}/delete', DeleteSupposedReasonOfViolenceController::class)->name('supposedReasonOfViolence.delete');
+
+    #--- ViolenceIncidentLocation Routes ---#
+    Route::get('/violenceIncidentLocations/list', ListViolenceIncidentLocationsController::class)->name('violenceIncidentLocation.list');
+    Route::post('/violenceIncidentLocation/store', StoreViolenceIncidentLocationController::class)->name('violenceIncidentLocation.store');
+    Route::match(['put','patch'],'/violenceIncidentLocation/{violenceIncidentLocation}/update', UpdateViolenceIncidentLocationController::class)->name('violenceIncidentLocation.update');
+    Route::delete('/violenceIncidentLocation/{violenceIncidentLocation}/delete', DeleteViolenceIncidentLocationController::class)->name('violenceIncidentLocation.delete');
 
     #--- Victims ---#
     Route::post('/victim/register/case', RegisterController::class)->name('victim.register.case');

@@ -51,11 +51,14 @@ export interface ViolenceTypes extends Omit<PaginatedData, "data"> {
     data: Array<App.Data.ViolenceTypeData>;
 }
 export interface Perpetrators extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.ViolenceTypeData>;
+    data: Array<App.Data.PerpetratorData>;
 }
 
 export interface SupposedReasonOfViolences extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.ViolenceTypeData>;
+    data: Array<App.Data.SupposedReasonOfViolenceData>;
+}
+export interface ViolenceIncidentLocations extends Omit<PaginatedData, "data"> {
+    data: Array<App.Data.ViolenceIncidentLocationData>;
 }
 
 export interface VictimCasesHistories extends Omit<PaginatedData, "data"> {

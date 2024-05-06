@@ -2,30 +2,30 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-import { ViolenceTypes } from "@/types/index";
+import { ViolenceIncidentLocations } from "@/types/index";
 import { PropType, ref, watch } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
-import CreateViolenceType from "./CreateViolenceType.vue";
-import DeleteViolenceType from "./DeleteViolenceType.vue";
-import EditViolenceType from "@/Pages/ViolenceType/EditViolenceType.vue";
+import CreateViolenceIncidentLocation from "./CreateViolenceIncidentLocation.vue";
+import DeleteViolenceIncidentLocation from "./DeleteViolenceIncidentLocation.vue";
+import EditViolenceIncidentLocation from "@/Pages/ViolenceIncidentLocation/EditViolenceIncidentLocation.vue";
 
 const props = defineProps({
-    violenceTypes: {
-        type: Object as PropType<ViolenceTypes>,
+    violenceIncidentLocations: {
+        type: Object as PropType<ViolenceIncidentLocations>,
         required: true,
     },
     search: String,
     messages: Object as PropType<FlasherResponse>,
 });
 
-const links = ref(props.violenceTypes.links);
+const links = ref(props.violenceIncidentLocations.links);
 
-const editingViolenceTypeTrigger = ref(false);
-const editingViolenceType = ref<App.Data.ViolenceTypeData | null>(null);
+const editingViolenceIncidentLocationTrigger = ref(false);
+const editingViolenceIncidentLocation = ref<App.Data.ViolenceIncidentLocationData | null>(null);
 
-const deletingViolenceTypeTrigger = ref(false);
-const deletingViolenceType = ref<App.Data.ViolenceTypeData | null>(null);
+const deletingViolenceIncidentLocationTrigger = ref(false);
+const deletingViolenceIncidentLocation = ref<App.Data.ViolenceIncidentLocationData | null>(null);
 
 const searchTerm = ref("");
 
@@ -46,7 +46,7 @@ watch(
 );
 
 watch(
-    () => props.violenceTypes.links,
+    () => props.violenceIncidentLocations.links,
     (value) => {
         links.value = value;
     },
@@ -54,40 +54,40 @@ watch(
 
 watch(searchTerm, (value) => {
     router.visit(
-        route("violenceType.list", {
+        route("violenceIncidentLocation.list", {
             search: value ?? "",
         }),
         {
-            only: ["violenceTypes"],
+            only: ["violenceIncidentLocations"],
             replace: false,
             preserveState: true,
         },
     );
 });
 
-function openEditViolenceTypeModal(violenceType: App.Data.ViolenceTypeData) {
-    editingViolenceType.value = violenceType;
-    editingViolenceTypeTrigger.value = true;
+function openEditViolenceIncidentLocationModal(violenceIncidentLocation: App.Data.ViolenceIncidentLocationData) {
+    editingViolenceIncidentLocation.value = violenceIncidentLocation;
+    editingViolenceIncidentLocationTrigger.value = true;
 }
 
-function closeEditViolenceTypeModal() {
-    editingViolenceType.value = null;
-    editingViolenceTypeTrigger.value = false;
+function closeEditViolenceIncidentLocationModal() {
+    editingViolenceIncidentLocation.value = null;
+    editingViolenceIncidentLocationTrigger.value = false;
 }
 
-function openDeleteViolenceTypeModal(violenceType: App.Data.ViolenceTypeData) {
-    deletingViolenceType.value = violenceType;
-    deletingViolenceTypeTrigger.value = true;
+function openDeleteViolenceIncidentLocationModal(violenceIncidentLocation: App.Data.ViolenceIncidentLocationData) {
+    deletingViolenceIncidentLocation.value = violenceIncidentLocation;
+    deletingViolenceIncidentLocationTrigger.value = true;
 }
 
-function closeDeleteViolenceTypeModal() {
-    deletingViolenceType.value = null;
-    deletingViolenceTypeTrigger.value = false;
+function closeDeleteViolenceIncidentLocationModal() {
+    deletingViolenceIncidentLocation.value = null;
+    deletingViolenceIncidentLocationTrigger.value = false;
 }
 </script>
 
 <template>
-    <Head title="Tipos de violência" />
+    <Head title="Locais de violência" />
     <AuthenticatedLayout>
         <template v-slot:content>
             <div class="mx-auto max-w-screen-xl">
@@ -134,7 +134,7 @@ function closeDeleteViolenceTypeModal() {
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
                         >
-                            <CreateViolenceType />
+                            <CreateViolenceIncidentLocation />
                         </div>
                     </div>
 
@@ -151,12 +151,7 @@ function closeDeleteViolenceTypeModal() {
                                     </th>
                                     <th class="px-4 py-3" scope="col">
                                         <div class="flex items-center">
-                                            Causa
-                                        </div>
-                                    </th>
-                                    <th class="px-4 py-3" scope="col">
-                                        <div class="flex items-center">
-                                            Descrição
+                                            Nome
                                         </div>
                                     </th>
 
@@ -170,8 +165,8 @@ function closeDeleteViolenceTypeModal() {
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="violenceType in violenceTypes.data"
-                                    :key="violenceType.id ?? undefined"
+                                    v-for="violenceIncidentLocation in violenceIncidentLocations.data"
+                                    :key="violenceIncidentLocation.id ?? undefined"
                                     class="border-b dark:border-gray-700"
                                 >
                                     <th
@@ -181,24 +176,20 @@ function closeDeleteViolenceTypeModal() {
                                         <span
                                             class="rounded-full bg-slate-50 text-black text-center"
                                         >
-                                            {{ violenceType.name?.charAt(0) }}
+                                            {{ violenceIncidentLocation.name?.charAt(0) }}
                                         </span>
                                     </th>
 
                                     <td class="px-4 py-3">
-                                        {{ violenceType.name }}
-                                    </td>
-
-                                    <td class="px-4 py-3">
-                                        {{ violenceType.description }}
+                                        {{ violenceIncidentLocation.name }}
                                     </td>
                                     <td class="px-4 py-3 w-32">
                                         <button
                                             class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                             type="button"
                                             @click="
-                                                openEditViolenceTypeModal(
-                                                    violenceType,
+                                                openEditViolenceIncidentLocationModal(
+                                                    violenceIncidentLocation,
                                                 )
                                             "
                                         >
@@ -235,8 +226,8 @@ function closeDeleteViolenceTypeModal() {
                                             class="bg-red-500 hover:bg-red-700 flex items-center justify-center text-white focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                             type="button"
                                             @click="
-                                                openDeleteViolenceTypeModal(
-                                                    violenceType,
+                                                openDeleteViolenceIncidentLocationModal(
+                                                    violenceIncidentLocation,
                                                 )
                                             "
                                         >
@@ -278,8 +269,8 @@ function closeDeleteViolenceTypeModal() {
                             <span
                                 class="font-semibold text-gray-900 dark:text-white"
                                 >{{
-                                    `${violenceTypes.meta.from ?? 0}-${
-                                        violenceTypes.meta.to ?? 0
+                                    `${violenceIncidentLocations.meta.from ?? 0}-${
+                                        violenceIncidentLocations.meta.to ?? 0
                                     }`
                                 }}</span
                             >
@@ -287,7 +278,7 @@ function closeDeleteViolenceTypeModal() {
                             <span
                                 class="font-semibold text-gray-900 dark:text-white"
                             >
-                                {{ violenceTypes.meta.total }}</span
+                                {{ violenceIncidentLocations.meta.total }}</span
                             >
                         </span>
                         <ul class="inline-flex items-stretch -space-x-px">
@@ -351,17 +342,17 @@ function closeDeleteViolenceTypeModal() {
                 </div>
             </div>
 
-            <EditViolenceType
-                v-if="editingViolenceType"
-                :close="closeEditViolenceTypeModal"
-                :openModal="editingViolenceTypeTrigger"
-                :violenceType="editingViolenceType"
+            <EditViolenceIncidentLocation
+                v-if="editingViolenceIncidentLocation"
+                :close="closeEditViolenceIncidentLocationModal"
+                :openModal="editingViolenceIncidentLocationTrigger"
+                :violenceIncidentLocation="editingViolenceIncidentLocation"
             />
-            <DeleteViolenceType
-                v-if="deletingViolenceType"
-                :close="closeDeleteViolenceTypeModal"
-                :openModal="deletingViolenceTypeTrigger"
-                :violenceType="deletingViolenceType"
+            <DeleteViolenceIncidentLocation
+                v-if="deletingViolenceIncidentLocation"
+                :close="closeDeleteViolenceIncidentLocationModal"
+                :openModal="deletingViolenceIncidentLocationTrigger"
+                :violenceIncidentLocation="deletingViolenceIncidentLocation"
             />
         </template>
     </AuthenticatedLayout>
