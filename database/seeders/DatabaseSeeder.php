@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\CaseProgressStatus;
+use App\Enums\PeriodOfViolenceAct;
 use App\Models\District;
 use App\Models\Neighborhood;
 use App\Models\Organization;
@@ -54,7 +55,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-      User::updateOrInsert([
+     User::updateOrInsert([
             'id' => '01hv1bd7wmatmqfyqqtecpj6v7'
         ],[
             'name' => 'Admin',
@@ -201,69 +202,59 @@ class DatabaseSeeder extends Seeder
             'name' => 'Rua',
         ]);
 
-
-
-
+        $baseUser =  $admin;
+        $baseUser->loadMissing('organization');
 
         #--- Seeder de dados de testo todos seeder devem ser feitos de 1 de Janeiro de 2024 a te a data actual---#
+        for ($i = 0; $i < 523 ; $i++) {
+           \DB::beginTransaction();
+            try {
+                $age = fake()->numberBetween(17, 90);
+                $victim = Victim::create([
+                    'name' => fake()->name,
+                    'neighborhood_id' => Neighborhood::all()->random()->id,
+                    'contact' => fake()->phoneNumber(),
+                    'age' => $age,
+                    'date_of_birth' => now()->subYears($age),
+                ]);
+                $baseOrg = $baseUser->organization;
+                $orgs = Organization::whereNot('id', $baseOrg->id)->get();
+                $code = incrementCode();
 
-//        for ($i = 0; $i < 300 ; $i++) {
-//            $victim =  Victim::create([
-//                'name' => fake()->name,
-//                'violence_details' => fake()->realText(),
-//                'violence_type_id' => ViolenceType::all()->random()->id,
-//                'neighborhood_id' => Neighborhood::all()->random()->id,
-//                'contact' => fake()->phoneNumber(),
-//                'age' => fake()->numberBetween(17,90),
-//            ]);
-//            $organizationsCount = Organization::count();
-//
-//            $baseUser = User::first();
-//            $baseOrg = $baseUser->organization;
-//            $orgs = Organization::whereNot('id',$baseOrg->id)->get();
-//            $forwarded = fake()->boolean();
-//            $code =  incrementCode();
-//
-//            VictimCase::create([
-//                'victim_id' => $victim->id,
-//                'organization_id' => $baseOrg->id,
-//                'case_registered_by_id' => $baseUser->id,
-//                'progress_status' =>  collect([
-//                    CaseProgressStatus::PENDING,
-//                    CaseProgressStatus::IN_PROGRESS,
-//                    CaseProgressStatus::SOLVED,
-//                ])->random(),
-//                'case_details' => $victim->violence_details,
-//                'case_updated_by_id' => $baseUser->id,
-//                'violence_type_id' => $victim->violence_type_id,
-//                'is_forwarded' => false,
-//                'case_code' => $code,
-//                'created_at' => fake()->dateTimeBetween(now()->firstOfYear(),now())
-//            ]);
-//
-//            if($forwarded){
-//                for ($j = 0; $j < fake()->numberBetween(0,$organizationsCount) ; $j++) {
-//                    $toOrg = $orgs->random()->id;
-//                    VictimCase::create([
-//                        'victim_id' => $victim->id,
-//                        'organization_id' => $toOrg,
-//                        'case_registered_by_id' => $baseUser->id,
-//                        'progress_status' => collect([
-//                            CaseProgressStatus::FORWARDED,
-//                            CaseProgressStatus::PENDING,
-//                            CaseProgressStatus::IN_PROGRESS,
-//                            CaseProgressStatus::SOLVED,
-//                        ])->random(),
-//                        'case_details' => $victim->violence_details,
-//                        'case_updated_by_id' => $baseUser->id,
-//                        'violence_type_id' => $victim->violence_type_id,
-//                        'forwarded_from_organization_id' => $baseOrg->id,
-//                        'forwarded_to_organization_id' => $toOrg,
-//                        'is_forwarded' => true,
-//                        'case_code' => $code,
-//                    ]);
-//                }
-//            }
-//        }
+                $resolved = fake()->boolean();
+
+                $case = VictimCase::create([
+                    'victim_id' => $victim->id,
+                    'organization_id' => $baseOrg->id,
+                    'case_registered_by_id' => $baseUser->id,
+                    'progress_status' => $resolved ? CaseProgressStatus::SOLVED :CaseProgressStatus::IN_PROGRESS,
+                    'violence_details' => fake()->realText(),
+                    'case_updated_by_id' =>$baseUser->id,
+                    'violence_type_id' => ViolenceType::all()->random()->id,
+                    'perpetrator_id' => Perpetrator::all()->random()->id,
+                    'period_of_violence_act' => collect(PeriodOfViolenceAct::getValues())->random(),
+                    'violence_incident_location_id' => ViolenceIncidentLocation::all()->random()->id,
+                    'supposed_reason_of_violence_id' => SupposedReasonOfViolence::all()->random()->id,
+                    'is_violence_caused_death' => fake()->boolean(),
+                    'is_terminated' => false,
+                    'case_code' => $code,
+                    'conclusion' => $resolved ? fake()->realText() : '',
+                    'created_at' => fake()->dateTimeBetween('2024-01-01', 'now'),
+                    'updated_at' => fake()->dateTimeBetween('2024-01-01', 'now'),
+                ]);
+
+                if (fake()->boolean()) {
+                    $case->refresh();
+                    $case->update([
+                        'forwarded_to_organization_id' => $orgs->random()->id,
+                        'forwarded_from_organization_id' => $baseOrg->id,
+                    ]);
+                }
+                \DB::commit();
+            }catch (\Exception $e) {
+                throw $e;
+                \DB::rollBack();
+            }
+        }
     }
 }

@@ -31,6 +31,7 @@ class GetForwardedVictimCasesController extends Controller
                     $query->whereAny(['name','age','contact'],'like',"%$term%");
                 })
                 ->whereForwardedFromOrganizationId($organization->id)
+                ->orderByDesc('created_at')
                 ->paginate(12)->withQueryString());
     }
 }
