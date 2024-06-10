@@ -163,7 +163,7 @@ const registerCase = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="violence_type_id"
-                                >Causa da morte</label
+                                >Tipo de Violência</label
                             >
                             <v-select
                                 v-model="form.violence_type_id"
@@ -171,7 +171,7 @@ const registerCase = () => {
                                     (option: ViolenceTypeData) => option.name
                                 "
                                 :options="violenceTypes"
-                                placeholder="Causa da morte"
+                                placeholder="Tipo de Violência"
                                 :reduce="(unit: ViolenceTypeData) => unit.id"
                                 label="violence_type_id"
                             ></v-select>
@@ -183,7 +183,7 @@ const registerCase = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="violence_details"
-                                >Detalhes da violência</label
+                                >Descrição do Caso</label
                             >
                             <textarea
                                 id="violence_details"
@@ -209,12 +209,12 @@ const registerCase = () => {
                                 v-model="form.requires_forwards"
                                 name="requires_forwards"
                                 class="flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Encaminhamento necessário"
+                                placeholder="Encaminhar o caso"
                                 type="checkbox"
                             />
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
-                                >Encaminhamento necessário</label
+                                >Encaminhar o caso</label
                             >
                             <InputError
                                 :message="form.errors.requires_forwards"
@@ -225,7 +225,7 @@ const registerCase = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="forward_to_organizations"
-                                >Encaminhar para</label
+                                >Encaminhar o caso</label
                             >
                             <v-select
                                 v-model="form.forward_to_organizations"
@@ -233,7 +233,7 @@ const registerCase = () => {
                                     (option: OrganizationData) => option.name
                                 "
                                 :options="organizations"
-                                placeholder="Encaminhar para"
+                                placeholder="Encaminhar o caso"
                                 :reduce="(unit: OrganizationData) => unit.id"
                                 label="forward_to_organizations"
                                 multiple

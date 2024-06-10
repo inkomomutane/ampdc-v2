@@ -113,7 +113,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
                         <DashboardCardData :value="receivedCasesCount" label="Casos recebidos"/>
                     </div>
                     <div class="grid grid-cols-2 gap-6 mb-8">
-                        <DeathCauseChart label="Gráfico por causa da morte" :causes="causeOfDeath.labels"  :causes-count="causeOfDeath.values" />
+                        <DeathCauseChart label="Gráfico por Tipo de Violência" :causes="causeOfDeath.labels"  :causes-count="causeOfDeath.values" />
                         <DeathCauseChart label="Gráfico por bor bairros" :causes="neighborhoodDeaths.labels"  :causes-count="neighborhoodDeaths.values" />
                     </div>
                 </div>

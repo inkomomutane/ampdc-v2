@@ -5,15 +5,40 @@ import InputError from "@components/InputError.vue";
 import {PropType, watch} from "vue";
 import {FlasherResponse} from "@flasher/flasher";
 import Flasher from "@/helprs";
+import GenderData = App.Data.GenderData;
 import NeighborhoodData = App.Data.NeighborhoodData;
+import ProvinceData = App.Data.ProvinceData;
+import DistrictData = App.Data.DistrictData;
+import ActivityData = App.Data.ActivityData;
+import EducationLevelData = App.Data.EducationLevelData;
 import ViolenceTypeData = App.Data.ViolenceTypeData;
 import OrganizationData = App.Data.OrganizationData;
 
 const props = defineProps({
+    genders: {
+         type: Array<App.Data.GenderData>,
+         required: true,
+    },
    neighborhoods: {
        type: Array<App.Data.NeighborhoodData>,
        required: true,
    },
+   province: {
+         type: Array<App.Data.ProvinceData>,
+         required: true,
+    },
+    district: {
+         type: Array<App.Data.DistrictData>,
+         required: true,
+    },
+    educationLevel: {
+         type: Array<App.Data.EducationLevelData>,
+         required: true,
+    },
+    activity: {
+         type: Array<App.Data.ActivityData>,
+         required: true,
+    },
     violenceTypes: {
          type: Array<App.Data.ViolenceTypeData>,
          required: true,
@@ -32,7 +57,12 @@ const form = useForm({
     name: "",
     age: "",
     date_of_birth: "",
+    gender_id: "",
+    province_id: "",
+    district_id: "",
     neighborhood_id: "",
+    education_level_id: "",
+    activity_id: "",
     violence_type_id: "",
     violence_details: "",
     contact: "",
@@ -51,6 +81,10 @@ watch(
         });
     },
 );
+
+const onCliqueDeathResults = () => {
+    form.death_results = !form.death_results;
+};
 
 const onCliqueRequiredForwards = () => {
     form.requires_forwards = !form.requires_forwards;
@@ -75,11 +109,11 @@ const registerCase = () => {
                         <h1
                             class="text-2xl font-semibold text-gray-900 dark:text-white"
                         >
-                            Registar um caso de feminicídio
+                            Registar um caso de Violencia Baseada no Gênero
                         </h1>
                         <p class="text-sm text-gray-900 dark:text-white">
                             Preencha o formulário abaixo para registar um caso
-                            de feminicídio.
+                            de VBG.
                         </p>
                     </div>
                 </div>
@@ -123,6 +157,26 @@ const registerCase = () => {
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    for="gender_id"
+                                    >Género</label
+                                >
+                                <v-select
+                                    v-model="form.gender_id"
+                                    :get-option-label="
+                                        (option: GenderData) => option.name
+                                    "
+                                    :options="genders"
+                                    placeholder="Género"
+                                    :reduce="(unit: GenderData) => unit.id"
+                                    label="gender_id"
+                                ></v-select>
+                                <InputError
+                                    :message="form.errors.gender_id"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="contact"
                                     >Contacto do parente/pessoa próxima</label
                                 >
@@ -137,6 +191,46 @@ const registerCase = () => {
                                 />
                                 <InputError :message="form.errors.contact" />
                             </div>
+                        </div>
+                        <div>
+                            <label
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="province_id"
+                                >Provincia</label
+                            >
+                            <v-select
+                                v-model="form.province_id"
+                                :get-option-label="
+                                    (option: ProvinceData) => option.name
+                                "
+                                :options="province"
+                                placeholder="Provincia"
+                                :reduce="(unit: ProvinceData) => unit.id"
+                                label="province_id"
+                            ></v-select>
+                            <InputError
+                                :message="form.errors.province_id"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="District_id"
+                                >Distrito</label
+                            >
+                            <v-select
+                                v-model="form.district_id"
+                                :get-option-label="
+                                    (option: DistrictData) => option.name
+                                "
+                                :options="district"
+                                placeholder="Distrito"
+                                :reduce="(unit: DistrictData) => unit.id"
+                                label="district_id"
+                            ></v-select>
+                            <InputError
+                                :message="form.errors.district_id"
+                            />
                         </div>
                         <div>
                             <label
@@ -161,8 +255,48 @@ const registerCase = () => {
                         <div>
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="activity_id"
+                                >Ocupação</label
+                            >
+                            <v-select
+                                v-model="form.neighborhood_id"
+                                :get-option-label="
+                                    (option: ActivityData) => option.name
+                                "
+                                :options="actvities"
+                                placeholder="Ocupação"
+                                :reduce="(unit: ActivityData) => unit.id"
+                                label="activity_id"
+                            ></v-select>
+                            <InputError
+                                :message="form.errors.activity_id"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="education_level_id"
+                                >Nível de Escolaridade</label
+                            >
+                            <v-select
+                                v-model="form.education_level_id"
+                                :get-option-label="
+                                    (option: EducationLevelData) => option.name
+                                "
+                                :options="educationLevels"
+                                placeholder="Nível de Escolaridade"
+                                :reduce="(unit: EducationLevelData) => unit.id"
+                                label="education_level_id"
+                            ></v-select>
+                            <InputError
+                                :message="form.errors.education_level_id"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="violence_type_id"
-                                >Causa da morte</label
+                                >Tipo de Violência</label
                             >
                             <v-select
                                 v-model="form.violence_type_id"
@@ -170,7 +304,7 @@ const registerCase = () => {
                                     (option: ViolenceTypeData) => option.name
                                 "
                                 :options="violenceTypes"
-                                placeholder="Causa da morte"
+                                placeholder="Tipo de Violência"
                                 :reduce="(unit: ViolenceTypeData) => unit.id"
                                 label="violence_type_id"
                             ></v-select>
@@ -182,7 +316,7 @@ const registerCase = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="violence_details"
-                                >Detalhes do crime</label
+                                >Detalhes do caso</label
                             >
                             <textarea
                                 id="violence_details"
@@ -190,7 +324,7 @@ const registerCase = () => {
                                 v-model="form.violence_details"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 name="violence_details"
-                                placeholder="Detalhes do crime"
+                                placeholder="Detalhes do caso"
                                 rows="4"
                             >
                             </textarea>
@@ -198,6 +332,29 @@ const registerCase = () => {
                                 :message="form.errors.violence_details"
                             />
                         </div>
+
+                        <div
+                            class="flex gap-4 col-span-2 cursor-pointer"
+                            @click="onCliqueDeathResults"
+                        >
+                            <input
+                                id="death_results"
+                                ref="deathResultsInput"
+                                v-model="form.death_results"
+                                name="death_results"
+                                class="flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Resultou em óbito"
+                                type="checkbox"
+                            />
+                            <label
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
+                                >Resultou em óbito</label
+                            >
+                            <InputError
+                                :message="form.errors.requires_forwards"
+                            />
+                        </div>
+
                         <div
                             class="flex gap-4 col-span-2 cursor-pointer"
                             @click="onCliqueRequiredForwards"
@@ -208,12 +365,12 @@ const registerCase = () => {
                                 v-model="form.requires_forwards"
                                 name="requires_forwards"
                                 class="flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Encaminhamento necessário"
+                                placeholder="Encaminhar o caso"
                                 type="checkbox"
                             />
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
-                                >Encaminhamento necessário</label
+                                >Encaminhar o caso</label
                             >
                             <InputError
                                 :message="form.errors.requires_forwards"
@@ -224,7 +381,7 @@ const registerCase = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="forward_to_organizations"
-                                >Encaminhar para</label
+                                >Encaminhar o caso</label
                             >
                             <v-select
                                 v-model="form.forward_to_organizations"
@@ -232,7 +389,7 @@ const registerCase = () => {
                                     (option: OrganizationData) => option.name
                                 "
                                 :options="organizations"
-                                placeholder="Encaminhar para"
+                                placeholder="Encaminhar o caso"
                                 :reduce="(unit: OrganizationData) => unit.id"
                                 label="forward_to_organizations"
                                 multiple

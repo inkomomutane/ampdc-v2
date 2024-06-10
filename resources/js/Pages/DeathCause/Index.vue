@@ -2,30 +2,30 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-import { ViolenceTypes } from "@/types/index";
+import { DeathCauses } from "@/types/index";
 import { PropType, ref, watch } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
-import CreateViolenceType from "./CreateViolenceType.vue";
-import DeleteViolenceType from "./DeleteViolenceType.vue";
-import EditViolenceType from "@/Pages/ViolenceType/EditViolenceType.vue";
+import CreateDeathCause from "./CreateDeathCause.vue";
+import DeleteDeathCause from "./DeleteDeathCause.vue";
+import EditDeathCause from "@/Pages/DeathCause/EditDeathCause.vue";
 
 const props = defineProps({
-    violenceTypes: {
-        type: Object as PropType<ViolenceTypes>,
+    deathCauses: {
+        type: Object as PropType<DeathCauses>,
         required: true,
     },
     search: String,
     messages: Object as PropType<FlasherResponse>,
 });
 
-const links = ref(props.violenceTypes.links);
+const links = ref(props.deathCauses.links);
 
-const editingViolenceTypeTrigger = ref(false);
-const editingViolenceType = ref<App.Data.ViolenceTypeData | null>(null);
+const editingDeathCauseTrigger = ref(false);
+const editingDeathCause = ref<App.Data.DeathCauseData | null>(null);
 
-const deletingViolenceTypeTrigger = ref(false);
-const deletingViolenceType = ref<App.Data.ViolenceTypeData | null>(null);
+const deletingDeathCauseTrigger = ref(false);
+const deletingDeathCause = ref<App.Data.DeathCauseData | null>(null);
 
 const searchTerm = ref("");
 
@@ -46,7 +46,7 @@ watch(
 );
 
 watch(
-    () => props.violenceTypes.links,
+    () => props.deathCauses.links,
     (value) => {
         links.value = value;
     },
@@ -54,35 +54,35 @@ watch(
 
 watch(searchTerm, (value) => {
     router.visit(
-        route("violenceType.list", {
+        route("deathCauses.list", {
             search: value ?? "",
         }),
         {
-            only: ["violenceTypes"],
+            only: ["deathCauses"],
             replace: false,
             preserveState: true,
         },
     );
 });
 
-function openEditViolenceTypeModal(violenceType: App.Data.ViolenceTypeData) {
-    editingViolenceType.value = violenceType;
-    editingViolenceTypeTrigger.value = true;
+function openEditDeathCauseModal(deathCause: App.Data.DeathCauseData) {
+    editingDeathCause.value = deathCause;
+    editingDeathCauseTrigger.value = true;
 }
 
-function closeEditViolenceTypeModal() {
-    editingViolenceType.value = null;
-    editingViolenceTypeTrigger.value = false;
+function closeEditDeathCauseModal() {
+    editingDeathCause.value = null;
+    editingDeathCauseTrigger.value = false;
 }
 
-function openDeleteViolenceTypeModal(violenceType: App.Data.ViolenceTypeData) {
-    deletingViolenceType.value = violenceType;
-    deletingViolenceTypeTrigger.value = true;
+function openDeleteDeathCauseModal(deathCause: App.Data.DeathCauseData) {
+    deletingDeathCause.value = deathCause;
+    deletingDeathCauseTrigger.value = true;
 }
 
-function closeDeleteViolenceTypeModal() {
-    deletingViolenceType.value = null;
-    deletingViolenceTypeTrigger.value = false;
+function closeDeleteDeathCauseModal() {
+    deletingDeathCause.value = null;
+    deletingDeathCauseTrigger.value = false;
 }
 </script>
 
@@ -134,7 +134,7 @@ function closeDeleteViolenceTypeModal() {
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
                         >
-                            <CreateViolenceType />
+                            <CreateDeathCause />
                         </div>
                     </div>
 
@@ -151,7 +151,7 @@ function closeDeleteViolenceTypeModal() {
                                     </th>
                                     <th class="px-4 py-3" scope="col">
                                         <div class="flex items-center">
-                                            Tipos
+                                            Causa
                                         </div>
                                     </th>
                                     <th class="px-4 py-3" scope="col">
@@ -170,8 +170,8 @@ function closeDeleteViolenceTypeModal() {
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="violenceType in violenceTypes.data"
-                                    :key="violenceType.id ?? undefined"
+                                    v-for="deathCause in deathCauses.data"
+                                    :key="deathCause.id ?? undefined"
                                     class="border-b dark:border-gray-700"
                                 >
                                     <th
@@ -181,24 +181,24 @@ function closeDeleteViolenceTypeModal() {
                                         <span
                                             class="rounded-full bg-slate-50 text-black text-center"
                                         >
-                                            {{ violenceType.name?.charAt(0) }}
+                                            {{ deathCause.name?.charAt(0) }}
                                         </span>
                                     </th>
 
                                     <td class="px-4 py-3">
-                                        {{ violenceType.name }}
+                                        {{ deathCause.name }}
                                     </td>
 
                                     <td class="px-4 py-3">
-                                        {{ violenceType.description }}
+                                        {{ deathCause.description }}
                                     </td>
                                     <td class="px-4 py-3 w-32">
                                         <button
                                             class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                             type="button"
                                             @click="
-                                                openEditViolenceTypeModal(
-                                                    violenceType,
+                                                openEditDeathCauseModal(
+                                                    deathCause,
                                                 )
                                             "
                                         >
@@ -235,8 +235,8 @@ function closeDeleteViolenceTypeModal() {
                                             class="bg-red-500 hover:bg-red-700 flex items-center justify-center text-white focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                             type="button"
                                             @click="
-                                                openDeleteViolenceTypeModal(
-                                                    violenceType,
+                                                openDeleteDeathCauseModal(
+                                                    deathCause,
                                                 )
                                             "
                                         >
@@ -278,8 +278,8 @@ function closeDeleteViolenceTypeModal() {
                             <span
                                 class="font-semibold text-gray-900 dark:text-white"
                                 >{{
-                                    `${violenceTypes.meta.from ?? 0}-${
-                                        violenceTypes.meta.to ?? 0
+                                    `${deathCauses.meta.from ?? 0}-${
+                                        deathCauses.meta.to ?? 0
                                     }`
                                 }}</span
                             >
@@ -287,7 +287,7 @@ function closeDeleteViolenceTypeModal() {
                             <span
                                 class="font-semibold text-gray-900 dark:text-white"
                             >
-                                {{ violenceTypes.meta.total }}</span
+                                {{ deathCauses.meta.total }}</span
                             >
                         </span>
                         <ul class="inline-flex items-stretch -space-x-px">
@@ -351,17 +351,17 @@ function closeDeleteViolenceTypeModal() {
                 </div>
             </div>
 
-            <EditViolenceType
-                v-if="editingViolenceType"
-                :close="closeEditViolenceTypeModal"
-                :openModal="editingViolenceTypeTrigger"
-                :violenceType="editingViolenceType"
+            <EditDeathCause
+                v-if="editingDeathCause"
+                :close="closeEditDeathCauseModal"
+                :openModal="editingDeathCauseTrigger"
+                :violenceType="editingDeathCause"
             />
-            <DeleteViolenceType
-                v-if="deletingViolenceType"
-                :close="closeDeleteViolenceTypeModal"
-                :openModal="deletingViolenceTypeTrigger"
-                :violenceType="deletingViolenceType"
+            <DeleteDeathCause
+                v-if="deletingDeathCause"
+                :close="closeDeleteDeathCauseModal"
+                :openModal="deletingDeathCauseTrigger"
+                :violenceType="deletingDeathCause"
             />
         </template>
     </AuthenticatedLayout>

@@ -4,16 +4,16 @@ import { PropType, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import InputError from "@/components/InputError.vue";
 
-const addViolenceType = ref(false);
+const addDeathCause = ref(false);
 const nameInput = ref();
 const descriptionInput = ref();
 
-const addViolenceTypeTrigger = () => {
-    addViolenceType.value = true;
+const addDeathCauseTrigger = () => {
+    addDeathCause.value = true;
 };
 
-const closeCreateViolenceTypeModal = () => {
-    addViolenceType.value = false;
+const closeCreateDeathCauseModal = () => {
+    addDeathCause.value = false;
     form.reset();
 };
 
@@ -22,10 +22,10 @@ const form = useForm({
     description: "",
 });
 
-const createViolenceType = () => {
-    form.post(route("violenceType.store"), {
+const createDeathCause = () => {
+    form.post(route("deathCause.store"), {
         preserveScroll: true,
-        onSuccess: () => closeCreateViolenceTypeModal(),
+        onSuccess: () => closeCreateDeathCauseModal(),
         onError: () => nameInput.value.focus(),
     });
 };
@@ -34,7 +34,7 @@ const createViolenceType = () => {
     <button
         class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
         type="button"
-        @click="addViolenceTypeTrigger"
+        @click="addDeathCauseTrigger"
     >
         <svg
             height="20"
@@ -66,15 +66,15 @@ const createViolenceType = () => {
                 fill="currentColor"
             />
         </svg>
-        <span class="mx-4">Adicionar Tipo de Violéncia</span>
+        <span class="mx-4">Adicionar causa de morte</span>
     </button>
 
-    <Modal :show="addViolenceType" @close="closeCreateViolenceTypeModal">
+    <Modal :show="addDeathCause" @close="closeCreateDeathCauseModal">
         <div class="relative bg-white rounded shadow dark:bg-gray-700">
             <button
                 class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
                 type="button"
-                @click="closeCreateViolenceTypeModal"
+                @click="closeCreateDeathCauseModal"
             >
                 <svg
                     aria-hidden="true"
@@ -95,15 +95,15 @@ const createViolenceType = () => {
                 <h3
                     class="mb-4 text-xl font-medium text-gray-900 dark:text-white"
                 >
-                Tipo de Violéncia
+                    Causa de Óbito
                 </h3>
-                <form class="space-y-6" @submit.prevent="createViolenceType">
+                <form class="space-y-6" @submit.prevent="createDeathCause">
                     <div class="grid grid-cols-1 gap-2">
                         <div>
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                                >  Tipo de Violéncia
+                                >  Causa de Óbito
                             </label>
                             <input
                                 id="name"
@@ -111,7 +111,7 @@ const createViolenceType = () => {
                                 v-model="form.name"
                                 name="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Causa de uma morte"
+                                placeholder="Causa de Óbito"
                                 type="text"
                             />
                             <InputError :message="form.errors.name" />
