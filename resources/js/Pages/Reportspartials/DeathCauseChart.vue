@@ -23,7 +23,7 @@ const chartData = {
     labels: props.causes,
     datasets:[
         {
-            label: 'Causa das mortes',
+            label: 'Tipo de Violencia',
             data:props.causesCount,
             borderColor:[
                 'rgba(54, 162, 235)',
