@@ -21,7 +21,15 @@ const props = defineProps({
     },
     neighborhoodDeaths : {
         type:Object
-    }
+    },
+
+    provinceDeaths : {
+        type:Object
+    },
+
+    districtDeaths : {
+        type:Object
+    },
 });
 
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
