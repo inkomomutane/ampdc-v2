@@ -1,15 +1,16 @@
-const animate = require("tailwindcss-animate")
-const  colors = require('tailwindcss/colors')
-const defaultTheme = require("tailwindcss/defaultTheme")
+const animate = require("tailwindcss-animate");
+const colors = require("tailwindcss/colors");
+const defaultTheme = require("tailwindcss/defaultTheme");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: ["class"],
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-        './resources/js/**/*.{js,ts,tsx,vue}',
-
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./node_modules/flowbite/**/*.js",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
+        "./resources/js/**/*.{js,ts,tsx,vue}",
+        "./resources/website/**/*.js",
     ],
     theme: {
         container: {
@@ -21,7 +22,7 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                sans: ['Lexend Deca', ...defaultTheme.fontFamily.sans],
+                sans: ["Lexend Deca", ...defaultTheme.fontFamily.sans],
             },
             keyframes: {
                 "accordion-down": {
@@ -39,8 +40,11 @@ module.exports = {
             },
         },
     },
-    plugins: [animate,
-        require('@tailwindcss/forms'),
-        require('@tailwindcss/typography'),
-        require('@tailwindcss/aspect-ratio')]
-}
+    plugins: [
+        animate,
+        require("@tailwindcss/forms"),
+        require("@tailwindcss/typography"),
+        require("@tailwindcss/aspect-ratio"),
+        require("flowbite/plugin"),
+    ],
+};

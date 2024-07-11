@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <title inertia>{{ config("app.name", "Laravel") }}</title>
+        <title>@yield("title", "Laravel")</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net" />
@@ -14,11 +14,11 @@
         />
 
         <!-- Scripts -->
-        @routes
-        @vite(["resources/js/app.ts", "resources/js/Pages/{$page["component"]}.vue"])
-        @inertiaHead
+        @vite(["resources/website/js/app.ts", "resources/website/css/app.css"])
     </head>
-    <body class="font-sans antialiased">
-        @inertia
+    <body
+        class="font-sans antialiased scroll-smooth selection:bg-red-500/90 selection:text-white"
+    >
+        @yield("content")
     </body>
 </html>

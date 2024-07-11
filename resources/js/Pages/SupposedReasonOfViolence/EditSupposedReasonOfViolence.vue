@@ -68,13 +68,17 @@ const createSupposedReasonOfViolence = () => {
                 >
                     Editar motivo de violência
                 </h3>
-                <form class="space-y-6" @submit.prevent="createSupposedReasonOfViolence">
+                <form
+                    class="space-y-6"
+                    @submit.prevent="createSupposedReasonOfViolence"
+                >
                     <div class="grid grid-cols-1 gap-2">
                         <div>
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                                > Motivo de violência</label
+                            >
+                                Motivo de violência</label
                             >
                             <input
                                 id="name"

@@ -11,9 +11,9 @@ const props = defineProps({
         type: Object as PropType<App.Data.UserData>,
         required: true,
     },
-    organizations : {
-        type : Array<OrganizationData>,
-        required:true
+    organizations: {
+        type: Array<OrganizationData>,
+        required: true,
     },
     close: {
         type: Function,
@@ -174,7 +174,7 @@ const updateUser = () => {
                             <label
                                 for="organization"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >Organização</label
+                                >Organização</label
                             >
                             <v-select
                                 v-model="form.organization_id"
@@ -183,10 +183,15 @@ const updateUser = () => {
                                 "
                                 :options="organizations"
                                 placeholder="Organização"
-                                :reduce="(organization: OrganizationData) => organization.id"
+                                :reduce="
+                                    (organization: OrganizationData) =>
+                                        organization.id
+                                "
                                 label="organization"
                             ></v-select>
-                            <InputError :message="form.errors.organization_id" />
+                            <InputError
+                                :message="form.errors.organization_id"
+                            />
                         </div>
                     </div>
 

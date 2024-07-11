@@ -22,10 +22,12 @@ const props = defineProps({
 const links = ref(props.violenceIncidentLocations.links);
 
 const editingViolenceIncidentLocationTrigger = ref(false);
-const editingViolenceIncidentLocation = ref<App.Data.ViolenceIncidentLocationData | null>(null);
+const editingViolenceIncidentLocation =
+    ref<App.Data.ViolenceIncidentLocationData | null>(null);
 
 const deletingViolenceIncidentLocationTrigger = ref(false);
-const deletingViolenceIncidentLocation = ref<App.Data.ViolenceIncidentLocationData | null>(null);
+const deletingViolenceIncidentLocation =
+    ref<App.Data.ViolenceIncidentLocationData | null>(null);
 
 const searchTerm = ref("");
 
@@ -65,7 +67,9 @@ watch(searchTerm, (value) => {
     );
 });
 
-function openEditViolenceIncidentLocationModal(violenceIncidentLocation: App.Data.ViolenceIncidentLocationData) {
+function openEditViolenceIncidentLocationModal(
+    violenceIncidentLocation: App.Data.ViolenceIncidentLocationData,
+) {
     editingViolenceIncidentLocation.value = violenceIncidentLocation;
     editingViolenceIncidentLocationTrigger.value = true;
 }
@@ -75,7 +79,9 @@ function closeEditViolenceIncidentLocationModal() {
     editingViolenceIncidentLocationTrigger.value = false;
 }
 
-function openDeleteViolenceIncidentLocationModal(violenceIncidentLocation: App.Data.ViolenceIncidentLocationData) {
+function openDeleteViolenceIncidentLocationModal(
+    violenceIncidentLocation: App.Data.ViolenceIncidentLocationData,
+) {
     deletingViolenceIncidentLocation.value = violenceIncidentLocation;
     deletingViolenceIncidentLocationTrigger.value = true;
 }
@@ -166,7 +172,9 @@ function closeDeleteViolenceIncidentLocationModal() {
                             <tbody>
                                 <tr
                                     v-for="violenceIncidentLocation in violenceIncidentLocations.data"
-                                    :key="violenceIncidentLocation.id ?? undefined"
+                                    :key="
+                                        violenceIncidentLocation.id ?? undefined
+                                    "
                                     class="border-b dark:border-gray-700"
                                 >
                                     <th
@@ -176,7 +184,11 @@ function closeDeleteViolenceIncidentLocationModal() {
                                         <span
                                             class="rounded-full bg-slate-50 text-black text-center"
                                         >
-                                            {{ violenceIncidentLocation.name?.charAt(0) }}
+                                            {{
+                                                violenceIncidentLocation.name?.charAt(
+                                                    0,
+                                                )
+                                            }}
                                         </span>
                                     </th>
 
@@ -269,9 +281,9 @@ function closeDeleteViolenceIncidentLocationModal() {
                             <span
                                 class="font-semibold text-gray-900 dark:text-white"
                                 >{{
-                                    `${violenceIncidentLocations.meta.from ?? 0}-${
-                                        violenceIncidentLocations.meta.to ?? 0
-                                    }`
+                                    `${
+                                        violenceIncidentLocations.meta.from ?? 0
+                                    }-${violenceIncidentLocations.meta.to ?? 0}`
                                 }}</span
                             >
                             of

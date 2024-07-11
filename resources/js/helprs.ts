@@ -1,6 +1,6 @@
 import { FlahserType } from "./types/index.d";
 import flasher from "@flasher/flasher";
-import {CaseProgressStatus} from "@/types/casestatus";
+import { CaseProgressStatus } from "@/types/casestatus";
 const Flasher = flasher;
 Flasher.addTheme("flasher", {
     render: function (envelope) {
@@ -75,9 +75,7 @@ export const tooltip = (message: string, className: string = "ml-5") => {
     };
 };
 
-
-export const progressCasesColor = (status: CaseProgressStatus)  => {
-
+export const progressCasesColor = (status: CaseProgressStatus) => {
     switch (status) {
         case CaseProgressStatus.FORWARDED:
             return "bg-blue-500";

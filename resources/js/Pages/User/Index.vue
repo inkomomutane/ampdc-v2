@@ -16,9 +16,9 @@ const props = defineProps({
         type: Object as PropType<Users>,
         required: true,
     },
-    organizations : {
-        type : Array<OrganizationData>,
-        required:true
+    organizations: {
+        type: Array<OrganizationData>,
+        required: true,
     },
     search: String,
     messages: Object as PropType<FlasherResponse>,

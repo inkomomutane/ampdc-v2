@@ -1,4 +1,3 @@
-
 export enum CaseProgressStatus {
     "REPORTED" = "Reportado",
     "FORWARDED" = "Encaminhado",
@@ -25,18 +24,16 @@ export enum PeriodOfViolenceAct {
     "NIGHT" = "Noite",
 }
 export interface KeyPair {
-    key: string,
-    value: string
+    key: string;
+    value: string;
 }
 
 export function getArrayFromEnum(enumObject: any) {
-
-    return Object.keys(enumObject).map(e => {
-        let f : KeyPair = {
+    return Object.keys(enumObject).map((e) => {
+        let f: KeyPair = {
             key: enumObject[e],
-            value: enumObject[e]
+            value: enumObject[e],
         };
         return f;
-        }
-    )
+    });
 }

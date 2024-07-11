@@ -2,21 +2,21 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import InputError from "@components/InputError.vue";
-import {PropType, watch} from "vue";
-import {FlasherResponse} from "@flasher/flasher";
+import { PropType, watch } from "vue";
+import { FlasherResponse } from "@flasher/flasher";
 import Flasher from "@/helprs";
 import NeighborhoodData = App.Data.NeighborhoodData;
 import ViolenceTypeData = App.Data.ViolenceTypeData;
 import OrganizationData = App.Data.OrganizationData;
 
 const props = defineProps({
-   neighborhoods: {
-       type: Array<App.Data.NeighborhoodData>,
-       required: true,
-   },
+    neighborhoods: {
+        type: Array<App.Data.NeighborhoodData>,
+        required: true,
+    },
     violenceTypes: {
-         type: Array<App.Data.ViolenceTypeData>,
-         required: true,
+        type: Array<App.Data.ViolenceTypeData>,
+        required: true,
     },
     organizations: {
         type: Array<App.Data.OrganizationData>,
@@ -55,8 +55,6 @@ watch(
 const onCliqueRequiredForwards = () => {
     form.requires_forwards = !form.requires_forwards;
 };
-
-
 
 const registerCase = () => {
     form.post(route("victim.register.case"), {
@@ -257,5 +255,3 @@ const registerCase = () => {
         </template>
     </AuthenticatedLayout>
 </template>
-
-

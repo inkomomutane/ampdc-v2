@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head, Link, useForm} from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import InputError from "@components/InputError.vue";
-import {PropType, watch} from "vue";
-import {FlasherResponse} from "@flasher/flasher";
-import Flasher, {progressCasesColor} from "@/helprs";
+import { PropType, watch } from "vue";
+import { FlasherResponse } from "@flasher/flasher";
+import Flasher, { progressCasesColor } from "@/helprs";
 import NeighborhoodData = App.Data.NeighborhoodData;
 import ViolenceTypeData = App.Data.ViolenceTypeData;
 
 const props = defineProps({
-   neighborhoods: {
-       type: Array<App.Data.NeighborhoodData>,
-       required: true,
-   },
+    neighborhoods: {
+        type: Array<App.Data.NeighborhoodData>,
+        required: true,
+    },
     violenceTypes: {
-         type: Array<App.Data.ViolenceTypeData>,
-         required: true,
+        type: Array<App.Data.ViolenceTypeData>,
+        required: true,
     },
     organizations: {
         type: Array<App.Data.OrganizationData>,
@@ -70,7 +70,8 @@ watch(
                         <h1
                             class="text-xl font-semibold text-gray-900 dark:text-white"
                         >
-                            Dados do caso : <strong>{{ props.victimCase.caseCode }}</strong>
+                            Dados do caso :
+                            <strong>{{ props.victimCase.caseCode }}</strong>
                         </h1>
                         <p class="text-sm text-gray-900 dark:text-white">
                             Dados da vítima e detalhes do processo do caso
@@ -181,7 +182,7 @@ watch(
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Organização encarregada
+                                >Organização encarregada
                             </label>
                             <input
                                 id="name"
@@ -199,7 +200,7 @@ watch(
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="age"
-                            >Estado do caso</label
+                                >Estado do caso</label
                             >
                             <input
                                 id="age"
@@ -207,8 +208,12 @@ watch(
                                 :value="props.victimCase.progressStatus"
                                 name="age"
                                 :disabled="true"
-                                class="disabled  text-sm   block w-full p-2.5 border-none text-white  font-semibold "
-                               :class="progressCasesColor(props.victimCase.progressStatus)"
+                                class="disabled text-sm block w-full p-2.5 border-none text-white font-semibold"
+                                :class="
+                                    progressCasesColor(
+                                        props.victimCase.progressStatus,
+                                    )
+                                "
                                 placeholder="Idade"
                                 type="text"
                             />
@@ -241,5 +246,3 @@ watch(
         </template>
     </AuthenticatedLayout>
 </template>
-
-

@@ -68,13 +68,17 @@ const createViolenceIncidentLocation = () => {
                 >
                     Editar local de violência
                 </h3>
-                <form class="space-y-6" @submit.prevent="createViolenceIncidentLocation">
+                <form
+                    class="space-y-6"
+                    @submit.prevent="createViolenceIncidentLocation"
+                >
                     <div class="grid grid-cols-1 gap-2">
                         <div>
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                                > Local de violência</label
+                            >
+                                Local de violência</label
                             >
                             <input
                                 id="name"

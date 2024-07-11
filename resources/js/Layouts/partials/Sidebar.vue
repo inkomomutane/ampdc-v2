@@ -122,12 +122,24 @@ const inactiveClass = ref(
                     <span class="mx-4 font-medium text-sm">Casos</span>
                 </Link>
                 <Link
-                     v-if="route().current('victim.case.edit') ||route().current('victim.case.info') "
+                    v-if="
+                        route().current('victim.case.edit') ||
+                        route().current('victim.case.info')
+                    "
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
                     href=""
                     :class="activeClass"
                 >
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" fill="currentColor"><path d="M1280 1056c0 53-43 96-96 96-32 0-62-16-80-43L877 768h-45v132l247 411c6 10 9 21 9 33 0 35-29 64-64 64H832v272c0 62-50 112-112 112H560c-61 0-112-50-112-112v-272H256c-35 0-64-29-64-64 0-12 3-23 9-33l247-411V768h-45l-227 341c-18 27-48 43-80 43-53 0-96-43-96-96 0-19 6-38 16-53l256-384c40-59 102-107 176-107h384c74 0 136 48 176 107l256 384c10 15 16 34 16 53zM864 256c0 124-100 224-224 224S416 380 416 256 516 32 640 32s224 100 224 224z"></path></svg>
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 1792 1792"
+                        fill="currentColor"
+                    >
+                        <path
+                            d="M1280 1056c0 53-43 96-96 96-32 0-62-16-80-43L877 768h-45v132l247 411c6 10 9 21 9 33 0 35-29 64-64 64H832v272c0 62-50 112-112 112H560c-61 0-112-50-112-112v-272H256c-35 0-64-29-64-64 0-12 3-23 9-33l247-411V768h-45l-227 341c-18 27-48 43-80 43-53 0-96-43-96-96 0-19 6-38 16-53l256-384c40-59 102-107 176-107h384c74 0 136 48 176 107l256 384c10 15 16 34 16 53zM864 256c0 124-100 224-224 224S416 380 416 256 516 32 640 32s224 100 224 224z"
+                        ></path>
+                    </svg>
                     <span class="mx-4 font-medium text-sm">Caso</span>
                 </Link>
 
@@ -162,9 +174,7 @@ const inactiveClass = ref(
                             opacity=".4"
                         ></path>
                     </svg>
-                    <span class="mx-4 font-medium text-sm"
-                        >Encaminhamento</span
-                    >
+                    <span class="mx-4 font-medium text-sm">Encaminhamento</span>
                 </Link>
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
@@ -197,7 +207,6 @@ const inactiveClass = ref(
                     <span class="mx-4 font-medium text-sm">Recebidos</span>
                 </Link>
 
-
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
                     :class="[
@@ -207,11 +216,31 @@ const inactiveClass = ref(
                     ]"
                     :href="route('perpetrator.list')"
                 >
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor"><defs></defs><title>person</title><path d="M18,30H14a2,2,0,0,1-2-2V21a2,2,0,0,1-2-2V13a3,3,0,0,1,3-3h6a3,3,0,0,1,3,3v6a2,2,0,0,1-2,2v7A2,2,0,0,1,18,30ZM13,12a.94.94,0,0,0-1,1v6h2v9h4V19h2V13a.94.94,0,0,0-1-1Z"></path><path d="M16,9a4,4,0,1,1,4-4h0A4,4,0,0,1,16,9Zm0-6a2,2,0,1,0,2,2h0a2,2,0,0,0-2-2Z"></path><rect id="_Transparent_Rectangle_" data-name="<Transparent Rectangle>" class="cls-1" width="32" height="32" style="fill:none"></rect></svg>
-
-                    <span class="mx-4 font-medium text-sm"
-                        >Perpetradores</span
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 32 32"
+                        fill="currentColor"
                     >
+                        <defs></defs>
+                        <title>person</title>
+                        <path
+                            d="M18,30H14a2,2,0,0,1-2-2V21a2,2,0,0,1-2-2V13a3,3,0,0,1,3-3h6a3,3,0,0,1,3,3v6a2,2,0,0,1-2,2v7A2,2,0,0,1,18,30ZM13,12a.94.94,0,0,0-1,1v6h2v9h4V19h2V13a.94.94,0,0,0-1-1Z"
+                        ></path>
+                        <path
+                            d="M16,9a4,4,0,1,1,4-4h0A4,4,0,0,1,16,9Zm0-6a2,2,0,1,0,2,2h0a2,2,0,0,0-2-2Z"
+                        ></path>
+                        <rect
+                            id="_Transparent_Rectangle_"
+                            data-name="<Transparent Rectangle>"
+                            class="cls-1"
+                            width="32"
+                            height="32"
+                            style="fill: none"
+                        ></rect>
+                    </svg>
+
+                    <span class="mx-4 font-medium text-sm">Perpetradores</span>
                 </Link>
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
@@ -222,9 +251,19 @@ const inactiveClass = ref(
                     ]"
                     :href="route('supposedReasonOfViolence.list')"
                 >
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12,11a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0V12A1,1,0,0,0,12,11Zm0-3a1,1,0,1,0,1,1A1,1,0,0,0,12,8Zm0-6A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.33l-2,2a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,22h9A10,10,0,0,0,12,2Zm0,18H5.41l.93-.93a1,1,0,0,0,.3-.71,1,1,0,0,0-.3-.7A8,8,0,1,1,12,20Z"></path></svg>
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="none"
+                    >
+                        <path
+                            d="M12,11a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0V12A1,1,0,0,0,12,11Zm0-3a1,1,0,1,0,1,1A1,1,0,0,0,12,8Zm0-6A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.33l-2,2a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,22h9A10,10,0,0,0,12,2Zm0,18H5.41l.93-.93a1,1,0,0,0,.3-.71,1,1,0,0,0-.3-.7A8,8,0,1,1,12,20Z"
+                        ></path>
+                    </svg>
                     <span class="mx-4 font-medium text-sm"
-                    >Motivos de violência</span
+                        >Motivos de violência</span
                     >
                 </Link>
                 <Link
@@ -236,10 +275,25 @@ const inactiveClass = ref(
                     ]"
                     :href="route('violenceIncidentLocation.list')"
                 >
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M18.5 10.2c0 2.57-2.1 5.79-6.16 9.51l-.34.3-.34-.31C7.6 15.99 5.5 12.77 5.5 10.2c0-3.84 2.82-6.7 6.5-6.7s6.5 2.85 6.5 6.7z" fill-opacity=".3"></path><path d="M12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2zm6 8.2C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"></path></svg>
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        enable-background="new 0 0 24 24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                    >
+                        <path d="M0 0h24v24H0V0z" fill="none"></path>
+                        <path
+                            d="M18.5 10.2c0 2.57-2.1 5.79-6.16 9.51l-.34.3-.34-.31C7.6 15.99 5.5 12.77 5.5 10.2c0-3.84 2.82-6.7 6.5-6.7s6.5 2.85 6.5 6.7z"
+                            fill-opacity=".3"
+                        ></path>
+                        <path
+                            d="M12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2zm6 8.2C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
+                        ></path>
+                    </svg>
 
                     <span class="mx-4 font-medium text-sm"
-                    >Locais de violência</span
+                        >Locais de violência</span
                     >
                 </Link>
 
@@ -265,7 +319,7 @@ const inactiveClass = ref(
                     </svg>
 
                     <span class="mx-4 font-medium text-sm"
-                    >Tipos de violência</span
+                        >Tipos de violência</span
                     >
                 </Link>
 

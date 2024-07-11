@@ -2,19 +2,25 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import InputError from "@components/InputError.vue";
-import {PropType, watch} from "vue";
-import {FlasherResponse} from "@flasher/flasher";
+import { PropType, watch } from "vue";
+import { FlasherResponse } from "@flasher/flasher";
 import Flasher from "@/helprs";
 import NeighborhoodData = App.Data.NeighborhoodData;
 import ViolenceTypeData = App.Data.ViolenceTypeData;
 import OrganizationData = App.Data.OrganizationData;
-import {CivilState, Gender, getArrayFromEnum, KeyPair, PeriodOfViolenceAct} from "@/types/casestatus";
+import {
+    CivilState,
+    Gender,
+    getArrayFromEnum,
+    KeyPair,
+    PeriodOfViolenceAct,
+} from "@/types/casestatus";
 
 const props = defineProps({
-   neighborhoods: {
-       type: Array<App.Data.NeighborhoodData>,
-       required: true,
-   },
+    neighborhoods: {
+        type: Array<App.Data.NeighborhoodData>,
+        required: true,
+    },
     perpetratorTypes: {
         type: Array<App.Data.BaseDataClass>,
         required: true,
@@ -28,8 +34,8 @@ const props = defineProps({
         required: true,
     },
     violenceTypes: {
-         type: Array<App.Data.ViolenceTypeData>,
-         required: true,
+        type: Array<App.Data.ViolenceTypeData>,
+        required: true,
     },
     organizations: {
         type: Array<App.Data.OrganizationData>,
@@ -54,14 +60,13 @@ const form = useForm({
     contact: "",
     requires_forwards: false,
     violence_type_id: null,
-    perpetrator_id:null,
+    perpetrator_id: null,
     period_of_violence_act: null,
     violence_incident_location_id: null,
     supposed_reason_of_violence_id: null,
     violence_details: "",
     forward_to_organization: null,
-    is_violence_caused_death: false
-
+    is_violence_caused_death: false,
 });
 
 watch(
@@ -152,28 +157,30 @@ const registerCase = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="gender"
-                                >Gênero</label
+                                    >Gênero</label
                                 >
                                 <v-select
                                     v-model="form.gender"
                                     placeholder="Gênero"
-                                    :get-option-label="(option: KeyPair) => option.value"
+                                    :get-option-label="
+                                        (option: KeyPair) => option.value
+                                    "
                                     :reduce="(unit: KeyPair) => unit.key"
                                     :options="genderOptions"
                                 ></v-select>
-                                <InputError
-                                    :message="form.errors.gender"
-                                />
+                                <InputError :message="form.errors.gender" />
                             </div>
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="civil_state"
-                                >Estado cívil</label
+                                    >Estado cívil</label
                                 >
                                 <v-select
                                     v-model="form.civil_state"
-                                    :get-option-label="(option: KeyPair) => option.value"
+                                    :get-option-label="
+                                        (option: KeyPair) => option.value
+                                    "
                                     :reduce="(unit: KeyPair) => unit.key"
                                     placeholder="Estado cívil"
                                     :options="civilStateOptions"
@@ -203,16 +210,19 @@ const registerCase = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="neighborhood_id"
-                                >Bairro</label
+                                    >Bairro</label
                                 >
                                 <v-select
                                     v-model="form.neighborhood_id"
                                     :get-option-label="
-                                    (option: NeighborhoodData) => option.name
-                                "
+                                        (option: NeighborhoodData) =>
+                                            option.name
+                                    "
                                     :options="neighborhoods"
                                     placeholder="Bairro"
-                                    :reduce="(unit: NeighborhoodData) => unit.id"
+                                    :reduce="
+                                        (unit: NeighborhoodData) => unit.id
+                                    "
                                     label="neighborhood_id"
                                 ></v-select>
                                 <InputError
@@ -223,16 +233,19 @@ const registerCase = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="violence_type_id"
-                                >Tipo de violência</label
+                                    >Tipo de violência</label
                                 >
                                 <v-select
                                     v-model="form.violence_type_id"
                                     :get-option-label="
-                                    (option: ViolenceTypeData) => option.name
-                                "
+                                        (option: ViolenceTypeData) =>
+                                            option.name
+                                    "
                                     :options="violenceTypes"
                                     placeholder="Tipo de violência"
-                                    :reduce="(unit: ViolenceTypeData) => unit.id"
+                                    :reduce="
+                                        (unit: ViolenceTypeData) => unit.id
+                                    "
                                     label="violence_type_id"
                                 ></v-select>
                                 <InputError
@@ -243,16 +256,20 @@ const registerCase = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="perpetrator_id"
-                                >Perpetrador</label
+                                    >Perpetrador</label
                                 >
                                 <v-select
                                     v-model="form.perpetrator_id"
                                     :get-option-label="
-                                    (option: App.Data.BaseDataClass) => option.name
-                                "
+                                        (option: App.Data.BaseDataClass) =>
+                                            option.name
+                                    "
                                     :options="perpetratorTypes"
                                     placeholder="Perpetrador"
-                                    :reduce="(perpetrator: App.Data.BaseDataClass) => perpetrator.id"
+                                    :reduce="
+                                        (perpetrator: App.Data.BaseDataClass) =>
+                                            perpetrator.id
+                                    "
                                     label="perpetrator_id"
                                 ></v-select>
                                 <InputError
@@ -263,17 +280,21 @@ const registerCase = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="period_of_violence_act"
-                                >Período que ocorreu a violência</label
+                                    >Período que ocorreu a violência</label
                                 >
                                 <v-select
                                     v-model="form.period_of_violence_act"
                                     placeholder="Período que ocorreu a violência"
-                                    :get-option-label="(option: KeyPair) => option.value"
+                                    :get-option-label="
+                                        (option: KeyPair) => option.value
+                                    "
                                     :reduce="(unit: KeyPair) => unit.key"
                                     :options="periodOfViolenceActOptions"
                                 ></v-select>
                                 <InputError
-                                    :message="form.errors.period_of_violence_act"
+                                    :message="
+                                        form.errors.period_of_violence_act
+                                    "
                                 />
                             </div>
                         </div>
@@ -281,40 +302,56 @@ const registerCase = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="violence_incident_location_id"
-                            >Local onde ocorreu a violência</label
+                                >Local onde ocorreu a violência</label
                             >
                             <v-select
                                 v-model="form.violence_incident_location_id"
                                 :get-option-label="
-                                    (violence_incident_location: App.Data.BaseDataClass) => violence_incident_location.name
+                                    (
+                                        violence_incident_location: App.Data.BaseDataClass,
+                                    ) => violence_incident_location.name
                                 "
                                 :options="violenceLocations"
                                 placeholder="Local onde ocorreu a violência"
-                                :reduce="(violence_incident_location: App.Data.BaseDataClass) => violence_incident_location.id"
+                                :reduce="
+                                    (
+                                        violence_incident_location: App.Data.BaseDataClass,
+                                    ) => violence_incident_location.id
+                                "
                                 label="violence_incident_location_id"
                             ></v-select>
                             <InputError
-                                :message="form.errors.violence_incident_location_id"
+                                :message="
+                                    form.errors.violence_incident_location_id
+                                "
                             />
                         </div>
                         <div>
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="supposed_reason_of_violence_id"
-                            >Suposto motivo da violência</label
+                                >Suposto motivo da violência</label
                             >
                             <v-select
                                 v-model="form.supposed_reason_of_violence_id"
                                 :get-option-label="
-                                    (violence_incident_location: App.Data.BaseDataClass) => violence_incident_location.name
+                                    (
+                                        violence_incident_location: App.Data.BaseDataClass,
+                                    ) => violence_incident_location.name
                                 "
                                 :options="supposedReasonsOfViolence"
                                 placeholder="Suposto motivo da violência"
-                                :reduce="(supposed_reason_of_violence: App.Data.BaseDataClass) => supposed_reason_of_violence.id"
+                                :reduce="
+                                    (
+                                        supposed_reason_of_violence: App.Data.BaseDataClass,
+                                    ) => supposed_reason_of_violence.id
+                                "
                                 label="violence_incident_location_id"
                             ></v-select>
                             <InputError
-                                :message="form.errors.supposed_reason_of_violence_id"
+                                :message="
+                                    form.errors.supposed_reason_of_violence_id
+                                "
                             />
                         </div>
                         <div class="col-span-2">
@@ -351,7 +388,7 @@ const registerCase = () => {
                             />
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
-                            >A violência resultou em morte?</label
+                                >A violência resultou em morte?</label
                             >
                             <InputError
                                 :message="form.errors.is_violence_caused_death"
@@ -411,5 +448,3 @@ const registerCase = () => {
         </template>
     </AuthenticatedLayout>
 </template>
-
-

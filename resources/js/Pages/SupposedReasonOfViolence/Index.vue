@@ -22,10 +22,12 @@ const props = defineProps({
 const links = ref(props.supposedReasonOfViolences.links);
 
 const editingSupposedReasonOfViolenceTrigger = ref(false);
-const editingSupposedReasonOfViolence = ref<App.Data.SupposedReasonOfViolenceData | null>(null);
+const editingSupposedReasonOfViolence =
+    ref<App.Data.SupposedReasonOfViolenceData | null>(null);
 
 const deletingSupposedReasonOfViolenceTrigger = ref(false);
-const deletingSupposedReasonOfViolence = ref<App.Data.SupposedReasonOfViolenceData | null>(null);
+const deletingSupposedReasonOfViolence =
+    ref<App.Data.SupposedReasonOfViolenceData | null>(null);
 
 const searchTerm = ref("");
 
@@ -65,7 +67,9 @@ watch(searchTerm, (value) => {
     );
 });
 
-function openEditSupposedReasonOfViolenceModal(supposedReasonOfViolence: App.Data.SupposedReasonOfViolenceData) {
+function openEditSupposedReasonOfViolenceModal(
+    supposedReasonOfViolence: App.Data.SupposedReasonOfViolenceData,
+) {
     editingSupposedReasonOfViolence.value = supposedReasonOfViolence;
     editingSupposedReasonOfViolenceTrigger.value = true;
 }
@@ -75,7 +79,9 @@ function closeEditSupposedReasonOfViolenceModal() {
     editingSupposedReasonOfViolenceTrigger.value = false;
 }
 
-function openDeleteSupposedReasonOfViolenceModal(supposedReasonOfViolence: App.Data.SupposedReasonOfViolenceData) {
+function openDeleteSupposedReasonOfViolenceModal(
+    supposedReasonOfViolence: App.Data.SupposedReasonOfViolenceData,
+) {
     deletingSupposedReasonOfViolence.value = supposedReasonOfViolence;
     deletingSupposedReasonOfViolenceTrigger.value = true;
 }
@@ -166,7 +172,9 @@ function closeDeleteSupposedReasonOfViolenceModal() {
                             <tbody>
                                 <tr
                                     v-for="supposedReasonOfViolence in supposedReasonOfViolences.data"
-                                    :key="supposedReasonOfViolence.id ?? undefined"
+                                    :key="
+                                        supposedReasonOfViolence.id ?? undefined
+                                    "
                                     class="border-b dark:border-gray-700"
                                 >
                                     <th
@@ -176,7 +184,11 @@ function closeDeleteSupposedReasonOfViolenceModal() {
                                         <span
                                             class="rounded-full bg-slate-50 text-black text-center"
                                         >
-                                            {{ supposedReasonOfViolence.name?.charAt(0) }}
+                                            {{
+                                                supposedReasonOfViolence.name?.charAt(
+                                                    0,
+                                                )
+                                            }}
                                         </span>
                                     </th>
 
@@ -269,9 +281,9 @@ function closeDeleteSupposedReasonOfViolenceModal() {
                             <span
                                 class="font-semibold text-gray-900 dark:text-white"
                                 >{{
-                                    `${supposedReasonOfViolences.meta.from ?? 0}-${
-                                        supposedReasonOfViolences.meta.to ?? 0
-                                    }`
+                                    `${
+                                        supposedReasonOfViolences.meta.from ?? 0
+                                    }-${supposedReasonOfViolences.meta.to ?? 0}`
                                 }}</span
                             >
                             of

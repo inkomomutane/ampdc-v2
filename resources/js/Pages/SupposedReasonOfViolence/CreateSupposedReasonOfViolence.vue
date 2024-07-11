@@ -67,7 +67,10 @@ const createSupposedReasonOfViolence = () => {
         <span class="mx-4">Adicionar motivo de violência</span>
     </button>
 
-    <Modal :show="addSupposedReasonOfViolence" @close="closeCreateSupposedReasonOfViolenceModal">
+    <Modal
+        :show="addSupposedReasonOfViolence"
+        @close="closeCreateSupposedReasonOfViolenceModal"
+    >
         <div class="relative bg-white rounded shadow dark:bg-gray-700">
             <button
                 class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
@@ -95,13 +98,17 @@ const createSupposedReasonOfViolence = () => {
                 >
                     Adicionar motivo de violência
                 </h3>
-                <form class="space-y-6" @submit.prevent="createSupposedReasonOfViolence">
+                <form
+                    class="space-y-6"
+                    @submit.prevent="createSupposedReasonOfViolence"
+                >
                     <div class="grid grid-cols-1 gap-2">
                         <div>
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                                >  Adicionar motivo de violência
+                            >
+                                Adicionar motivo de violência
                             </label>
                             <input
                                 id="name"

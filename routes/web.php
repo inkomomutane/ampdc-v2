@@ -67,7 +67,20 @@ Auth::routes([
     'verify' => false, // Email Verification Routes...
 ]);
 
-Route::get('/', static fn() => redirect()->route('victim.register') );
+Route::get('/', static fn() => view('Website.Pages.welcome'))->name('welcome');
+
+Route::get('/about',static fn() => 'about')->name('about.us');
+//news
+Route::get('/news',static fn() => 'news')->name('news');
+//news.page
+Route::get('/news/{news}',static fn() => 'news')->name('news.page');
+//events
+Route::get('/events',static fn() => 'events')->name('events');
+//contact
+Route::get('/contact',static fn() => 'contact')->name('contact');
+
+
+
 
 Route::get('/dashboard', static function () {
     return Inertia::render('Register',[

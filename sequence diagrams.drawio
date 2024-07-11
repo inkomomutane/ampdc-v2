@@ -1,0 +1,33 @@
+<mxfile host="drawio-plugin" modified="2024-07-09T17:53:39.996Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="7q2YQDAatNiimcG72gOz" version="22.1.22" type="embed">
+  <diagram name="Sequence diagrams" id="G6Qgu8tCdBAraK7SaGFH">
+    <mxGraphModel dx="839" dy="729" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="15" value="" style="rounded=0;dashed=0;container=0;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry x="170" y="90" width="670" height="580" as="geometry" />
+        </mxCell>
+        <mxCell id="16" value="LifeLine1" style="rounded=0;dashed=0;whiteSpace=wrap;html=1;" vertex="1" parent="15">
+          <mxGeometry x="30" y="10" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="17" value="" style="rounded=0;dashed=0;" vertex="1" parent="15">
+          <mxGeometry x="75" y="60" width="10" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="18" value="" style="html=1;verticalAlign=bottom;startArrow=none;endArrow=none;dashed=1;rounded=0;" edge="1" parent="15" source="17" target="16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="19" value="" style="html=1;verticalAlign=bottom;startArrow=none;endArrow=none;dashed=1;rounded=0;" edge="1" parent="15" target="17">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="150" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20" value="" style="html=1;verticalAlign=bottom;startArrow=none;endArrow=open;endFill=0;rounded=0;" edge="1" parent="15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="60" as="sourcePoint" />
+            <mxPoint x="75" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

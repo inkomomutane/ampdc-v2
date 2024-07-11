@@ -1,0 +1,14 @@
+{
+    "plugins": ["prettier-plugin-blade"],
+    "overrides": [
+        {
+            "files": [
+                "*.blade.php",
+                "\"resources/js/**/*.{js,jsx,ts,tsx,vue}\","
+            ],
+            "options": {
+                "parser": "blade"
+            }
+        }
+    ]
+}
