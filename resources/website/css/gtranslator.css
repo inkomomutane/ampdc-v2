@@ -1,0 +1,20 @@
+#google_translate_element {
+    width: 120px;
+    display: flex;
+    border: none;
+}
+
+#google_translate_element > div {
+    display: flex !important;
+}
+
+#google_translate_element div div {
+    display: flex;
+    border: none !important;
+}
+
+#google_translate_element div div span a {
+    display: flex;
+    --tw-text-opacity: 1 !important;
+    color: rgb(75 85 99 / var(--tw-text-opacity)) !important;
+}

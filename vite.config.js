@@ -8,6 +8,8 @@ export default defineConfig({
             input: [
                 "resources/js/app.ts",
                 "resources/website/js/app.js",
+                "resources/js/splide.ts",
+                "resources/website/css/gtranslator.css",
                 "resources/website/css/app.css",
             ],
             refresh: true,
