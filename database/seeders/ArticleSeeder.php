@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
-use App\Models\ArticleSection;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Random\RandomException;
 
@@ -19,8 +17,8 @@ class ArticleSeeder extends Seeder
         try {
             \DB::beginTransaction();
             Article::factory()
-                ->count(10)
-                ->hasSections(random_int(1, 5),
+                ->count(12)
+                ->hasSections(random_int(4, 9),
                     fn (array $attributes, Article $article) => ['article_id' => $article->id]
                 )
                 ->create();

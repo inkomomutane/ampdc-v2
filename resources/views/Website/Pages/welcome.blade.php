@@ -285,28 +285,31 @@
                     <ul class="splide__list">
                         @foreach ($articles as $article)
                             <li class="splide__slide py-12">
-                                <a href="">
+                                <a
+                                    href="{{ route("news.page", ["article" => $article->slug]) }}"
+                                >
                                     <article
                                         class="group bg-white flex flex-col justify-start rounded-t"
                                         data-aos="fade-up"
                                     >
-                                        {{ $article->cover->img()->attributes(['class' => '!max-h-[12rem] object-cover mb-2 rounded-t'])  }}
+                                        {{ $article->cover->img()->attributes(["class" => "!max-h-[12rem] object-cover mb-2 rounded-t"]) }}
 
                                         <header class="text-gray-600 px-4">
                                             <div
                                                 class="text-xs font-bold text-white capitalize bg-red-500 p-1 px-2 mb-2 w-fit"
                                             >
-                                                {{ $article->posted_at->format("d M, Y")}}
+                                                {{ $article->posted_at->format("d M, Y") }}
                                             </div>
                                             <h2
                                                 class="line-clamp-1 text-red-600 text-sm font-bold tracking-wide"
                                             >
-                                                {{ $article->title  }}
+                                                {{ $article->title }}
                                             </h2>
                                         </header>
                                         <p
                                             class="line-clamp-3 my-2 text-sm px-4"
-                                        >{{ $article->content  }}
+                                        >
+                                            {{ $article->content }}
                                         </p>
                                         <span
                                             class="group-hover:text-primary-500 inline-flex self-start items-center justify-center font-bold text-center text-xs p-4 right-0"
@@ -359,5 +362,5 @@
 @endsection
 
 @push("scripts")
-
+    
 @endpush

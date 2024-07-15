@@ -30,7 +30,7 @@ class ArticleFactory extends Factory
     public function configure():static
     {
         return $this->afterCreating(function (Article $article) {
-            $article->addMediaFromUrl(config('app.url').'/img.png')
+            $article->addMediaFromUrl(config('app.url').'/img.jpg')
                 ->toMediaCollection('covers');
         });
     }

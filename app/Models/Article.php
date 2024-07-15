@@ -30,7 +30,17 @@ class Article extends Model implements HasMedia
         'status',
     ];
 
-    protected $with = ['media'];
+
+    public static function boot():void {
+        parent::boot();
+        static::deleting(function (Article $model) {
+            foreach($model->sections ?: [] as $section) {
+                $section->delete();
+            }
+        });
+}
+
+    protected $with = ['media','sections'];
 
     public  string $dataClass = ArticleData::class;
 

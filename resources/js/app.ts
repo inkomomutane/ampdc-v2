@@ -9,6 +9,7 @@ import VueSelect from "vs-vue3-select";
 import VueApexCharts from "vue3-apexcharts";
 import "vs-vue3-select/dist/vs-vue3-select.css";
 import "@/components/select/select.css";
+import "quill/dist/quill.core.css";
 
 import.meta.glob(["../images/**", "../fonts/**"]);
 const appName = import.meta.env.VITE_APP_NAME || "Donations";

@@ -1,7 +1,8 @@
 <?php
 
 
-
+use App\Data\OrganizationData;
+use App\Http\Controllers\Article\StoreArticleController;
 use App\Http\Controllers\District\CreateDistrict;
 use App\Http\Controllers\District\DeleteDistrict;
 use App\Http\Controllers\District\GetDistricts;
@@ -48,6 +49,9 @@ use App\Http\Controllers\ViolenceType\DeleteViolenceTypeController;
 use App\Http\Controllers\ViolenceType\ListViolenceTypesController;
 use App\Http\Controllers\ViolenceType\StoreViolenceTypeController;
 use App\Http\Controllers\ViolenceType\UpdateViolenceTypeController;
+use App\Models\Neighborhood;
+use App\Models\Perpetrator;
+use App\Models\ViolenceType;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -67,33 +71,16 @@ Auth::routes([
     'verify' => false, // Email Verification Routes...
 ]);
 
-Route::get('/', static fn() => view('Website.Pages.welcome',[
-    'articles' => \App\Models\Article::orderByDesc('posted_at')->limit(6)->get(),
-]))->name('welcome');
 
-Route::get('/about',static fn() => 'about')->name('about.us');
-//news
-Route::get('/news',static fn() => view('Website.Pages.news',[
-    'article' => \App\Models\Article::latest('posted_at')->first(),
-    'articles' => \App\Models\Article::whereNot('id',\App\Models\Article::latest('posted_at')->first()?->id)->orderByDesc('posted_at')->paginate(6),
-]))->name('news');
-//news.page
-Route::get('/news/{news}',static fn() => 'news')->name('news.page');
-//events
-Route::get('/events',static fn() => 'events')->name('events');
-//contact
-Route::get('/contact',static fn() => view('Website.Pages.contact'))->name('contact');
-Route::post('/contact',static fn() => 'contact')->name('contact.message');
-
-
+include 'website.php';
 
 
 Route::get('/dashboard', static function () {
     return Inertia::render('Register',[
-        'organizations' => \App\Data\OrganizationData::collection(\App\Models\Organization::whereNot('id',organization()->id)->get()),
-        'violenceTypes' => \App\Data\ViolenceTypeData::collection(\App\Models\ViolenceType::all()),
-        'neighborhoods' => \App\Data\NeighborhoodData::collection(\App\Models\Neighborhood::all()),
-        'perpetratorTypes' => \App\Data\BaseDataClass::collection(\App\Models\Perpetrator::all()),
+        'organizations' => OrganizationData::collection(\App\Models\Organization::whereNot('id',organization()->id)->get()),
+        'violenceTypes' => \App\Data\ViolenceTypeData::collection(ViolenceType::all()),
+        'neighborhoods' => \App\Data\NeighborhoodData::collection(Neighborhood::all()),
+        'perpetratorTypes' => \App\Data\BaseDataClass::collection(Perpetrator::all()),
         'violenceLocations' => \App\Data\BaseDataClass::collection(\App\Models\ViolenceIncidentLocation::all()),
         'supposedReasonsOfViolence' => \App\Data\BaseDataClass::collection(\App\Models\SupposedReasonOfViolence::all()),
     ]);
@@ -179,6 +166,11 @@ Route::middleware('auth')->group(function () {
     #--- Reports ---#
 
     Route::get('/dashboard/reports', ReportsController::class)->name('dashboard.reports');
+
+
+    #--- articles ---#
+
+    Route::post('store/article',StoreArticleController::class)->name('article.store');
 
 });
 

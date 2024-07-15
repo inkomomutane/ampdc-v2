@@ -83,7 +83,7 @@
                 </li>
                 <li>
                     <a
-                        href=""
+                        href="{{ route('about.us') }}"
                         class="block py-2 pl-3 pr-4 @if (request()->routeIs("about.us"))
                             text-white
                             bg-red-700
@@ -107,10 +107,11 @@
                         Sobre-nós
                     </a>
                 </li>
+
                 <li>
                     <a
-                        href="{{ request()->routeIs("news.page") ? "" : route("news") }}"
-                        class="block py-2 pl-3 pr-4 @if (request()->routeIs("news") || request()->routeIs("news.page"))
+                        href="{{ route("news") }}"
+                        class="block py-2 pl-3 pr-4 @if (request()->routeIs("news") )
                             text-white
                             bg-red-700
                             md:bg-transparent
@@ -133,10 +134,38 @@
                         Actividades
                     </a>
                 </li>
+                @if( request()->routeIs("news.page") )
                 <li>
                     <a
-                        href="{{ request()->routeIs("news.page") ? "" : route("news") }}"
-                        class="block py-2 pl-3 pr-4 @if (request()->routeIs("news") || request()->routeIs("news.page"))
+                        href=""
+                        class="block py-2 pl-3 pr-4 @if (request()->routeIs("news.page") )
+                            text-white
+                            bg-red-700
+                            md:bg-transparent
+                            md:text-red-700
+                            md:p-0
+                        @else
+                            text-gray-600
+                            hover:bg-red-50
+                            md:hover:bg-transparent
+                            md:hover:text-red-700
+                            md:p-0
+                            md:dark:hover:text-red-500
+                            dark:text-white
+                            dark:hover:bg-gray-700
+                            dark:hover:text-white
+                            md:dark:hover:bg-transparent
+                            dark:border-gray-700
+                        @endif"
+                    >
+                        Post
+                    </a>
+                </li>
+                @endif
+                <li>
+                    <a
+                        href="{{ route("reports") }}"
+                        class="block py-2 pl-3 pr-4 @if (request()->routeIs("reports"))
                             text-white
                             bg-red-700
                             md:bg-transparent

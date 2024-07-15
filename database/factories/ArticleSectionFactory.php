@@ -5,10 +5,9 @@ namespace Database\Factories;
 use App\Models\Article;
 use App\Models\ArticleSection;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ArticleSection>
+ * @extends Factory<ArticleSection>
  */
 class ArticleSectionFactory extends Factory
 {
@@ -29,7 +28,7 @@ class ArticleSectionFactory extends Factory
     public function configure():static
     {
         return $this->afterCreating(function (ArticleSection $articleSection) {
-            $articleSection->addMediaFromUrl(config('app.url').'/img.png')
+            $articleSection->addMediaFromUrl(config('app.url').'/img.jpg')
                 ->toMediaCollection('covers');
         });
     }

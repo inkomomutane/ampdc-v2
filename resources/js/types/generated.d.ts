@@ -1,4 +1,17 @@
 declare namespace App.Data {
+    export type ArticleData = {
+        id: string | null;
+        title: string | null;
+        content: string | null;
+        cover: App.Data.MediaData | null;
+        sections: Array<any> | null;
+    };
+    export type ArticleSectionData = {
+        id: string | null;
+        title: string | null;
+        content: string | null;
+        cover: App.Data.MediaData | null;
+    };
     export type BaseDataClass = {
         id: string | null;
         name: string | null;
@@ -7,6 +20,22 @@ declare namespace App.Data {
         id: string | null;
         name: string | null;
         province: any | App.Data.ProvinceData | null;
+    };
+    export type MediaData = {
+        id: number | null;
+        file_name: string | null;
+        name: string | null;
+        mime_type: string | null;
+        original_url: string | null;
+        preview_url: string | null;
+        size: number | null;
+        custom_properties: Array<any> | null;
+        responsive_images: App.Data.ResponsiveImageData | Array<any> | null;
+        srcset: string | null;
+    };
+    export type MediaLibraryOriginalData = {
+        base64svg: string | null;
+        urls: Array<any> | null;
     };
     export type NeighborhoodData = {
         id: string | null;
@@ -25,6 +54,9 @@ declare namespace App.Data {
     export type ProvinceData = {
         id: string | null;
         name: string | null;
+    };
+    export type ResponsiveImageData = {
+        media_library_original: App.Data.MediaLibraryOriginalData | null;
     };
     export type RoleData = {
         id: string | null;
@@ -60,7 +92,7 @@ declare namespace App.Data {
         forwardedToOrganization: App.Data.OrganizationData | any;
         forwardedFromOrganization: App.Data.OrganizationData | any;
         isTerminated: boolean;
-        conclusion: string;
+        conclusion: string | null;
         caseRegisteredBy: App.Data.UserData | any;
         caseUpdatedBy: App.Data.UserData | any;
     };

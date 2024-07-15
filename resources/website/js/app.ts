@@ -138,9 +138,9 @@ window.addEventListener("load", () => {
             },
         },
     };
-   if (document.querySelector("#chart") !== null) {
-       let chart = new ApexCharts(document.querySelector("#chart"), options);
-       chart.render();
+    if (document.querySelector("#chart") !== null) {
+        let chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
     }
 
     radialBar("#radial");
