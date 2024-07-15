@@ -283,56 +283,30 @@
             <div class="splide" id="news">
                 <div class="splide__track">
                     <ul class="splide__list">
-                        @for ($i = 0; $i < 3; $i++)
+                        @foreach ($articles as $article)
                             <li class="splide__slide py-12">
                                 <a href="">
                                     <article
                                         class="group bg-white flex flex-col justify-start rounded-t"
                                         data-aos="fade-up"
                                     >
-                                        <img
-                                            class="!max-h-[12rem] object-cover mb-2 rounded-t"
-                                            src="{{ Vite::asset("resources/website/images/news1.jpg") }} "
-                                            alt="mockup"
-                                        />
+                                        {{ $article->cover->img()->attributes(['class' => '!max-h-[12rem] object-cover mb-2 rounded-t'])  }}
+
                                         <header class="text-gray-600 px-4">
                                             <div
                                                 class="text-xs font-bold text-white capitalize bg-red-500 p-1 px-2 mb-2 w-fit"
                                             >
-                                                21 Jun, 2024
+                                                {{ $article->posted_at->format("d M, Y")}}
                                             </div>
                                             <h2
-                                                class="line-clamp-2 text-red-600 text-sm font-bold tracking-wide"
+                                                class="line-clamp-1 text-red-600 text-sm font-bold tracking-wide"
                                             >
-                                                Encontro entre Observatório de
-                                                Feminicídio e a presidente da
-                                                Assembleia Provincial
+                                                {{ $article->title  }}
                                             </h2>
                                         </header>
                                         <p
                                             class="line-clamp-3 my-2 text-sm px-4"
-                                        >
-                                            Encontro entre Observatório de
-                                            Feminicídio e a presidente da
-                                            Assembleia Provincial com sua equipe
-                                            jurídica, com objectivo de advogar
-                                            para revisão da lei de VBG para o
-                                            enquadramento do Feminicídio como um
-                                            crime , de primeira a presidente deu
-                                            parabéns pelo inciativa do movimento
-                                            e mostrou total disponibilidade em
-                                            apoiar , recomendando que
-                                            Observatório elaborasse um documento
-                                            com devidas assinaturas requisitando
-                                            a necessidade da revisão da lei
-                                            remeter a assembleia provincial, por
-                                            sua vez ia remeter a assembleia
-                                            nacional e ela com lobby e advocacia
-                                            apoiar na flexibilização de todo
-                                            trâmite para termos a revisão , para
-                                            o observatório é um grande resultado
-                                            e vai dar seguimento pra ter melhor
-                                            resultado.
+                                        >{{ $article->content  }}
                                         </p>
                                         <span
                                             class="group-hover:text-primary-500 inline-flex self-start items-center justify-center font-bold text-center text-xs p-4 right-0"
@@ -354,7 +328,7 @@
                                     </article>
                                 </a>
                             </li>
-                        @endfor
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -385,5 +359,5 @@
 @endsection
 
 @push("scripts")
-    
+
 @endpush

@@ -67,11 +67,16 @@ Auth::routes([
     'verify' => false, // Email Verification Routes...
 ]);
 
-Route::get('/', static fn() => view('Website.Pages.welcome'))->name('welcome');
+Route::get('/', static fn() => view('Website.Pages.welcome',[
+    'articles' => \App\Models\Article::orderByDesc('posted_at')->limit(6)->get(),
+]))->name('welcome');
 
 Route::get('/about',static fn() => 'about')->name('about.us');
 //news
-Route::get('/news',static fn() => view('Website.Pages.news'))->name('news');
+Route::get('/news',static fn() => view('Website.Pages.news',[
+    'article' => \App\Models\Article::latest('posted_at')->first(),
+    'articles' => \App\Models\Article::whereNot('id',\App\Models\Article::latest('posted_at')->first()?->id)->orderByDesc('posted_at')->paginate(6),
+]))->name('news');
 //news.page
 Route::get('/news/{news}',static fn() => 'news')->name('news.page');
 //events

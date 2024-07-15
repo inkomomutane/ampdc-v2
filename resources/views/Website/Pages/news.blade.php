@@ -6,20 +6,19 @@
             <div class="mr-auto place-self-center lg:col-span-6 tracking-tight px-4 md:px-8">
                 <div class="grid sm:grid-cols-1 gap-4 w-full " data-aos="fade-up">
                     <div class="sm:col-span-1  grid w-full h-fit relative">
-                        <a
-                            href="">
-                            <article
-                                class="relative min-h-72 max-h-72 xl:min-h-96 xl:max-h-96 flex  items-end text-white">
-                                <img class="absolute inset-0 w-full h-full object-cover object-top"
-                                     src="{{ Vite::asset("resources/website/images/news1.jpg") }} "
-                                     alt="Observatório">
-                                <div class="absolute   inset-0 bg-gradient-to-t from-black/90 to-black/10"></div>
-                                <div class="relative  p-6 w-full">
-                                    <div class="group flex flex-row justify-start rounded-t w-full
+                        @if($article)
+                            <a
+                                href="">
+                                <article
+                                    class="relative min-h-72 max-h-72 xl:min-h-96 xl:max-h-96 flex  items-end text-white">
+                                    {{ $article->cover->img()->attributes(['class' => 'absolute inset-0 w-full h-full object-cover object-top','alt' => $article->title])  }}
+                                    <div class="absolute   inset-0 bg-gradient-to-t from-black/90 to-black/10"></div>
+                                    <div class="relative  p-6 w-full">
+                                        <div class="group flex flex-row justify-start rounded-t w-full
                                "
-                                         data-aos="fade-up">
-                                        <div class="grid content-center mx-3 w-full space-y-1">
-                                            <div class="inline-flex flex-col align-middle space-y-2">
+                                             data-aos="fade-up">
+                                            <div class="grid content-center mx-3 w-full space-y-1">
+                                                <div class="inline-flex flex-col align-middle space-y-2">
 
                                                     <span class="inline-flex flex-row align-middle ">
                                                         <span class="inline-block align-middle mr-2">
@@ -32,32 +31,31 @@
                                                             </svg>
                                                         </span>
                                                         <span
-                                                            class="inline-flex flex-row align-middle text-sm  ">Sofala</span>
+                                                            class="inline-flex flex-row align-middle text-sm  ">{{ $article->location  }}</span>
                                                     </span>
-                                            </div>
-                                            <div class="flex justify-between w-full">
-                                                <h2 class=" text-base font-semibold   capitalize tracking-wide">
-                                                    Encontro entre Observatório de
-                                                    Feminicídio e a presidente da
-                                                    Assembleia Provincial
-                                                </h2>
-                                            </div>
-                                            <div
-                                                class="flex justify-between w-fit bg-red-600 p-1 px-2 capitalize text-xs text-white font-semibold">
-                                                <span>Actividade</span>
+                                                </div>
+                                                <div class="flex justify-between w-full">
+                                                    <h2 class=" text-base font-semibold   capitalize tracking-wide">
+                                                       {{ $article->title  }}
+                                                    </h2>
+                                                </div>
+                                                <div
+                                                    class="flex justify-between w-fit bg-red-600 p-1 px-2 capitalize text-xs text-white font-semibold">
+                                                    <span>{{ $article->status }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </article>
-                        </a>
+                                </article>
+                            </a>
+                        @endif
                     </div>
                 </div>
                 <div class="grid md:grid-cols-3 gap-x-4 w-full  ">
                     <div class="col-span-2 grid h-fit w-full">
                         <h1 class="w-full mt-8 mb-4 text-red-600 text-sm font-extrabold tracking-tight leading-none  dark:text-white uppercase "
                             data-aos="fade-up"> — Actividades recentes</h1>
-                        @foreach ([1,3,4,5,6,7] as $articleItem)
+                        @foreach ($articles as $articleItem)
                             <div class="md:mr-4 mb-4 bg-left-bottom bg-gradient-to-r from-red-600 to-red-500
                                              bg-[length:0%_3px] bg-no-repeat hover:bg-[length:100%_2px] transition-all duration-500 ease-out
                                              hover:scale-[1.01]
@@ -69,45 +67,24 @@
 
                                            ">
                                     <div class="sm:col-span-1 h-48  sm:h-auto relative ">
-                                        <img class="absolute inset-0 w-full h-full  object-cover"
-                                             src="{{ Vite::asset("resources/website/images/news1.jpg") }}"
-                                             alt="Observatorio">
+                                        {{ $articleItem->cover->img()->attributes(['class' => 'absolute inset-0 w-full h-full  object-cover',
+'alt' => $articleItem->title])  }}
+
                                         <div class="absolute   inset-0 bg-gradient-to-t from-black/60 to-black/10"></div>
                                     </div>
                                     <div class="sm:col-span-2 grid content-center space-y-2 p-6 sm:px-2">
                                         <h2
                                             class=" mb-2 text-lg font-bold  tracking-tight text-red-600 capitalize line-clamp-1 ">
-                                            Encontro entre Observatório de
-                                            Feminicídio e a presidente da
-                                            Assembleia Provincial
+                                            {{ $articleItem->title }}
                                         </h2>
 
                                         <p class="line-clamp-3 font-[Poppins] text-[13px] text-gray-800/80">
-                                            Encontro entre Observatório de
-                                            Feminicídio e a presidente da
-                                            Assembleia Provincial com sua equipe
-                                            jurídica, com objectivo de advogar
-                                            para revisão da lei de VBG para o
-                                            enquadramento do Feminicídio como um
-                                            crime , de primeira a presidente deu
-                                            parabéns pelo inciativa do movimento
-                                            e mostrou total disponibilidade em
-                                            apoiar , recomendando que
-                                            Observatório elaborasse um documento
-                                            com devidas assinaturas requisitando
-                                            a necessidade da revisão da lei
-                                            remeter a assembleia provincial, por
-                                            sua vez ia remeter a assembleia
-                                            nacional e ela com lobby e advocacia
-                                            apoiar na flexibilização de todo
-                                            trâmite para termos a revisão , para
-                                            o observatório é um grande resultado
-                                            e vai dar seguimento pra ter melhor
-                                            resultado.
+                                         {{ $articleItem->content  }}
                                         </p>
                                         <time
                                             class="w-fit text-xs text-white font-semibold tracking-tight bg-red-500 p-1 px-2 rounded-sm">
-                                            Apr 7, 2023 </time>
+                                            {{ $articleItem?->posted_at?->format('d M, Y')}}
+                                        </time>
 
                                     </div>
                                 </article>
@@ -192,6 +169,7 @@
                             </a>
                         </div>
                     </div>
+                    {{ $articles->links() }}
                 </div>
             </div>
         </div>
