@@ -3,7 +3,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import ApexCharts from "apexcharts";
 
-
 window.addEventListener("load", () => {
     AOS.init({
         offset: 0,
@@ -139,8 +138,10 @@ window.addEventListener("load", () => {
             },
         },
     };
-    let chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
+   if (document.querySelector("#chart") !== null) {
+       let chart = new ApexCharts(document.querySelector("#chart"), options);
+       chart.render();
+    }
 
     radialBar("#radial");
     radialBar("#radial2");
@@ -204,6 +205,9 @@ function radialBar(selector: string) {
         labels: ["Percent"],
     };
 
+    if (document.querySelector(selector) === null) {
+        return;
+    }
     var chart = new ApexCharts(document.querySelector(selector), options);
     chart.render();
 }

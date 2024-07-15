@@ -162,7 +162,7 @@
 
                 <li>
                     <a
-                        href=""
+                        href="{{ route("contact") }}"
                         class="block py-2 pl-3 pr-4 @if (request()->routeIs("contact"))
                             text-white
                             bg-red-700

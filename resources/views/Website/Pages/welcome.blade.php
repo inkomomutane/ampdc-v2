@@ -1,7 +1,6 @@
 @extends("Website.Layouts.website")
 @section("title", "Welcome")
 @section("content")
-    @include("Website.partials.navbar")
     @include("Website.partials.hero")
     <section class="bg-gradient-to-b from-red-50 to-white dark:bg-gray-900">
         <div
@@ -46,9 +45,7 @@
             </div>
         </div>
     </section>
-    <section
-        class="bg-gradient-to-b from-white via-red-100 to-red-400 dark:bg-gray-900"
-    >
+    <section class="bg-gradient-to-b from-white to-red-200 dark:bg-gray-900">
         <div
             class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:px-16 justify-items-center"
         >
@@ -248,7 +245,7 @@
             </ul>
         </div>
     </section>
-    <section class="bg-white dark:bg-gray-900">
+    <section class="bg-gradient-to-b from-red-200 to-white dark:bg-gray-900">
         <div
             class="grid grid-cols-3 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:px-16 justify-items-center"
         >
@@ -265,76 +262,128 @@
         </div>
     </section>
 
-    <section class="bg-gradient-to-b from-white to-red-500 dark:bg-gray-900">
-        <div class="max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:p-16  ">
-            <h1 class="mb-4 text-red-600 text-sm font-extrabold tracking-tight leading-none
-                dark:text-white capitalize text-center "
-                data-aos="fade-up" >— Post's</h1>
-            <h2 class=" mb-2  text-zinc-700  tracking-tight leading-none
-                  text-center first-letter:uppercase"
-                data-aos="fade-up" >actividades realizadas recentemente.</h2>
+    <section
+        class="bg-gradient-to-b from-white via-red-200 to-red-500 dark:bg-gray-900"
+    >
+        <div
+            class="max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:p-16"
+        >
+            <h1
+                class="mb-4 text-red-600 text-sm font-extrabold tracking-tight leading-none dark:text-white capitalize text-center"
+                data-aos="fade-up"
+            >
+                — Post's
+            </h1>
+            <h2
+                class="mb-2 text-zinc-700 tracking-tight leading-none text-center first-letter:uppercase"
+                data-aos="fade-up"
+            >
+                actividades realizadas recentemente.
+            </h2>
             <div class="splide" id="news">
                 <div class="splide__track">
-                    <ul class="splide__list ">
-
+                    <ul class="splide__list">
                         @for ($i = 0; $i < 3; $i++)
                             <li class="splide__slide py-12">
-                                <a
-                                    href="">
-                                    <article class="group bg-white flex flex-col justify-start rounded-t" data-aos="fade-up"
+                                <a href="">
+                                    <article
+                                        class="group bg-white flex flex-col justify-start rounded-t"
+                                        data-aos="fade-up"
                                     >
-                                        <img class=" !max-h-[12rem] object-cover mb-2 rounded-t"
-                                             src="{{ Vite::asset('resources/website/images/news1.jpg')  }} " alt="mockup">
-                                        <header class="text-gray-600 px-4 ">
-
-                                            <div class="text-xs font-bold text-white capitalize bg-red-500 p-1 px-2 mb-2 w-fit">
-                                               21 Jun,
-                                                2024 </div>
-                                            <h2 class="line-clamp-2 text-red-600 text-sm font-bold tracking-wide">
-                                                Encontro entre Observatório de Feminicídio e a presidente da Assembleia Provincial
+                                        <img
+                                            class="!max-h-[12rem] object-cover mb-2 rounded-t"
+                                            src="{{ Vite::asset("resources/website/images/news1.jpg") }} "
+                                            alt="mockup"
+                                        />
+                                        <header class="text-gray-600 px-4">
+                                            <div
+                                                class="text-xs font-bold text-white capitalize bg-red-500 p-1 px-2 mb-2 w-fit"
+                                            >
+                                                21 Jun, 2024
+                                            </div>
+                                            <h2
+                                                class="line-clamp-2 text-red-600 text-sm font-bold tracking-wide"
+                                            >
+                                                Encontro entre Observatório de
+                                                Feminicídio e a presidente da
+                                                Assembleia Provincial
                                             </h2>
                                         </header>
-                                        <p class="line-clamp-3 my-2 text-sm px-4">
-                                            Encontro entre Observatório de Feminicídio e a presidente da Assembleia Provincial com sua equipe jurídica, com objectivo de advogar para revisão da lei de VBG para o enquadramento do Feminicídio como um crime , de primeira a presidente deu parabéns pelo inciativa do movimento e mostrou total disponibilidade em apoiar , recomendando que Observatório elaborasse um documento com devidas assinaturas requisitando a necessidade da revisão da lei remeter a assembleia provincial, por sua vez ia remeter a assembleia nacional e ela com lobby e advocacia apoiar na flexibilização de todo trâmite para termos a revisão , para o observatório é um grande resultado e vai dar seguimento pra ter melhor resultado.
+                                        <p
+                                            class="line-clamp-3 my-2 text-sm px-4"
+                                        >
+                                            Encontro entre Observatório de
+                                            Feminicídio e a presidente da
+                                            Assembleia Provincial com sua equipe
+                                            jurídica, com objectivo de advogar
+                                            para revisão da lei de VBG para o
+                                            enquadramento do Feminicídio como um
+                                            crime , de primeira a presidente deu
+                                            parabéns pelo inciativa do movimento
+                                            e mostrou total disponibilidade em
+                                            apoiar , recomendando que
+                                            Observatório elaborasse um documento
+                                            com devidas assinaturas requisitando
+                                            a necessidade da revisão da lei
+                                            remeter a assembleia provincial, por
+                                            sua vez ia remeter a assembleia
+                                            nacional e ela com lobby e advocacia
+                                            apoiar na flexibilização de todo
+                                            trâmite para termos a revisão , para
+                                            o observatório é um grande resultado
+                                            e vai dar seguimento pra ter melhor
+                                            resultado.
                                         </p>
                                         <span
-                                            class="group-hover:text-primary-500 inline-flex self-start items-center justify-center  font-bold text-center text-xs p-4 right-0">
-                                        Ler mais
-                                        <svg class="w-3 h-3 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                                  clip-rule="evenodd"></path>
-                                        </svg>
-                                    </span>
+                                            class="group-hover:text-primary-500 inline-flex self-start items-center justify-center font-bold text-center text-xs p-4 right-0"
+                                        >
+                                            Ler mais
+                                            <svg
+                                                class="w-3 h-3 ml-2 -mr-1"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"
+                                                ></path>
+                                            </svg>
+                                        </span>
                                     </article>
                                 </a>
                             </li>
                         @endfor
-
                     </ul>
                 </div>
             </div>
             <div class="flex justify-end">
-                <a data-aos="fade-up" href="{{ route('news') }}"
-                   class="inline-flex place-self-center items-center justify-center py-3 text-sm font-medium text-center
-                    px-5 bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-500 focus:ring-4 focus:ring-red-600
-
-    ">
+                <a
+                    data-aos="fade-up"
+                    href="{{ route("news") }}"
+                    class="inline-flex place-self-center items-center justify-center py-3 text-sm font-medium text-center px-5 bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-500 focus:ring-4 focus:ring-red-600"
+                >
                     Ver todas actividades
-                    <svg class="w-3 h-3 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                              clip-rule="evenodd"></path>
+                    <svg
+                        class="w-3 h-3 ml-2 -mr-1"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        ></path>
                     </svg>
                 </a>
             </div>
         </div>
     </section>
-    @include("Website.partials.footer")
+    @include("Website.partials.partners")
 @endsection
 
 @push("scripts")
-
+    
 @endpush

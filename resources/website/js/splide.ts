@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (document.getElementById("partiners")) {
         const partiners = new Splide("#partiners", {
-            type   : 'loop',
-            drag   : 'free',
-            focus  : 'center',
-            arrows : false,
-            perPage : 5,
-            pagination:false,
+            type: "loop",
+            drag: "free",
+            focus: "center",
+            arrows: false,
+            perPage: 5,
+            pagination: false,
             autoScroll: {
                 speed: 1,
             },
