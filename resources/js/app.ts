@@ -1,15 +1,17 @@
 import "./bootstrap";
 import "../css/app.css";
 
-import { createApp, h, DefineComponent } from "vue";
+import { createApp, h, DefineComponent, ref, onMounted } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import VueSelect from "vs-vue3-select";
 import VueApexCharts from "vue3-apexcharts";
 import "vs-vue3-select/dist/vs-vue3-select.css";
+import PrimeVue from "primevue/config";
 import "@/components/select/select.css";
-import "quill/dist/quill.core.css";
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 import.meta.glob(["../images/**", "../fonts/**"]);
 const appName = import.meta.env.VITE_APP_NAME || "Donations";
@@ -26,7 +28,9 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(VueApexCharts)
+            .component("QuillEditor", QuillEditor)
             .component("v-select", VueSelect)
+            .use(PrimeVue)
             .mount(el);
     },
     progress: {
