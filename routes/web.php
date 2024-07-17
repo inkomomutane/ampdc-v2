@@ -3,8 +3,11 @@
 
 use App\Data\OrganizationData;
 use App\Http\Controllers\Article\CreateArticleController;
+use App\Http\Controllers\Article\DeleteArticleController;
+use App\Http\Controllers\Article\EditArticleController;
 use App\Http\Controllers\Article\ListArticlesController;
 use App\Http\Controllers\Article\StoreArticleController;
+use App\Http\Controllers\Article\UpdateArticleController;
 use App\Http\Controllers\District\CreateDistrict;
 use App\Http\Controllers\District\DeleteDistrict;
 use App\Http\Controllers\District\GetDistricts;
@@ -175,7 +178,9 @@ Route::middleware('auth')->group(function () {
     Route::get('article/list',ListArticlesController::class)->name('article.list');
     Route::get('/article/create', CreateArticleController::class)->name('article.create');
     Route::post('store/article',StoreArticleController::class)->name('article.store');
-    Route::get('/article/edit/{article}', fn($article) => $article)->name('article.edit');
+    Route::get('/article/edit/{article}', EditArticleController::class)->name('article.edit');
+    Route::match(['put','patch','post'],'/article/update/{article}',UpdateArticleController::class)->name('article.update');
+    Route::delete('/article/delete/{article}',DeleteArticleController::class)->name('article.delete');
 });
 
 require __DIR__.'/auth.php';

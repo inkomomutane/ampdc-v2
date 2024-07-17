@@ -224,3 +224,10 @@ Breadcrumbs::for('article.list',static function (BreadcrumbTrail $trail) {
     $trail->parent('article.create');
     $trail->push('Postagens',\route('article.list'));
 });
+
+Breadcrumbs::for('article.edit',static function (BreadcrumbTrail $trail, \App\Models\Article $article) {
+    $trail->parent('article.list');
+    $trail->push('Editar post',\route('article.edit',[
+        'article' => $article->slug
+    ]));
+});

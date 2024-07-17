@@ -2,11 +2,13 @@ declare namespace App.Data {
     export type ArticleData = {
         id: string | null;
         title: string | null;
+        slug: string | null;
         content: string | null;
         cover: App.Data.MediaData | null;
-        sections: Array<any> | null;
+        sections: Array<any>;
         status: string;
         location: string | null;
+        short_description: string;
     };
     export type ArticleSectionData = {
         id: string | null;

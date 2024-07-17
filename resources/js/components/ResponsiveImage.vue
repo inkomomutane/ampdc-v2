@@ -1,15 +1,16 @@
 <script setup lang="ts">
+
 import { ref } from "vue";
 import { PropType } from "vue";
 
 const props = defineProps({
     responsive: {
-        type: Object as PropType<App.Data.MediaData>,
+        type: Object as PropType<App.Data.MediaData>
     },
     class: String,
     className: String,
     caption: String,
-    alt: String,
+    alt: String
 });
 
 const optimized = ref<Boolean>(props.responsive?.mime_type !== "image/webp");
@@ -19,7 +20,7 @@ const optimized = ref<Boolean>(props.responsive?.mime_type !== "image/webp");
     <img
         v-if="optimized && responsive != undefined"
         :class="className"
-        :srcset="responsive?.srcsets ?? ''"
+        :srcset="responsive?.srcset ?? ''"
         :src="responsive?.original_url ?? ''"
         loading="lazy"
         :alt="alt"

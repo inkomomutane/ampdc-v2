@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
-import CreateArticle from "@/Pages/Website/CreateArticle.vue";
 import { PropType, ref, watch } from "vue";
 import { FlasherResponse } from "@flasher/flasher";
 import Flasher from "@/helprs";
@@ -92,7 +91,7 @@ watch(
                         <Link
                             :href="
                                 route('article.edit', {
-                                    article: article.id,
+                                    article: article.slug,
                                 })
                             "
                             v-for="article in articles.data"

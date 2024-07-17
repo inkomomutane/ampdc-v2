@@ -11,11 +11,13 @@ class ArticleData extends Data
     public function __construct(
         public ?string $id,
         public ?string $title,
+        public ?string $slug,
         public ?string $content,
         public ?MediaData $cover,
-        public ?array $sections,
+        public array $sections,
         public string $status,
         public ?string $location,
+        public string $short_description = '',
     ) {}
 
     public static function fromModel(?Article $article = null): ?ArticleData
@@ -27,11 +29,12 @@ class ArticleData extends Data
         return new self(
             id: $article->id,
             title: $article->title,
+            slug: $article->slug,
             content: $article->content,
             cover: MediaData::fromModel($article->cover),
-            sections: $article->sections->map(fn (ArticleSection $section) => ArticleSectionData::fromModel($section))->toArray(),
+            sections: $article->sections->map(fn (ArticleSection $section) => ArticleSectionData::fromModel($section))->toArray() ?? [],
             status: $article->status,
-            location: $article->location
+            location: $article->location,short_description: $article->short_description,
         );
     }
 }
