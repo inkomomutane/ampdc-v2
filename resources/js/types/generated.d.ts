@@ -118,6 +118,15 @@ declare namespace App.Data {
         name: string | null;
         description: string | null;
     };
+    export type WebsiteMessageData = {
+        id: string | null;
+        name: string | null;
+        message: string | null;
+        email: string | null;
+        contact: string | null;
+        is_read: boolean | null;
+        date: any;
+    };
 }
 declare namespace App.Enums {
     export enum CaseProgressStatus {

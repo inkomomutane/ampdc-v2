@@ -49,16 +49,10 @@
         @include("Website.partials.footer")
         @stack("scripts")
         <script>
-            @production
-            document.getElementById('preloader').style.display = 'none';
-            @endproduction
-            @env('local')
             document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() {
-                    document.getElementById('preloader').style.display = 'none';
-                }, 0);
+                document.getElementById('preloader').style.display = 'none';
             });
-            @endenv
+
         </script>
         <script type="text/javascript">
             function googleTranslateElementInit() {

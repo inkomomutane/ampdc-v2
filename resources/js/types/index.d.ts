@@ -69,6 +69,10 @@ export interface Articles extends Omit<PaginatedData, "data"> {
     data: Array<App.Data.ArticleData>;
 }
 
+export interface WebsiteMessages extends Omit<PaginatedData, "data"> {
+    data: Array<App.Data.WebsiteMessageData>;
+}
+
 export interface User {
     id: number;
     name: string;

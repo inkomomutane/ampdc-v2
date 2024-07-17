@@ -181,6 +181,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/article/edit/{article}', EditArticleController::class)->name('article.edit');
     Route::match(['put','patch','post'],'/article/update/{article}',UpdateArticleController::class)->name('article.update');
     Route::delete('/article/delete/{article}',DeleteArticleController::class)->name('article.delete');
+
+    #--- website messages ---#
+
+    Route::get('/website/messages', \App\Http\Controllers\WebsiteMessage\GetWebsiteMessagesController::class)->name('website.message.list');
+    Route::delete('/website/message/{message}', \App\Http\Controllers\WebsiteMessage\DeleteWebsiteMessageController::class)->name('website.message.delete');
+    Route::match(['put','patch','post'],'/website/message/{message}/change', \App\Http\Controllers\WebsiteMessage\ChangeWebsiteReadMessageStateController::class)->name('website.message.update');
+
 });
 
 require __DIR__.'/auth.php';

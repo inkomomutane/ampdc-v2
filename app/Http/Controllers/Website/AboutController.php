@@ -18,7 +18,7 @@ class AboutController extends Controller
                 title: 'Sobre',
                 description: 'Sobre o Observatório do feminicídio',
                 image: null,
-                url: route('about'),
+                url: route('about.us'),
                 articleBody: 'Sobre o Observatório do feminicídio',
                 section: 'About',
                 schema: null,

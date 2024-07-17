@@ -6,6 +6,7 @@ use App\Http\Controllers\Website\ContactController;
 use App\Http\Controllers\Website\NewsController;
 use App\Http\Controllers\Website\ReportsController;
 use App\Http\Controllers\Website\WelcomeController;
+use App\Http\Controllers\WebsiteMessage\WebsiteMessageRegisterController;
 
 Route::get('/', WelcomeController::class)->name('welcome');
 
@@ -17,6 +18,6 @@ Route::get('/news/{article}',ArticleController::class)->name('news.page');
 
 Route::get('/contact', ContactController::class)->name('contact');
 
-Route::post('/contact',static fn() => 'contact')->name('contact.message');
+Route::post('/contact/send/message',WebsiteMessageRegisterController::class)->name('contact.message');
 
 Route::get('/reports', ReportsController::class)->name('reports');

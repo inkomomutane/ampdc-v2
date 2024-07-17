@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { useSidebar } from "@/composables/useSidebar";
 import { Link } from "@inertiajs/vue3";
 import logo from "@images/logo.png";
+import WebsiteMessageLink from "@/Layouts/partials/WebsiteMessageLink.vue";
 
 const { isOpen } = useSidebar();
 const activeClass = ref(
@@ -76,6 +77,7 @@ const inactiveClass = ref(
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill="none" stroke="currentColor" stroke-width="2" d="M16,7 L19,7 L19,11 L16,11 L16,7 Z M9,15 L20,15 M9,11 L13,11 M9,7 L13,7 M6,18.5 C6,19.8807119 4.88071187,21 3.5,21 C2.11928813,21 1,19.8807119 1,18.5 L1,7 L6.02493781,7 M6,18.5 L6,3 L23,3 L23,18.5 C23,19.8807119 21.8807119,21 20.5,21 L3.5,21"></path></svg>
                     <span class="mx-4 font-medium text-sm">Editar post</span>
                 </Link>
+                <WebsiteMessageLink/>
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
                     :href="route('dashboard.reports')"

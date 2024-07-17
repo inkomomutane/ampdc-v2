@@ -291,11 +291,18 @@
                                     href="{{ route("news.page", ["article" => $article->slug]) }}"
                                 >
                                     <article
-                                        class="group bg-white flex flex-col justify-start rounded-t"
+                                        class="group bg-white h-full flex flex-col justify-start rounded-t"
                                         data-aos="fade-up"
                                     >
-                                        {{ $article->cover?->img()?->attributes(["class" => "!max-h-[12rem] object-cover mb-2 rounded-t"]) }}
-
+                                        @if (!$article->cover)
+                                            <img
+                                                src="{{Vite::asset('resources/images/placeholder.svg')}}"
+                                                alt="{{ $article->title }}"
+                                                class="!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t"
+                                            />
+                                        @else
+                                        {{ $article->cover?->img()?->attributes(["class" => "!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t"]) }}
+                                        @endif
                                         <header class="text-gray-600 px-4">
                                             <div
                                                 class="text-xs font-bold text-white capitalize bg-red-500 p-1 px-2 mb-2 w-fit"

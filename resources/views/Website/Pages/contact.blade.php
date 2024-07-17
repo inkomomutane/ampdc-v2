@@ -98,48 +98,18 @@
             </div>
         </div>
         <div class="col-span-10 md:col-span-6 px-6 py-16 md:p-20 bg-red-50">
-            @if (session("success"))
-                <div
-                    id="alert-border-3"
-                    class="flex p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
-                    role="alert"
-                >
-                    <svg
-                        class="flex-shrink-0 w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd"
-                        ></path>
-                    </svg>
+            @if(session('message_success'))
+                <div id="alert-border-3" class="flex p-4 mb-4 text-white border-t-4 border-green-900 bg-green-600 " role="alert">
+                    <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                     <div class="ml-3 text-sm font-medium">
-                        {{ session("success") }}
+                        {{ session('message_success') }}
                     </div>
                 </div>
-            @elseif (session("error"))
-                <div
-                    id="alert-border-2"
-                    class="flex p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-500 dark:bg-gray-800 dark:border-red-800"
-                    role="alert"
-                >
-                    <svg
-                        class="flex-shrink-0 w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd"
-                        ></path>
-                    </svg>
+            @elseif(session('message_error'))
+                <div id="alert-border-2" class="flex p-4 mb-4 text-white border-t-4 border-red-800 bg-red-600 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
+                    <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                     <div class="ml-3 text-sm font-medium">
-                        {{ session("error") }}
+                        {{ session('message_error') }}
                     </div>
                 </div>
             @endif
@@ -155,13 +125,13 @@
                         </label>
                         <input
                             type="text"
-                            name="nome_do_cliente"
-                            id="nome_do_cliente"
+                            name="name"
+                            id="name"
                             class="h-10 border mt-1 focus:ring-1 focus:ring-red-500 border-red-500 focus:border-red-500 rounded-sm p-6 px-4 w-full bg-red-50"
-                            value=""
+                            value="{{old('name')}}"
                             placeholder="Teu nome"
                         />
-                        @error("nome_do_cliente")
+                        @error("name")
                             <span class="text-red-500 text-sm font-semibold">
                                 {{ $message }}
                             </span>
@@ -174,7 +144,7 @@
                             name="email"
                             id="email"
                             class="h-10 border mt-1 rounded-sm p-6 px-4 w-full bg-red-50 focus:ring-1 focus:ring-red-500 border-red-500 focus:border-red-500"
-                            value=""
+                            value="{{old('email')}}"
                             placeholder="Exemplo@email.com"
                         />
                         @error("email")
@@ -184,13 +154,13 @@
                         @enderror
                     </div>
                     <div class="md:col-span-2 mb-2">
-                        <label for="contacto">Contacto</label>
+                        <label for="contact">Contacto</label>
                         <input
                             type="text"
-                            name="contacto"
+                            name="contact"
                             id="contacto"
                             class="h-10 border mt-1 rounded-sm p-6 px-4 w-full bg-red-50 focus:ring-1 border-red-500 focus:ring-red-500 focus:border-red-500"
-                            value=""
+                            value="{{ old('contact') }}"
                             placeholder="Contacto"
                         />
                         @error("contacto")
@@ -200,20 +170,20 @@
                         @enderror
                     </div>
                     <div class="md:col-span-2 mb-2">
-                        <label for="mensagem">Mensagem</label>
+                        <label for="message">Mensagem</label>
                         <div
                             class="flex border border-red-200 items-center mt-1"
                         >
                             <textarea
-                                name="mensagem"
-                                id="mensagem"
+                                name="message"
+                                id="message"
                                 cols="10"
                                 rows="5"
                                 class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent focus:ring-1 border-red-500 focus:ring-red-500 focus:border-red-500 rounded-sm"
                                 placeholder="Mensagem..."
                             ></textarea>
                         </div>
-                        @error("mensagem")
+                        @error("message")
                             <span class="text-red-500 text-sm font-semibold">
                                 {{ $message }}
                             </span>

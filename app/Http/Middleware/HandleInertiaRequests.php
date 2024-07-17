@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Data\RoleData;
+use App\Http\Controllers\WebsiteMessage\WebsiteMessageCountController;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use App\Models\Role;
@@ -41,6 +42,7 @@ class HandleInertiaRequests extends Middleware
             'roles' => RoleData::collection(Role::all()),
             'organization' => organization(),
             '_token' => csrf_token(),
+            'mails' =>WebsiteMessageCountController::handle() ?? 0,
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
