@@ -65,6 +65,10 @@ export interface VictimCasesHistories extends Omit<PaginatedData, "data"> {
     data: Array<App.Data.VictimCaseData>;
 }
 
+export interface Articles extends Omit<PaginatedData, "data"> {
+    data: Array<App.Data.ArticleData>;
+}
+
 export interface User {
     id: number;
     name: string;

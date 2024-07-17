@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
+use RalphJSmit\Laravel\SEO\Schema\BreadcrumbListSchema;
+use RalphJSmit\Laravel\SEO\SchemaCollection;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
+use RalphJSmit\Laravel\SEO\Support\ImageMeta;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Spatie\LaravelData\WithData;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -20,7 +26,7 @@ class Article extends Model implements HasMedia
     use HasSlug;
     use HasUlids;
     use WithData;
-
+    use HasSEO;
     protected $fillable = [
         'title',
         'short_description',
@@ -94,5 +100,33 @@ class Article extends Model implements HasMedia
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+
+    public function getDynamicSEOData(): SEOData {
+        return new SEOData(
+            title: $this->title,
+            description: $this->short_description,
+            author: 'AMPDC',
+            image: $this->hasMedia('covers') ? $this->getFirstMedia('covers')?->getUrl('social-media') :null,
+            url: route('news.page', ['article' => $this->slug]),
+            imageMeta: $this->hasMedia('covers') ? new ImageMeta($this->getFirstMedia('covers')?->getUrl('social-media')) :null,
+            published_time: $this->posted_at,
+            modified_time: $this->updated_at,
+            articleBody: $this->content,
+            section: 'post',
+            tags: ['post','news','article'],
+            schema: SchemaCollection::initialize()->addArticle()->addBreadcrumbs(
+                fn (BreadcrumbListSchema $breadcrumbs): BreadcrumbListSchema => $breadcrumbs->prependBreadcrumbs([
+                    'Welcome' => route('welcome'),
+                ])
+            ),
+            type: 'article',
+            site_name: 'Observatorio do feminicídio',
+            favicon: asset('favicon.ico'),
+            locale: 'pt',
+            canonical_url: route('news.page', ['article' => $this->slug]),
+            openGraphTitle: $this->title,
+        );
     }
 }

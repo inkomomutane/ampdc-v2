@@ -3,7 +3,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import InputError from "@components/InputError.vue";
-import { onMounted, ref, watch } from "vue";
+import { ref } from "vue";
 import { ulid } from "ulidx";
 import ImageUploader from "@components/ImageUploader.vue";
 interface Section {
@@ -33,7 +33,7 @@ const addSection = () => {
 };
 
 const createArticle = () => {
-    form.post(route('articles.store'), {
+    form.post(route('article.store'), {
         preserveScroll: true,
         onSuccess: () => {
             form.reset();
@@ -93,7 +93,7 @@ const createArticle = () => {
                             <input
                                 id="location"
                                 ref="locationRef"
-                                v-model="form.title"
+                                v-model="form.location"
                                 name="location"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Localização"
@@ -130,9 +130,14 @@ const createArticle = () => {
                             >Conteúdo
                             </label>
                             <QuillEditor
+                                :options="{
+                                    placeholder: 'Conteúdo',
+                                }"
+                                contentType="html"
                                 theme="snow"
                                 class="!h-fit"
-                                v-model="form.content"
+                                toolbar="minimal"
+                                v-model:content="form.content"
                             />
                             <InputError :message="form.errors.content" />
                         </div>
@@ -186,9 +191,14 @@ const createArticle = () => {
                             >Conteúdo da secção
                             </label>
                             <QuillEditor
+                                :options="{
+                                    placeholder: 'Conteúdo',
+                                }"
+                                contentType="html"
                                 theme="snow"
                                 class="!h-fit"
-                                v-model="section.content"
+                                toolbar="minimal"
+                                v-model:content="section.content"
                             />
                         </div>
                     </div>

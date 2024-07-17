@@ -214,3 +214,13 @@ Breadcrumbs::for('victim.case.edit', static function (BreadcrumbTrail $trail, Vi
 Breadcrumbs::for('dashboard.reports', function (BreadcrumbTrail $trail) {
     $trail->push('Relatórios', route('dashboard.reports'));
 });
+
+
+Breadcrumbs::for('article.create',static function (BreadcrumbTrail $trail) {
+    $trail->push('Criar post',\route('article.create'));
+});
+
+Breadcrumbs::for('article.list',static function (BreadcrumbTrail $trail) {
+    $trail->parent('article.create');
+    $trail->push('Postagens',\route('article.list'));
+});

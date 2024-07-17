@@ -1,5 +1,7 @@
 @extends("Website.Layouts.website")
-@section("title", "Contacto")
+@section('seo')
+    {!! seo($seoData) !!}
+@endsection
 @section("content")
     <div class="h-96 ml-0">
         <iframe

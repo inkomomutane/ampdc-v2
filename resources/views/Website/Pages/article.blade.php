@@ -1,5 +1,7 @@
 @extends("Website.Layouts.website")
-@section("title", $article->title ?? "Observatório do feminicídio")
+@section('seo')
+    {!! seo()->for($article) !!}
+@endsection
 @section("content")
     <section class="bg-white md:bg-gradient-to-b md:from-red-200 md:via-white md:to-white">
         <div
@@ -13,7 +15,7 @@
                         <article
                             class="relative min-h-72 max-h-72 xl:min-h-96 xl:max-h-96 flex items-end text-white"
                         >
-                            {{ $article->cover->img()->attributes(["class" => "absolute inset-0 w-full h-full object-cover object-top", "alt" => $article->title]) }}
+                            {{ $article->cover?->img()?->attributes(["class" => "absolute inset-0 w-full h-full object-cover object-top", "alt" => $article->title]) }}
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/90 to-black/10"
                             ></div>
@@ -87,12 +89,7 @@
                                 class="grid md:grid-cols-2 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:px-16 items-center group"
                             >
                                 <div class="group-even:md:order-2">
-                                    <img
-                                        class="h-full object-cover object-top rounded hover:scale-105 transition-transform duration-500 ease-in-out"
-                                        src="{{ Vite::asset("resources/website/images/observatorio.jpeg") }}"
-                                        alt="mockup"
-                                        data-aos="fade-up"
-                                    />
+                                    {{ $section->cover?->img()?->attributes(["class" => "h-full object-cover object-top rounded hover:scale-105 transition-transform duration-500 ease-in-out", "alt" => $section->title]) }}
                                 </div>
                                 <div class="bg-white p-8 h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10">
                                     <h1 class="font-extrabold text-xl text-red-600 mb-2">{{$section->title}}</h1>

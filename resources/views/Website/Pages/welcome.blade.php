@@ -1,5 +1,7 @@
 @extends("Website.Layouts.website")
-@section("title", "Welcome")
+@section('seo')
+    {!! seo($seoData) !!}
+@endsection
 @section("content")
     @include("Website.partials.hero")
     <section class="bg-gradient-to-b from-red-50 to-white dark:bg-gray-900">
@@ -292,7 +294,7 @@
                                         class="group bg-white flex flex-col justify-start rounded-t"
                                         data-aos="fade-up"
                                     >
-                                        {{ $article->cover->img()->attributes(["class" => "!max-h-[12rem] object-cover mb-2 rounded-t"]) }}
+                                        {{ $article->cover?->img()?->attributes(["class" => "!max-h-[12rem] object-cover mb-2 rounded-t"]) }}
 
                                         <header class="text-gray-600 px-4">
                                             <div
@@ -306,11 +308,11 @@
                                                 {{ $article->title }}
                                             </h2>
                                         </header>
-                                        <p
+                                        <div
                                             class="line-clamp-3 my-2 text-sm px-4"
                                         >
-                                            {{ $article->content }}
-                                        </p>
+                                            {!!  $article->content !!}
+                                        </div>
                                         <span
                                             class="group-hover:text-primary-500 inline-flex self-start items-center justify-center font-bold text-center text-xs p-4 right-0"
                                         >
@@ -362,5 +364,5 @@
 @endsection
 
 @push("scripts")
-    
+
 @endpush

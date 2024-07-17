@@ -14,6 +14,8 @@ class ArticleData extends Data
         public ?string $content,
         public ?MediaData $cover,
         public ?array $sections,
+        public string $status,
+        public ?string $location,
     ) {}
 
     public static function fromModel(?Article $article = null): ?ArticleData
@@ -28,6 +30,8 @@ class ArticleData extends Data
             content: $article->content,
             cover: MediaData::fromModel($article->cover),
             sections: $article->sections->map(fn (ArticleSection $section) => ArticleSectionData::fromModel($section))->toArray(),
+            status: $article->status,
+            location: $article->location
         );
     }
 }

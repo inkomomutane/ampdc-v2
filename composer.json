@@ -20,6 +20,7 @@
         "maatwebsite/excel": "^3.1",
         "php-flasher/flasher-laravel": "^1.15",
         "php-flasher/flasher-noty-laravel": "^1.15",
+        "ralphjsmit/laravel-seo": "^1.6",
         "robertboes/inertia-breadcrumbs": "^0.4.0",
         "samuelbie/mpesa": "^1.5",
         "spatie/laravel-data": "^3.11",

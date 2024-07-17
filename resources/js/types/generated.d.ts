@@ -5,6 +5,8 @@ declare namespace App.Data {
         content: string | null;
         cover: App.Data.MediaData | null;
         sections: Array<any> | null;
+        status: string;
+        location: string | null;
     };
     export type ArticleSectionData = {
         id: string | null;

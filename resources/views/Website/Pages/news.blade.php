@@ -1,5 +1,7 @@
 @extends("Website.Layouts.website")
-@section("title", "Actividades")
+@section('seo')
+    {!! seo($seoData) !!}
+@endsection
 @section("content")
     <section class="bg-gradient-to-b from-red-200 via-red-100 to-red-200">
         <div
@@ -104,7 +106,7 @@
                                     <div
                                         class="sm:col-span-1 h-48 sm:h-auto relative"
                                     >
-                                        {{ $articleItem->cover->img()->attributes(["class" => "absolute inset-0 w-full h-full  object-cover", "alt" => $articleItem->title]) }}
+                                        {{ $articleItem->cover?->img()?->attributes(["class" => "absolute inset-0 w-full h-full  object-cover", "alt" => $articleItem->title]) }}
 
                                         <div
                                             class="absolute inset-0 bg-gradient-to-t from-black/60 to-black/10"
@@ -122,7 +124,7 @@
                                         <p
                                             class="line-clamp-3 font-[Poppins] text-[13px] text-gray-800/80"
                                         >
-                                            {{ $articleItem->content }}
+                                            {!!  $articleItem->content !!}
                                         </p>
                                         <time
                                             class="w-fit text-xs text-white font-semibold tracking-tight bg-red-500 p-1 px-2 rounded-sm"
