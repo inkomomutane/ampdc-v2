@@ -7,7 +7,6 @@ use App\Http\Controllers\WebsiteMessage\WebsiteMessageCountController;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use App\Models\Role;
-use Tightenco\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -43,10 +42,6 @@ class HandleInertiaRequests extends Middleware
             'organization' => organization(),
             '_token' => csrf_token(),
             'mails' =>WebsiteMessageCountController::handle() ?? 0,
-            'ziggy' => fn () => [
-                ...(new Ziggy)->toArray(),
-                'location' => $request->url(),
-            ],
         ];
     }
 }

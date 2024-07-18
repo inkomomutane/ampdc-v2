@@ -186,7 +186,7 @@ function radialBar(selector: string) {
                         fontSize: "17px",
                     },
                     value: {
-                        formatter: function (val) {
+                        formatter: function (val:any) {
                             return parseInt(val);
                         },
                         color: "#111",

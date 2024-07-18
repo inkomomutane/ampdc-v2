@@ -58,7 +58,7 @@ class StoreArticleController
             flash()->addError('Erro ao criar post');
             throw $e;
         }
-        return back();
+        return to_route('article.list');
     }
 
 

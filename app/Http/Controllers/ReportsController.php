@@ -15,7 +15,7 @@ class ReportsController extends Controller
     {
         $year = $request->year ?? now()->year;
         return Inertia::render('Reports',[
-            'casesCountArrayByYear' => $this->getCasesByYear($year),
+            'casesCountArrayByYear' => static::getCasesByYear($year),
             'casesCount' => $this->getCasesCountByYear($year),
             'forwardedCasesCount' => $this->getCasesCountByYear($year,'forwarded'),
             'receivedCasesCount' => $this->getCasesCountByYear($year,'received'),
@@ -24,17 +24,33 @@ class ReportsController extends Controller
         ]);
     }
 
-    private function getCasesByYear(int $year) : array
+    public static function getCasesByYear(?int $year) : array
     {
+        $year = $year ?? now()->year;
+
         $monthCounts = [];
         for ($i = 1; $i <= 12; $i++) {
             $monthCounts[] = VictimCase::whereYear('created_at',$year)
-                ->whereOrganizationId(organization()->id)
                 ->whereMonth('created_at',$i)
                 ->count();
         }
      return $monthCounts;
     }
+
+    public static function getSolvedCasesByYear(?int $year) : array
+    {
+        $year = $year ?? now()->year;
+
+        $monthCounts = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $monthCounts[] = VictimCase::whereYear('created_at',$year)
+                ->whereMonth('created_at',$i)
+                ->whereProgressStatus(CaseProgressStatus::SOLVED->value)
+                ->count();
+        }
+        return $monthCounts;
+    }
+
 
     private  function getCasesCountByYear (int $year,string $type = 'cases') : object
     {

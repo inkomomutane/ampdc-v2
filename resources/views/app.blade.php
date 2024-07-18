@@ -12,9 +12,8 @@
             href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap"
             rel="stylesheet"
         />
-
-        <!-- Scripts -->
         @routes
+        <!-- Scripts -->
         @vite(["resources/js/app.ts", "resources/js/Pages/{$page["component"]}.vue"])
         @inertiaHead
     </head>

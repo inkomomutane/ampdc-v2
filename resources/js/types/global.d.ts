@@ -7,9 +7,11 @@ declare global {
     interface Window {
         axios: AxiosInstance;
         ApexCharts: ApexCharts;
+        route: typeof ziggyRoute;
     }
 
     var route: typeof ziggyRoute;
+
 }
 
 declare module "vue" {
