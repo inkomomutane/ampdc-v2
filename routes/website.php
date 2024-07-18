@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Reports\GetReportByViolenceTypeAndByYearController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\Website\AboutController;
 use App\Http\Controllers\Website\ArticleController;
@@ -26,3 +27,4 @@ Route::get('/reports', WebsiteReportsController::class)->name('reports');
 
 
 Route::get('/reports/year', AnualReportsApiJsonController::class)->name('api.reports.year');
+Route::get('/reports/violence-type', GetReportByViolenceTypeAndByYearController::class)->name('api.reports.violence-type');

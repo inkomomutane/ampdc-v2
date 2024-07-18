@@ -24,6 +24,6 @@ class ListArticlesController
                  $query->whereAny(['location','content','title'],'Like',"%$term%")
                      ->orwhereRelation('sections','title','Like',"%$term%")
                      ->orWhereRelation('sections','content','Like',"%$term%");
-             })->paginate(6)->withQueryString());
+             })->orderByDesc('updated_at')->paginate(6)->withQueryString());
     }
 }
