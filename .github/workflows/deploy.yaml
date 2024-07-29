@@ -1,0 +1,78 @@
+name: 🚀🔥 Deploy 🔥🚀
+on:
+  push:
+    branches:
+      - production
+jobs:
+  buildAssets:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+      - name: Run composer install
+        run: composer install -n --prefer-dist
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install nodejs dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Build project
+        run: npm run build
+
+      - name: Upload production-ready build files to github container
+        uses: actions/upload-artifact@v3
+        with:
+          name: production-files
+          path: ./public/build
+      - name: Upload built frontend files to Elint accounting via FTP SERVER
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public/build/
+          server-dir: ./public/build/
+  deployAssets:
+    name: Deploy
+    needs: buildAssets
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/production'
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: production-files
+          path: ./public/build
+  buildApp:
+    name: Fetch updates from git and install all dependencies and clean all cache
+    needs: deployAssets
+    runs-on: ubuntu-latest
+    steps:
+      - name: install composer dependencies
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            ${{ secrets.FUN_GIT_PULL }}
+            su ofeminicidio.ampdc.org
+            php composer.phar update
+            php artisan migrate --force
+            php artisan db:seed --force
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            exit
+          host: ${{ secrets.SSH_SERVER }}
+          user: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          #pass: ${{ secrets.SSH_PASS_KEY }}
+          args: "-tt -vvv"
