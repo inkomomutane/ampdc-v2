@@ -8,8 +8,8 @@ export default defineConfig({
         laravel({
             input: [
                 "resources/js/app.ts",
-                "resources/website/js/app.js",
-                "resources/js/splide.ts",
+                "resources/website/js/app.ts",
+                "resources/website/js/splide.ts",
                 'resources/website/js/reports.ts',
                 "resources/website/css/gtranslator.css",
                 "resources/website/css/app.css",

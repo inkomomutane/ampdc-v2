@@ -284,7 +284,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                             <svg
                                 class="ml-2 w-10 h-10 rounded-full"
                                 :class="
-                                    !loadedMessage?.is_read ?? false
+                                    !loadedMessage?.is_read
                                         ? 'ring-2 ring-green-400 dark:ring-slate-100'
                                         : 'ring-2 ring-slate-400 dark:ring-slate-400'
                                 "
@@ -309,7 +309,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                                     {{ loadedMessage?.name }}
                                 </p>
                                 <a
-                                    :href="'tel:' + loadedMessage?.contact"
+                                    :href="`tel:'${loadedMessage?.contact}`"
                                     class="capitalize my-auto ml-4 text-sm flex flex-row dark:text-slate-200"
                                 >
                                     <svg
@@ -343,7 +343,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                                     loadedMessage?.contact != undefined ||
                                     loadedMessage?.contact != null
                                 "
-                            :href="'tel:' + loadedMessage?.contact"
+                            :href="`tel:${loadedMessage?.contact}`"
                             class="px-2 py-2 my-auto border-r-2 border-l-2 dark:border-gray-800"
                         >
                             <svg
@@ -375,7 +375,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                                     loadedMessage?.email != undefined ||
                                     loadedMessage?.email != null
                                 "
-                                :href="'mail:' + loadedMessage?.email ?? ''"
+                                :href="`mail: ${loadedMessage?.email ?? ''}`"
                             >
                                 <svg
                                     width="24"
@@ -450,7 +450,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                         </div>
                     </div>
                     <a
-                        :href="'mail:' + loadedMessage?.email"
+                        :href="`mail:${loadedMessage?.email}`"
                         class="capitalize text-blue-900 my-auto mt-2 ml-2 font-semibold text-xs flex flex-row dark:text-slate-200"
                     >
                         {{ loadedMessage?.email }}

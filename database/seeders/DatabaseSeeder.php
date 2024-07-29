@@ -59,8 +59,8 @@ class DatabaseSeeder extends Seeder
             'id' => '01hv1bd7wmatmqfyqqtecpj6v7'
         ],[
             'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password'),
+            'email' => 'administrator@ampdc.org',
+            'password' => \Hash::make(config('admin.admin_password')),
             'email_verified_at' => now(),
             'organization_id' => '01hv77xvhb4n8xfx36k1z1khjn'
         ]);
@@ -206,55 +206,5 @@ class DatabaseSeeder extends Seeder
         $baseUser->loadMissing('organization');
 
         #--- Seeder de dados de testo todos seeder devem ser feitos de 1 de Janeiro de 2024 a te a data actual---#
-        for ($i = 0; $i < 523 ; $i++) {
-           \DB::beginTransaction();
-            try {
-                $age = fake()->numberBetween(17, 90);
-                $victim = Victim::create([
-                    'name' => fake()->name,
-                    'neighborhood_id' => Neighborhood::all()->random()->id,
-                    'contact' => fake()->phoneNumber(),
-                    'age' => $age,
-                    'date_of_birth' => now()->subYears($age),
-                ]);
-                $baseOrg = $baseUser->organization;
-                $orgs = Organization::whereNot('id', $baseOrg->id)->get();
-                $code = incrementCode();
-
-                $resolved = fake()->boolean();
-
-                $case = VictimCase::create([
-                    'victim_id' => $victim->id,
-                    'organization_id' => $baseOrg->id,
-                    'case_registered_by_id' => $baseUser->id,
-                    'progress_status' => $resolved ? CaseProgressStatus::SOLVED :CaseProgressStatus::IN_PROGRESS,
-                    'violence_details' => fake()->realText(),
-                    'case_updated_by_id' =>$baseUser->id,
-                    'violence_type_id' => ViolenceType::all()->random()->id,
-                    'perpetrator_id' => Perpetrator::all()->random()->id,
-                    'period_of_violence_act' => collect(PeriodOfViolenceAct::getValues())->random(),
-                    'violence_incident_location_id' => ViolenceIncidentLocation::all()->random()->id,
-                    'supposed_reason_of_violence_id' => SupposedReasonOfViolence::all()->random()->id,
-                    'is_violence_caused_death' => fake()->boolean(),
-                    'is_terminated' => false,
-                    'case_code' => $code,
-                    'conclusion' => $resolved ? fake()->realText() : '',
-                    'created_at' => fake()->dateTimeBetween('2024-01-01', 'now'),
-                    'updated_at' => fake()->dateTimeBetween('2024-01-01', 'now'),
-                ]);
-
-                if (fake()->boolean()) {
-                    $case->refresh();
-                    $case->update([
-                        'forwarded_to_organization_id' => $orgs->random()->id,
-                        'forwarded_from_organization_id' => $baseOrg->id,
-                    ]);
-                }
-                \DB::commit();
-            }catch (\Exception $e) {
-                throw $e;
-                \DB::rollBack();
-            }
-        }
     }
 }
