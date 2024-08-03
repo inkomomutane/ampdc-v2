@@ -124,7 +124,7 @@
                                         <p
                                             class="line-clamp-3 font-[Poppins] text-[13px] text-gray-800/80"
                                         >
-                                            {!!  $articleItem->content !!}
+                                            {!!  $articleItem->short_description !!}
                                         </p>
                                         <time
                                             class="w-fit text-xs text-white font-semibold tracking-tight bg-red-500 p-1 px-2 rounded-sm"
