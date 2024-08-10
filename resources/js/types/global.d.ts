@@ -10,7 +10,7 @@ declare global {
         route: typeof ziggyRoute;
     }
 
-    var route: typeof ziggyRoute;
+    let route: typeof ziggyRoute;
 
 }
 

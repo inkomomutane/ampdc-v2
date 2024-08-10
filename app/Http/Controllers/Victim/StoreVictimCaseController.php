@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Http\Controllers\Victim;
+
+use App\Enums\PeriodOfViolenceAct;
+use App\Models\User;
+use App\Models\Victim;
+use DB;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
+class StoreVictimCaseController
+{
+    private function rules() : array {
+        return  [
+//            #case fields
+              'violence_type_id' => 'required|exists:violence_types,id',
+              'supposed_reason_of_violence_id' => 'required|exists:supposed_reason_of_violences,id',
+              'perpetrator_id' => 'required|exists:perpetrators,id',
+              'perpetrator_name' => 'required|string',
+              'perpetrator_profession' => 'required|string',
+              'perpetrator_address' => 'required|string',
+              'perpetrator_contact' => 'required|string',
+              'period_of_violence_act' => ['required',Rule::in(PeriodOfViolenceAct::getValues())],
+              'violence_incident_location_id' => 'required|exists:violence_incident_locations,id',
+              'violence_details' => 'required|string',
+              'is_violence_caused_death' => 'required|bool',
+              'is_the_first_time' => 'required|bool',
+              'is_violence_reported_to_authorities' => 'nullable|bool',
+
+             'last_violences_description' => 'nullable|string',
+             'is_the_last_cases_reported_to_authorities' => ['nullable','bool'],
+             'are_last_cases_resolved' => ['required_if:is_the_last_cases_reported_to_authorities,true','nullable','bool'],
+             'last_cases_resolution_details' => ['required_if:are_last_cases_resolved,true','nullable','string'],
+
+//            'case_registered_address' => 'nullable|string',
+//            'case_registered_agent' => 'nullable|string',
+//            'case_registered_city' => 'nullable|string',
+//            'case_registered_province' => 'nullable|string',
+//            'case_registered_district' => 'nullable|string',
+
+        ];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function __invoke(Victim $victim, Request $request) {
+       $data = $request->validate($this->rules());
+
+        if (self::handle($victim,$data,auth()->user())) {
+            flash()->addSuccess('Caso de violência adicionado com sucesso.');
+        } else {
+            flash()->addError('Erro ao adicionar caso de violência.');
+        }
+
+        return redirect()->back();
+    }
+
+
+    /**
+     * @param Victim $victim
+     * @param array{
+     *     violence_type_id:string,
+     *     supposed_reason_of_violence_id:string,
+     *     perpetrator_id:string,
+     *     perpetrator_name:string,
+     *     perpetrator_profession:string,
+     *     perpetrator_address:string,
+     *     perpetrator_contact:string,
+     *     period_of_violence_act:string,
+     *     violence_incident_location_id:string,
+     *     violence_details:string,
+     *     is_violence_caused_death:bool,
+     *     is_the_first_time:bool,
+     *     is_violence_reported_to_authorities:bool,
+     *     last_violences_description?:string,
+     *     is_the_last_cases_reported_to_authorities?:bool,
+     *     are_last_cases_resolved?:bool,
+     *     last_cases_resolution_details?:string,
+     *     case_registered_address?:string,
+     *     case_registered_agent?:string,
+     *     case_registered_city?:string,
+     *     case_registered_province?:string,
+     * } $data
+     * @return bool
+     * @throws Exception
+     */
+    public static  function handle(Victim $victim,array $data,User $user): bool
+    {
+        try {
+            DB::beginTransaction();
+              $victim->cases()->create(array_merge( $data,
+                  [
+                      'case_code' => incrementCode(),
+                      'case_registered_by_id' => $user->id,
+                      'case_registered_by_organization_id' => $user->organization_id,
+                      'case_registered_at' => now(),
+                  ]
+              ));
+            DB::commit();
+            return true;
+        }catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+
+        return false;
+    }
+}

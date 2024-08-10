@@ -103,11 +103,11 @@ const inactiveClass = ref(
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
                     :class="[
-                        route().current('victim.register')
+                        route().current('victim.create')
                             ? activeClass
                             : inactiveClass,
                     ]"
-                    :href="route('victim.register')"
+                    :href="route('victim.create')"
                 >
                     <svg
                         class="w-5 h-5"
@@ -128,42 +128,8 @@ const inactiveClass = ref(
                     <span class="mx-4 font-medium text-sm">Registo</span>
                 </Link>
                 <Link
-                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
-                    :href="route('victim.cases.list')"
-                    :class="[
-                        route().current('victim.cases.list')
-                            ? activeClass
-                            : inactiveClass,
-                    ]"
-                >
-                    <svg
-                        class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1.5"
-                            d="M17.38 10.38v3.23c0 2.69-1.08 3.77-3.77 3.77h-3.23c-2.69 0-3.77-1.08-3.77-3.77v-3.23c0-2.69 1.08-3.77 3.77-3.77h3.23c2.7.01 3.77 1.08 3.77 3.77z"
-                        ></path>
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1.5"
-                            d="M22 5.77V9c0 2.69-1.08 3.77-3.77 3.77h-.85v-2.38c0-2.69-1.08-3.77-3.77-3.77h-2.38v-.85C11.23 3.08 12.31 2 15 2h3.23C20.92 2 22 3.08 22 5.77zM2 18.23V15c0-2.69 1.08-3.77 3.77-3.77h.85v2.38c0 2.69 1.08 3.77 3.77 3.77h2.38v.85C12.77 20.92 11.69 22 9 22H5.77C3.08 22 2 20.92 2 18.23z"
-                            opacity=".4"
-                        ></path>
-                    </svg>
-                    <span class="mx-4 font-medium text-sm">Casos</span>
-                </Link>
-                <Link
                     v-if="
-                        route().current('victim.case.edit') ||
-                        route().current('victim.case.info')
+                        route().current('victim.edit')
                     "
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
                     href=""
@@ -179,72 +145,107 @@ const inactiveClass = ref(
                             d="M1280 1056c0 53-43 96-96 96-32 0-62-16-80-43L877 768h-45v132l247 411c6 10 9 21 9 33 0 35-29 64-64 64H832v272c0 62-50 112-112 112H560c-61 0-112-50-112-112v-272H256c-35 0-64-29-64-64 0-12 3-23 9-33l247-411V768h-45l-227 341c-18 27-48 43-80 43-53 0-96-43-96-96 0-19 6-38 16-53l256-384c40-59 102-107 176-107h384c74 0 136 48 176 107l256 384c10 15 16 34 16 53zM864 256c0 124-100 224-224 224S416 380 416 256 516 32 640 32s224 100 224 224z"
                         ></path>
                     </svg>
-                    <span class="mx-4 font-medium text-sm">Caso</span>
+                    <span class="mx-4 font-medium text-sm">Vítima</span>
                 </Link>
 
-                <Link
-                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
-                    :href="route('victim.forwarded.cases.list')"
-                    :class="[
-                        route().current('victim.forwarded.cases.list')
-                            ? activeClass
-                            : inactiveClass,
-                    ]"
-                >
-                    <svg
-                        class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1.5"
-                            d="M17.38 10.38v3.23c0 2.69-1.08 3.77-3.77 3.77h-3.23c-2.69 0-3.77-1.08-3.77-3.77v-3.23c0-2.69 1.08-3.77 3.77-3.77h3.23c2.7.01 3.77 1.08 3.77 3.77z"
-                        ></path>
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1.5"
-                            d="M22 5.77V9c0 2.69-1.08 3.77-3.77 3.77h-.85v-2.38c0-2.69-1.08-3.77-3.77-3.77h-2.38v-.85C11.23 3.08 12.31 2 15 2h3.23C20.92 2 22 3.08 22 5.77zM2 18.23V15c0-2.69 1.08-3.77 3.77-3.77h.85v2.38c0 2.69 1.08 3.77 3.77 3.77h2.38v.85C12.77 20.92 11.69 22 9 22H5.77C3.08 22 2 20.92 2 18.23z"
-                            opacity=".4"
-                        ></path>
-                    </svg>
-                    <span class="mx-4 font-medium text-sm">Encaminhamento</span>
-                </Link>
-                <Link
-                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
-                    :href="route('victim.received.cases.list')"
-                    :class="[
-                        route().current('victim.received.cases.list')
-                            ? activeClass
-                            : inactiveClass,
-                    ]"
-                >
-                    <svg
-                        class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path
-                            d="M21.25 5.77V9c0 2.29-.73 3.02-3.02 3.02h-.1v-1.64c0-3.12-1.39-4.51-4.51-4.51h-1.64v-.1c0-2.29.73-3.02 3.02-3.02h3.23c2.29 0 3.02.73 3.02 3.02z"
-                            opacity=".4"
-                        ></path>
-                        <path
-                            d="M16.63 10.38v3.24c0 2.28-.73 3.01-3.01 3.01h-3.24c-2.28 0-3.01-.73-3.01-3.01v-3.24c0-2.28.73-3.01 3.01-3.01h3.24c2.28 0 3.01.73 3.01 3.01z"
-                        ></path>
-                        <path
-                            d="M12.02 18.13v.1c0 2.29-.73 3.02-3.02 3.02H5.77c-2.29 0-3.02-.73-3.02-3.02V15c0-2.29.73-3.02 3.02-3.02h.1v1.64c0 3.12 1.39 4.51 4.51 4.51h1.64z"
-                            opacity=".4"
-                        ></path>
-                    </svg>
-                    <span class="mx-4 font-medium text-sm">Recebidos</span>
-                </Link>
+<!--                <Link-->
+<!--                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"-->
+<!--                    :href="route('victim.cases.list')"-->
+<!--                    :class="[-->
+<!--                        route().current('victim.cases.list')-->
+<!--                            ? activeClass-->
+<!--                            : inactiveClass,-->
+<!--                    ]"-->
+<!--                >-->
+<!--                    <svg-->
+<!--                        class="w-5 h-5"-->
+<!--                        xmlns="http://www.w3.org/2000/svg"-->
+<!--                        fill="none"-->
+<!--                        viewBox="0 0 24 24"-->
+<!--                        stroke="currentColor"-->
+<!--                        aria-hidden="true"-->
+<!--                    >-->
+<!--                        <path-->
+<!--                            stroke-linecap="round"-->
+<!--                            stroke-linejoin="round"-->
+<!--                            stroke-width="1.5"-->
+<!--                            d="M17.38 10.38v3.23c0 2.69-1.08 3.77-3.77 3.77h-3.23c-2.69 0-3.77-1.08-3.77-3.77v-3.23c0-2.69 1.08-3.77 3.77-3.77h3.23c2.7.01 3.77 1.08 3.77 3.77z"-->
+<!--                        ></path>-->
+<!--                        <path-->
+<!--                            stroke-linecap="round"-->
+<!--                            stroke-linejoin="round"-->
+<!--                            stroke-width="1.5"-->
+<!--                            d="M22 5.77V9c0 2.69-1.08 3.77-3.77 3.77h-.85v-2.38c0-2.69-1.08-3.77-3.77-3.77h-2.38v-.85C11.23 3.08 12.31 2 15 2h3.23C20.92 2 22 3.08 22 5.77zM2 18.23V15c0-2.69 1.08-3.77 3.77-3.77h.85v2.38c0 2.69 1.08 3.77 3.77 3.77h2.38v.85C12.77 20.92 11.69 22 9 22H5.77C3.08 22 2 20.92 2 18.23z"-->
+<!--                            opacity=".4"-->
+<!--                        ></path>-->
+<!--                    </svg>-->
+<!--                    <span class="mx-4 font-medium text-sm">Casos</span>-->
+<!--                </Link>-->
+
+
+<!--                <Link-->
+<!--                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"-->
+<!--                    :href="route('victim.forwarded.cases.list')"-->
+<!--                    :class="[-->
+<!--                        route().current('victim.forwarded.cases.list')-->
+<!--                            ? activeClass-->
+<!--                            : inactiveClass,-->
+<!--                    ]"-->
+<!--                >-->
+<!--                    <svg-->
+<!--                        class="w-5 h-5"-->
+<!--                        xmlns="http://www.w3.org/2000/svg"-->
+<!--                        fill="none"-->
+<!--                        viewBox="0 0 24 24"-->
+<!--                        stroke="currentColor"-->
+<!--                        aria-hidden="true"-->
+<!--                    >-->
+<!--                        <path-->
+<!--                            stroke-linecap="round"-->
+<!--                            stroke-linejoin="round"-->
+<!--                            stroke-width="1.5"-->
+<!--                            d="M17.38 10.38v3.23c0 2.69-1.08 3.77-3.77 3.77h-3.23c-2.69 0-3.77-1.08-3.77-3.77v-3.23c0-2.69 1.08-3.77 3.77-3.77h3.23c2.7.01 3.77 1.08 3.77 3.77z"-->
+<!--                        ></path>-->
+<!--                        <path-->
+<!--                            stroke-linecap="round"-->
+<!--                            stroke-linejoin="round"-->
+<!--                            stroke-width="1.5"-->
+<!--                            d="M22 5.77V9c0 2.69-1.08 3.77-3.77 3.77h-.85v-2.38c0-2.69-1.08-3.77-3.77-3.77h-2.38v-.85C11.23 3.08 12.31 2 15 2h3.23C20.92 2 22 3.08 22 5.77zM2 18.23V15c0-2.69 1.08-3.77 3.77-3.77h.85v2.38c0 2.69 1.08 3.77 3.77 3.77h2.38v.85C12.77 20.92 11.69 22 9 22H5.77C3.08 22 2 20.92 2 18.23z"-->
+<!--                            opacity=".4"-->
+<!--                        ></path>-->
+<!--                    </svg>-->
+<!--                    <span class="mx-4 font-medium text-sm">Encaminhamento</span>-->
+<!--                </Link>-->
+<!--                <Link-->
+<!--                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"-->
+<!--                    :href="route('victim.received.cases.list')"-->
+<!--                    :class="[-->
+<!--                        route().current('victim.received.cases.list')-->
+<!--                            ? activeClass-->
+<!--                            : inactiveClass,-->
+<!--                    ]"-->
+<!--                >-->
+<!--                    <svg-->
+<!--                        class="w-5 h-5"-->
+<!--                        xmlns="http://www.w3.org/2000/svg"-->
+<!--                        viewBox="0 0 24 24"-->
+<!--                        fill="currentColor"-->
+<!--                        aria-hidden="true"-->
+<!--                    >-->
+<!--                        <path-->
+<!--                            d="M21.25 5.77V9c0 2.29-.73 3.02-3.02 3.02h-.1v-1.64c0-3.12-1.39-4.51-4.51-4.51h-1.64v-.1c0-2.29.73-3.02 3.02-3.02h3.23c2.29 0 3.02.73 3.02 3.02z"-->
+<!--                            opacity=".4"-->
+<!--                        ></path>-->
+<!--                        <path-->
+<!--                            d="M16.63 10.38v3.24c0 2.28-.73 3.01-3.01 3.01h-3.24c-2.28 0-3.01-.73-3.01-3.01v-3.24c0-2.28.73-3.01 3.01-3.01h3.24c2.28 0 3.01.73 3.01 3.01z"-->
+<!--                        ></path>-->
+<!--                        <path-->
+<!--                            d="M12.02 18.13v.1c0 2.29-.73 3.02-3.02 3.02H5.77c-2.29 0-3.02-.73-3.02-3.02V15c0-2.29.73-3.02 3.02-3.02h.1v1.64c0 3.12 1.39 4.51 4.51 4.51h1.64z"-->
+<!--                            opacity=".4"-->
+<!--                        ></path>-->
+<!--                    </svg>-->
+<!--                    <span class="mx-4 font-medium text-sm">Recebidos</span>-->
+<!--                </Link>-->
 
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"

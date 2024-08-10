@@ -38,14 +38,12 @@ use App\Http\Controllers\User\CreateUser;
 use App\Http\Controllers\User\DeleteUser;
 use App\Http\Controllers\User\GetUsers;
 use App\Http\Controllers\User\UpdateUser;
-use App\Http\Controllers\Victim\EditDataOfVictimCaseController;
-use App\Http\Controllers\Victim\ExportVictimCasesController;
-use App\Http\Controllers\Victim\GetDataOfVictimCaseController;
-use App\Http\Controllers\Victim\GetForwardedVictimCasesController;
-use App\Http\Controllers\Victim\GetReceivedVictimCasesController;
-use App\Http\Controllers\Victim\GetVictimCasesController;
-use App\Http\Controllers\Victim\RegisterController;
-use App\Http\Controllers\Victim\UpdateDataOfVictimCaseController;
+use App\Http\Controllers\Victim\CreateVictimCaseController;
+use App\Http\Controllers\Victim\EditDataOfVictimController;
+use App\Http\Controllers\Victim\RegisterDataOfVictimController;
+use App\Http\Controllers\Victim\RegisterVictimDataController;
+use App\Http\Controllers\Victim\StoreVictimCaseController;
+use App\Http\Controllers\Victim\UpdateVictimDataController;
 use App\Http\Controllers\ViolenceIncidentLocation\DeleteViolenceIncidentLocationController;
 use App\Http\Controllers\ViolenceIncidentLocation\ListViolenceIncidentLocationsController;
 use App\Http\Controllers\ViolenceIncidentLocation\StoreViolenceIncidentLocationController;
@@ -54,12 +52,7 @@ use App\Http\Controllers\ViolenceType\DeleteViolenceTypeController;
 use App\Http\Controllers\ViolenceType\ListViolenceTypesController;
 use App\Http\Controllers\ViolenceType\StoreViolenceTypeController;
 use App\Http\Controllers\ViolenceType\UpdateViolenceTypeController;
-use App\Models\Neighborhood;
-use App\Models\Perpetrator;
-use App\Models\ViolenceType;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,16 +73,7 @@ Auth::routes([
 include 'website.php';
 
 
-Route::get('/dashboard', static function () {
-    return Inertia::render('Register',[
-        'organizations' => OrganizationData::collection(\App\Models\Organization::whereNot('id',organization()->id)->get()),
-        'violenceTypes' => \App\Data\ViolenceTypeData::collection(ViolenceType::all()),
-        'neighborhoods' => \App\Data\NeighborhoodData::collection(Neighborhood::all()),
-        'perpetratorTypes' => \App\Data\BaseDataClass::collection(Perpetrator::all()),
-        'violenceLocations' => \App\Data\BaseDataClass::collection(\App\Models\ViolenceIncidentLocation::all()),
-        'supposedReasonsOfViolence' => \App\Data\BaseDataClass::collection(\App\Models\SupposedReasonOfViolence::all()),
-    ]);
-})->middleware(['auth', 'verified'])->name('victim.register');
+Route::get('/dashboard', static fn () => to_route('victim.create'))->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
@@ -158,14 +142,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/violenceIncidentLocation/{violenceIncidentLocation}/delete', DeleteViolenceIncidentLocationController::class)->name('violenceIncidentLocation.delete');
 
     #--- Victims ---#
-    Route::post('/victim/register/case', RegisterController::class)->name('victim.register.case');
-    Route::get('/victims/cases',GetVictimCasesController::class)->name('victim.cases.list');
-    Route::get('/victims/received-cases', GetReceivedVictimCasesController::class)->name('victim.received.cases.list');
-    Route::get('/victims/forwarded-cases', GetForwardedVictimCasesController::class)->name('victim.forwarded.cases.list');
-    Route::get('/export/victims/{type}/cases', ExportVictimCasesController::class)->name('export.victims.cases');
-    Route::get('/show/victimCase/{case}/info', GetDataOfVictimCaseController::class)->name('victim.case.info');
-    Route::get('/show/victimCase/{case}/edit', EditDataOfVictimCaseController::class)->name('victim.case.edit');
-    Route::match(['put','patch','post'],'/update/victimCase/{case}', UpdateDataOfVictimCaseController::class)->name('victim.case.update');
+    Route::post('/victim/register/data', RegisterVictimDataController::class)->name('victim.data.store');
+    Route::post('/victim/update/{victim}/data', UpdateVictimDataController::class)->name('victim.data.update');
+
+    Route::get('/victim/create',RegisterDataOfVictimController::class)->name('victim.create');
+    Route::get('/victim/{victim}/edit', EditDataOfVictimController::class)->name('victim.edit');
+
+    Route::get('/victim/{victim}/create/case',CreateVictimCaseController::class)->name('victim.case.create');
+    Route::post('/victim/{victim}/store/case', StoreVictimCaseController::class)->name('victim.case.store');
+
+
+//    Route::get('/victims/cases',GetVictimCasesController::class)->name('victim.cases.list');
+//    Route::get('/victims/received-cases', GetReceivedVictimCasesController::class)->name('victim.received.cases.list');
+//    Route::get('/victims/forwarded-cases', GetForwardedVictimCasesController::class)->name('victim.forwarded.cases.list');
+//    Route::get('/export/victims/{type}/cases', ExportVictimCasesController::class)->name('export.victims.cases');
+//    Route::get('/show/victimCase/{case}/info', GetDataOfVictimCaseController::class)->name('victim.case.info');
+//    Route::get('/show/victimCase/{case}/edit', EditDataOfVictimCaseController::class)->name('victim.case.edit');
+//    Route::match(['put','patch','post'],'/update/victimCase/{case}', UpdateDataOfVictimCaseController::class)->name('victim.case.update');
 
 
     #--- Reports ---#

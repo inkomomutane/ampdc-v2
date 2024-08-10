@@ -101,13 +101,19 @@ declare namespace App.Data {
         caseUpdatedBy: App.Data.UserData | any;
     };
     export type VictimData = {
+        id: string | null;
         name: string;
         age: number;
-        date_of_birth: string | null;
-        civilState: App.Enums.CivilState | null;
-        gender: App.Enums.Gender | null;
-        neighborhood: App.Data.NeighborhoodData | any | null;
+        gender: App.Enums.Gender;
+        civil_state: App.Enums.CivilState;
         contact: string | null;
+        profession: string | null;
+        education_level: App.Enums.EducationLevel | null;
+        contact_alternative: string | null;
+        contact_person: string | null;
+        city: string | null;
+        neighborhood: string | null;
+        address: string | null;
     };
     export type ViolenceIncidentLocationData = {
         id: string | null;
@@ -145,13 +151,33 @@ declare namespace App.Enums {
         "DIVORCED" = "divorciado",
         "WIDOWER" = "viúvo",
     }
+    export enum DocumentTypeMoz {
+        "BI" = "BI",
+        "NUIT" = "NUIT",
+        "PASSPORT" = "Passaporte",
+        "BIRTH_CERTIFICATE" = "Certidão de Nascimento",
+        "DRIVING_LICENSE" = "Carta de Condução",
+        "DIRE" = "DIRE",
+        "OTHER" = "Outro",
+    }
+    export enum EducationLevel {
+        "PRIMARY" = "Ensino Primário",
+        "SECONDARY" = "Ensino Secundário",
+        "TECHNICAL_PROFESSIONAL" = "Ensino Técnico Profissional",
+        "UNIVERSITY" = "Ensino Universitário",
+        "POSTGRADUATE" = "Pós-Graduação",
+        "MASTER" = "Mestrado",
+        "DOCTORATE" = "Doutoramento",
+    }
     export enum Gender {
         "FEMALE" = "Feminino",
         "MALE" = "Masculino",
+        "LGBTQ_OTHER" = "LGBTQ+/Outro",
     }
     export enum PeriodOfViolenceAct {
         "MORNING" = "Manhã",
         "AFTERNOON" = "Tarde",
         "NIGHT" = "Noite",
+        "DAWN" = "Madrugada",
     }
 }

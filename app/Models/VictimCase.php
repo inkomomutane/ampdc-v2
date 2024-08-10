@@ -20,31 +20,25 @@ class VictimCase extends Model
     public string $dataClass = VictimCaseData::class;
 
     protected $with = [
-        'victim',
-        'perpetrator',
-        'organization',
-        'caseRegisteredBy',
-        'caseUpdatedBy',
-        'violenceType',
-        'violenceIncidentLocation',
-        'supposedReasonOfViolence',
-        'forwardedFromOrganization',
-        'forwardedToOrganization'
+
     ];
 
     public $casts = [
         'period_of_violence_act' => PeriodOfViolenceAct::class,
-        'progress_status' => CaseProgressStatus::class,
         'is_violence_caused_death' => 'boolean',
         'is_terminated' => 'boolean',
         'updated_fields' => 'array',
-        'date_of_birth' => 'date'
+        'date_of_birth' => 'date',
+        'case_registered_at' => 'datetime',
+        'is_violence_reported_to_authorities' => 'boolean',
+        'is_the_first_time' => 'boolean',
+        'is_the_last_cases_reported_to_authorities' => 'boolean',
+        'are_last_cases_resolved' => 'boolean'
     ];
 
     protected $fillable = [
         'case_code',
         'victim_id',
-        'date_of_birth',
         'violence_type_id',
         'perpetrator_id',
         'period_of_violence_act',
@@ -52,15 +46,28 @@ class VictimCase extends Model
         'supposed_reason_of_violence_id',
         'violence_details',
         'is_violence_caused_death',
-        'progress_status',
-        'updated_fields',
-        'organization_id',
-        'forwarded_to_organization_id',
-        'forwarded_from_organization_id',
         'is_terminated',
         'conclusion',
         'case_registered_by_id',
-        'case_updated_by_id',
+        'case_registered_by_organization_id',
+        'case_registered_at',
+        'case_registered_address',
+        'case_registered_agent',
+        'case_registered_city',
+        'case_registered_province',
+        'case_registered_district',
+        'perpetrator_relationship',
+        'perpetrator_name',
+        'perpetrator_profession',
+        'perpetrator_address',
+        'perpetrator_contact',
+        'perpetrator_contact_alternative',
+        'is_violence_reported_to_authorities',
+        'is_the_first_time',
+        'last_violences_description',
+        'is_the_last_cases_reported_to_authorities',
+        'are_last_cases_resolved',
+        'last_cases_resolution_details'
     ];
 
 
@@ -89,29 +96,14 @@ class VictimCase extends Model
         return $this->belongsTo(SupposedReasonOfViolence::class);
     }
 
-    public function organization() : BelongsTo
-    {
-        return $this->belongsTo(Organization::class);
-    }
-
-    public function forwardedToOrganization() : BelongsTo
-    {
-        return $this->belongsTo(Organization::class);
-    }
-
-    public function forwardedFromOrganization() : BelongsTo
-    {
-        return $this->belongsTo(Organization::class);
-    }
 
     public function caseRegisteredBy() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'case_registered_by_id');
     }
 
-    public function caseUpdatedBy() : BelongsTo
+    public function caseRegisteredByOrganization(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Organization::class,'case_registered_by_organization_id');
     }
-
 }

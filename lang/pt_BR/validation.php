@@ -268,5 +268,13 @@ return [
         'username'                 => 'usuário',
         'value'                    => 'valor',
         'year'                     => 'ano',
+        "civil_state"              => "estado civil",
+        "contact"                  => "contato",
+        "has_profession"           => "tem profissão",
+        "profession"               => "profissão",
+        "education_level"          => "nível de educação",
+        "neighborhood"             => "bairro",
+        'violence_type_id'         => 'tipo de violência',
+        "supposed_reason_of_violence_id" => "suposto motivo da violência",
     ],
 ];

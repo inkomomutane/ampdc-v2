@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import InputError from "@/components/InputError.vue";
 import { Link, useForm } from "@inertiajs/vue3";
-import loginImage from "@images/login.png";
 import logo from "@images/logo.png";
 
 defineProps<{
@@ -53,12 +52,8 @@ const submit = () => {
         <section
             class="relative bg-gradient-to-b to-amber-100 from-white dark:bg-gray-900 col-span-3 flex"
         >
-            <img
-                class="absolute inset-0 w-full h-full object-cover"
-                :src="loginImage"
-                alt="mockup"
-            />
-            <div class="absolute inset-0 bg-black opacity-40"></div>
+
+            <div class="absolute inset-0 bg-rose-500 opacity-40"></div>
             <div
                 class="relative py-8 px-4 mx-auto my-auto w-5/6 sm:w-3/5 md:w-5/6 lg:w-3/5"
             >

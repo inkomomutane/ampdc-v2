@@ -4,17 +4,88 @@
             <div class="splide__track">
                 <ul class="splide__list mt-2">
                     <li class="splide__slide">
-                        <a
-                            href="https://www.essor-ong.org"
+                        <span
+                            class="flex justify-center items-center"
+                        >
+                            <img
+                                class="!h-12"
+                                src="{{ Vite::asset("resources/website/images/partners/ampdc.jpg") }}"
+                                alt="AMPDC"
+                            />
+                        </span>
+                    </li>
+                    <li class="splide__slide">
+                        <span
                             class="flex justify-center items-center"
                         >
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/silverlining.png") }}"
-                                alt="Essor"
+                                alt="Silverlining"
                             />
-                        </a>
+                        </span>
                     </li>
+                    <li class="splide__slide">
+                        <span
+
+                            class="flex justify-center items-center"
+                        >
+                            <img
+                                class="!h-12"
+                                src="{{ Vite::asset("resources/website/images/partners/cesc.png") }}"
+                                alt="Cesc"
+                            />
+                        </span>
+                    </li>
+                    <li class="splide__slide">
+                        <span
+
+                            class="flex justify-center items-center"
+                        >
+                            <img
+                                class="!h-12"
+                                src="{{ Vite::asset("resources/website/images/partners/igual.jpg") }}"
+                                alt="Igual"
+                            />
+                        </span>
+                    </li>
+                    <li class="splide__slide">
+                        <span
+
+                            class="flex justify-center items-center"
+                        >
+                            <img
+                                class="!h-12"
+                                src="{{ Vite::asset("resources/website/images/partners/Lemusica.png") }}"
+                                alt="Lemusica"
+                            />
+                        </span>
+                    </li>
+                    <li class="splide__slide">
+                        <span
+
+                            class="flex justify-center items-center"
+                        >
+                            <img
+                                class="!h-12"
+                                src="{{ Vite::asset("resources/website/images/partners/NAFEZA.png") }}"
+                                alt="NAFEZA"
+                            />
+                        </span>
+                    </li>
+                    <li class="splide__slide">
+                        <span
+
+                            class="flex justify-center items-center"
+                        >
+                            <img
+                                class="!h-12"
+                                src="{{ Vite::asset("resources/website/images/partners/observatorio.jpg") }}"
+                                alt="Observatorio das mulheres"
+                            />
+                        </span>
+                    </li>
+
                 </ul>
             </div>
         </div>

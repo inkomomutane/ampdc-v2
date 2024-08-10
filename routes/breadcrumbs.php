@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Breadcrumbs::for('victim.register', function (BreadcrumbTrail $trail) {
-    $trail->push('Registo', route('victim.register'));
+    $trail->push('Registo', route('victim.create'));
 });
 
 Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
