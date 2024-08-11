@@ -19,9 +19,6 @@ const props = defineProps({
     causeOfDeath: {
         type: Object,
     },
-    neighborhoodDeaths: {
-        type: Object,
-    },
 });
 
 import {
@@ -197,16 +194,11 @@ ChartJS.register(
                             label="Casos recebidos"
                         />
                     </div>
-                    <div class="grid grid-cols-2 gap-6 mb-8">
+                    <div class="grid  gap-6 mb-8">
                         <DeathCauseChart
                             label="Gráfico tipo de violência"
                             :causes="causeOfDeath.labels"
                             :causes-count="causeOfDeath.values"
-                        />
-                        <DeathCauseChart
-                            label="Gráfico por bor bairros"
-                            :causes="neighborhoodDeaths.labels"
-                            :causes-count="neighborhoodDeaths.values"
                         />
                     </div>
                 </div>

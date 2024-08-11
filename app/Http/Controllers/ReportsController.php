@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CaseProgressStatus;
+use App\Models\ForwardingCase;
 use App\Models\Neighborhood;
 use App\Models\VictimCase;
 use App\Models\ViolenceType;
@@ -20,7 +21,6 @@ class ReportsController extends Controller
             'forwardedCasesCount' => $this->getCasesCountByYear($year,'forwarded'),
             'receivedCasesCount' => $this->getCasesCountByYear($year,'received'),
             'causeOfDeath' => $this->getCauseCauses($year),
-            'neighborhoodDeaths' => $this->getNeighborhoodDeaths($year)
         ]);
     }
 
@@ -45,7 +45,7 @@ class ReportsController extends Controller
         for ($i = 1; $i <= 12; $i++) {
             $monthCounts[] = VictimCase::whereYear('created_at',$year)
                 ->whereMonth('created_at',$i)
-                ->whereProgressStatus(CaseProgressStatus::SOLVED->value)
+                ->whereIsTerminated(true)
                 ->count();
         }
         return $monthCounts;
@@ -58,23 +58,35 @@ class ReportsController extends Controller
        if($type === 'cases'){
            return (object) [
                'total' =>  VictimCase::whereYear('created_at',$year)->count(),
-               'done' =>    VictimCase::whereYear('created_at',$year)->whereProgressStatus(CaseProgressStatus::SOLVED->value)->count(),
-               'pending' => VictimCase::whereYear('created_at',$year)->whereNot('progress_status','<=>',CaseProgressStatus::SOLVED->value )->count()
+               'done' =>    VictimCase::whereYear('created_at',$year)->whereIsTerminated(true)->count(),
+               'pending' => VictimCase::whereYear('created_at',$year)->whereIsTerminated(false)->count()
            ];
        }
 
         if($type === 'forwarded'){
             return (object) [
-                'total' =>  VictimCase::whereYear('created_at',$year)->whereForwardedFromOrganizationId(organization()->id)->count(),
-                'done' =>    VictimCase::whereYear('created_at',$year)->whereForwardedFromOrganizationId(organization()->id)->whereProgressStatus(CaseProgressStatus::SOLVED->value)->count(),
-                'pending' => VictimCase::whereYear('created_at',$year)->whereForwardedFromOrganizationId(organization()->id)->whereNot('progress_status','<=>',CaseProgressStatus::SOLVED->value )->count()
+                'total' =>  ForwardingCase::whereYear('created_at',$year)
+                    ->whereOrganizationId(auth()->user()->organization_id)
+                    ->count(),
+                'done' =>    ForwardingCase::whereYear('created_at',$year)
+                    ->whereOrganizationId(auth()->user()->organization_id)
+                    ->whereStatus(CaseProgressStatus::SOLVED->value)->count(),
+                'pending' => ForwardingCase::whereYear('created_at',$year)
+                    ->whereOrganizationId(auth()->user()->organization_id)
+                    ->whereNot('forwarding_cases.status','<=>',CaseProgressStatus::SOLVED->value)->count()
             ];
         }
 
         return (object) [
-            'total' =>  VictimCase::whereYear('created_at',$year)->whereForwardedToOrganizationId(organization()->id)->count(),
-            'done' =>    VictimCase::whereYear('created_at',$year)->whereForwardedToOrganizationId(organization()->id)->whereProgressStatus(CaseProgressStatus::SOLVED->value)->count(),
-            'pending' => VictimCase::whereYear('created_at',$year)->whereForwardedToOrganizationId(organization()->id)->whereNot('progress_status','<=>',CaseProgressStatus::SOLVED->value )->count()
+            'total' =>  ForwardingCase::whereYear('created_at',$year)
+                ->whereForwardedTo(auth()->user()->organization_id)
+                ->count(),
+            'done' =>    ForwardingCase::whereYear('created_at',$year)
+                ->whereForwardedTo(auth()->user()->organization_id)
+                ->whereStatus(CaseProgressStatus::SOLVED->value)->count(),
+            'pending' => ForwardingCase::whereYear('created_at',$year)
+                ->whereForwardedTo(auth()->user()->organization_id)
+                ->whereNot('forwarding_cases.status','<=>',CaseProgressStatus::SOLVED->value)->count()
         ];
     }
 
@@ -85,33 +97,12 @@ class ReportsController extends Controller
         $causeCases = collect([]);
 
         foreach ($causes as $cause) {
-            $causeCases->put($cause->name,VictimCase::whereOrganizationId(organization()->id)->whereYear('created_at',$year)
+            $causeCases->put($cause->name,VictimCase::whereYear('created_at',$year)
             ->whereViolenceTypeId($cause->id)
 
                 ->count());
         }
 
-        return (object) [
-            'labels' => $causeCases->keys()->toArray(),
-            'values' => $causeCases->values()->toArray()
-        ];
-    }
-    private function getNeighborhoodDeaths (int $year) : object {
-
-        $causes = Neighborhood::all();
-
-        $causeCases = collect([]);
-
-        foreach ($causes as $cause) {
-            $causeCases->put($cause->name,
-                VictimCase::
-                whereOrganizationId(organization()->id)->whereYear('created_at',$year)
-                ->whereRelation('victim.neighborhood','id',$cause->id)
-
-                    ->count())
-
-            ;
-        }
         return (object) [
             'labels' => $causeCases->keys()->toArray(),
             'values' => $causeCases->values()->toArray()

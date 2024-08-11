@@ -14,7 +14,6 @@ class StoreVictimCaseController
 {
     private function rules() : array {
         return  [
-//            #case fields
               'violence_type_id' => 'required|exists:violence_types,id',
               'supposed_reason_of_violence_id' => 'required|exists:supposed_reason_of_violences,id',
               'perpetrator_id' => 'required|exists:perpetrators,id',
