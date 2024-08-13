@@ -17,18 +17,4 @@ class Organization extends Model
     protected $fillable = ['name', 'services'];
     protected string $dataClass = OrganizationData::class;
 
-    public function cases() : HasMany
-    {
-        return $this->hasMany(VictimCase::class, 'organization_id');
-    }
-
-    public function receivedCases() :HasMany
-    {
-        return $this->hasMany(VictimCase::class, 'forwarded_to_organization_id');
-    }
-
-    public function forwardedCases() :HasMany
-    {
-        return $this->hasMany(VictimCase::class, 'forwarded_from_organization_id');
-    }
 }

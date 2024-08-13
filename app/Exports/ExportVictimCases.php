@@ -7,95 +7,78 @@ use App\Enums\Gender;
 use App\Models\Organization;
 use App\Models\VictimCase;
 use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
- class ExportVictimCases implements FromArray,WithHeadings,WithStyles,ShouldAutoSize,WithColumnFormatting
+ class ExportVictimCases implements FromQuery,WithHeadings,WithStyles,ShouldAutoSize,WithColumnFormatting,WithMapping
 {
 
-    private array $cases;
 
-    public function __construct(public Organization $case,public string $type = 'cases')
+
+    public function query()
     {
-
-        if($this->type === 'cases'){
-            $this->cases =  $this->case->cases->map(fn(VictimCase $case) => $this->getCaseArray($case))->toArray();
-        }
-       else if($this->type === 'forwarded'){
-            $this->cases = $this->case->forwardedCases->map(fn(VictimCase $case) => $this->getCaseArray($case))->toArray();
-        }
-      else  if($this->type === 'received'){
-            $this->cases = $this->case->receivedCases->map(fn(VictimCase $case) => $this->getCaseArray($case))->toArray();
-        }
-        else {
-            $this->cases = [];
-        }
+        return VictimCase::query();
     }
 
-    /**
-     * @return array
-     */
-    public function array(): array
+    public function map(mixed $row): array
     {
-        return $this->cases;
-    }
-
-    private function getCaseArray(VictimCase $case): array
-    {
+        /** @var VictimCase $row */
       return [
-            $case->case_code,
-            $case->victim->name,
-            $case->victim->age,
-          $case->victim->gender->value,
-            $case->victim->civil_state->value,
-            $case->victim->contact,
-            $case->victim->has_profession ? 'Sim' : 'Não',
-            $case->victim->profession,
-            $case->victim->education_level->value,
-            $case->victim->contact_alternative,
-            $case->victim->contact_person,
-            $case->victim->contact_person_relationship,
-            $case->victim->has_children ? 'Sim' : 'Não',
-            $case->victim->number_of_children,
-            $case->victim->live_with_other_parents ? 'Sim' : 'Não',
-            $case->victim->city,
-            $case->victim->neighborhood,
-            $case->victim->address,
-            $case->violenceType->name,
-            $case->perpetrator->name,
-            $case->perpetrator_relationship,
-             $case->perpetrator_name,
-              $case->perpetrator_profession,
-              $case->perpetrator_address,
-              $case->perpetrator_contact,
-          $case->perpetrator_contact_alternative,
-            $case->period_of_violence_act,
-            $case->violenceIncidentLocation->name,
-            $case->supposedReasonOfViolence->name,
-            $case->violence_details,
-            $case->is_violence_caused_death ? 'Sim' : 'Não',
-            $case->is_terminated ? 'Sim' : 'Não',
-            $case->conclusion,
-            $case->caseRegisteredBy->name,
-            $case->caseRegisteredByOrganization->name,
-            $case->case_registered_at->format('d/m/Y'),
-            $case->case_registered_address,
-            $case->case_registered_agent,
-            $case->case_registered_city,
-            $case->case_registered_province,
-            $case->case_registered_district,
-            $case->is_violence_reported_to_authorities ? 'Sim' : 'Não',
-            $case->is_the_first_time ? 'Sim' : 'Não',
-            $case->last_violences_description,
-            $case->is_the_last_cases_reported_to_authorities ? 'Sim' : 'Não',
-            $case->are_last_cases_resolved ? 'Sim' : 'Não',
-            $case->last_cases_resolution_details,
+          $row->case_code,
+            $row->victim->name,
+            $row->victim->age,
+            $row->victim->gender->value,
+            $row->victim->civil_state?->value,
+            $row->victim->contact,
+            $row->victim->has_profession ? 'Sim' : 'Não',
+            $row->victim->profession,
+            $row->victim->education_level?->value,
+            $row->victim->contact_alternative,
+            $row->victim->contact_person,
+            $row->victim->contact_person_relationship,
+            $row->victim->has_children ? 'Sim' : 'Não',
+            $row->victim->number_of_children,
+            $row->victim->live_with_other_parents ? 'Sim' : 'Não',
+            $row->victim->city,
+            $row->victim->neighborhood,
+            $row->victim->address,
+            $row->violenceType?->name,
+            $row->perpetrator?->name,
+            $row->perpetrator_relationship,
+             $row->perpetrator_name,
+              $row->perpetrator_profession,
+              $row->perpetrator_address,
+              $row->perpetrator_contact,
+          $row->perpetrator_contact_alternative,
+            $row->period_of_violence_act?->value,
+            $row->violenceIncidentLocation?->name,
+            $row->supposedReasonOfViolence?->name,
+            $row->violence_details,
+            $row->is_violence_caused_death ? 'Sim' : 'Não',
+            $row->is_terminated ? 'Sim' : 'Não',
+            $row->conclusion,
+            $row->caseRegisteredBy?->name,
+            $row->caseRegisteredByOrganization?->name,
+            $row->case_registered_at?->format('d/m/Y'),
+            $row->case_registered_address,
+            $row->case_registered_agent,
+            $row->case_registered_city,
+            $row->case_registered_province,
+            $row->case_registered_district,
+            $row->is_violence_reported_to_authorities ? 'Sim' : 'Não',
+            $row->is_the_first_time ? 'Sim' : 'Não',
+            $row->last_violences_description,
+            $row->is_the_last_cases_reported_to_authorities ? 'Sim' : 'Não',
+            $row->are_last_cases_resolved ? 'Sim' : 'Não',
+            $row->last_cases_resolution_details,
 
 
         ];
@@ -160,12 +143,12 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
     public function styles(Worksheet $sheet) :void
     {
         $sheet->setTitle( 'Casos de vitimas');
-        $length = count($this->cases)  + 1;
-        $sheet->getStyle('A1:AZ1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:AZ1')->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('A1:AZ1')->getAlignment()->setVertical('center');
-        $sheet->getStyle("A1:AZ$length")->getBorders()->getAllBorders()->setBorderStyle('thin');
-        $sheet->getStyle('A1:AZ1')->getBorders()->getAllBorders()->setBorderStyle('medium');
+        $length = VictimCase::count()  + 1;
+        $sheet->getStyle('A1:AT1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:AT1')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A1:AT1')->getAlignment()->setVertical('center');
+        $sheet->getStyle("A1:AT$length")->getBorders()->getAllBorders()->setBorderStyle('thin');
+        $sheet->getStyle('A1:AT1')->getBorders()->getAllBorders()->setBorderStyle('medium');
     }
 
     public function columnFormats(): array
