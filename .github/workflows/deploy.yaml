@@ -62,8 +62,7 @@ jobs:
         with:
           command: |
             cd htdocs/ofeminicidio.ampdc.org
-            eval "$(ssh-agent -s)"
-            ssh-add ~/.ssh/id_ed25519
+            git config --global --add safe.directory /home/ofeminicidio/htdocs/ofeminicidio.ampdc.org
             git pull origin production
             php composer_production.phar update
             php artisan migrate --force
