@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Data\VictimCaseData;
-use App\Enums\CaseProgressStatus;
 use App\Enums\PeriodOfViolenceAct;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +18,15 @@ class VictimCase extends Model
 
     public string $dataClass = VictimCaseData::class;
 
-    protected $with = ['victim','violenceType','perpetrator','violenceIncidentLocation','supposedReasonOfViolence'];
+    protected $with = [
+        'victim',
+        'violenceType',
+        'perpetrator',
+        'violenceIncidentLocation',
+        'supposedReasonOfViolence',
+        'caseRegisteredBy',
+        'caseRegisteredByOrganization'
+    ];
 
     public $casts = [
         'period_of_violence_act' => PeriodOfViolenceAct::class,
@@ -93,7 +100,6 @@ class VictimCase extends Model
     {
         return $this->belongsTo(SupposedReasonOfViolence::class);
     }
-
 
     public function caseRegisteredBy() : BelongsTo
     {
