@@ -62,7 +62,7 @@ jobs:
         with:
           command: |
             ${{ secrets.FUN_GIT_PULL }}
-            su ofeminicidio.ampdc.org
+            cd htdocs/ofeminicidio.ampdc.org
             php composer.phar update
             php artisan migrate --force
             php artisan db:seed --force
