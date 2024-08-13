@@ -3,6 +3,7 @@
 use App\Models\District;
 use App\Models\Neighborhood;
 use App\Models\Organization;
+use App\Models\Victim;
 use App\Models\VictimCase;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
@@ -169,47 +170,55 @@ Breadcrumbs::for('victim.cases.list', function (BreadcrumbTrail $trail) {
     $trail->push('Casos', route('victim.cases.list'));
 });
 
-Breadcrumbs::for('victim.received.cases.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
-    $trail->push('Casos Recebidos', route('victim.received.cases.list'));
-});
 
-Breadcrumbs::for('victim.forwarded.cases.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
-    $trail->push('Casos Encaminhados', route('victim.forwarded.cases.list'));
-});
-
-
-
-Breadcrumbs::for('victim.case.info', function (BreadcrumbTrail $trail, VictimCase $case) {
-
-    if($case->is_forwarded && $case->forwarded_to_organization_id === auth()->user()->organization_id){
-        $trail->parent('victim.received.cases.list');
-    }else if($case->is_forwarded && $case->forwarded_from_organization_id === auth()->user()->organization_id){
-        $trail->parent('victim.forwarded.cases.list');
-    }
-    else{
-        $trail->parent('victim.cases.list');
-    }
-
-    $trail->push('Informação do caso - ' . $case->case_code, route('victim.case.info',[
-        'case' => $case
+Breadcrumbs::for('victim.edit', static function (BreadcrumbTrail $trail, Victim $victim) {
+    $trail->parent('victim.cases.list');
+    $trail->push('Editar dados da vítima ' , route('victim.edit',[
+        'victim' => $victim
     ]));
 });
 
-Breadcrumbs::for('victim.case.edit', static function (BreadcrumbTrail $trail, VictimCase $case) {
-    if($case->is_forwarded && $case->forwarded_to_organization_id === auth()->user()->organization_id){
-        $trail->parent('victim.received.cases.list');
-    }else if($case->is_forwarded && $case->forwarded_from_organization_id === auth()->user()->organization_id){
-        $trail->parent('victim.forwarded.cases.list');
-    }
-    else{
-        $trail->parent('victim.cases.list');
-    }
-    $trail->push('Editar caso - ' . $case->case_code, route('victim.case.edit',[
-        'case' => $case
-    ]));
-});
+//Breadcrumbs::for('victim.received.cases.list', function (BreadcrumbTrail $trail) {
+//    $trail->parent('victim.register');
+//    $trail->push('Casos Recebidos', route('victim.received.cases.list'));
+//});
+//
+//Breadcrumbs::for('victim.forwarded.cases.list', function (BreadcrumbTrail $trail) {
+//    $trail->parent('victim.register');
+//    $trail->push('Casos Encaminhados', route('victim.forwarded.cases.list'));
+//});
+
+
+
+//Breadcrumbs::for('victim.case.info', function (BreadcrumbTrail $trail, VictimCase $case) {
+//
+//    if($case->is_forwarded && $case->forwarded_to_organization_id === auth()->user()->organization_id){
+//        $trail->parent('victim.received.cases.list');
+//    }else if($case->is_forwarded && $case->forwarded_from_organization_id === auth()->user()->organization_id){
+//        $trail->parent('victim.forwarded.cases.list');
+//    }
+//    else{
+//        $trail->parent('victim.cases.list');
+//    }
+//
+//    $trail->push('Informação do caso - ' . $case->case_code, route('victim.case.info',[
+//        'case' => $case
+//    ]));
+//});
+
+//Breadcrumbs::for('victim.case.edit', static function (BreadcrumbTrail $trail, VictimCase $case) {
+//    if($case->is_forwarded && $case->forwarded_to_organization_id === auth()->user()->organization_id){
+//        $trail->parent('victim.received.cases.list');
+//    }else if($case->is_forwarded && $case->forwarded_from_organization_id === auth()->user()->organization_id){
+//        $trail->parent('victim.forwarded.cases.list');
+//    }
+//    else{
+//        $trail->parent('victim.cases.list');
+//    }
+//    $trail->push('Editar caso - ' . $case->case_code, route('victim.case.edit',[
+//        'case' => $case
+//    ]));
+//});
 
 Breadcrumbs::for('dashboard.reports', function (BreadcrumbTrail $trail) {
     $trail->push('Relatórios', route('dashboard.reports'));

@@ -40,6 +40,7 @@ use App\Http\Controllers\User\GetUsers;
 use App\Http\Controllers\User\UpdateUser;
 use App\Http\Controllers\Victim\CreateVictimCaseController;
 use App\Http\Controllers\Victim\EditDataOfVictimController;
+use App\Http\Controllers\Victim\ListVictimCases;
 use App\Http\Controllers\Victim\RegisterDataOfVictimController;
 use App\Http\Controllers\Victim\RegisterVictimDataController;
 use App\Http\Controllers\Victim\StoreVictimCaseController;
@@ -152,7 +153,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/victim/{victim}/store/case', StoreVictimCaseController::class)->name('victim.case.store');
 
 
-//    Route::get('/victims/cases',GetVictimCasesController::class)->name('victim.cases.list');
+    Route::get('/victims/cases',ListVictimCases::class)->name('victim.cases.list');
 //    Route::get('/victims/received-cases', GetReceivedVictimCasesController::class)->name('victim.received.cases.list');
 //    Route::get('/victims/forwarded-cases', GetForwardedVictimCasesController::class)->name('victim.forwarded.cases.list');
 //    Route::get('/export/victims/{type}/cases', ExportVictimCasesController::class)->name('export.victims.cases');

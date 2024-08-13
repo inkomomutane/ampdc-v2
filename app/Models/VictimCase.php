@@ -19,9 +19,7 @@ class VictimCase extends Model
 
     public string $dataClass = VictimCaseData::class;
 
-    protected $with = [
-
-    ];
+    protected $with = ['victim','violenceType','perpetrator','violenceIncidentLocation','supposedReasonOfViolence'];
 
     public $casts = [
         'period_of_violence_act' => PeriodOfViolenceAct::class,

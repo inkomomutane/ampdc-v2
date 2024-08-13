@@ -88,7 +88,7 @@ function closeDeleteUserModal() {
 </script>
 
 <template>
-    <Head title="User do imóvel" />
+    <Head title="Usuários" />
     <AuthenticatedLayout>
         <template v-slot:content>
             <div class="mx-auto max-w-screen-xl">

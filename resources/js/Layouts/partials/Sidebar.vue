@@ -147,40 +147,39 @@ const inactiveClass = ref(
                     </svg>
                     <span class="mx-4 font-medium text-sm">Vítima</span>
                 </Link>
-
-<!--                <Link-->
-<!--                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"-->
-<!--                    :href="route('victim.cases.list')"-->
-<!--                    :class="[-->
-<!--                        route().current('victim.cases.list')-->
-<!--                            ? activeClass-->
-<!--                            : inactiveClass,-->
-<!--                    ]"-->
-<!--                >-->
-<!--                    <svg-->
-<!--                        class="w-5 h-5"-->
-<!--                        xmlns="http://www.w3.org/2000/svg"-->
-<!--                        fill="none"-->
-<!--                        viewBox="0 0 24 24"-->
-<!--                        stroke="currentColor"-->
-<!--                        aria-hidden="true"-->
-<!--                    >-->
-<!--                        <path-->
-<!--                            stroke-linecap="round"-->
-<!--                            stroke-linejoin="round"-->
-<!--                            stroke-width="1.5"-->
-<!--                            d="M17.38 10.38v3.23c0 2.69-1.08 3.77-3.77 3.77h-3.23c-2.69 0-3.77-1.08-3.77-3.77v-3.23c0-2.69 1.08-3.77 3.77-3.77h3.23c2.7.01 3.77 1.08 3.77 3.77z"-->
-<!--                        ></path>-->
-<!--                        <path-->
-<!--                            stroke-linecap="round"-->
-<!--                            stroke-linejoin="round"-->
-<!--                            stroke-width="1.5"-->
-<!--                            d="M22 5.77V9c0 2.69-1.08 3.77-3.77 3.77h-.85v-2.38c0-2.69-1.08-3.77-3.77-3.77h-2.38v-.85C11.23 3.08 12.31 2 15 2h3.23C20.92 2 22 3.08 22 5.77zM2 18.23V15c0-2.69 1.08-3.77 3.77-3.77h.85v2.38c0 2.69 1.08 3.77 3.77 3.77h2.38v.85C12.77 20.92 11.69 22 9 22H5.77C3.08 22 2 20.92 2 18.23z"-->
-<!--                            opacity=".4"-->
-<!--                        ></path>-->
-<!--                    </svg>-->
-<!--                    <span class="mx-4 font-medium text-sm">Casos</span>-->
-<!--                </Link>-->
+                <Link
+                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
+                    :href="route('victim.cases.list')"
+                    :class="[
+                        route().current('victim.cases.list')
+                            ? activeClass
+                            : inactiveClass,
+                    ]"
+                >
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            d="M17.38 10.38v3.23c0 2.69-1.08 3.77-3.77 3.77h-3.23c-2.69 0-3.77-1.08-3.77-3.77v-3.23c0-2.69 1.08-3.77 3.77-3.77h3.23c2.7.01 3.77 1.08 3.77 3.77z"
+                        ></path>
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            d="M22 5.77V9c0 2.69-1.08 3.77-3.77 3.77h-.85v-2.38c0-2.69-1.08-3.77-3.77-3.77h-2.38v-.85C11.23 3.08 12.31 2 15 2h3.23C20.92 2 22 3.08 22 5.77zM2 18.23V15c0-2.69 1.08-3.77 3.77-3.77h.85v2.38c0 2.69 1.08 3.77 3.77 3.77h2.38v.85C12.77 20.92 11.69 22 9 22H5.77C3.08 22 2 20.92 2 18.23z"
+                            opacity=".4"
+                        ></path>
+                    </svg>
+                    <span class="mx-4 font-medium text-sm">Casos</span>
+                </Link>
 
 
 <!--                <Link-->
