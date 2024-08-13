@@ -40,7 +40,7 @@ const changeMode = (dark: Boolean) => {
 };
 
 const profileLink = () => router.get(route("profile.edit"));
-const logout = () => router.post(route("logout"));
+const logout = () => window.open(route("logout"), "_self");
 </script>
 
 <template>
