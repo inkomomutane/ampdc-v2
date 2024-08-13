@@ -61,9 +61,10 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            ${{ secrets.FUN_GIT_PULL }}
             cd htdocs/ofeminicidio.ampdc.org
-            php composer.phar update
+            git fetch --all
+            git pull origin production
+            php composer_production.phar update
             php artisan migrate --force
             php artisan db:seed --force
             php artisan optimize:clear
