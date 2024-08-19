@@ -7,6 +7,7 @@ import {FlasherResponse} from "@flasher/flasher";
 import Flasher, {progressCasesColor} from "@/helprs";
 import NeighborhoodData = App.Data.NeighborhoodData;
 import ViolenceTypeData = App.Data.ViolenceTypeData;
+import OrganizationData = App.Data.OrganizationData;
 import {CaseProgressStatus} from "@/types/casestatus";
 
 const props = defineProps({
@@ -32,6 +33,8 @@ const props = defineProps({
     },
 });
 
+
+
 const form = useForm({
     name: props.victimCase?.victim.name,
     age: props.victimCase?.victim.age,
@@ -40,7 +43,13 @@ const form = useForm({
     violence_details: props.victimCase?.caseDetails,
     contact: props.victimCase?.victim.contact,
     status: props.victimCase?.progressStatus,
+    requires_forwards: false,
+    forward_to_organizations: [],
 });
+
+const onCliqueRequiredForwards = () => {
+    form.requires_forwards = !form.requires_forwards;
+};
 
 const updateCaseData = () => {
     form.post(route('victim.case.update', {
@@ -160,7 +169,7 @@ watch(
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="violence_type_id"
-                                >Causa da morte</label
+                                >Tipo de Violência</label
                             >
                             <v-select
                                 v-model="form.violence_type_id"
@@ -168,7 +177,7 @@ watch(
                                     (option: ViolenceTypeData) => option.name
                                 "
                                 :options="violenceTypes"
-                                placeholder="Causa da morte"
+                                placeholder="Tipo de Violência"
                                 :reduce="(unit: ViolenceTypeData) => unit.id"
                                 label="violence_type_id"
                             ></v-select>
@@ -216,7 +225,7 @@ watch(
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="violence_details"
-                                >Detalhes da violência</label
+                                >Descrição do caso</label
                             >
                             <textarea
                                 id="violence_details"
@@ -224,12 +233,55 @@ watch(
                                 v-model="form.violence_details"
                                 class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 name="violence_details"
-                                placeholder="Detalhes da violência"
+                                placeholder="Descrição do caso"
                                 rows="4"
                             >
                             </textarea>
                             <InputError
                                 :message="form.errors.violence_details"
+                            />
+                        </div>
+                        <div
+                            class="flex gap-4 col-span-2 cursor-pointer"
+                            @click="onCliqueRequiredForwards"
+                        >
+                            <input
+                                id="requires_forwards"
+                                ref="requiresForwardsInput"
+                                v-model="form.requires_forwards"
+                                name="requires_forwards"
+                                class="flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Encaminhar o caso"
+                                type="checkbox"
+                            />
+                            <label
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
+                                >Encaminhar o caso</label
+                            >
+                            <InputError
+                                :message="form.errors.requires_forwards"
+                            />
+                        </div>
+
+                        <div class="col-span-2" v-if="form.requires_forwards">
+                            <label
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="forward_to_organizations"
+                                >Encaminhar o caso</label
+                            >
+                            <v-select
+                                v-model="form.forward_to_organizations"
+                                :get-option-label="
+                                    (option: OrganizationData) => option.name
+                                "
+                                :options="organizations"
+                                placeholder="Encaminhar o caso"
+                                :reduce="(unit: OrganizationData) => unit.id"
+                                label="forward_to_organizations"
+                                multiple
+                            ></v-select>
+                            <InputError
+                                :message="form.errors.forward_to_organizations"
                             />
                         </div>
                         <button

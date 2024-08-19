@@ -4,8 +4,8 @@ import { useForm } from "@inertiajs/vue3";
 import { PropType } from "vue";
 
 const props = defineProps({
-    violenceType: {
-        type: Object as PropType<App.Data.ViolenceTypeData>,
+    deathCause: {
+        type: Object as PropType<App.Data.DeathCauseData>,
         required: true,
     },
     close: {
@@ -19,13 +19,13 @@ const props = defineProps({
 });
 
 const form = useForm({
-    id: props.violenceType.id,
+    id: props.deathCause.id,
 });
 
-const deleteViolenceType = () => {
+const deleteDeathCause = () => {
     form.delete(
-        route("violenceType.delete", {
-            violenceType: props.violenceType.id,
+        route("deathCause.delete", {
+            deathCause: props.deathCause.id,
         }),
         {
             preserveScroll: true,
@@ -61,13 +61,13 @@ const deleteViolenceType = () => {
                 <span class="sr-only">Fechar</span>
             </button>
             <div class="px-6 py-6 lg:px-8">
-                <h1 class="flex">Deseja excluir esse Tipo de Violéncia?</h1>
-                <form class="space-y-6" @submit.prevent="deleteViolenceType">
+                <h1 class="flex">Deseja excluir a Causa de Óbito?</h1>
+                <form class="space-y-6" @submit.prevent="deleteDeathCause">
                     <button
                         type="submit"
                         class="w-full mt-8 text-white focus:ring-4 focus:outline-none font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-800 dark:focus:ring-slate-200 bg-red-500 hover:bg-red-600 focus:ring-red-300"
                     >
-                        <span>Excluir esse Tipo de Violéncia.</span>
+                        <span>Excluir á Causa de Óbito</span>
                     </button>
                 </form>
             </div>

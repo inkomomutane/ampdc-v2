@@ -2,6 +2,10 @@
 
 
 
+use App\Http\Controllers\DeathCause\DeleteDeathCauseController;
+use App\Http\Controllers\DeathCause\ListDeathCausesController;
+use App\Http\Controllers\DeathCause\StoreDeathCauseController;
+use App\Http\Controllers\DeathCause\UpdateDeathCauseController;
 use App\Http\Controllers\District\CreateDistrict;
 use App\Http\Controllers\District\DeleteDistrict;
 use App\Http\Controllers\District\GetDistricts;
@@ -112,6 +116,11 @@ Route::middleware('auth')->group(function () {
     Route::match(['put','patch'],'/violenceType/{violenceType}/update', UpdateViolenceTypeController::class)->name('violenceType.update');
     Route::delete('/violenceType/{violenceType}/delete', DeleteViolenceTypeController::class)->name('violenceType.delete');
 
+     #--- Death Cause Routes DeathCause---#
+     Route::get('/deathCause/list', ListDeathCausesController::class)->name('deathCause.list');
+     Route::post('/deathCause/store', StoreDeathCauseController::class)->name('deathCause.store');
+     Route::match(['put','patch'],'/deathCause/{deathCause}/update', UpdateDeathCauseController::class)->name('deathCause.update');
+     Route::delete('/deathCause/{deathCause}/delete', DeleteDeathCauseController::class)->name('deathCause.delete');
 
     #--- Victims ---#
 

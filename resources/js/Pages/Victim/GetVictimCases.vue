@@ -150,12 +150,12 @@ const exportCases = () => {
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
-                                            Organização
+                                            Estado do caso
                                         </div>
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
-                                            Estado do caso
+                                            Instituição
                                         </div>
                                     </th>
                                     <th scope="col" class="px-4 py-3">
@@ -178,9 +178,6 @@ const exportCases = () => {
                                     <td class="px-4 py-3">
                                         {{ victimCase.victim.name }}
                                     </td>
-                                    <td class="px-4 py-3" >
-                                        {{ victimCase.organization.name }}
-                                    </td>
                                     <td class="px-4 py-3">
                                          <span
                                              :class="progressCasesColor(victimCase.progressStatus)"
@@ -188,6 +185,9 @@ const exportCases = () => {
                                          >
                                                 {{ victimCase.progressStatus }}
                                             </span>
+                                    </td>
+                                    <td class="px-4 py-3" >
+                                        {{ victimCase.organization.name }}
                                     </td>
                                     <td class="px-4 py-3 w-32">
                                         <Link
