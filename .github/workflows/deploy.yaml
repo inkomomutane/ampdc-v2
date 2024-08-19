@@ -61,7 +61,7 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            cd htdocs/ofeminicidio.ampdc.org
+            cd /home/ofeminicidio/htdocs/ofeminicidio.ampdc.org
             git checkout production
             git config --global --add safe.directory /home/ofeminicidio/htdocs/ofeminicidio.ampdc.org
             git pull origin production
