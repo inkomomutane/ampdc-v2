@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
 import { useSidebar } from "@/composables/useSidebar";
-import { Link, router } from "@inertiajs/vue3";
+import { Link, router, useForm } from "@inertiajs/vue3";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,7 +10,6 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar } from "@components/ui/avatar";
 import { usePage } from "@inertiajs/vue3";
 const profile = usePage().props.auth.user;
 const { isOpen } = useSidebar();
@@ -40,7 +39,7 @@ const changeMode = (dark: Boolean) => {
 };
 
 const profileLink = () => router.get(route("profile.edit"));
-const logout = () => window.open(route("logout"), "_self");
+const logout = () => useForm({}).post(route("logout"));
 </script>
 
 <template>

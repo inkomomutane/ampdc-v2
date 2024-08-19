@@ -66,9 +66,9 @@ const submit = () => {
                         <div
                             class="bg-white p-6 space-y-4 md:space-y-6 sm:p-8 rounded flex flex-col"
                         >
-                            <Link href="/" class="mx-auto">
+                            <a href="/" class="mx-auto">
                                 <img alt="logo" :src="logo" class="w-24" />
-                            </Link>
+                            </a>
                             <form
                                 @submit.prevent="submit"
                                 class="space-y-4 md:space-y-6"

@@ -31,12 +31,12 @@ const inactiveClass = ref(
             class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-slate-800 dark:bg-gray-800 lg:translate-x-0 lg:static lg:inset-0"
         >
             <div class="flex items-start justify-start mt-8 ml-3">
-                <Link href="/" class="flex items-center">
-                    <img :src="logo" class="w-12" />
-                    <span class="text-white text-2xl font-medium mx-2"
-                        >DBF</span
+                <a href="/" class="flex items-center">
+                    <img :src="logo" class="w-12 rounded-full" alt="logo" />
+                    <span class="text-white text-lg font-medium mx-2"
+                        >Ofeminicídio</span
                     >
-                </Link>
+                </a>
             </div>
 
             <nav class="mt-10">
