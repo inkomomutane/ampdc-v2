@@ -16,7 +16,7 @@
         "aos": "^2.3.4",
         "apexcharts": "^3.50.0",
         "autoprefixer": "10.4.19",
-        "axios": "1.7.2",
+        "axios": "1.7.4",
         "flatpickr": "^4.6.13",
         "jsvectormap": "1.6.0",
         "laravel-vite-plugin": "1.0.5",
