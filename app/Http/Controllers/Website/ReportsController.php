@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Reports\ReportByAgeRange;
 use Illuminate\Http\Request;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
@@ -27,7 +28,8 @@ class ReportsController extends Controller
                 favicon: asset('favicon.ico'),
                 locale: 'pt',
                 openGraphTitle: 'Observatório do feminicídio',
-            )
+            ),
+            'report_by_age' => ReportByAgeRange::handle()
         ]);
     }
 }

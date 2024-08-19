@@ -30,7 +30,7 @@
                     enfrentamento.
                 </p>
                 <a
-                    href=""
+                    href="{{ route('about.us') }}"
                     class="inline-flex items-center justify-center px-5 py-3 mr-3 text-sm font-medium text-center bg-red-500 text-white hover:bg-red-700 focus:ring-4 focus:ring-red-300 transition-transform transform-gpu duration-300 ease-in-out"
                 >
                     Ler mais
