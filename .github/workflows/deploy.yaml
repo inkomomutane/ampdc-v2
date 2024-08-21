@@ -73,6 +73,7 @@ jobs:
             php artisan route:clear
             php artisan view:clear
             exit
+            exit
           host: ${{ secrets.SSH_SERVER }}
           user: ${{ secrets.SSH_USERNAME }}
           #key: ${{ secrets.SSH_PRIVATE_KEY }}
