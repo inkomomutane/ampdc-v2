@@ -19,8 +19,8 @@ class RegisterVictimDataController extends Controller
 
         return [
 
-            'name' => 'required|string', #done
-            'age' => 'required|integer', #done
+            'name' => 'nullable|string', #done
+            'age' => 'nullable|integer', #done
             'gender' => ['required',Rule::in(Gender::getValues())], #done
             'civil_state' => ['required', Rule::in(CivilState::getValues())], #done
             'contact' => 'nullable|string', #done
