@@ -13,8 +13,8 @@ class VictimData extends Data
 {
     public function __construct(
         public ?string $id,
-        public string $name,
-        public int $age,
+        public ?string $name,
+        public ?int $age,
         public Gender $gender,
         public CivilState $civil_state,
         public ?string $contact,
