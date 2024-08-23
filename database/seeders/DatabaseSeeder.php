@@ -136,71 +136,57 @@ class DatabaseSeeder extends Seeder
 
         #-- Violence Types --#
 
+        $violenceTypes = [ 'Física', 'Psicológica', 'Sexual', 'Económica', 'Patrimonial', 'Moral', 'Simbólica', 'Institucional'];
 
-        ViolenceType::updateOrInsert([
-            'id' => '01hv76yj1fcx11dssx0j30bkw0'
-        ],[
-            'id' => '01hv76yj1fcx11dssx0j30bkw0',
-            'name' => 'Física',
-        ]);
+        foreach ($violenceTypes as $violenceType) {
+            ViolenceType::updateOrCreate([
+                'name' => $violenceType
+            ],[
+                'name' => $violenceType,
+            ]);
+        }
 
-        ViolenceType::updateOrInsert([
-            'id' => '01hv76zgjexawh7dqca2k9snv0'
-        ],[
-            'id' => '01hv76zgjexawh7dqca2k9snv0',
-            'name' => 'Psicológica',
-        ]);
+        $perpetrators = [
+            'Namorado','Cunhado','Tio','Primo','Pai','Irmão','Amigo','Desconhecido','Colega de trabalho',
+            'Patrão','Vizinho','Ex-namorado','Ex-marido','Ex-amigo','Ex-colega de trabalho','Ex-patrão',
+            'Marido','Esposa',
+            'Outro'
+        ];
 
-        ViolenceType::updateOrInsert([
-            'id' => '01hvgctxffvmgbxm026batvhmp'
-        ],[
-            'id' => '01hvgctxffvmgbxm026batvhmp',
-            'name' => 'Sexual'
-            ]
-        );
-
-        Perpetrator::updateOrInsert([
-            'id' => '01hv76zgjexawh7dqca2k9snv0'
-        ],[
-            'id' => '01hv76zgjexawh7dqca2k9snv0',
-            'name' => 'Desconhecido',
-        ]);
+        foreach ($perpetrators as $perpetrator) {
+            Perpetrator::updateOrCreate([
+                'name' => $perpetrator
+            ],[
+                'name' => $perpetrator,
+            ]);
+        }
 
 
-        Perpetrator::updateOrInsert([
-            'id' => '01hx7csmacgsh902kq2fzfwjc6'
-        ],[
-            'id' => '01hx7csmacgsh902kq2fzfwjc6',
-            'name' => 'Marido',
-        ]);
+        $reasons = [
+            'Ciúmes','Inveja','Vingança','Desconfiança','Desentendimento','Discussão'
+            ,'Embriaguez','Dívida','Outro'
+        ];
 
-        Perpetrator::updateOrInsert([
-            'id' => '01hx7ct385qn157pjgjtw82hb9'
-        ],[
-            'id' => '01hx7ct385qn157pjgjtw82hb9',
-            'name' => 'Namorado',
-        ]);
+        foreach ($reasons as $reason) {
+            SupposedReasonOfViolence::updateOrCreate([
+                'name' => $reason
+            ],[
+                'name' => $reason,
+            ]);
+        }
 
-        SupposedReasonOfViolence::updateOrInsert([
-            'id' => '01hx7cvxbpk04skcac2rwgkxqt'
-        ],[
-            'id' => '01hx7cvxbpk04skcac2rwgkxqt',
-            'name' => 'Ciúmes',
-        ]);
 
-        ViolenceIncidentLocation::updateOrInsert([
-            'id' => '01hx7cxq1k1yte0x19r8hygnfj'
-        ],[
-            'id' => '01hx7cxq1k1yte0x19r8hygnfj',
-            'name' => 'Casa',
-        ]);
+        $locations = [
+            'Casa','Rua','Escola','Trabalho','Mercado','Outro'
+        ];
 
-        ViolenceIncidentLocation::updateOrInsert([
-            'id' => '01hx7cydw3w43x231mt7666706'
-        ],[
-            'id' => '01hx7cydw3w43x231mt7666706',
-            'name' => 'Rua',
-        ]);
+        foreach ($locations as $location) {
+            ViolenceIncidentLocation::updateOrCreate([
+                'name' => $location
+            ],[
+                'name' => $location,
+            ]);
+        }
 
         $baseUser =  $admin;
         $baseUser->loadMissing('organization');
