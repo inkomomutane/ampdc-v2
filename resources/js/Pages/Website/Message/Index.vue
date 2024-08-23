@@ -21,10 +21,10 @@ watch(
         value?.envelopes.forEach((element) => {
             Flasher.flash(
                 element.notification.type,
-                element.notification.message
+                element.notification.message,
             );
         });
-    }
+    },
 );
 
 const links = ref(props.website_messages?.links);
@@ -35,7 +35,7 @@ watch(
     () => props.website_messages?.links,
     (value) => {
         links.value = value;
-    }
+    },
 );
 
 const closeViewingMessage = () => {
@@ -63,7 +63,7 @@ const form = useForm({
 const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
     form.delete(
         route("website.message.delete", {
-            message: mail.id ,
+            message: mail.id,
         }),
         {
             preserveScroll: true,
@@ -72,7 +72,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                 form.reset();
             },
             onFinish: () => form.reset(),
-        }
+        },
     );
 };
 </script>
@@ -201,7 +201,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                         Showing
                         <span
                             class="font-semibold text-gray-900 dark:text-white"
-                        >{{
+                            >{{
                                 `${website_messages?.meta.from ?? 0}-${
                                     website_messages?.meta.to ?? 0
                                 }`
@@ -222,14 +222,14 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                             <Link
                                 href=""
                                 class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >&laquo; Previous</Link
+                                >&laquo; Previous</Link
                             >
                         </li>
                         <li v-else>
                             <Link
                                 class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                 :href="links[0]?.url ?? ''"
-                            >&laquo; Previous</Link
+                                >&laquo; Previous</Link
                             >
                         </li>
                         <li
@@ -240,7 +240,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                 v-if="!link.active"
                                 :href="link.url ?? ''"
-                            >{{ link.label }}
+                                >{{ link.label }}
                             </Link>
                             <span
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -250,7 +250,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                                         ? 'bg-gray-700 dark:bg-slate-600 text-white dark:text-slate-100'
                                         : ''
                                 }`"
-                            >{{ link.label }}</span
+                                >{{ link.label }}</span
                             >
                         </li>
                         <li
@@ -259,7 +259,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                         >
                             <span
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >Next &raquo;</span
+                                >Next &raquo;</span
                             >
                         </li>
                         <li
@@ -267,7 +267,7 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                         >
                             <Link :href="links.slice(-1)[0].url ?? ''"
-                            >Next &raquo;</Link
+                                >Next &raquo;</Link
                             >
                         </li>
                     </ul>
@@ -338,37 +338,37 @@ const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
                         <div
                             class="flex border dark:border-gray-800 rounded-lg justify-end"
                         >
-                           <a
-                            v-if="
+                            <a
+                                v-if="
                                     loadedMessage?.contact != undefined ||
                                     loadedMessage?.contact != null
                                 "
-                            :href="`tel:${loadedMessage?.contact}`"
-                            class="px-2 py-2 my-auto border-r-2 border-l-2 dark:border-gray-800"
-                        >
-                            <svg
-                                class="currentColor"
-                                width="24"
-                                height="24"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
+                                :href="`tel:${loadedMessage?.contact}`"
+                                class="px-2 py-2 my-auto border-r-2 border-l-2 dark:border-gray-800"
                             >
-                                <path
-                                    class="fill-current dark:fill-slate-50"
-                                    d="M8,4l10,2h1c1.657,0,3,1.343,3,3v10c0,1.657-1.343,3-3,3H9c-1.657,0-3-1.343-3-3v-1L4,8L8,4z"
-                                    opacity=".2"
-                                />
-                                <path
-                                    class="currentColor fill-current dark:fill-slate-50"
-                                    d="M18,5v1H9C7.34,6,6,7.34,6,9v9H5c-1.66,0-3-1.34-3-3V5c0-1.66,1.34-3,3-3h10C16.66,2,18,3.34,18,5z"
-                                />
-                                <path
-                                    class="currentColor fill-current dark:fill-slate-50"
-                                    d="M18.393,15.467c-0.809-0.809-2.121-0.809-2.93,0l-0.516,0.516l-2.93-2.93l0.516-0.516c0.809-0.809,0.809-2.121,0-2.93s-2.121-0.809-2.93,0c-0.517,0.517-0.7,1.239-0.556,1.904c0.123,0.919,0.606,3.029,2.509,4.932s4.013,2.386,4.932,2.509c0.665,0.144,1.387-0.039,1.904-0.556C19.202,17.587,19.202,16.276,18.393,15.467z"
-                                    fill="currentColor"
-                                />
-                            </svg>
-                        </a>
+                                <svg
+                                    class="currentColor"
+                                    width="24"
+                                    height="24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        class="fill-current dark:fill-slate-50"
+                                        d="M8,4l10,2h1c1.657,0,3,1.343,3,3v10c0,1.657-1.343,3-3,3H9c-1.657,0-3-1.343-3-3v-1L4,8L8,4z"
+                                        opacity=".2"
+                                    />
+                                    <path
+                                        class="currentColor fill-current dark:fill-slate-50"
+                                        d="M18,5v1H9C7.34,6,6,7.34,6,9v9H5c-1.66,0-3-1.34-3-3V5c0-1.66,1.34-3,3-3h10C16.66,2,18,3.34,18,5z"
+                                    />
+                                    <path
+                                        class="currentColor fill-current dark:fill-slate-50"
+                                        d="M18.393,15.467c-0.809-0.809-2.121-0.809-2.93,0l-0.516,0.516l-2.93-2.93l0.516-0.516c0.809-0.809,0.809-2.121,0-2.93s-2.121-0.809-2.93,0c-0.517,0.517-0.7,1.239-0.556,1.904c0.123,0.919,0.606,3.029,2.509,4.932s4.013,2.386,4.932,2.509c0.665,0.144,1.387-0.039,1.904-0.556C19.202,17.587,19.202,16.276,18.393,15.467z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                            </a>
                             <a
                                 class="px-2 py-2 my-auto border-r-2 dark:border-gray-800"
                                 v-if="

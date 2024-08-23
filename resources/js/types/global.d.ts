@@ -11,7 +11,6 @@ declare global {
     }
 
     let route: typeof ziggyRoute;
-
 }
 
 declare module "vue" {

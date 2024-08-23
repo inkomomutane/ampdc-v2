@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import InputError from "@components/InputError.vue";
@@ -15,7 +14,7 @@ interface Section {
 const titleRef = ref();
 const shortDescriptionRef = ref();
 const locationRef = ref();
-const form  = useForm({
+const form = useForm({
     title: "",
     content: "",
     cover: [],
@@ -25,7 +24,7 @@ const form  = useForm({
 });
 const addSection = () => {
     form.sections.push({
-        id : ulid(),
+        id: ulid(),
         title: "",
         content: "",
         cover: [],
@@ -33,7 +32,7 @@ const addSection = () => {
 };
 
 const createArticle = () => {
-    form.post(route('article.store'), {
+    form.post(route("article.store"), {
         preserveScroll: true,
         onSuccess: () => {
             form.reset();
@@ -48,13 +47,13 @@ const createArticle = () => {
     <AuthenticatedLayout>
         <template v-slot:content>
             <div class="max-w-7xl mx-auto p-6 lg:p-8 bg-white">
-                <div class="grid gap-6 ">
+                <div class="grid gap-6">
                     <div class="grid md:grid-cols-3 gap-4">
                         <div>
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Título
+                                >Título
                             </label>
                             <input
                                 id="title"
@@ -71,7 +70,7 @@ const createArticle = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Breve descrição
+                                >Breve descrição
                             </label>
                             <input
                                 id="short_description"
@@ -82,13 +81,15 @@ const createArticle = () => {
                                 placeholder="Breve descrição"
                                 type="text"
                             />
-                            <InputError :message="form.errors.short_description" />
+                            <InputError
+                                :message="form.errors.short_description"
+                            />
                         </div>
                         <div>
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="location"
-                            >Localização
+                                >Localização
                             </label>
                             <input
                                 id="location"
@@ -105,21 +106,22 @@ const createArticle = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Capa do post
+                                >Capa do post
                             </label>
                             <ImageUploader
                                 @update:images="
-                                (files: any) => (form.cover = files)
-                            "
+                                    (files: any) => (form.cover = files)
+                                "
                                 :multiple="false"
                                 :disabledUpload="true"
                                 :disabledCancel="true"
                                 mediaType="image/*"
                                 labelText="Carregar imagem"
                             />
-                            <span class="text-medium text-red-500 font-semibold">{{
-                                    form.errors.cover
-                                }}</span>
+                            <span
+                                class="text-medium text-red-500 font-semibold"
+                                >{{ form.errors.cover }}</span
+                            >
                         </div>
                     </div>
                     <div class="grid w-full gap-4">
@@ -127,7 +129,7 @@ const createArticle = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Conteúdo
+                                >Conteúdo
                             </label>
                             <QuillEditor
                                 :options="{
@@ -143,21 +145,39 @@ const createArticle = () => {
                         </div>
                     </div>
                     <div>
-                        <button @click="addSection" class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800">
-                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="-4.5 -4.5 24 24" fill="currentColor"><path d="M8.9 6.9v-5a1 1 0 1 0-2 0v5h-5a1 1 0 1 0 0 2h5v5a1 1 0 1 0 2 0v-5h5a1 1 0 1 0 0-2h-5z"></path></svg> <span class="mx-4">
-                            Adicionar secção
-                        </span></button>
+                        <button
+                            @click="addSection"
+                            class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="-4.5 -4.5 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M8.9 6.9v-5a1 1 0 1 0-2 0v5h-5a1 1 0 1 0 0 2h5v5a1 1 0 1 0 2 0v-5h5a1 1 0 1 0 0-2h-5z"
+                                ></path>
+                            </svg>
+                            <span class="mx-4"> Adicionar secção </span>
+                        </button>
                     </div>
-                    <div v-for="(section, index) in form.sections" :key="section.id" class="grid gap-4 bg-red-50 p-6">
+                    <div
+                        v-for="(section, index) in form.sections"
+                        :key="section.id"
+                        class="grid gap-4 bg-red-50 p-6"
+                    >
                         <button
                             @click="form.sections.splice(index, 1)"
                             class="flex items-center justify-center text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                        >Remove</button>
+                        >
+                            Remove
+                        </button>
                         <div>
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Título da secção
+                                >Título da secção
                             </label>
                             <input
                                 v-model="section.title"
@@ -171,12 +191,12 @@ const createArticle = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Capa da secção
+                                >Capa da secção
                             </label>
                             <ImageUploader
                                 @update:images="
-                                (files: any) => (section.cover = files)
-                            "
+                                    (files: any) => (section.cover = files)
+                                "
                                 :multiple="false"
                                 :disabledUpload="true"
                                 :disabledCancel="true"
@@ -188,7 +208,7 @@ const createArticle = () => {
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="name"
-                            >Conteúdo da secção
+                                >Conteúdo da secção
                             </label>
                             <QuillEditor
                                 :options="{
@@ -202,21 +222,19 @@ const createArticle = () => {
                             />
                         </div>
                     </div>
-                  <div class="grid justify-items-end">
-                      <button
-                          class=" right-0  w-fit text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-bold rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
-                          type="submit"
-                          @click="createArticle"
-                      >
-                          Salvar post
-                      </button>
-                  </div>
+                    <div class="grid justify-items-end">
+                        <button
+                            class="right-0 w-fit text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-bold rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
+                            type="submit"
+                            @click="createArticle"
+                        >
+                            Salvar post
+                        </button>
+                    </div>
                 </div>
             </div>
         </template>
     </AuthenticatedLayout>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

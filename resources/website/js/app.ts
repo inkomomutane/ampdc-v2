@@ -12,5 +12,4 @@ window.addEventListener("load", () => {
         duration: 700,
         delay: 0,
     });
-
 });

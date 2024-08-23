@@ -49,7 +49,19 @@ const inactiveClass = ref(
                             : inactiveClass,
                     ]"
                 >
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill="none" stroke="currentColor" stroke-width="2" d="M16,7 L19,7 L19,11 L16,11 L16,7 Z M9,15 L20,15 M9,11 L13,11 M9,7 L13,7 M6,18.5 C6,19.8807119 4.88071187,21 3.5,21 C2.11928813,21 1,19.8807119 1,18.5 L1,7 L6.02493781,7 M6,18.5 L6,3 L23,3 L23,18.5 C23,19.8807119 21.8807119,21 20.5,21 L3.5,21"></path></svg>
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                    >
+                        <path
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M16,7 L19,7 L19,11 L16,11 L16,7 Z M9,15 L20,15 M9,11 L13,11 M9,7 L13,7 M6,18.5 C6,19.8807119 4.88071187,21 3.5,21 C2.11928813,21 1,19.8807119 1,18.5 L1,7 L6.02493781,7 M6,18.5 L6,3 L23,3 L23,18.5 C23,19.8807119 21.8807119,21 20.5,21 L3.5,21"
+                        ></path>
+                    </svg>
                     <span class="mx-4 font-medium text-sm">Criar post</span>
                 </Link>
                 <Link
@@ -61,11 +73,23 @@ const inactiveClass = ref(
                             : inactiveClass,
                     ]"
                 >
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill="none" stroke="currentColor" stroke-width="2" d="M16,7 L19,7 L19,11 L16,11 L16,7 Z M9,15 L20,15 M9,11 L13,11 M9,7 L13,7 M6,18.5 C6,19.8807119 4.88071187,21 3.5,21 C2.11928813,21 1,19.8807119 1,18.5 L1,7 L6.02493781,7 M6,18.5 L6,3 L23,3 L23,18.5 C23,19.8807119 21.8807119,21 20.5,21 L3.5,21"></path></svg>
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                    >
+                        <path
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M16,7 L19,7 L19,11 L16,11 L16,7 Z M9,15 L20,15 M9,11 L13,11 M9,7 L13,7 M6,18.5 C6,19.8807119 4.88071187,21 3.5,21 C2.11928813,21 1,19.8807119 1,18.5 L1,7 L6.02493781,7 M6,18.5 L6,3 L23,3 L23,18.5 C23,19.8807119 21.8807119,21 20.5,21 L3.5,21"
+                        ></path>
+                    </svg>
                     <span class="mx-4 font-medium text-sm">Postagens</span>
                 </Link>
                 <Link
-                    v-if=" route().current('article.edit')"
+                    v-if="route().current('article.edit')"
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
                     href=""
                     :class="[
@@ -74,10 +98,22 @@ const inactiveClass = ref(
                             : inactiveClass,
                     ]"
                 >
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill="none" stroke="currentColor" stroke-width="2" d="M16,7 L19,7 L19,11 L16,11 L16,7 Z M9,15 L20,15 M9,11 L13,11 M9,7 L13,7 M6,18.5 C6,19.8807119 4.88071187,21 3.5,21 C2.11928813,21 1,19.8807119 1,18.5 L1,7 L6.02493781,7 M6,18.5 L6,3 L23,3 L23,18.5 C23,19.8807119 21.8807119,21 20.5,21 L3.5,21"></path></svg>
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                    >
+                        <path
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M16,7 L19,7 L19,11 L16,11 L16,7 Z M9,15 L20,15 M9,11 L13,11 M9,7 L13,7 M6,18.5 C6,19.8807119 4.88071187,21 3.5,21 C2.11928813,21 1,19.8807119 1,18.5 L1,7 L6.02493781,7 M6,18.5 L6,3 L23,3 L23,18.5 C23,19.8807119 21.8807119,21 20.5,21 L3.5,21"
+                        ></path>
+                    </svg>
                     <span class="mx-4 font-medium text-sm">Editar post</span>
                 </Link>
-                <WebsiteMessageLink/>
+                <WebsiteMessageLink />
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
                     :href="route('dashboard.reports')"
@@ -128,9 +164,7 @@ const inactiveClass = ref(
                     <span class="mx-4 font-medium text-sm">Registo</span>
                 </Link>
                 <Link
-                    v-if="
-                        route().current('victim.edit')
-                    "
+                    v-if="route().current('victim.edit')"
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
                     href=""
                     :class="activeClass"
@@ -181,70 +215,69 @@ const inactiveClass = ref(
                     <span class="mx-4 font-medium text-sm">Casos</span>
                 </Link>
 
-
-<!--                <Link-->
-<!--                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"-->
-<!--                    :href="route('victim.forwarded.cases.list')"-->
-<!--                    :class="[-->
-<!--                        route().current('victim.forwarded.cases.list')-->
-<!--                            ? activeClass-->
-<!--                            : inactiveClass,-->
-<!--                    ]"-->
-<!--                >-->
-<!--                    <svg-->
-<!--                        class="w-5 h-5"-->
-<!--                        xmlns="http://www.w3.org/2000/svg"-->
-<!--                        fill="none"-->
-<!--                        viewBox="0 0 24 24"-->
-<!--                        stroke="currentColor"-->
-<!--                        aria-hidden="true"-->
-<!--                    >-->
-<!--                        <path-->
-<!--                            stroke-linecap="round"-->
-<!--                            stroke-linejoin="round"-->
-<!--                            stroke-width="1.5"-->
-<!--                            d="M17.38 10.38v3.23c0 2.69-1.08 3.77-3.77 3.77h-3.23c-2.69 0-3.77-1.08-3.77-3.77v-3.23c0-2.69 1.08-3.77 3.77-3.77h3.23c2.7.01 3.77 1.08 3.77 3.77z"-->
-<!--                        ></path>-->
-<!--                        <path-->
-<!--                            stroke-linecap="round"-->
-<!--                            stroke-linejoin="round"-->
-<!--                            stroke-width="1.5"-->
-<!--                            d="M22 5.77V9c0 2.69-1.08 3.77-3.77 3.77h-.85v-2.38c0-2.69-1.08-3.77-3.77-3.77h-2.38v-.85C11.23 3.08 12.31 2 15 2h3.23C20.92 2 22 3.08 22 5.77zM2 18.23V15c0-2.69 1.08-3.77 3.77-3.77h.85v2.38c0 2.69 1.08 3.77 3.77 3.77h2.38v.85C12.77 20.92 11.69 22 9 22H5.77C3.08 22 2 20.92 2 18.23z"-->
-<!--                            opacity=".4"-->
-<!--                        ></path>-->
-<!--                    </svg>-->
-<!--                    <span class="mx-4 font-medium text-sm">Encaminhamento</span>-->
-<!--                </Link>-->
-<!--                <Link-->
-<!--                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"-->
-<!--                    :href="route('victim.received.cases.list')"-->
-<!--                    :class="[-->
-<!--                        route().current('victim.received.cases.list')-->
-<!--                            ? activeClass-->
-<!--                            : inactiveClass,-->
-<!--                    ]"-->
-<!--                >-->
-<!--                    <svg-->
-<!--                        class="w-5 h-5"-->
-<!--                        xmlns="http://www.w3.org/2000/svg"-->
-<!--                        viewBox="0 0 24 24"-->
-<!--                        fill="currentColor"-->
-<!--                        aria-hidden="true"-->
-<!--                    >-->
-<!--                        <path-->
-<!--                            d="M21.25 5.77V9c0 2.29-.73 3.02-3.02 3.02h-.1v-1.64c0-3.12-1.39-4.51-4.51-4.51h-1.64v-.1c0-2.29.73-3.02 3.02-3.02h3.23c2.29 0 3.02.73 3.02 3.02z"-->
-<!--                            opacity=".4"-->
-<!--                        ></path>-->
-<!--                        <path-->
-<!--                            d="M16.63 10.38v3.24c0 2.28-.73 3.01-3.01 3.01h-3.24c-2.28 0-3.01-.73-3.01-3.01v-3.24c0-2.28.73-3.01 3.01-3.01h3.24c2.28 0 3.01.73 3.01 3.01z"-->
-<!--                        ></path>-->
-<!--                        <path-->
-<!--                            d="M12.02 18.13v.1c0 2.29-.73 3.02-3.02 3.02H5.77c-2.29 0-3.02-.73-3.02-3.02V15c0-2.29.73-3.02 3.02-3.02h.1v1.64c0 3.12 1.39 4.51 4.51 4.51h1.64z"-->
-<!--                            opacity=".4"-->
-<!--                        ></path>-->
-<!--                    </svg>-->
-<!--                    <span class="mx-4 font-medium text-sm">Recebidos</span>-->
-<!--                </Link>-->
+                <!--                <Link-->
+                <!--                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"-->
+                <!--                    :href="route('victim.forwarded.cases.list')"-->
+                <!--                    :class="[-->
+                <!--                        route().current('victim.forwarded.cases.list')-->
+                <!--                            ? activeClass-->
+                <!--                            : inactiveClass,-->
+                <!--                    ]"-->
+                <!--                >-->
+                <!--                    <svg-->
+                <!--                        class="w-5 h-5"-->
+                <!--                        xmlns="http://www.w3.org/2000/svg"-->
+                <!--                        fill="none"-->
+                <!--                        viewBox="0 0 24 24"-->
+                <!--                        stroke="currentColor"-->
+                <!--                        aria-hidden="true"-->
+                <!--                    >-->
+                <!--                        <path-->
+                <!--                            stroke-linecap="round"-->
+                <!--                            stroke-linejoin="round"-->
+                <!--                            stroke-width="1.5"-->
+                <!--                            d="M17.38 10.38v3.23c0 2.69-1.08 3.77-3.77 3.77h-3.23c-2.69 0-3.77-1.08-3.77-3.77v-3.23c0-2.69 1.08-3.77 3.77-3.77h3.23c2.7.01 3.77 1.08 3.77 3.77z"-->
+                <!--                        ></path>-->
+                <!--                        <path-->
+                <!--                            stroke-linecap="round"-->
+                <!--                            stroke-linejoin="round"-->
+                <!--                            stroke-width="1.5"-->
+                <!--                            d="M22 5.77V9c0 2.69-1.08 3.77-3.77 3.77h-.85v-2.38c0-2.69-1.08-3.77-3.77-3.77h-2.38v-.85C11.23 3.08 12.31 2 15 2h3.23C20.92 2 22 3.08 22 5.77zM2 18.23V15c0-2.69 1.08-3.77 3.77-3.77h.85v2.38c0 2.69 1.08 3.77 3.77 3.77h2.38v.85C12.77 20.92 11.69 22 9 22H5.77C3.08 22 2 20.92 2 18.23z"-->
+                <!--                            opacity=".4"-->
+                <!--                        ></path>-->
+                <!--                    </svg>-->
+                <!--                    <span class="mx-4 font-medium text-sm">Encaminhamento</span>-->
+                <!--                </Link>-->
+                <!--                <Link-->
+                <!--                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"-->
+                <!--                    :href="route('victim.received.cases.list')"-->
+                <!--                    :class="[-->
+                <!--                        route().current('victim.received.cases.list')-->
+                <!--                            ? activeClass-->
+                <!--                            : inactiveClass,-->
+                <!--                    ]"-->
+                <!--                >-->
+                <!--                    <svg-->
+                <!--                        class="w-5 h-5"-->
+                <!--                        xmlns="http://www.w3.org/2000/svg"-->
+                <!--                        viewBox="0 0 24 24"-->
+                <!--                        fill="currentColor"-->
+                <!--                        aria-hidden="true"-->
+                <!--                    >-->
+                <!--                        <path-->
+                <!--                            d="M21.25 5.77V9c0 2.29-.73 3.02-3.02 3.02h-.1v-1.64c0-3.12-1.39-4.51-4.51-4.51h-1.64v-.1c0-2.29.73-3.02 3.02-3.02h3.23c2.29 0 3.02.73 3.02 3.02z"-->
+                <!--                            opacity=".4"-->
+                <!--                        ></path>-->
+                <!--                        <path-->
+                <!--                            d="M16.63 10.38v3.24c0 2.28-.73 3.01-3.01 3.01h-3.24c-2.28 0-3.01-.73-3.01-3.01v-3.24c0-2.28.73-3.01 3.01-3.01h3.24c2.28 0 3.01.73 3.01 3.01z"-->
+                <!--                        ></path>-->
+                <!--                        <path-->
+                <!--                            d="M12.02 18.13v.1c0 2.29-.73 3.02-3.02 3.02H5.77c-2.29 0-3.02-.73-3.02-3.02V15c0-2.29.73-3.02 3.02-3.02h.1v1.64c0 3.12 1.39 4.51 4.51 4.51h1.64z"-->
+                <!--                            opacity=".4"-->
+                <!--                        ></path>-->
+                <!--                    </svg>-->
+                <!--                    <span class="mx-4 font-medium text-sm">Recebidos</span>-->
+                <!--                </Link>-->
 
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"

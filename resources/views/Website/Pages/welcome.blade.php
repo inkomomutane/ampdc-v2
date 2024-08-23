@@ -1,10 +1,12 @@
 @extends("Website.Layouts.website")
-@section('seo')
+@section("seo")
     {!! seo($seoData) !!}
 @endsection
-@push('scripts')
-    @vite('resources/website/js/reports.ts')
+
+@push("scripts")
+    @vite("resources/website/js/reports.ts")
 @endpush
+
 @section("content")
     @include("Website.partials.hero")
     <section class="bg-gradient-to-b from-red-50 to-white dark:bg-gray-900">
@@ -30,7 +32,7 @@
                     enfrentamento.
                 </p>
                 <a
-                    href="{{ route('about.us') }}"
+                    href="{{ route("about.us") }}"
                     class="inline-flex items-center justify-center px-5 py-3 mr-3 text-sm font-medium text-center bg-red-500 text-white hover:bg-red-700 focus:ring-4 focus:ring-red-300 transition-transform transform-gpu duration-300 ease-in-out"
                 >
                     Ler mais
@@ -254,17 +256,25 @@
         <div
             class="grid grid-cols-3 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:px-16 justify-items-center"
         >
-            <div data-aos="fade-up" id="anualChart" class="w-full col-span-3"></div>
+            <div
+                data-aos="fade-up"
+                id="anualChart"
+                class="w-full col-span-3"
+            ></div>
         </div>
-
     </section>
-    <section class="bg-gradient-to-b from-white via-red-50 to-white dark:bg-gray-900">
+    <section
+        class="bg-gradient-to-b from-white via-red-50 to-white dark:bg-gray-900"
+    >
         <div
             class="grid grid-cols-3 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:px-16 justify-items-center"
         >
-            <div data-aos="fade-up" id="violenceTypeChart" class="w-full col-span-3"></div>
+            <div
+                data-aos="fade-up"
+                id="violenceTypeChart"
+                class="w-full col-span-3"
+            ></div>
         </div>
-
     </section>
 
     <section
@@ -297,14 +307,14 @@
                                         class="group bg-white h-full flex flex-col justify-start rounded-t"
                                         data-aos="fade-up"
                                     >
-                                        @if (!$article->cover)
+                                        @if (! $article->cover)
                                             <img
-                                                src="{{Vite::asset('resources/images/placeholder.svg')}}"
+                                                src="{{ Vite::asset("resources/images/placeholder.svg") }}"
                                                 alt="{{ $article->title }}"
                                                 class="!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t"
                                             />
                                         @else
-                                        {{ $article->cover?->img()?->attributes(["class" => "!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t"]) }}
+                                            {{ $article->cover?->img()?->attributes(["class" => "!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t"]) }}
                                         @endif
                                         <header class="text-gray-600 px-4">
                                             <div
@@ -321,7 +331,7 @@
                                         <div
                                             class="line-clamp-3 my-2 text-sm px-4"
                                         >
-                                            {!!  $article->content !!}
+                                            {!! $article->content !!}
                                         </div>
                                         <span
                                             class="group-hover:text-primary-500 inline-flex self-start items-center justify-center font-bold text-center text-xs p-4 right-0"
@@ -374,5 +384,5 @@
 @endsection
 
 @push("scripts")
-
+    
 @endpush

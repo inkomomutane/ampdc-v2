@@ -9,7 +9,9 @@
                 class="max-w-2xl mb-4 text-3xl text-white px-2 w-fit bg-red-500-content font-extrabold tracking-tight leading-none md:text-6xl xl:text-7xl dark:text-white first-letter:uppercase"
                 data-aos="fade-down"
             >
-               <mark class="bg-red-600 text-white px-4 break-words"> Sobre &nbsp; Observatório</mark>
+                <mark class="bg-red-600 text-white px-4 break-words">
+                    Sobre &nbsp; Observatório
+                </mark>
             </h2>
             <h1
                 class="max-w-2xl mb-4 text-red-600 text-sm font-bold tracking-tight leading-none dark:text-white first-letter:uppercase"

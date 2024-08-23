@@ -253,7 +253,7 @@
                             ></path>
                         </svg>
                         <span class="mx-4"
-                        >{{ labelText ?? "Upload image" }}
+                            >{{ labelText ?? "Upload image" }}
                         </span>
                     </button>
                     <button

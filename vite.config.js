@@ -10,7 +10,7 @@ export default defineConfig({
                 "resources/js/app.ts",
                 "resources/website/js/app.ts",
                 "resources/website/js/splide.ts",
-                'resources/website/js/reports.ts',
+                "resources/website/js/reports.ts",
                 "resources/website/css/gtranslator.css",
                 "resources/website/css/app.css",
             ],
@@ -32,7 +32,7 @@ export default defineConfig({
             "@components": "/resources/js/components",
             "@composables": "/resources/js/composables",
             "@website": "/resources/website",
-            'ziggy-js': path.resolve('vendor/tightenco/ziggy'),
+            "ziggy-js": path.resolve("vendor/tightenco/ziggy"),
         },
     },
 });

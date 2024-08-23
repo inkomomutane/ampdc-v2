@@ -10,7 +10,7 @@ import ResponsiveImage from "@components/ResponsiveImage.vue";
 const props = defineProps({
     articles: {
         type: Object as PropType<Articles>,
-        required:true
+        required: true,
     },
     messages: Object as PropType<FlasherResponse>,
 });
@@ -84,7 +84,7 @@ watch(
                                 name="article"
                                 type="text"
                                 v-model="articleSearch"
-                                class="h-14 w-full pr-8 pl-5  z-0 focus:outline-none shadow-2xl bg-zinc-50 border-2 border-zinc-900 text-red-900 focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                class="h-14 w-full pr-8 pl-5 z-0 focus:outline-none shadow-2xl bg-zinc-50 border-2 border-zinc-900 text-red-900 focus:ring-2 focus:ring-red-600 focus:border-transparent"
                                 placeholder="Pesquisar post..."
                             />
                         </div>
@@ -97,28 +97,31 @@ watch(
                             v-for="article in articles.data"
                         >
                             <article
-                                class="!w-full  rounded-b-xl bg-white dark:bg-gray-700 dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400"
+                                class="!w-full rounded-b-xl bg-white dark:bg-gray-700 dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400"
                             >
                                 <header class="">
-                                    <ResponsiveImage :responsive="article.cover ?? undefined" class-name="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover  w-full" />
+                                    <ResponsiveImage
+                                        :responsive="article.cover ?? undefined"
+                                        class-name="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover  w-full"
+                                    />
                                 </header>
 
                                 <div
-                                    class="w-full p-4 pb-6  grid justify-items-stretch col-span-3"
+                                    class="w-full p-4 pb-6 grid justify-items-stretch col-span-3"
                                 >
                                     <div class="flex justify-between">
                                         <h1
-                                            class="text-lg text-red-600  font-semibold  py-1 line-clamp-1"
+                                            class="text-lg text-red-600 font-semibold py-1 line-clamp-1"
                                         >
                                             {{ article.title }}
                                         </h1>
                                     </div>
-                                   <div class="pb-3">
-                                       <div
-                                           class="line-clamp-2  text-sm"
-                                           v-html="article.content"
-                                       ></div>
-                                   </div>
+                                    <div class="pb-3">
+                                        <div
+                                            class="line-clamp-2 text-sm"
+                                            v-html="article.content"
+                                        ></div>
+                                    </div>
 
                                     <div
                                         class="flex mb-1 font-normal text-sm text-gray-700 dark:text-gray-400 line-clamp-1"
@@ -154,7 +157,7 @@ watch(
                                         </svg>
                                         <p class="line-clamp-1">
                                             &nbsp;
-                                            {{ article.location ?? '' }}
+                                            {{ article.location ?? "" }}
                                         </p>
                                     </div>
                                     <div class="flex gap-2 mt-2 font-black">
@@ -167,7 +170,7 @@ watch(
                                                     article.status ===
                                                     'published',
                                             }"
-                                            class="flex text-center font-['Roboto'] text-gray-50  p-1 px-2"
+                                            class="flex text-center font-['Roboto'] text-gray-50 p-1 px-2"
                                         >
                                             <small class="font-black uppercase">
                                                 {{ article.status }}
@@ -189,7 +192,7 @@ watch(
                         Mostrando
                         <span
                             class="font-semibold text-red-900 dark:text-white"
-                        >{{
+                            >{{
                                 `${articles.meta.from ?? 0}-${
                                     articles.meta.to ?? 0
                                 }`
@@ -210,14 +213,14 @@ watch(
                             <Link
                                 href=""
                                 class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-red-500 bg-white border border-red-300 hover:bg-red-100 hover:text-red-700 dark:bg-red-800 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white"
-                            >&laquo; Anterior
+                                >&laquo; Anterior
                             </Link>
                         </li>
                         <li v-else>
                             <Link
                                 class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-red-500 bg-white border border-red-300 hover:bg-red-100 hover:text-red-700 dark:bg-red-800 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white"
                                 :href="links[0].url ?? ''"
-                            >&laquo; Anterior
+                                >&laquo; Anterior
                             </Link>
                         </li>
                         <li
@@ -228,7 +231,7 @@ watch(
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-red-500 bg-white border border-red-300 hover:bg-red-100 hover:text-red-700 dark:bg-red-800 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white"
                                 v-if="!link.active"
                                 :href="link.url ?? ''"
-                            >{{ link.label }}
+                                >{{ link.label }}
                             </Link>
                             <span
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-red-500 border border-red-300 dark:bg-red-800 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white"
@@ -238,7 +241,7 @@ watch(
                                         ? 'bg-red-700 dark:bg-slate-600 text-white dark:text-slate-100'
                                         : ''
                                 }`"
-                            >{{ link.label }}</span
+                                >{{ link.label }}</span
                             >
                         </li>
                         <li
@@ -247,7 +250,7 @@ watch(
                         >
                             <span
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-red-500 bg-white rounded-r-lg border border-red-300 hover:bg-red-100 hover:text-red-700 dark:bg-red-800 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white"
-                            >Próximo &raquo;</span
+                                >Próximo &raquo;</span
                             >
                         </li>
                         <li
@@ -255,7 +258,7 @@ watch(
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-red-500 bg-white rounded-r-lg border border-red-300 hover:bg-red-100 hover:text-red-700 dark:bg-red-800 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white"
                         >
                             <Link :href="links.slice(-1)[0].url ?? ''"
-                            >Próximo &raquo;</Link
+                                >Próximo &raquo;</Link
                             >
                         </li>
                     </ul>

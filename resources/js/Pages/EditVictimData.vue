@@ -43,7 +43,7 @@ const props = defineProps({
     //     required: true,
     // },
     victim: {
-      type: Object as PropType<App.Data.VictimData>,
+        type: Object as PropType<App.Data.VictimData>,
         required: true,
     },
     messages: {
@@ -59,16 +59,16 @@ const educationLevelOptions = getArrayFromEnum(EducationLevel);
 const form = useForm({
     name: props.victim.name,
     age: props.victim.age,
-    gender:  props.victim.gender,
-    civil_state:  props.victim.civil_state,
-    contact:  props.victim.contact,
+    gender: props.victim.gender,
+    civil_state: props.victim.civil_state,
+    contact: props.victim.contact,
     profession: props.victim.profession,
-    education_level:  props.victim.education_level,
-    contact_alternative:  props.victim.contact_alternative,
-    contact_person:  props.victim.contact_person,
-    city:  props.victim.city,
-    neighborhood:  props.victim.neighborhood,
-    address:  props.victim.address,
+    education_level: props.victim.education_level,
+    contact_alternative: props.victim.contact_alternative,
+    contact_person: props.victim.contact_person,
+    city: props.victim.city,
+    neighborhood: props.victim.neighborhood,
+    address: props.victim.address,
 });
 
 watch(
@@ -84,15 +84,16 @@ watch(
 );
 
 const registerVictim = () => {
-    form.post(route("victim.data.update",{
-        victim: props.victim.id,
-    }), {
-        preserveScroll: true,
-        preserveState: true,
-        onSuccess: () => {
-
+    form.post(
+        route("victim.data.update", {
+            victim: props.victim.id,
+        }),
+        {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => {},
         },
-    });
+    );
 };
 </script>
 <template>
@@ -105,7 +106,7 @@ const registerVictim = () => {
                         <h1
                             class="text-xl font-semibold text-gray-900 dark:text-white"
                         >
-                           Editar dados da víctima
+                            Editar dados da víctima
                         </h1>
                     </div>
                 </div>
@@ -116,7 +117,8 @@ const registerVictim = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="name"
-                                    >Nome da vítima <span class="text-red-500">*</span>
+                                    >Nome da vítima
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <input
                                     id="name"
@@ -133,7 +135,8 @@ const registerVictim = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="name"
-                                >Idade da vítima <span class="text-red-500">*</span>
+                                    >Idade da vítima
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <input
                                     id="age"
@@ -150,13 +153,14 @@ const registerVictim = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="name"
-                                >Sexo da vítima <span class="text-red-500">*</span>
+                                    >Sexo da vítima
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <v-select
                                     v-model="form.gender"
                                     :get-option-label="
-                                    (option: KeyPair) => option.key
-                                "
+                                        (option: KeyPair) => option.key
+                                    "
                                     :options="genderOptions"
                                     placeholder="Sexo da vítima"
                                     :reduce="(gender: KeyPair) => gender.value"
@@ -169,25 +173,28 @@ const registerVictim = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="civil_state"
-                                >Estado civil da vítima <span class="text-red-500">*</span>
+                                    >Estado civil da vítima
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <v-select
                                     v-model="form.civil_state"
                                     :get-option-label="
-                                    (option: KeyPair) => option.key
-                                "
+                                        (option: KeyPair) => option.key
+                                    "
                                     :options="civilStateOptions"
                                     placeholder="Estado civil da vítima"
                                     :reduce="(gender: KeyPair) => gender.value"
                                     label="civil_state"
                                 ></v-select>
-                                <InputError :message="form.errors.civil_state" />
+                                <InputError
+                                    :message="form.errors.civil_state"
+                                />
                             </div>
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="contact"
-                                >Profissão da vítima
+                                    >Profissão da vítima
                                 </label>
                                 <input
                                     id="profession"
@@ -204,26 +211,29 @@ const registerVictim = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="education_level"
-                                >Nível acadêmico da vítima <span class="text-red-500">*</span>
+                                    >Nível acadêmico da vítima
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <v-select
                                     v-model="form.education_level"
                                     :get-option-label="
-                                    (option: KeyPair) => option.key
-                                "
+                                        (option: KeyPair) => option.key
+                                    "
                                     :options="educationLevelOptions"
                                     placeholder="Nível acadêmico da vítima"
                                     :reduce="(value: KeyPair) => value.value"
                                     label="education_level"
                                 ></v-select>
-                                <InputError :message="form.errors.education_level" />
+                                <InputError
+                                    :message="form.errors.education_level"
+                                />
                             </div>
 
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="city"
-                                >Cidade de residência da vítima
+                                    >Cidade de residência da vítima
                                 </label>
                                 <input
                                     id="city"
@@ -240,7 +250,7 @@ const registerVictim = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="neighborhood"
-                                >Bairro de residência da vítima
+                                    >Bairro de residência da vítima
                                 </label>
                                 <input
                                     id="neighborhood"
@@ -251,13 +261,15 @@ const registerVictim = () => {
                                     placeholder="Bairro de residência da vítima"
                                     type="text"
                                 />
-                                <InputError :message="form.errors.neighborhood" />
+                                <InputError
+                                    :message="form.errors.neighborhood"
+                                />
                             </div>
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="address"
-                                >Endereço da vítima
+                                    >Endereço da vítima
                                 </label>
                                 <input
                                     id="address"
@@ -275,7 +287,7 @@ const registerVictim = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="contact"
-                                >Contacto da vítima
+                                    >Contacto da vítima
                                 </label>
                                 <input
                                     id="contact"
@@ -292,7 +304,7 @@ const registerVictim = () => {
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="contact_alternative"
-                                >Contacto alternativo da vítima
+                                    >Contacto alternativo da vítima
                                 </label>
                                 <input
                                     id="contact_alternative"
@@ -303,28 +315,29 @@ const registerVictim = () => {
                                     placeholder="Contacto alternativo da vítima"
                                     type="text"
                                 />
-                                <InputError :message="form.errors.contact_alternative" />
+                                <InputError
+                                    :message="form.errors.contact_alternative"
+                                />
                             </div>
                             <div>
-                            <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                for="contact"
-                            >Pessoa de contacto da vítima
-                            </label>
-                            <input
-                                id="contact_personInput"
-                                ref="contact_personInput"
-                                v-model="form.contact_person"
-                                name="contact_personInput"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Pessoa de contacto da vítima"
-                                type="text"
-                            />
-                            <InputError :message="form.errors.contact_person" />
-                        </div>
-
-
-
+                                <label
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    for="contact"
+                                    >Pessoa de contacto da vítima
+                                </label>
+                                <input
+                                    id="contact_personInput"
+                                    ref="contact_personInput"
+                                    v-model="form.contact_person"
+                                    name="contact_personInput"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="Pessoa de contacto da vítima"
+                                    type="text"
+                                />
+                                <InputError
+                                    :message="form.errors.contact_person"
+                                />
+                            </div>
                         </div>
                         <button
                             class="w-full col-span-2 text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-bold rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"

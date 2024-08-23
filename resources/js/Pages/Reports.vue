@@ -194,7 +194,7 @@ ChartJS.register(
                             label="Casos recebidos"
                         />
                     </div>
-                    <div class="grid  gap-6 mb-8">
+                    <div class="grid gap-6 mb-8">
                         <DeathCauseChart
                             label="Gráfico tipo de violência"
                             :causes="causeOfDeath.labels"

@@ -4,9 +4,7 @@
             <div class="splide__track">
                 <ul class="splide__list mt-2">
                     <li class="splide__slide">
-                        <span
-                            class="flex justify-center items-center"
-                        >
+                        <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/ampdc.jpg") }}"
@@ -15,9 +13,7 @@
                         </span>
                     </li>
                     <li class="splide__slide">
-                        <span
-                            class="flex justify-center items-center"
-                        >
+                        <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/silverlining.png") }}"
@@ -26,10 +22,7 @@
                         </span>
                     </li>
                     <li class="splide__slide">
-                        <span
-
-                            class="flex justify-center items-center"
-                        >
+                        <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/cesc.png") }}"
@@ -38,10 +31,7 @@
                         </span>
                     </li>
                     <li class="splide__slide">
-                        <span
-
-                            class="flex justify-center items-center"
-                        >
+                        <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/igual.jpg") }}"
@@ -50,10 +40,7 @@
                         </span>
                     </li>
                     <li class="splide__slide">
-                        <span
-
-                            class="flex justify-center items-center"
-                        >
+                        <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/Lemusica.png") }}"
@@ -62,10 +49,7 @@
                         </span>
                     </li>
                     <li class="splide__slide">
-                        <span
-
-                            class="flex justify-center items-center"
-                        >
+                        <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/NAFEZA.png") }}"
@@ -74,10 +58,7 @@
                         </span>
                     </li>
                     <li class="splide__slide">
-                        <span
-
-                            class="flex justify-center items-center"
-                        >
+                        <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/observatorio.jpg") }}"
@@ -85,7 +66,6 @@
                             />
                         </span>
                     </li>
-
                 </ul>
             </div>
         </div>

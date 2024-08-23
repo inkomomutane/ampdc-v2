@@ -5,13 +5,13 @@ import { createApp, h, DefineComponent, ref, onMounted } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import VueSelect from "vs-vue3-select";
-import { ZiggyVue } from 'ziggy-js';
+import { ZiggyVue } from "ziggy-js";
 import VueApexCharts from "vue3-apexcharts";
 import "vs-vue3-select/dist/vs-vue3-select.css";
 import PrimeVue from "primevue/config";
 import "@/components/select/select.css";
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 import.meta.glob(["../images/**", "../fonts/**"]);
 const appName = import.meta.env.VITE_APP_NAME || "Donations";

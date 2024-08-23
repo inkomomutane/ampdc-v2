@@ -3,29 +3,35 @@ import { PropType } from "vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputError from "@components/InputError.vue";
-import { Gender, getArrayFromEnum, KeyPair, PeriodOfViolenceAct } from "@/types/casestatus";
-const props= defineProps({
+import {
+    Gender,
+    getArrayFromEnum,
+    KeyPair,
+    PeriodOfViolenceAct,
+} from "@/types/casestatus";
+import Wizzard from "@/Pages/partials/Wizzard.vue";
+const props = defineProps({
     victim: {
         type: Object as PropType<App.Data.VictimData>,
-        required: true
+        required: true,
     },
     violenceTypes: {
         type: Array<App.Data.ViolenceTypeData>,
-        required: true
+        required: true,
     },
     perpetrators: {
         type: Array<App.Data.PerpetratorData>,
-        required: true
+        required: true,
     },
-    supposedReasonsOfViolence : {
+    supposedReasonsOfViolence: {
         type: Array<App.Data.SupposedReasonOfViolenceData>,
-        required: true
+        required: true,
     },
-    violenceIncidentLocations : {
+    violenceIncidentLocations: {
         type: Array<App.Data.ViolenceIncidentLocationData>,
-        required: true
-    }
-})
+        required: true,
+    },
+});
 
 const periodOfViolenceOptions = getArrayFromEnum(PeriodOfViolenceAct);
 
@@ -37,8 +43,8 @@ const form = useForm({
     perpetrator_profession: "",
     perpetrator_address: "",
     perpetrator_contact: "",
-    period_of_violence_act : null,
-    violence_incident_location_id : null,
+    period_of_violence_act: null,
+    violence_incident_location_id: null,
     violence_details: "",
     is_violence_caused_death: false,
     is_the_first_time: true,
@@ -49,40 +55,39 @@ const form = useForm({
     is_the_last_cases_reported_to_authorities: false,
     are_last_cases_resolved: false,
     last_cases_resolution_details: "",
-
-
 });
 
 const onClickIsViolenceCausedDeath = () => {
     form.is_violence_caused_death = !form.is_violence_caused_death;
-}
+};
 
 const onClickIsTheFirstTime = () => {
     form.is_the_first_time = !form.is_the_first_time;
-    if(form.is_the_first_time){
+    if (form.is_the_first_time) {
         form.last_violences_description = "";
         form.is_the_last_cases_reported_to_authorities = false;
         form.are_last_cases_resolved = false;
         form.last_cases_resolution_details = "";
     }
-}
+};
 
 const onClickIsViolenceReportedToAuthorities = () => {
-    form.is_violence_reported_to_authorities = !form.is_violence_reported_to_authorities;
-}
+    form.is_violence_reported_to_authorities =
+        !form.is_violence_reported_to_authorities;
+};
 
 const onClickIsTheLastCasesReportedToAuthorities = () => {
-    form.is_the_last_cases_reported_to_authorities = !form.is_the_last_cases_reported_to_authorities;
-}
+    form.is_the_last_cases_reported_to_authorities =
+        !form.is_the_last_cases_reported_to_authorities;
+};
 
 const onClickAreLastCasesResolved = () => {
     form.are_last_cases_resolved = !form.are_last_cases_resolved;
-}
-
+};
 
 const registerVictimCase = () => {
-    form.post(route('victim.case.store', { victim: props.victim.id }));
-}
+    form.post(route("victim.case.store", { victim: props.victim.id }));
+};
 </script>
 
 <template>
@@ -92,98 +97,155 @@ const registerVictimCase = () => {
             <div class="pb-12">
                 <div class="max-w-7xl mx-auto p-4 bg-white dark:bg-slate-600">
                     <div class="p-4 bg-slate-100 rounded dark:bg-slate-900">
-                        <h1 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        <h1
+                            class="text-lg font-semibold text-gray-900 dark:text-white"
+                        >
                             Registar caso da vítima {{ victim.name }}
                         </h1>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
-                            Preencha o formulário abaixo para registar um novo caso para a vítima <strong>{{ victim.name }}</strong>.
-                        </p>
+                        <Wizzard :step="2" />
                     </div>
                 </div>
-                <div class="max-w-7xl mx-auto p-6 lg:p-8 bg-white dark:bg-slate-700">
+                <div
+                    class="max-w-7xl mx-auto p-6 lg:p-8 bg-white dark:bg-slate-700"
+                >
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="col-span-2 grid md:grid-cols-3 gap-4">
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="violence_type_id"
-                                >Tipo de violência sofrida <span class="text-red-500">*</span>
+                                    >Tipo de violência sofrida
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <v-select
                                     v-model="form.violence_type_id"
-                                    :get-option-label="(violence: App.Data.ViolenceTypeData) => violence.name"
+                                    :get-option-label="
+                                        (violence: App.Data.ViolenceTypeData) =>
+                                            violence.name
+                                    "
                                     :options="violenceTypes"
                                     placeholder="Selecione o tipo de violência"
-                                    :reduce="(violence: App.Data.ViolenceTypeData) => violence.id"
+                                    :reduce="
+                                        (violence: App.Data.ViolenceTypeData) =>
+                                            violence.id
+                                    "
                                 ></v-select>
-                                <InputError :message="form.errors.violence_type_id" />
+                                <InputError
+                                    :message="form.errors.violence_type_id"
+                                />
                             </div>
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="violence_type_id"
-                                >Suposto motivo da violência <span class="text-red-500">*</span>
+                                    >Suposto motivo da violência
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <v-select
-                                    v-model="form.supposed_reason_of_violence_id"
-                                    :get-option-label="(key: App.Data.SupposedReasonOfViolenceData) => key.name"
+                                    v-model="
+                                        form.supposed_reason_of_violence_id
+                                    "
+                                    :get-option-label="
+                                        (
+                                            key: App.Data.SupposedReasonOfViolenceData,
+                                        ) => key.name
+                                    "
                                     :options="supposedReasonsOfViolence"
                                     placeholder="Suposto motivo da violência"
-                                    :reduce="(value: App.Data.SupposedReasonOfViolenceData) => value.id"
+                                    :reduce="
+                                        (
+                                            value: App.Data.SupposedReasonOfViolenceData,
+                                        ) => value.id
+                                    "
                                 ></v-select>
-                                <InputError :message="form.errors.supposed_reason_of_violence_id" />
+                                <InputError
+                                    :message="
+                                        form.errors
+                                            .supposed_reason_of_violence_id
+                                    "
+                                />
                             </div>
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="period_of_violence_act"
-                                >Período que ocorreu a violência <span class="text-red-500">*</span>
+                                    >Período que ocorreu a violência
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <v-select
                                     v-model="form.period_of_violence_act"
-                                    :get-option-label="(key: KeyPair) => key.key"
+                                    :get-option-label="
+                                        (key: KeyPair) => key.key
+                                    "
                                     :options="periodOfViolenceOptions"
                                     placeholder="Período que ocorreu a violência"
                                     :reduce="(value: KeyPair) => value.value"
                                 ></v-select>
-                                <InputError :message="form.errors.period_of_violence_act" />
+                                <InputError
+                                    :message="
+                                        form.errors.period_of_violence_act
+                                    "
+                                />
                             </div>
 
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="violence_incident_location_id"
-                                >Local onde ocorreu a violência <span class="text-red-500">*</span>
+                                    >Local onde ocorreu a violência
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <v-select
                                     v-model="form.violence_incident_location_id"
-                                    :get-option-label="(key: App.Data.ViolenceIncidentLocationData) => key.name"
+                                    :get-option-label="
+                                        (
+                                            key: App.Data.ViolenceIncidentLocationData,
+                                        ) => key.name
+                                    "
                                     :options="violenceIncidentLocations"
                                     placeholder="Local onde ocorreu a violência"
-                                    :reduce="(value: App.Data.ViolenceIncidentLocationData) => value.id"
+                                    :reduce="
+                                        (
+                                            value: App.Data.ViolenceIncidentLocationData,
+                                        ) => value.id
+                                    "
                                 ></v-select>
-                                <InputError :message="form.errors.violence_incident_location_id" />
+                                <InputError
+                                    :message="
+                                        form.errors
+                                            .violence_incident_location_id
+                                    "
+                                />
                             </div>
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="perpetrator_id"
-                                >Perpetrador da violência <span class="text-red-500">*</span>
+                                    >Perpetrador da violência
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <v-select
                                     v-model="form.perpetrator_id"
-                                    :get-option-label="(key: App.Data.PerpetratorData) => key.name"
+                                    :get-option-label="
+                                        (key: App.Data.PerpetratorData) =>
+                                            key.name
+                                    "
                                     :options="perpetrators"
                                     placeholder="Perpetrador da violência"
-                                    :reduce="(value: App.Data.PerpetratorData) => value.id"
+                                    :reduce="
+                                        (value: App.Data.PerpetratorData) =>
+                                            value.id
+                                    "
                                 ></v-select>
-                                <InputError :message="form.errors.perpetrator_id" />
+                                <InputError
+                                    :message="form.errors.perpetrator_id"
+                                />
                             </div>
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="name"
-                                >Nome do perpetrador
+                                    >Nome do perpetrador
                                 </label>
                                 <input
                                     id="perpetrator_name"
@@ -194,14 +256,16 @@ const registerVictimCase = () => {
                                     placeholder="Nome do perpetrador"
                                     type="text"
                                 />
-                                <InputError :message="form.errors.perpetrator_name" />
+                                <InputError
+                                    :message="form.errors.perpetrator_name"
+                                />
                             </div>
 
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="perpetrator_profession"
-                                >Profissão do perpetrador
+                                    >Profissão do perpetrador
                                 </label>
                                 <input
                                     id="perpetrator_profession"
@@ -212,13 +276,17 @@ const registerVictimCase = () => {
                                     placeholder="Profissão do perpetrador"
                                     type="text"
                                 />
-                                <InputError :message="form.errors.perpetrator_profession" />
+                                <InputError
+                                    :message="
+                                        form.errors.perpetrator_profession
+                                    "
+                                />
                             </div>
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="perpetrator_address"
-                                >Endereço do perpetrador
+                                    >Endereço do perpetrador
                                 </label>
                                 <input
                                     id="perpetrator_address"
@@ -229,13 +297,15 @@ const registerVictimCase = () => {
                                     placeholder="Endereço do perpetrador"
                                     type="text"
                                 />
-                                <InputError :message="form.errors.perpetrator_address" />
+                                <InputError
+                                    :message="form.errors.perpetrator_address"
+                                />
                             </div>
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="perpetrator_address"
-                                >Contacto do perpetrador
+                                    >Contacto do perpetrador
                                 </label>
                                 <input
                                     id="perpetrator_contact"
@@ -246,25 +316,30 @@ const registerVictimCase = () => {
                                     placeholder="Contacto do perpetrador"
                                     type="text"
                                 />
-                                <InputError :message="form.errors.perpetrator_contact" />
+                                <InputError
+                                    :message="form.errors.perpetrator_contact"
+                                />
                             </div>
-                            <div class=" md:col-span-3">
+                            <div class="md:col-span-3">
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="violence_details"
-                                >Detalhes da violência <span class="text-red-500">*</span>
+                                    >Detalhes da violência
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <QuillEditor
                                     :options="{
-                                    placeholder: 'Detalhes da violência',
-                                }"
+                                        placeholder: 'Detalhes da violência',
+                                    }"
                                     contentType="html"
                                     theme="snow"
                                     class="!h-fit"
                                     toolbar="minimal"
                                     v-model:content="form.violence_details"
                                 />
-                                <InputError :message="form.errors.violence_details" />
+                                <InputError
+                                    :message="form.errors.violence_details"
+                                />
                             </div>
 
                             <div
@@ -281,14 +356,16 @@ const registerVictimCase = () => {
                                 />
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
-                                >A violência resultou em morte?</label
+                                    >A violência resultou em morte?</label
                                 >
                                 <InputError
-                                    :message="form.errors.is_violence_caused_death"
+                                    :message="
+                                        form.errors.is_violence_caused_death
+                                    "
                                 />
                             </div>
                             <div
-                                class="flex gap-4  cursor-pointer"
+                                class="flex gap-4 cursor-pointer"
                                 @click="onClickIsTheFirstTime"
                             >
                                 <input
@@ -301,19 +378,21 @@ const registerVictimCase = () => {
                                 />
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
-                                >É primeira vez a sofrer violência?</label
+                                    >É primeira vez a sofrer violência?</label
                                 >
                                 <InputError
                                     :message="form.errors.is_the_first_time"
                                 />
                             </div>
                             <div
-                                class="flex gap-4  cursor-pointer"
+                                class="flex gap-4 cursor-pointer"
                                 @click="onClickIsViolenceReportedToAuthorities"
                             >
                                 <input
                                     id="is_the_first_time"
-                                    v-model="form.is_violence_reported_to_authorities"
+                                    v-model="
+                                        form.is_violence_reported_to_authorities
+                                    "
                                     name="is_the_first_time"
                                     class="flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     placeholder="Reportou o caso nas autoridades??"
@@ -321,38 +400,57 @@ const registerVictimCase = () => {
                                 />
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
-                                >Reportou o caso nas autoridades? </label
-                                >
+                                    >Reportou o caso nas autoridades?
+                                </label>
                                 <InputError
-                                    :message="form.errors.is_violence_reported_to_authorities"
+                                    :message="
+                                        form.errors
+                                            .is_violence_reported_to_authorities
+                                    "
                                 />
                             </div>
 
-                            <div v-if="!form.is_the_first_time" class=" md:col-span-3">
+                            <div
+                                v-if="!form.is_the_first_time"
+                                class="md:col-span-3"
+                            >
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="last_violences_description"
-                                >Detalhes da ultima violência sofrida <span class="text-red-500">*</span>
+                                    >Detalhes da ultima violência sofrida
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <QuillEditor
                                     :options="{
-                                    placeholder: 'Detalhes da ultima violência sofrida',
-                                }"
+                                        placeholder:
+                                            'Detalhes da ultima violência sofrida',
+                                    }"
                                     contentType="html"
                                     theme="snow"
                                     class="!h-fit"
                                     toolbar="minimal"
-                                    v-model:content="form.last_violences_description"
+                                    v-model:content="
+                                        form.last_violences_description
+                                    "
                                 />
-                                <InputError :message="form.errors.last_violences_description" />
+                                <InputError
+                                    :message="
+                                        form.errors.last_violences_description
+                                    "
+                                />
                             </div>
-                            <div v-if="!form.is_the_first_time"
-                                class="flex gap-4  cursor-pointer"
-                                @click="onClickIsTheLastCasesReportedToAuthorities"
+                            <div
+                                v-if="!form.is_the_first_time"
+                                class="flex gap-4 cursor-pointer"
+                                @click="
+                                    onClickIsTheLastCasesReportedToAuthorities
+                                "
                             >
                                 <input
                                     id="is_the_last_cases_reported_to_authorities"
-                                    v-model="form.is_the_last_cases_reported_to_authorities"
+                                    v-model="
+                                        form.is_the_last_cases_reported_to_authorities
+                                    "
                                     name="is_the_last_cases_reported_to_authorities"
                                     class="flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     placeholder="O último caso foi reportado as autoridades?"
@@ -360,14 +458,18 @@ const registerVictimCase = () => {
                                 />
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
-                                >O último caso foi reportado as autoridades? </label
-                                >
+                                    >O último caso foi reportado as autoridades?
+                                </label>
                                 <InputError
-                                    :message="form.errors.is_the_last_cases_reported_to_authorities"
+                                    :message="
+                                        form.errors
+                                            .is_the_last_cases_reported_to_authorities
+                                    "
                                 />
                             </div>
-                            <div v-if="!form.is_the_first_time"
-                                class="flex gap-4  cursor-pointer"
+                            <div
+                                v-if="!form.is_the_first_time"
+                                class="flex gap-4 cursor-pointer"
                                 @click="onClickAreLastCasesResolved"
                             >
                                 <input
@@ -380,29 +482,43 @@ const registerVictimCase = () => {
                                 />
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
-                                >O caso foi resolvido? </label
-                                >
+                                    >O caso foi resolvido?
+                                </label>
                                 <InputError
-                                    :message="form.errors.are_last_cases_resolved"
+                                    :message="
+                                        form.errors.are_last_cases_resolved
+                                    "
                                 />
                             </div>
-                            <div v-if="form.are_last_cases_resolved" class=" md:col-span-3">
+                            <div
+                                v-if="form.are_last_cases_resolved"
+                                class="md:col-span-3"
+                            >
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="last_cases_resolution_details"
-                                >Detalhes da resolução do último caso <span class="text-red-500">*</span>
+                                    >Detalhes da resolução do último caso
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <QuillEditor
                                     :options="{
-                                    placeholder: 'Detalhes da resolução do último caso',
-                                }"
+                                        placeholder:
+                                            'Detalhes da resolução do último caso',
+                                    }"
                                     contentType="html"
                                     theme="snow"
                                     class="!h-fit"
                                     toolbar="minimal"
-                                    v-model:content="form.last_cases_resolution_details"
+                                    v-model:content="
+                                        form.last_cases_resolution_details
+                                    "
                                 />
-                                <InputError :message="form.errors.last_cases_resolution_details" />
+                                <InputError
+                                    :message="
+                                        form.errors
+                                            .last_cases_resolution_details
+                                    "
+                                />
                             </div>
                         </div>
                         <button
@@ -413,7 +529,6 @@ const registerVictimCase = () => {
                             Registar caso
                         </button>
                     </div>
-
                 </div>
             </div>
         </template>

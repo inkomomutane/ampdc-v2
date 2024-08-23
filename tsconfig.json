@@ -24,6 +24,6 @@
         "resources/js/**/*.d.ts",
         "resources/js/**/*.vue",
         "resources/website/**/*.ts",
-        "resources/website/**/*.d.ts",
+        "resources/website/**/*.d.ts"
     ]
 }

@@ -1,9 +1,12 @@
 @extends("Website.Layouts.website")
-@section('seo')
+@section("seo")
     {!! seo()->for($article) !!}
 @endsection
+
 @section("content")
-    <section class="bg-white md:bg-gradient-to-b md:from-red-200 md:via-white md:to-white">
+    <section
+        class="bg-white md:bg-gradient-to-b md:from-red-200 md:via-white md:to-white"
+    >
         <div
             class="max-w-screen-xl md:px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:px-16"
         >
@@ -68,7 +71,7 @@
                                             class="flex justify-between w-fit bg-red-600 p-1 px-2 capitalize text-xs text-white font-semibold"
                                         >
                                             <strong>
-                                                {{ $article->posted_at->format('d F, Y') }}
+                                                {{ $article->posted_at->format("d F, Y") }}
                                             </strong>
                                         </div>
                                     </div>
@@ -76,7 +79,7 @@
                             </div>
                         </article>
                         <div
-                            class="text-base  p-6 text-justify bg-white/60 tracking-normal space-y-4"
+                            class="text-base p-6 text-justify bg-white/60 tracking-normal space-y-4"
                         >
                             {!! $article->content ?? "" !!}
                         </div>
@@ -84,21 +87,27 @@
 
                     @if (! is_null($article?->sections))
                         <ul>
-                        @foreach ($article?->sections as $section)
-                            <li
-                                class="grid md:grid-cols-2 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:px-16 items-center group"
-                            >
-                                <div class="group-even:md:order-2">
-                                    {{ $section->cover?->img()?->attributes(["class" => "h-full object-cover object-top rounded hover:scale-105 transition-transform duration-500 ease-in-out", "alt" => $section->title]) }}
-                                </div>
-                                <div class="bg-white p-8 h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10">
-                                    <h1 class="font-extrabold text-xl text-red-600 mb-2">{{$section->title}}</h1>
-                                    <p class="py-2">
-                                       {!! $section->content !!}
-                                    </p>
-                                </div>
-                            </li>
-                        @endforeach
+                            @foreach ($article?->sections as $section)
+                                <li
+                                    class="grid md:grid-cols-2 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:px-16 items-center group"
+                                >
+                                    <div class="group-even:md:order-2">
+                                        {{ $section->cover?->img()?->attributes(["class" => "h-full object-cover object-top rounded hover:scale-105 transition-transform duration-500 ease-in-out", "alt" => $section->title]) }}
+                                    </div>
+                                    <div
+                                        class="bg-white p-8 h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10"
+                                    >
+                                        <h1
+                                            class="font-extrabold text-xl text-red-600 mb-2"
+                                        >
+                                            {{ $section->title }}
+                                        </h1>
+                                        <p class="py-2">
+                                            {!! $section->content !!}
+                                        </p>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     @endif
                 </div>

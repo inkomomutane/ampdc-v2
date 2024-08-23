@@ -1,7 +1,8 @@
 @extends("Website.Layouts.website")
-@section('seo')
+@section("seo")
     {!! seo($seoData) !!}
 @endsection
+
 @section("content")
     <section class="bg-gradient-to-b from-red-200 via-red-100 to-red-200">
         <div
@@ -124,7 +125,7 @@
                                         <p
                                             class="line-clamp-3 font-[Poppins] text-[13px] text-gray-800/80"
                                         >
-                                            {!!  $articleItem->short_description !!}
+                                            {!! $articleItem->short_description !!}
                                         </p>
                                         <time
                                             class="w-fit text-xs text-white font-semibold tracking-tight bg-red-500 p-1 px-2 rounded-sm"
