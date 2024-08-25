@@ -2,7 +2,7 @@ name: 🚀🔥 Deploy 🔥🚀
 on:
   push:
     branches:
-      - production
+      - terminated
 jobs:
   buildAssets:
     name: Build

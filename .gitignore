@@ -19,3 +19,7 @@ yarn-error.log
 /.vscode
 composer_production.phar
 composer.lock
+
+/caddy
+frankenphp
+frankenphp-worker.php
