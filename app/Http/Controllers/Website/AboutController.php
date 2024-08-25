@@ -13,6 +13,9 @@ class AboutController extends Controller
      */
     public function __invoke(Request $request)
     {
+
+
+
         return view('Website.Pages.about',[
             'seoData' => new SEOData(
                 title: 'Sobre',

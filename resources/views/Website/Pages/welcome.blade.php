@@ -384,5 +384,5 @@
 @endsection
 
 @push("scripts")
-    
+
 @endpush
