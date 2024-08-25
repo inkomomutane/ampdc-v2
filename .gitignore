@@ -23,3 +23,6 @@ composer.lock
 /caddy
 frankenphp
 frankenphp-worker.php
+ngix.conf
+php-fpm.conf
+nginx.config

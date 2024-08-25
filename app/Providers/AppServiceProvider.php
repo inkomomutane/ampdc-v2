@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Support\Facades\Route as RouteFacade;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
+use URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(125);
+          if (app()->isProduction()){
+              URL::forceScheme('https');
+          }
     }
 }
