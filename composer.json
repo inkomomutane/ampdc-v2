@@ -31,7 +31,7 @@
         "spatie/laravel-sluggable": "^3.6",
         "spatie/laravel-typescript-transformer": "^2.3",
         "spatie/typescript-transformer": "^2.2",
-        "tightenco/ziggy": "^v2.0"
+        "tightenco/ziggy": "^2.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",

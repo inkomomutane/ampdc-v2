@@ -46,6 +46,6 @@ class Http3Response
 
         $response->headers->set('Link', "<".Vite::asset('resources/website/images/logo.png').">; rel=preload; as=image", false);
         $response->sendHeaders(103);
-        return $next($request);
+        return $response;
     }
 }

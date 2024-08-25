@@ -26,3 +26,4 @@ frankenphp-worker.php
 ngix.conf
 php-fpm.conf
 nginx.config
+Caddyfile

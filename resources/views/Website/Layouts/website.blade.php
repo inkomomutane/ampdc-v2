@@ -5,14 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>@yield("title", "Observatório de feminicidio")</title>
         @yield("seo")
-
+        @routes
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net" />
         <link
             href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap"
             rel="stylesheet"
         />
-        @routes
         <!-- Scripts -->
         @vite(["resources/website/js/app.ts", "resources/website/css/app.css"])
         @vite(["resources/website/js/splide.ts", "resources/website/css/gtranslator.css"])

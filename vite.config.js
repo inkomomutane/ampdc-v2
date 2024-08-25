@@ -32,7 +32,6 @@ export default defineConfig({
             "@components": "/resources/js/components",
             "@composables": "/resources/js/composables",
             "@website": "/resources/website",
-            "ziggy-js": path.resolve("vendor/tightenco/ziggy"),
         },
     },
 });
