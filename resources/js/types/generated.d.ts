@@ -115,8 +115,8 @@ declare namespace App.Data {
     };
     export type VictimData = {
         id: string | null;
-        name: string;
-        age: number;
+        name: string | null;
+        age: number | null;
         gender: App.Enums.Gender;
         civil_state: App.Enums.CivilState;
         contact: string | null;
@@ -163,6 +163,7 @@ declare namespace App.Enums {
         "MARRIED" = "casado",
         "DIVORCED" = "divorciado",
         "WIDOWER" = "viúvo",
+        "NOT_SPECIFIED" = "não especificado",
     }
     export enum DocumentTypeMoz {
         "BI" = "BI",
@@ -181,6 +182,8 @@ declare namespace App.Enums {
         "POSTGRADUATE" = "Pós-Graduação",
         "MASTER" = "Mestrado",
         "DOCTORATE" = "Doutoramento",
+        "NONE" = "Nenhuma",
+        "NOT_SPECIFIED" = "Não Especificado",
     }
     export enum Gender {
         "FEMALE" = "Feminino",
@@ -192,5 +195,6 @@ declare namespace App.Enums {
         "AFTERNOON" = "Tarde",
         "NIGHT" = "Noite",
         "DAWN" = "Madrugada",
+        "OUTRO" = "Outro",
     }
 }
