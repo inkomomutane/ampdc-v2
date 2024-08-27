@@ -7,9 +7,10 @@
         @yield("seo")
         @routes
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net" />
+        <link rel="preconnect" href="https://fonts.bunny.net" media="print" />
         <link
             href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap"
+            media="print"
             rel="stylesheet"
         />
         <!-- Scripts -->
