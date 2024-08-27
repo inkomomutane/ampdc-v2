@@ -22,10 +22,10 @@ class RegisterVictimDataController extends Controller
             'name' => 'nullable|string', #done
             'age' => 'nullable|integer', #done
             'gender' => ['required',Rule::in(Gender::getValues())], #done
-            'civil_state' => ['required', Rule::in(CivilState::getValues())], #done
+            'civil_state' => [Rule::in(CivilState::getValues())], #done
             'contact' => 'nullable|string', #done
             'profession' => 'nullable|string',
-            'education_level' => ['nullable', Rule::in(EducationLevel::getValues())],
+            'education_level' => ['required', Rule::in(EducationLevel::getValues())],
             'contact_alternative' => 'nullable|string',
             'contact_person' => 'nullable|string',
             'city' => 'nullable|string',

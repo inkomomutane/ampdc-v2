@@ -8,6 +8,7 @@ enum PeriodOfViolenceAct : string
     case AFTERNOON = 'Tarde';
     case NIGHT = 'Noite';
     case DAWN = 'Madrugada';
+    case OUTRO = 'Outro';
 
 
     public static function getValues():array
@@ -16,7 +17,8 @@ enum PeriodOfViolenceAct : string
             self::MORNING->value,
             self::AFTERNOON->value,
             self::NIGHT->value,
-            self::DAWN->value
+            self::DAWN->value,
+            self::OUTRO->value
         ];
     }
 }

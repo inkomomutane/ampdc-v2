@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum EducationLevel : string
 {
+
     case PRIMARY = 'Ensino Primário';
     case SECONDARY = 'Ensino Secundário';
     case TECHNICAL_PROFESSIONAL = 'Ensino Técnico Profissional';
@@ -11,6 +12,8 @@ enum EducationLevel : string
     case POSTGRADUATE = 'Pós-Graduação';
     case MASTER = 'Mestrado';
     case DOCTORATE = 'Doutoramento';
+    case NONE = 'Nenhuma';
+    case NOT_SPECIFIED = 'Não Especificado';
 
     public static function getValues(): array
     {
@@ -22,6 +25,8 @@ enum EducationLevel : string
             self::POSTGRADUATE->value,
             self::MASTER->value,
             self::DOCTORATE->value,
+            self::NONE->value,
+            self::NOT_SPECIFIED->value
         ];
     }
 }

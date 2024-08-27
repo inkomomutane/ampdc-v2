@@ -8,6 +8,7 @@ enum CivilState :string
     case MARRIED = 'casado';
     case DIVORCED = 'divorciado';
     case WIDOWER = 'viúvo';
+    case NOT_SPECIFIED = 'não especificado';
 
 
     public static function getValues(): array
@@ -17,6 +18,7 @@ enum CivilState :string
             self::MARRIED->value,
             self::DIVORCED->value,
             self::WIDOWER->value,
+            self::NOT_SPECIFIED->value
         ];
     }
 }
