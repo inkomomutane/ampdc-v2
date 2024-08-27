@@ -81,6 +81,7 @@ class StoreVictimCaseController
      *     case_registered_city?:string,
      *     case_registered_province?:string,
      * } $data
+     * @param User $user
      * @return bool
      * @throws Exception
      */
