@@ -23,7 +23,7 @@
                                 <article
                                     class="relative min-h-72 max-h-72 xl:min-h-96 xl:max-h-96 flex items-end text-white"
                                 >
-                                    {{ $article->cover->img()->attributes(["class" => "absolute inset-0 w-full h-full object-cover object-top", "alt" => $article->title]) }}
+                                    {{ $article?->cover?->img()?->attributes(["class" => "absolute inset-0 w-full h-full object-cover object-top", "alt" => $article->title]) }}
                                     <div
                                         class="absolute inset-0 bg-gradient-to-t from-black/90 to-black/10"
                                     ></div>
