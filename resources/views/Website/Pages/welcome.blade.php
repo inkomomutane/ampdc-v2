@@ -276,7 +276,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach ($articles as $article)
-                            <li role="option" class="splide__slide py-12">
+                            <li role="listitem" class="splide__slide py-12">
                                 <a
                                     href="{{ route("news.page", ["article" => $article->slug]) }}"
                                 >
