@@ -21,7 +21,7 @@ class UpdateVictimDataController extends Controller
             'name' => 'nullable|string',
             'age' => 'nullable|integer',
             'gender' => ['required',Rule::in(Gender::getValues())],
-            'civil_state' => ['required', Rule::in(CivilState::getValues())],
+            'civil_state' => ['nullable', Rule::in(CivilState::getValues())],
             'contact' => 'nullable|string',
             'profession' => 'nullable|string',
             'education_level' => ['nullable', Rule::in(EducationLevel::getValues())],

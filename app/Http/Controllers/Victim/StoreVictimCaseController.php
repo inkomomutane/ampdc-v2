@@ -15,30 +15,22 @@ class StoreVictimCaseController
     private function rules() : array {
         return  [
               'violence_type_id' => 'required|exists:violence_types,id',
-              'supposed_reason_of_violence_id' => 'required|exists:supposed_reason_of_violences,id',
-              'perpetrator_id' => 'required|exists:perpetrators,id',
+              'supposed_reason_of_violence_id' => 'exists:supposed_reason_of_violences,id',
+              'perpetrator_id' => 'exists:perpetrators,id',
               'perpetrator_name' => 'nullable|string',
               'perpetrator_profession' => 'nullable|string',
               'perpetrator_address' => 'nullable|string',
               'perpetrator_contact' => 'nullable|string',
-              'period_of_violence_act' => ['required',Rule::in(PeriodOfViolenceAct::getValues())],
-              'violence_incident_location_id' => 'required|exists:violence_incident_locations,id',
+              'period_of_violence_act' => ['nullable',Rule::in(PeriodOfViolenceAct::getValues())],
+              'violence_incident_location_id' => 'nullable|exists:violence_incident_locations,id',
               'violence_details' => 'nullable|string',
               'is_violence_caused_death' => 'required|bool',
               'is_the_first_time' => 'required|bool',
               'is_violence_reported_to_authorities' => 'nullable|bool',
-
              'last_violences_description' => 'nullable|string',
              'is_the_last_cases_reported_to_authorities' => ['nullable','bool'],
              'are_last_cases_resolved' => ['required_if:is_the_last_cases_reported_to_authorities,true','nullable','bool'],
              'last_cases_resolution_details' => ['required_if:are_last_cases_resolved,true','nullable','string'],
-
-//            'case_registered_address' => 'nullable|string',
-//            'case_registered_agent' => 'nullable|string',
-//            'case_registered_city' => 'nullable|string',
-//            'case_registered_province' => 'nullable|string',
-//            'case_registered_district' => 'nullable|string',
-
         ];
     }
 
