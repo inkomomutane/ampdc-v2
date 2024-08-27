@@ -13,6 +13,27 @@ export enum CivilState {
     "MARRIED" = "casado",
     "DIVORCED" = "divorciado",
     "WIDOWER" = "viúvo",
+    "NOT_SPECIFIED" = "não especificado",
+}
+export enum DocumentTypeMoz {
+    "BI" = "BI",
+    "NUIT" = "NUIT",
+    "PASSPORT" = "Passaporte",
+    "BIRTH_CERTIFICATE" = "Certidão de Nascimento",
+    "DRIVING_LICENSE" = "Carta de Condução",
+    "DIRE" = "DIRE",
+    "OTHER" = "Outro",
+}
+export enum EducationLevel {
+    "PRIMARY" = "Ensino Primário",
+    "SECONDARY" = "Ensino Secundário",
+    "TECHNICAL_PROFESSIONAL" = "Ensino Técnico Profissional",
+    "UNIVERSITY" = "Ensino Universitário",
+    "POSTGRADUATE" = "Pós-Graduação",
+    "MASTER" = "Mestrado",
+    "DOCTORATE" = "Doutoramento",
+    "NONE" = "Nenhuma",
+    "NOT_SPECIFIED" = "Não Especificado",
 }
 export enum Gender {
     "FEMALE" = "Feminino",
@@ -24,16 +45,7 @@ export enum PeriodOfViolenceAct {
     "AFTERNOON" = "Tarde",
     "NIGHT" = "Noite",
     "DAWN" = "Madrugada",
-}
-
-export enum EducationLevel {
-    "PRIMARY" = "Ensino Primário",
-    "SECONDARY" = "Ensino Secundário",
-    "TECHNICAL_PROFESSIONAL" = "Ensino Técnico Profissional",
-    "UNIVERSITY" = "Ensino Universitário",
-    "POSTGRADUATE" = "Pós-Graduação",
-    "MASTER" = "Mestrado",
-    "DOCTORATE" = "Doutoramento",
+    "OUTRO" = "Outro",
 }
 export interface KeyPair {
     key: string;
