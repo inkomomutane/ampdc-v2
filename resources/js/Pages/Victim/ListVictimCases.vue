@@ -2,7 +2,7 @@
 import { Head, Link, router } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { ref, watch } from "vue";
-import Flasher from "@/helprs";
+import DeleteVictimCase from "@/Pages/Victim/DeleteVictimCase.vue";
 
 const props = defineProps({
     cases: {
@@ -18,6 +18,8 @@ const props = defineProps({
 
 const searchTerm = ref("");
 const links = ref(props.cases.links);
+const deletingCaseTrigger = ref(false);
+const deletingCase = ref<App.Data.VictimCaseData | null>(null);
 
 watch(
     () => props.cases.links,
@@ -38,6 +40,16 @@ watch(searchTerm, (value) => {
         },
     );
 });
+
+function openDeleteCaseModal(vCase: App.Data.VictimCaseData) {
+    deletingCase.value = vCase;
+    deletingCaseTrigger.value = true;
+}
+
+function closeDeleteCaseModal() {
+    deletingCase.value = null;
+    deletingCaseTrigger.value = false;
+}
 </script>
 
 <template>
@@ -143,6 +155,9 @@ watch(searchTerm, (value) => {
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         Editar
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        Excluir
                                     </th>
                                 </tr>
                             </thead>
@@ -253,6 +268,40 @@ watch(searchTerm, (value) => {
                                             </svg>
                                         </Link>
                                     </td>
+                                    <td class="px-4 py-3 justify-end w-32">
+                                        <button
+                                            type="button"
+                                            @click="
+                                                openDeleteCaseModal(
+                                                    caseVictim,
+                                                )
+                                            "
+                                            class="flex items-center justify-center text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                            >
+                                                <path
+                                                    class="fill-current text-gray-100"
+                                                    d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
+                                                />
+                                                <path
+                                                    class="fill-current text-gray-100"
+                                                    opacity="0.5"
+                                                    d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
+                                                />
+                                                <path
+                                                    class="fill-current text-gray-100"
+                                                    opacity="0.5"
+                                                    d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -339,5 +388,12 @@ watch(searchTerm, (value) => {
                 </div>
             </div>
         </template>
+
     </AuthenticatedLayout>
+    <DeleteVictimCase
+        v-if="deletingCase"
+        :victim-case="deletingCase"
+        :openModal="deletingCaseTrigger"
+        :close="closeDeleteCaseModal"
+    />
 </template>

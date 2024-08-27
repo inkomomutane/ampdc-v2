@@ -38,11 +38,11 @@ use App\Http\Controllers\User\DeleteUser;
 use App\Http\Controllers\User\GetUsers;
 use App\Http\Controllers\User\UpdateUser;
 use App\Http\Controllers\Victim\CreateVictimCaseController;
+use App\Http\Controllers\Victim\DeleteVictimCase;
 use App\Http\Controllers\Victim\EditDataOfVictimController;
 use App\Http\Controllers\Victim\ExportVictimCasesController;
 use App\Http\Controllers\Victim\ListVictimCases;
 use App\Http\Controllers\Victim\RegisterDataOfVictimController;
-use App\Http\Controllers\Victim\EditDataOfVictimCaseController;
 
 use App\Http\Controllers\Victim\RegisterVictimDataController;
 use App\Http\Controllers\Victim\StoreVictimCaseController;
@@ -155,13 +155,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/victim/{victim}/create/case',CreateVictimCaseController::class)->name('victim.case.create');
     Route::post('/victim/{victim}/store/case', StoreVictimCaseController::class)->name('victim.case.store');
 
+    Route::delete('/victim/{case}/delete', DeleteVictimCase::class)->name('victim.case.delete');
+
 
     Route::get('/victims/cases',ListVictimCases::class)->name('victim.cases.list');
 //    Route::get('/victims/received-cases', GetReceivedVictimCasesController::class)->name('victim.received.cases.list');
 //    Route::get('/victims/forwarded-cases', GetForwardedVictimCasesController::class)->name('victim.forwarded.cases.list');
     Route::get('/export/victims/cases', ExportVictimCasesController::class)->name('export.victims.cases');
 //    Route::get('/show/victimCase/{case}/info', GetDataOfVictimCaseController::class)->name('victim.case.info');
-    Route::get('/show/victimCase/{case}/edit', EditDataOfVictimCaseController::class)->name('victim.case.edit');
 //    Route::match(['put','patch','post'],'/update/victimCase/{case}', UpdateDataOfVictimCaseController::class)->name('victim.case.update');
 
     #--- Reports ---#

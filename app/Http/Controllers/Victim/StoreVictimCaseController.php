@@ -47,14 +47,12 @@ class StoreVictimCaseController
      */
     public function __invoke(Victim $victim, Request $request) {
        $data = $request->validate($this->rules());
-
         if (self::handle($victim,$data,auth()->user())) {
             flash()->addSuccess('Caso de violência adicionado com sucesso.');
         } else {
             flash()->addError('Erro ao adicionar caso de violência.');
         }
-
-        return redirect()->back();
+        return redirect()->route('victim.cases.list');
     }
 
 
