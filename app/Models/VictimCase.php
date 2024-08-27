@@ -4,15 +4,19 @@ namespace App\Models;
 
 use App\Data\VictimCaseData;
 use App\Enums\PeriodOfViolenceAct;
+use Database\Factories\VictimCaseFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use RalphJSmit\Helpers\Laravel\Concerns\HasFactory;
 use Spatie\LaravelData\WithData;
 
 class VictimCase extends Model
 {
     use HasUlids;
     use WithData;
+    use HasFactory;
 
     public $incrementing = false;
 
@@ -109,5 +113,10 @@ class VictimCase extends Model
     public function caseRegisteredByOrganization(): BelongsTo
     {
         return $this->belongsTo(Organization::class,'case_registered_by_organization_id');
+    }
+
+    public static function newFactory(): VictimCaseFactory
+    {
+        return new VictimCaseFactory();
     }
 }

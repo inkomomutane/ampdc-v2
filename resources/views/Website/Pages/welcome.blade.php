@@ -17,7 +17,7 @@
                 <img
                     class="h-full object-cover object-top rounded hover:scale-105 transition-transform duration-500 ease-in-out"
                     src="{{ Vite::asset("resources/website/images/observatorio.jpeg") }}"
-                    alt="mockup"
+                    alt="Observatório de feminicidio"
                     data-aos="fade-right"
                 />
             </div>
@@ -276,7 +276,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach ($articles as $article)
-                            <li class="splide__slide py-12">
+                            <li role="option" class="splide__slide py-12">
                                 <a
                                     href="{{ route("news.page", ["article" => $article->slug]) }}"
                                 >
@@ -291,7 +291,7 @@
                                                 class="!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t"
                                             />
                                         @else
-                                            {{ $article->cover?->img()?->attributes(["class" => "!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t"]) }}
+                                            {{ $article->cover?->img()?->attributes(["class" => "!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t",'alt' => $article->title]) }}
                                         @endif
                                         <header class="text-gray-600 px-4">
                                             <div

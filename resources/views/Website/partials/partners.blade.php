@@ -3,7 +3,7 @@
         <div class="splide" id="partiners">
             <div class="splide__track">
                 <ul class="splide__list mt-2">
-                    <li class="splide__slide">
+                    <li  role="listitem" class="splide__slide">
                         <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
@@ -12,7 +12,7 @@
                             />
                         </span>
                     </li>
-                    <li class="splide__slide">
+                    <li role="listitem" class="splide__slide">
                         <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
@@ -21,7 +21,7 @@
                             />
                         </span>
                     </li>
-                    <li class="splide__slide">
+                    <li  role="listitem" class="splide__slide">
                         <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
@@ -30,7 +30,7 @@
                             />
                         </span>
                     </li>
-                    <li class="splide__slide">
+                    <li  role="listitem" class="splide__slide">
                         <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
@@ -39,7 +39,7 @@
                             />
                         </span>
                     </li>
-                    <li class="splide__slide">
+                    <li  role="listitem" class="splide__slide">
                         <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
@@ -48,7 +48,7 @@
                             />
                         </span>
                     </li>
-                    <li class="splide__slide">
+                    <li  role="listitem" class="splide__slide">
                         <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
@@ -57,7 +57,7 @@
                             />
                         </span>
                     </li>
-                    <li class="splide__slide">
+                    <li  role="listitem" class="splide__slide">
                         <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
