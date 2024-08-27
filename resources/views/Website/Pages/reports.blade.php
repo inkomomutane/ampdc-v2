@@ -2,17 +2,19 @@
 @section("seo")
     {!! seo($seoData) !!}
 @endsection
-
+@push("scripts")
+    @vite("resources/website/js/reports.ts")
+@endpush
 @section("title", "Relatórios")
 @section("content")
     @include("Website.partials.hero_reports")
-    <section class="">
+    <section class="bg-gradient-to-b from-white to-red-200">
         <div
             class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:px-16 justify-items-start text-gray-800"
         >
             <div
                 data-aos="fade-up"
-                class="grid sm:grid-cols-2 gap-4 w-full sm:gap-2 flex-row mb-0.5 bg-white rounded hover:cursor-pointer hover:bg-white/95 aos-init aos-animate"
+                class="grid sm:grid-cols-2 gap-4 w-full sm:gap-2 flex-row mb-0.5 rounded hover:cursor-pointer aos-init aos-animate"
             >
                 <div class="flex-col content-center space-y-2 p-6 sm:px-2">
                     <img
@@ -63,4 +65,7 @@
             </div>
         </div>
     </section>
+    @include("Website.partials.reports")
+
+
 @endsection
