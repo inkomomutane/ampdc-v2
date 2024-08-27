@@ -28,6 +28,7 @@
                 <img
                     class="h-full xl:h-[80%] object-cover object-top rounded hover:scale-105 transition-transform duration-500 ease-in-out"
                     src="{{ Vite::asset("resources/website/images/about.svg") }}"
+                    loading="lazy"
                     alt="mockup"
                     data-aos="fade-left"
                 />

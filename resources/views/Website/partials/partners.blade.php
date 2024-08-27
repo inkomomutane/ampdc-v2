@@ -8,6 +8,7 @@
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/ampdc.jpg") }}"
+                                loading="lazy"
                                 alt="AMPDC"
                             />
                         </span>
@@ -17,6 +18,7 @@
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/silverlining.png") }}"
+                                loading="lazy"
                                 alt="Silverlining"
                             />
                         </span>
@@ -26,6 +28,7 @@
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/cesc.png") }}"
+                                loading="lazy"
                                 alt="Cesc"
                             />
                         </span>
@@ -35,6 +38,7 @@
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/igual.jpg") }}"
+                                loading="lazy"
                                 alt="Igual"
                             />
                         </span>
@@ -44,6 +48,7 @@
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/Lemusica.png") }}"
+                                loading="lazy"
                                 alt="Lemusica"
                             />
                         </span>
@@ -53,6 +58,7 @@
                             <img
                                 class="!h-12"
                                 src="{{ Vite::asset("resources/website/images/partners/NAFEZA.png") }}"
+                                loading="lazy"
                                 alt="NAFEZA"
                             />
                         </span>
@@ -61,6 +67,7 @@
                         <span class="flex justify-center items-center">
                             <img
                                 class="!h-12"
+                                loading="lazy"
                                 src="{{ Vite::asset("resources/website/images/partners/observatorio.jpg") }}"
                                 alt="Observatorio das mulheres"
                             />
