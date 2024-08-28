@@ -85,7 +85,7 @@ const props = defineProps({
                     Casos de violência contra a vítima
                 </p>
             </div>
-            <div v-for="vCase in cases"  class="max-w-7xl mx-auto p-6 lg:p-8 bg-white dark:bg-slate-800">
+            <div v-for="vCase in cases"  class="max-w-7xl mx-auto p-6 lg:p-8 bg-white dark:bg-slate-800 mb-5">
                 <header><h2 class="text-lg font-medium text-gray-900 dark:text-gray-100"> Informação do caso :
                     <span class="text-sm bg-blue-800 dark:bg-slate-100  w-fit rounded-sm font-semibold my-4 text-white dark:text-slate-900 p-2">
                         {{ vCase.caseCode }}
