@@ -26,7 +26,7 @@
                         data-sizes='(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 70vw,(max-width: 1200px) 60vw,(max-width: 1600px) 50vw,  40vw',
                         data-srcset ="{{$article->cover->getSrcset()}}"
                         >
-                            {{ $article->cover?->img()?->attributes(["class" => "gallery absolute inset-0 w-full h-full object-cover object-top",
+                            {{ $article->cover?->img()?->attributes(["class" => " absolute inset-0 w-full h-full object-cover object-top",
  "alt" => $article->title,
 
  ]) }}
