@@ -14,6 +14,7 @@ export default defineConfig({
                 "resources/website/js/app.ts",
                 "resources/website/js/splide.ts",
                 "resources/website/js/reports.ts",
+                "resources/website/js/lightbox.ts",
                 "resources/website/css/gtranslator.css",
                 "resources/website/css/app.css",
             ],

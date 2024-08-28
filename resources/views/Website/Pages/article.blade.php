@@ -3,6 +3,10 @@
     {!! seo()->for($article) !!}
 @endsection
 
+@push('scripts')
+    @vite('resources/website/js/lightbox.ts')
+@endpush
+
 @section("content")
     <section
         class="bg-white md:bg-gradient-to-b md:from-red-200 md:via-white md:to-white"
@@ -15,10 +19,31 @@
             >
                 <div class="grid gap-4 w-full" data-aos="fade-up">
                     <div class="grid w-full h-fit relative">
-                        <article
-                            class="relative min-h-72 max-h-72 xl:min-h-96 xl:max-h-96 flex items-end text-white"
+                        <a
+                            href="{{ $article->cover->original_url}}"
+                              data-glightbox ="description: .desc_article ;descPosition: left "
+                            class="gallery relative min-h-72 max-h-72 xl:min-h-96 xl:max-h-96 flex items-end text-white"
+                        data-sizes='(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 70vw,(max-width: 1200px) 60vw,(max-width: 1600px) 50vw,  40vw',
+                        data-srcset ="{{$article->cover->getSrcset()}}"
                         >
-                            {{ $article->cover?->img()?->attributes(["class" => "absolute inset-0 w-full h-full object-cover object-top", "alt" => $article->title]) }}
+                            {{ $article->cover?->img()?->attributes(["class" => "gallery absolute inset-0 w-full h-full object-cover object-top",
+ "alt" => $article->title,
+
+ ]) }}
+                            <div class="glightbox-desc desc_article">
+                                <div
+                                    class="h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10"
+                                >
+                                    <h1
+                                        class="font-extrabold text-xl text-red-600 mb-2"
+                                    >
+                                        {{ $article->title }}
+                                    </h1>
+                                    <p class="py-2 text-base">
+                                        {!! $article->content !!}
+                                    </p>
+                                </div>
+                            </div>
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/90 to-black/10"
                             ></div>
@@ -77,7 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </article>
+                        </a>
                         <div
                             class="text-base p-6 text-justify bg-white/60 tracking-normal space-y-4"
                         >
@@ -88,14 +113,34 @@
                     @if (! is_null($article?->sections))
                         <ul>
                             @foreach ($article?->sections as $section)
-                                <li
-                                    class="grid md:grid-cols-2 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:px-16 items-center group"
+                                <li class="grid md:grid-cols-2 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:px-16 items-center group"
                                 >
-                                    <div class="group-even:md:order-2">
-                                        {{ $section->cover?->img()?->attributes(["class" => "h-full object-cover object-top rounded hover:scale-105 transition-transform duration-500 ease-in-out", "alt" => $section->title]) }}
-                                    </div>
+                                    <a class="group-even:md:order-2">
+                                        {{ $section->cover?->img()?->attributes(
+                                                                ["class" => "cursor-pointer gallery h-full object-cover object-top rounded hover:scale-105  transition-transform duration-500 ease-in-out",
+                                                                 "alt" => $section->title,
+                                                                 "data-glightbox" => "description: .desc_$loop->index ;descPosition: left ",
+                                                                 "data-sizes" => '(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 70vw,(max-width: 1200px) 60vw,(max-width: 1600px) 50vw,  40vw',
+                                                                 "data-srcset" => $section->cover->getSrcset()
+                                                                 ]) }}
+
+                                        <div class="glightbox-desc desc_{{ $loop->index }}">
+                                            <div
+                                                class="h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10"
+                                            >
+                                                <h1
+                                                    class="font-extrabold text-xl text-red-600 mb-2"
+                                                >
+                                                    {{ $section->title }}
+                                                </h1>
+                                                <p class="py-2 text-base">
+                                                    {!! $section->content !!}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
                                     <div
-                                        class="bg-white p-8 h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10"
+                                        class=" bg-white p-8 h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10"
                                     >
                                         <h1
                                             class="font-extrabold text-xl text-red-600 mb-2"

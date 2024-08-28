@@ -43,6 +43,7 @@
         "clsx": "2.1.1",
         "collect.js": "^4.36.1",
         "flowbite": "^2.4.1",
+        "glightbox": "^3.3.0",
         "lucide-vue-next": "0.407.0",
         "prettier": "3.3.2",
         "prettier-plugin-blade": "^2.1.16",
