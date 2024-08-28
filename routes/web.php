@@ -45,6 +45,7 @@ use App\Http\Controllers\Victim\ListVictimCases;
 use App\Http\Controllers\Victim\RegisterDataOfVictimController;
 
 use App\Http\Controllers\Victim\RegisterVictimDataController;
+use App\Http\Controllers\Victim\ShowVictimCaseData;
 use App\Http\Controllers\Victim\StoreVictimCaseController;
 use App\Http\Controllers\Victim\UpdateVictimDataController;
 use App\Http\Controllers\ViolenceIncidentLocation\DeleteViolenceIncidentLocationController;
@@ -162,7 +163,7 @@ Route::middleware('auth')->group(function () {
 //    Route::get('/victims/received-cases', GetReceivedVictimCasesController::class)->name('victim.received.cases.list');
 //    Route::get('/victims/forwarded-cases', GetForwardedVictimCasesController::class)->name('victim.forwarded.cases.list');
     Route::get('/export/victims/cases', ExportVictimCasesController::class)->name('export.victims.cases');
-//    Route::get('/show/victimCase/{case}/info', GetDataOfVictimCaseController::class)->name('victim.case.info');
+    Route::get('/show/victimCase/{victim}/info', ShowVictimCaseData::class)->name('victim.case.info');
 //    Route::match(['put','patch','post'],'/update/victimCase/{case}', UpdateDataOfVictimCaseController::class)->name('victim.case.update');
 
     #--- Reports ---#
