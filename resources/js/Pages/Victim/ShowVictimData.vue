@@ -100,7 +100,7 @@ const props = defineProps({
                             'bg-blue-500': !vCase.isTerminated
                         }"
                         class="p-1 text-sm  w-fit rounded-sm font-semibold my-4 text-white px-4">
-                        {{ vCase.isTerminated ? 'Caso terminado' : 'Caso em curso' }}
+                        {{ vCase.isTerminated ? 'Encerrado' : 'Em andamento' }}
                     </p>
                 </header>
                 <div class="grid gap-6">
@@ -114,6 +114,50 @@ const props = defineProps({
                             <InputLabel value="Suposto motivo da violência" />
                             <DisabledTextInput :model-value="vCase.supposedReasonOfViolence?.name" />
                         </div>
+
+                        <div>
+                            <InputLabel value="Período que ocorreu a violência" />
+                            <DisabledTextInput :model-value="vCase.periodOfViolenceAct" />
+                        </div>
+
+
+                        <div>
+                            <InputLabel value="Local onde ocorreu a violência" />
+                            <DisabledTextInput :model-value="vCase.violenceIncidentLocation?.name" />
+                        </div>
+                        <div>
+                            <InputLabel value="Perpetrador da violência" />
+                            <DisabledTextInput :model-value="vCase.perpetrator?.name" />
+                        </div>
+
+
+                        <div>
+                            <InputLabel value="Nome do perpetrador" />
+                            <DisabledTextInput :model-value="vCase.perpetratorName" />
+                        </div>
+
+                        <div>
+                            <InputLabel value="Profissão do perpetrador" />
+                            <DisabledTextInput :model-value="vCase.perpetratorProfession" />
+                        </div>
+                        <div>
+                            <InputLabel value="Endereço do perpetrador" />
+                            <DisabledTextInput :model-value="vCase.perpetratorAddress" />
+                        </div>
+
+                        <div>
+                            <InputLabel value="Contacto do perpetrador" />
+                            <DisabledTextInput :model-value="vCase.perpetratorContact" />
+                        </div>
+
+
+
+                        <div class="sm:col-span-2 md:col-span-3">
+                            <InputLabel value="Detalhes da violência" />
+                            <div class="bg-zinc-200 p-4 py-6" v-html="vCase.violenceDetails"/>
+                        </div>
+
+
 
                     </div>
                 </div>
