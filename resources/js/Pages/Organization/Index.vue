@@ -2,13 +2,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-import { Organizations } from "@/types/index";
+import { Organizations } from "./types/index.d.ts";
 import { PropType, ref, watch } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import CreateOrganization from "./CreateOrganization.vue";
 import DeleteOrganization from "./DeleteOrganization.vue";
 import EditOrganization from "@/Pages/Organization/EditOrganization.vue";
+import { OrganizationData } from "@/types/generated";
 
 const props = defineProps({
     organizations: {
@@ -22,10 +23,10 @@ const props = defineProps({
 const links = ref(props.organizations.links);
 
 const editingOrganizationTrigger = ref(false);
-const editingOrganization = ref<App.Data.OrganizationData | null>(null);
+const editingOrganization = ref<OrganizationData | null>(null);
 
 const deletingOrganizationTrigger = ref(false);
-const deletingOrganization = ref<App.Data.OrganizationData | null>(null);
+const deletingOrganization = ref<OrganizationData | null>(null);
 
 const searchTerm = ref("");
 
@@ -65,7 +66,7 @@ watch(searchTerm, (value) => {
     );
 });
 
-function openEditOrganizationModal(organization: App.Data.OrganizationData) {
+function openEditOrganizationModal(organization: OrganizationData) {
     editingOrganization.value = organization;
     editingOrganizationTrigger.value = true;
 }
@@ -75,7 +76,7 @@ function closeEditOrganizationModal() {
     editingOrganizationTrigger.value = false;
 }
 
-function openDeleteOrganizationModal(organization: App.Data.OrganizationData) {
+function openDeleteOrganizationModal(organization: OrganizationData) {
     deletingOrganization.value = organization;
     deletingOrganizationTrigger.value = true;
 }

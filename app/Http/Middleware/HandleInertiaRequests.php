@@ -41,6 +41,7 @@ class HandleInertiaRequests extends Middleware
             'roles' => RoleData::collection(Role::all()),
             'organization' => organization(),
             '_token' => csrf_token(),
+            'role' => \Auth::user()?->roles?->first()?->name ?? 'default',
             'mails' =>WebsiteMessageCountController::handle() ?? 0,
         ];
     }

@@ -3,8 +3,7 @@ import Modal from "@/components/Modal.vue";
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import InputError from "@/components/InputError.vue";
-import RoleData = App.Data.RoleData;
-import OrganizationData = App.Data.OrganizationData;
+import { OrganizationData, RoleData } from "@/types/generated";
 
 const props = defineProps({
     organizations: {

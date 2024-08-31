@@ -62,16 +62,19 @@ const props = defineProps({
                     </div>
 
                     <div
-                        class="w-10 h-10 mx-auto  rounded-full text-lg  flex items-center"
+                        class="w-10 h-10 mx-auto rounded-full text-lg flex items-center"
                         :class="{
                             'bg-white text-gray-600 ': props.step < 2,
                             'bg-green-500 text-white': props.step < 5,
                         }"
                     >
-                        <span class="text-center w-full" :class="{
-                            'text-gray-400': props.step < 2,
-                            'text-white': props.step < 5,
-                        }">
+                        <span
+                            class="text-center w-full"
+                            :class="{
+                                'text-gray-400': props.step < 2,
+                                'text-white': props.step < 5,
+                            }"
+                        >
                             <svg
                                 class="w-full"
                                 :class="{
@@ -126,16 +129,19 @@ const props = defineProps({
                     </div>
 
                     <div
-                        class="w-10 h-10 mx-auto  border-2 border-gray-200 rounded-full text-lg  flex items-center"
+                        class="w-10 h-10 mx-auto border-2 border-gray-200 rounded-full text-lg flex items-center"
                         :class="{
                             'bg-white text-gray-600 ': props.step < 3,
                             'bg-green-500 text-white': props.step < 5,
                         }"
                     >
-                        <span class="text-center  w-full" :class="{
-                            'text-gray-400': props.step < 3,
-                            'text-white': props.step < 5,
-                        }">
+                        <span
+                            class="text-center w-full"
+                            :class="{
+                                'text-gray-400': props.step < 3,
+                                'text-white': props.step < 5,
+                            }"
+                        >
                             <svg
                                 class="w-full"
                                 :class="{

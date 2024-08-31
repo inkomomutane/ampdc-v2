@@ -3,10 +3,11 @@ import Modal from "@/components/Modal.vue";
 import { PropType, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import InputError from "@/components/InputError.vue";
+import { ViolenceIncidentLocationData } from "@/types/generated";
 
 const props = defineProps({
     violenceIncidentLocation: {
-        type: Object as PropType<App.Data.ViolenceIncidentLocationData>,
+        type: Object as PropType<ViolenceIncidentLocationData>,
         required: true,
     },
     close: {

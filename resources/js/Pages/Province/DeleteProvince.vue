@@ -2,10 +2,11 @@
 import Modal from "@/components/Modal.vue";
 import { useForm } from "@inertiajs/vue3";
 import { PropType } from "vue";
+import { ProvinceData } from "@/types/generated";
 
 const props = defineProps({
     province: {
-        type: Object as PropType<App.Data.ProvinceData>,
+        type: Object as PropType<ProvinceData>,
         required: true,
     },
     close: {
@@ -26,7 +27,7 @@ const form = useForm({
 const deleteProvince = () => {
     form.delete(
         route("province.delete", {
-            province: props.province.id as number,
+            province: props.province.id ,
         }),
         {
             preserveScroll: true,

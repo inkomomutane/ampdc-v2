@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router, useForm } from "@inertiajs/vue3";
-import { WebsiteMessages } from "@/types";
+import { WebsiteMessages } from "./types/index.d.ts";
 import { PropType } from "vue";
 import { ref, watch } from "vue";
 import axios from "axios";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import Modal from "@components/Modal.vue";
+import { WebsiteMessageData } from "@/types/generated";
 
 const props = defineProps({
     website_messages: Object as PropType<WebsiteMessages>,
@@ -29,7 +30,7 @@ watch(
 
 const links = ref(props.website_messages?.links);
 const viewingMessage = ref(false);
-const loadedMessage = ref<App.Data.WebsiteMessageData | null>(null);
+const loadedMessage = ref<WebsiteMessageData | null>(null);
 
 watch(
     () => props.website_messages?.links,
@@ -42,7 +43,7 @@ const closeViewingMessage = () => {
     viewingMessage.value = false;
 };
 
-const showViewingMessage = (mail: App.Data.WebsiteMessageData) => {
+const showViewingMessage = (mail: WebsiteMessageData) => {
     if (!mail.is_read) {
         axios
             .patch(route("website.message.update", { message: mail.id }), {
@@ -60,7 +61,7 @@ const form = useForm({
     agenda: null,
 });
 
-const deleteMessage = (mail: App.Data.WebsiteMessageData) => {
+const deleteMessage = (mail: WebsiteMessageData) => {
     form.delete(
         route("website.message.delete", {
             message: mail.id,

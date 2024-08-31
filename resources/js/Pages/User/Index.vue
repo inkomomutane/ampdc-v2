@@ -2,14 +2,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-import { Users } from "@/types/index";
+import { Users } from "./types/index.d.ts";
 import { ref, watch, PropType } from "vue";
 import Flasher, { tooltip } from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import CreateUser from "./CreateUser.vue";
 import EditUser from "./EditUser.vue";
 import DeleteUser from "./DeleteUser.vue";
-import OrganizationData = App.Data.OrganizationData;
+import { OrganizationData, UserData } from "@/types/generated";
 
 const props = defineProps({
     users: {
@@ -27,10 +27,10 @@ const props = defineProps({
 const links = ref(props.users.links);
 
 const editingUserTrigger = ref(false);
-const editingUser = ref<App.Data.UserData | null>(null);
+const editingUser = ref<UserData | null>(null);
 
 const deletingUserTrigger = ref(false);
-const deletingUser = ref<App.Data.UserData | null>(null);
+const deletingUser = ref<UserData | null>(null);
 
 const searchTerm = ref("");
 
@@ -66,7 +66,7 @@ watch(searchTerm, (value) => {
     );
 });
 
-function openEditUserModal(user: App.Data.UserData) {
+function openEditUserModal(user: UserData) {
     editingUser.value = user;
     editingUserTrigger.value = true;
 }
@@ -76,7 +76,7 @@ function closeEditUserModal() {
     editingUserTrigger.value = false;
 }
 
-function openDeleteUserModal(user: App.Data.UserData) {
+function openDeleteUserModal(user: UserData) {
     deletingUser.value = user;
     deletingUserTrigger.value = true;
 }

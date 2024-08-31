@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\CaseProgressStatus;
 use App\Enums\PeriodOfViolenceAct;
+use App\Enums\Roles;
 use App\Models\District;
 use App\Models\Neighborhood;
 use App\Models\Organization;
@@ -68,13 +69,12 @@ class DatabaseSeeder extends Seeder
 
       $admin = User::where('id', '01hv1bd7wmatmqfyqqtecpj6v7')->first();
 
-       Role::updateOrInsert([
-            'id' => '01hv1yfks80m74f2j8198t8ger'
-        ],[
-            'id' => '01hv1yfks80m74f2j8198t8ger',
-            'name' => 'Admin',
-            'guard_name' => 'web',
-        ]);
+       collect(Roles::cases())->each(fn(Roles $role) => Role::updateOrCreate([
+           'name' => $role->value
+       ],[
+           'name' => $role->value
+       ]));
+
 
         $admin->assignRole('01hv1yfks80m74f2j8198t8ger');
 

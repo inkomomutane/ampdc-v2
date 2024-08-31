@@ -1,4 +1,4 @@
-import { FlahserType } from "./types/index.d";
+import { FlahserType } from "./types/index.d.ts";
 import flasher from "@flasher/flasher";
 import { CaseProgressStatus } from "@/types/casestatus";
 const Flasher = flasher;
@@ -75,6 +75,12 @@ export const tooltip = (message: string, className: string = "ml-5") => {
     };
 };
 
+export const routerCheck = (routes: Array<string>): boolean => {
+    for (let index: number = 0; index < routes.length; index++) {
+        if (route().current(routes[index])) return true;
+    }
+    return false;
+};
 export const progressCasesColor = (status: CaseProgressStatus) => {
     switch (status) {
         case CaseProgressStatus.FORWARDED:

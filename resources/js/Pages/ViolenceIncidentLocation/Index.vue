@@ -2,13 +2,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-import { ViolenceIncidentLocations } from "@/types/index";
+import { ViolenceIncidentLocations } from "./types/index.d.ts";
 import { PropType, ref, watch } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import CreateViolenceIncidentLocation from "./CreateViolenceIncidentLocation.vue";
 import DeleteViolenceIncidentLocation from "./DeleteViolenceIncidentLocation.vue";
 import EditViolenceIncidentLocation from "@/Pages/ViolenceIncidentLocation/EditViolenceIncidentLocation.vue";
+import { ViolenceIncidentLocationData } from "@/types/generated";
 
 const props = defineProps({
     violenceIncidentLocations: {
@@ -23,11 +24,11 @@ const links = ref(props.violenceIncidentLocations.links);
 
 const editingViolenceIncidentLocationTrigger = ref(false);
 const editingViolenceIncidentLocation =
-    ref<App.Data.ViolenceIncidentLocationData | null>(null);
+    ref<ViolenceIncidentLocationData | null>(null);
 
 const deletingViolenceIncidentLocationTrigger = ref(false);
 const deletingViolenceIncidentLocation =
-    ref<App.Data.ViolenceIncidentLocationData | null>(null);
+    ref<ViolenceIncidentLocationData | null>(null);
 
 const searchTerm = ref("");
 
@@ -68,7 +69,7 @@ watch(searchTerm, (value) => {
 });
 
 function openEditViolenceIncidentLocationModal(
-    violenceIncidentLocation: App.Data.ViolenceIncidentLocationData,
+    violenceIncidentLocation: ViolenceIncidentLocationData,
 ) {
     editingViolenceIncidentLocation.value = violenceIncidentLocation;
     editingViolenceIncidentLocationTrigger.value = true;
@@ -80,7 +81,7 @@ function closeEditViolenceIncidentLocationModal() {
 }
 
 function openDeleteViolenceIncidentLocationModal(
-    violenceIncidentLocation: App.Data.ViolenceIncidentLocationData,
+    violenceIncidentLocation: ViolenceIncidentLocationData,
 ) {
     deletingViolenceIncidentLocation.value = violenceIncidentLocation;
     deletingViolenceIncidentLocationTrigger.value = true;

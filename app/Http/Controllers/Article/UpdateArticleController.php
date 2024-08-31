@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Article;
 
+use App\Http\Controllers\concerns\AuthorizeWriters;
 use App\Models\Article;
 use App\Models\ArticleSection;
 use DB;
@@ -11,8 +12,12 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class UpdateArticleController
 {
+    use AuthorizeWriters;
+
     public function __invoke(Request $request,Article $article)
     {
+        $this->authorizeAction();
+
         $validatedSections = $request->validate([
             'sections' => ['nullable', 'array'],
             'sections.*.title' => ['required', 'string'],

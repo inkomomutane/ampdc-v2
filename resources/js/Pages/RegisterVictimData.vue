@@ -305,13 +305,24 @@ const registerVictim = () => {
                             </div>
                         </div>
                         <button
-                            class="w-full  col-span-2 text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-bold rounded  px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
+                            class="w-full col-span-2 text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-bold rounded px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
                             type="submit"
                             @click="registerVictim"
                         >
-                            <span class="inline-flex items-center gap-x-1">Prosseguir <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.83L17.17 12 14 15.17V14H6v-4h8V8.83M12 4v4H4v8h8v4l8-8-8-8z"></path></svg>
-                     </span>
-                                </button>
+                            <span class="inline-flex items-center gap-x-1"
+                                >Prosseguir
+                                <svg
+                                    class="w-5 h-5"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M14 8.83L17.17 12 14 15.17V14H6v-4h8V8.83M12 4v4H4v8h8v4l8-8-8-8z"
+                                    ></path>
+                                </svg>
+                            </span>
+                        </button>
                     </div>
                 </div>
             </div>

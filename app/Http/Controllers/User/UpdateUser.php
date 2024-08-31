@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\User;
 
 
+use App\Http\Controllers\concerns\AuthorizeAdmins;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Throwable;
 
 class UpdateUser
 {
-
+    use AuthorizeAdmins;
 
     public function __invoke(User $user)
     {

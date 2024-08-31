@@ -3,8 +3,8 @@
     {!! seo()->for($article) !!}
 @endsection
 
-@push('scripts')
-    @vite('resources/website/js/lightbox.ts')
+@push("scripts")
+    @vite("resources/website/js/lightbox.ts")
 @endpush
 
 @section("content")
@@ -20,16 +20,15 @@
                 <div class="grid gap-4 w-full" data-aos="fade-up">
                     <div class="grid w-full h-fit relative">
                         <a
-                            href="{{ $article->cover->original_url}}"
-                              data-glightbox ="description: .desc_article ;descPosition: left "
+                            href="{{ $article->cover->original_url }}"
+                            data-glightbox="description: .desc_article ;descPosition: left "
                             class="gallery relative min-h-72 max-h-72 xl:min-h-96 xl:max-h-96 flex items-end text-white"
-                        data-sizes='(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 70vw,(max-width: 1200px) 60vw,(max-width: 1600px) 50vw,  40vw',
-                        data-srcset ="{{$article->cover->getSrcset()}}"
+                            data-sizes="(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 70vw,(max-width: 1200px) 60vw,(max-width: 1600px) 50vw,  40vw"
+                            data-srcset="{{ $article->cover->getSrcset() }}"
                         >
-                            {{ $article->cover?->img()?->attributes(["class" => " absolute inset-0 w-full h-full object-cover object-top",
- "alt" => $article->title,
-
- ]) }}
+                            {{
+                                $article->cover?->img()?->attributes(["class" => " absolute inset-0 w-full h-full object-cover object-top", "alt" => $article->title])
+                            }}
                             <div class="glightbox-desc desc_article">
                                 <div
                                     class="h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10"
@@ -113,18 +112,25 @@
                     @if (! is_null($article?->sections))
                         <ul>
                             @foreach ($article?->sections as $section)
-                                <li class="grid md:grid-cols-2 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:px-16 items-center group"
+                                <li
+                                    class="grid md:grid-cols-2 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:px-16 items-center group"
                                 >
                                     <a class="group-even:md:order-2">
-                                        {{ $section->cover?->img()?->attributes(
-                                                                ["class" => "cursor-pointer gallery h-full object-cover object-top rounded hover:scale-105  transition-transform duration-500 ease-in-out",
-                                                                 "alt" => $section->title,
-                                                                 "data-glightbox" => "description: .desc_$loop->index ;descPosition: left ",
-                                                                 "data-sizes" => '(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 70vw,(max-width: 1200px) 60vw,(max-width: 1600px) 50vw,  40vw',
-                                                                 "data-srcset" => $section->cover->getSrcset()
-                                                                 ]) }}
+                                        {{
+                                            $section->cover
+                                                ?->img()
+                                                ?->attributes([
+                                                    "class" => "cursor-pointer gallery h-full object-cover object-top rounded hover:scale-105  transition-transform duration-500 ease-in-out",
+                                                    "alt" => $section->title,
+                                                    "data-glightbox" => "description: .desc_$loop->index ;descPosition: left ",
+                                                    "data-sizes" => "(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 70vw,(max-width: 1200px) 60vw,(max-width: 1600px) 50vw,  40vw",
+                                                    "data-srcset" => $section->cover->getSrcset(),
+                                                ])
+                                        }}
 
-                                        <div class="glightbox-desc desc_{{ $loop->index }}">
+                                        <div
+                                            class="glightbox-desc desc_{{ $loop->index }}"
+                                        >
                                             <div
                                                 class="h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10"
                                             >
@@ -140,7 +146,7 @@
                                         </div>
                                     </a>
                                     <div
-                                        class=" bg-white p-8 h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10"
+                                        class="bg-white p-8 h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10"
                                     >
                                         <h1
                                             class="font-extrabold text-xl text-red-600 mb-2"

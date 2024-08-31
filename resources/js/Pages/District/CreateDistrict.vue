@@ -2,11 +2,11 @@
 import Modal from "@/components/Modal.vue";
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
-import ProvinceData = App.Data.ProvinceData;
+import { ProvinceData } from "@/types/generated";
 
 const props = defineProps({
     provinces: {
-        type: Array<App.Data.ProvinceData>,
+        type: Array<ProvinceData>,
         required: true,
     },
 });

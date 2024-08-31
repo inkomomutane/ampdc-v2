@@ -2,10 +2,11 @@
 import Modal from "@/components/Modal.vue";
 import { useForm } from "@inertiajs/vue3";
 import { PropType, ref } from "vue";
+import { UserData } from "@/types/generated";
 
 const props = defineProps({
     user: {
-        type: Object as PropType<App.Data.UserData>,
+        type: Object as PropType<UserData>,
         required: true,
     },
     close: {

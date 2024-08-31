@@ -253,7 +253,7 @@
         </div>
     </section>
 
-     @include("Website.partials.reports")
+    @include("Website.partials.reports")
     <section
         class="bg-gradient-to-b from-white via-red-200 to-red-500 dark:bg-gray-900"
     >
@@ -291,7 +291,7 @@
                                                 class="!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t"
                                             />
                                         @else
-                                            {{ $article->cover?->img()?->attributes(["class" => "!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t",'alt' => $article->title]) }}
+                                            {{ $article->cover?->img()?->attributes(["class" => "!h-[15rem] !sm:h-[12rem] object-cover mb-2 rounded-t", "alt" => $article->title]) }}
                                         @endif
                                         <header class="text-gray-600 px-4">
                                             <div
@@ -361,5 +361,5 @@
 @endsection
 
 @push("scripts")
-
+    
 @endpush

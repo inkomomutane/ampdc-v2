@@ -10,12 +10,12 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 use Illuminate\Support\Facades\Route;
 
 
-Breadcrumbs::for('victim.register', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('victim.create', function (BreadcrumbTrail $trail) {
     $trail->push('Registo', route('victim.create'));
 });
 
 Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Perfil', route('profile.edit'));
 });
 
@@ -25,19 +25,15 @@ Breadcrumbs::for('profile.update', function (BreadcrumbTrail $trail) {
 });
 
 Breadcrumbs::for('profile.destroy', function (BreadcrumbTrail $trail) {
-    $trail->parent('profile.edit');
+    $trail->parent('prFofile.edit');
     $trail->push('Eliminar', route('profile.destroy'));
 });
 
 Breadcrumbs::for('organization.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Organizações', route('organization.list'));
 });
 
-Breadcrumbs::for('organization.store', function (BreadcrumbTrail $trail) {
-    $trail->parent('organization.list');
-    $trail->push('Registo', route('organization.store'));
-});
 
 Breadcrumbs::for('organization.update', function (BreadcrumbTrail $trail, Organization $organization) {
     $trail->parent('organization.list');
@@ -54,14 +50,11 @@ Breadcrumbs::for('organization.delete', function (BreadcrumbTrail $trail, Organi
 });
 
 Breadcrumbs::for('province.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Províncias', route('province.list'));
 });
 
-Breadcrumbs::for('province.store', function (BreadcrumbTrail $trail) {
-    $trail->parent('province.list');
-    $trail->push('Registo', route('province.store'));
-});
+
 
 Breadcrumbs::for('province.update', function (BreadcrumbTrail $trail,\App\Models\Province $province) {
     $trail->parent('province.list');
@@ -78,14 +71,10 @@ Breadcrumbs::for('province.delete', function (BreadcrumbTrail $trail,\App\Models
 });
 
 Breadcrumbs::for('district.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Distritos', route('district.list'));
 });
 
-Breadcrumbs::for('district.store', function (BreadcrumbTrail $trail) {
-    $trail->parent('district.list');
-    $trail->push('Registo', route('district.store'));
-});
 
 Breadcrumbs::for('district.update', function (BreadcrumbTrail $trail, District $district) {
     $trail->parent('district.list');
@@ -100,14 +89,11 @@ Breadcrumbs::for('district.delete', function (BreadcrumbTrail $trail) {
 });
 
 Breadcrumbs::for('neighborhood.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Bairros', route('neighborhood.list'));
 });
 
-Breadcrumbs::for('neighborhood.store', function (BreadcrumbTrail $trail) {
-    $trail->parent('neighborhood.list');
-    $trail->push('Registo', route('neighborhood.store'));
-});
+
 
 Breadcrumbs::for('neighborhood.update', function (BreadcrumbTrail $trail,Neighborhood $neighborhood) {
     $trail->parent('neighborhood.list');
@@ -124,49 +110,35 @@ Breadcrumbs::for('neighborhood.delete', function (BreadcrumbTrail $trail, Neighb
 });
 
 Breadcrumbs::for('user.all', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Utilizadores', route('user.all'));
 });
 
-Breadcrumbs::for('user.store', function (BreadcrumbTrail $trail) {
-    $trail->parent('user.all');
-    $trail->push('Registo', route('user.store'));
-});
 
-Breadcrumbs::for('user.update', function (BreadcrumbTrail $trail, \App\Models\User $user) {
-    $trail->parent('user.all');
-    $trail->push('Actualizar', route('user.update',[
-        'user' => $user
-    ]));
-});
 
-Breadcrumbs::for('user.status', function (BreadcrumbTrail $trail) {
-    $trail->parent('user.all');
-    $trail->push('Eliminar', route('user.status'));
-});
 
 Breadcrumbs::for('violenceType.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Tipos de violência', route('violenceType.list'));
 });
 
 Breadcrumbs::for('perpetrator.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Perpetradores', route('perpetrator.list'));
 });
 
 Breadcrumbs::for('supposedReasonOfViolence.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Motivos que causam violência', route('supposedReasonOfViolence.list'));
 });
 
 Breadcrumbs::for('violenceIncidentLocation.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Locais de violência', route('violenceIncidentLocation.list'));
 });
 
 Breadcrumbs::for('victim.cases.list', function (BreadcrumbTrail $trail) {
-    $trail->parent('victim.register');
+    $trail->parent('victim.create');
     $trail->push('Casos', route('victim.cases.list'));
 });
 
@@ -178,13 +150,20 @@ Breadcrumbs::for('victim.edit', static function (BreadcrumbTrail $trail, Victim 
     ]));
 });
 
+Breadcrumbs::for('victim.case.info', static function (BreadcrumbTrail $trail, Victim $victim) {
+    $trail->parent('victim.cases.list');
+    $trail->push('Informação da vítima ' , route('victim.case.info',[
+        'victim' => $victim
+    ]));
+});
+
 //Breadcrumbs::for('victim.received.cases.list', function (BreadcrumbTrail $trail) {
-//    $trail->parent('victim.register');
+//    $trail->parent('victim.create');
 //    $trail->push('Casos Recebidos', route('victim.received.cases.list'));
 //});
 //
 //Breadcrumbs::for('victim.forwarded.cases.list', function (BreadcrumbTrail $trail) {
-//    $trail->parent('victim.register');
+//    $trail->parent('victim.create');
 //    $trail->push('Casos Encaminhados', route('victim.forwarded.cases.list'));
 //});
 

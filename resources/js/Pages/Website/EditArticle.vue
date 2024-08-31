@@ -5,10 +5,9 @@ import InputError from "@components/InputError.vue";
 import { PropType, ref } from "vue";
 import { ulid } from "ulidx";
 import ImageUploader from "@components/ImageUploader.vue";
-import ArticleData = App.Data.ArticleData;
 import ResponsiveImage from "@components/ResponsiveImage.vue";
-import ArticleSectionData = App.Data.ArticleSectionData;
 import DeleteArticle from "@/Pages/Website/DeleteArticle.vue";
+import { ArticleData, ArticleSectionData } from "@/types/generated";
 
 const props = defineProps({
     article: {

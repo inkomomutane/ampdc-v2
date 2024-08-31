@@ -2,13 +2,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-import { Provinces } from "@/types";
+import { Provinces } from "./types/index.d.ts";
 import { ref, watch, PropType } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import CreateProvince from "./CreateProvince.vue";
 import EditProvince from "./EditProvince.vue";
 import DeleteProvince from "./DeleteProvince.vue";
+import { ProvinceData } from "@/types/generated";
 
 const props = defineProps({
     provinces: {
@@ -22,10 +23,10 @@ const props = defineProps({
 const links = ref(props.provinces.links);
 
 const editingProvinceTrigger = ref(false);
-const editingProvince = ref<App.Data.ProvinceData | null>(null);
+const editingProvince = ref<ProvinceData | null>(null);
 
 const deletingProvinceTrigger = ref(false);
-const deletingProvince = ref<App.Data.ProvinceData | null>(null);
+const deletingProvince = ref<ProvinceData | null>(null);
 
 const searchTerm = ref("");
 
@@ -61,7 +62,7 @@ watch(searchTerm, (value) => {
     );
 });
 
-function openEditProvinceModal(province: App.Data.ProvinceData) {
+function openEditProvinceModal(province: ProvinceData) {
     editingProvince.value = province;
     editingProvinceTrigger.value = true;
 }
@@ -71,7 +72,7 @@ function closeEditProvinceModal() {
     editingProvinceTrigger.value = false;
 }
 
-function openDeleteProvinceModal(province: App.Data.ProvinceData) {
+function openDeleteProvinceModal(province: ProvinceData) {
     deletingProvince.value = province;
     deletingProvinceTrigger.value = true;
 }
@@ -158,7 +159,7 @@ function closeDeleteProvinceModal() {
                                 <tr
                                     class="border-b dark:border-gray-700"
                                     v-for="province in provinces.data"
-                                    :key="province.id as number"
+                                    :key="province.id "
                                 >
                                     <td class="px-4 py-3">
                                         {{ province.name }}

@@ -2,10 +2,11 @@
 import Modal from "@/components/Modal.vue";
 import { useForm } from "@inertiajs/vue3";
 import { PropType } from "vue";
+import { DistrictData } from "@/types/generated";
 
 const props = defineProps({
     district: {
-        type: Object as PropType<App.Data.DistrictData>,
+        type: Object as PropType<DistrictData>,
         required: true,
     },
     close: {

@@ -2,13 +2,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-import { SupposedReasonOfViolences } from "@/types";
+import { SupposedReasonOfViolences } from "./types/index.d.ts";
 import { PropType, ref, watch } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import CreateSupposedReasonOfViolence from "./CreateSupposedReasonOfViolence.vue";
 import DeleteSupposedReasonOfViolence from "./DeleteSupposedReasonOfViolence.vue";
 import EditSupposedReasonOfViolence from "@/Pages/SupposedReasonOfViolence/EditSupposedReasonOfViolence.vue";
+import { SupposedReasonOfViolenceData } from "@/types/generated";
 
 const props = defineProps({
     supposedReasonOfViolences: {
@@ -23,11 +24,11 @@ const links = ref(props.supposedReasonOfViolences.links);
 
 const editingSupposedReasonOfViolenceTrigger = ref(false);
 const editingSupposedReasonOfViolence =
-    ref<App.Data.SupposedReasonOfViolenceData | null>(null);
+    ref<SupposedReasonOfViolenceData | null>(null);
 
 const deletingSupposedReasonOfViolenceTrigger = ref(false);
 const deletingSupposedReasonOfViolence =
-    ref<App.Data.SupposedReasonOfViolenceData | null>(null);
+    ref<SupposedReasonOfViolenceData | null>(null);
 
 const searchTerm = ref("");
 
@@ -68,7 +69,7 @@ watch(searchTerm, (value) => {
 });
 
 function openEditSupposedReasonOfViolenceModal(
-    supposedReasonOfViolence: App.Data.SupposedReasonOfViolenceData,
+    supposedReasonOfViolence: SupposedReasonOfViolenceData,
 ) {
     editingSupposedReasonOfViolence.value = supposedReasonOfViolence;
     editingSupposedReasonOfViolenceTrigger.value = true;
@@ -80,7 +81,7 @@ function closeEditSupposedReasonOfViolenceModal() {
 }
 
 function openDeleteSupposedReasonOfViolenceModal(
-    supposedReasonOfViolence: App.Data.SupposedReasonOfViolenceData,
+    supposedReasonOfViolence: SupposedReasonOfViolenceData,
 ) {
     deletingSupposedReasonOfViolence.value = supposedReasonOfViolence;
     deletingSupposedReasonOfViolenceTrigger.value = true;

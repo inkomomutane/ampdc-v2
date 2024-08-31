@@ -3,10 +3,11 @@ import Modal from "@/components/Modal.vue";
 import { PropType, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import InputError from "@/components/InputError.vue";
+import { PerpetratorData } from "@/types/generated";
 
 const props = defineProps({
     perpetrator: {
-        type: Object as PropType<App.Data.PerpetratorData>,
+        type: Object as PropType<PerpetratorData>,
         required: true,
     },
     close: {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Article;
 
+use App\Http\Controllers\concerns\AuthorizeWriters;
 use App\Models\Article;
 use App\Models\ArticleSection;
 use DB;
@@ -11,6 +12,9 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class StoreArticleController
 {
+
+    use AuthorizeWriters;
+
     private function rules():array
     {
         return [
@@ -26,6 +30,8 @@ class StoreArticleController
      */
     public function __invoke(Request $request)
     {
+        $this->authorizeAction();
+
         $data = $request->validate($this->rules());
         try {
             DB::beginTransaction();

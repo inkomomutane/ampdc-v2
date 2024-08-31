@@ -5,7 +5,7 @@ import * as path from "node:path";
 
 export default defineConfig({
     build: {
-      sourcemap: true,
+        sourcemap: true,
     },
     plugins: [
         laravel({

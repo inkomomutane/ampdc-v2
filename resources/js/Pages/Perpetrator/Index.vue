@@ -2,13 +2,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-import { Perpetrators } from "@/types/index";
+import { Perpetrators } from "./types/index.d.ts";
 import { PropType, ref, watch } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import CreatePerpetrator from "./CreatePerpetrator.vue";
 import DeletePerpetrator from "./DeletePerpetrator.vue";
 import EditPerpetrator from "@/Pages/Perpetrator/EditPerpetrator.vue";
+import { PerpetratorData } from "@/types/generated";
 
 const props = defineProps({
     perpetrators: {
@@ -22,10 +23,10 @@ const props = defineProps({
 const links = ref(props.perpetrators.links);
 
 const editingPerpetratorTrigger = ref(false);
-const editingPerpetrator = ref<App.Data.PerpetratorData | null>(null);
+const editingPerpetrator = ref<PerpetratorData | null>(null);
 
 const deletingPerpetratorTrigger = ref(false);
-const deletingPerpetrator = ref<App.Data.PerpetratorData | null>(null);
+const deletingPerpetrator = ref<PerpetratorData | null>(null);
 
 const searchTerm = ref("");
 
@@ -65,7 +66,7 @@ watch(searchTerm, (value) => {
     );
 });
 
-function openEditPerpetratorModal(perpetrator: App.Data.PerpetratorData) {
+function openEditPerpetratorModal(perpetrator: PerpetratorData) {
     editingPerpetrator.value = perpetrator;
     editingPerpetratorTrigger.value = true;
 }
@@ -75,7 +76,7 @@ function closeEditPerpetratorModal() {
     editingPerpetratorTrigger.value = false;
 }
 
-function openDeletePerpetratorModal(perpetrator: App.Data.PerpetratorData) {
+function openDeletePerpetratorModal(perpetrator: PerpetratorData) {
     deletingPerpetrator.value = perpetrator;
     deletingPerpetratorTrigger.value = true;
 }

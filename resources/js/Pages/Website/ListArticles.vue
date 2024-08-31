@@ -4,7 +4,7 @@ import { Head, Link, router } from "@inertiajs/vue3";
 import { PropType, ref, watch } from "vue";
 import { FlasherResponse } from "@flasher/flasher";
 import Flasher from "@/helprs";
-import { Articles } from "@/types";
+import { Articles } from "./types/index.d.ts";
 import ResponsiveImage from "@components/ResponsiveImage.vue";
 
 const props = defineProps({

@@ -9,6 +9,7 @@ import { FlasherResponse } from "@flasher/flasher";
 import CreateViolenceType from "./CreateViolenceType.vue";
 import DeleteViolenceType from "./DeleteViolenceType.vue";
 import EditViolenceType from "@/Pages/ViolenceType/EditViolenceType.vue";
+import { ViolenceTypeData } from "@/types/generated";
 
 const props = defineProps({
     violenceTypes: {
@@ -22,10 +23,10 @@ const props = defineProps({
 const links = ref(props.violenceTypes.links);
 
 const editingViolenceTypeTrigger = ref(false);
-const editingViolenceType = ref<App.Data.ViolenceTypeData | null>(null);
+const editingViolenceType = ref<ViolenceTypeData | null>(null);
 
 const deletingViolenceTypeTrigger = ref(false);
-const deletingViolenceType = ref<App.Data.ViolenceTypeData | null>(null);
+const deletingViolenceType = ref<ViolenceTypeData | null>(null);
 
 const searchTerm = ref("");
 
@@ -65,7 +66,7 @@ watch(searchTerm, (value) => {
     );
 });
 
-function openEditViolenceTypeModal(violenceType: App.Data.ViolenceTypeData) {
+function openEditViolenceTypeModal(violenceType: ViolenceTypeData) {
     editingViolenceType.value = violenceType;
     editingViolenceTypeTrigger.value = true;
 }
@@ -75,7 +76,7 @@ function closeEditViolenceTypeModal() {
     editingViolenceTypeTrigger.value = false;
 }
 
-function openDeleteViolenceTypeModal(violenceType: App.Data.ViolenceTypeData) {
+function openDeleteViolenceTypeModal(violenceType: ViolenceTypeData) {
     deletingViolenceType.value = violenceType;
     deletingViolenceTypeTrigger.value = true;
 }

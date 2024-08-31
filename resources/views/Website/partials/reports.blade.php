@@ -2,11 +2,7 @@
     <div
         class="grid grid-cols-3 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:px-16 justify-items-center"
     >
-        <div
-            data-aos="fade-up"
-            id="anualChart"
-            class="w-full col-span-3"
-        ></div>
+        <div data-aos="fade-up" id="anualChart" class="w-full col-span-3"></div>
     </div>
 </section>
 <section

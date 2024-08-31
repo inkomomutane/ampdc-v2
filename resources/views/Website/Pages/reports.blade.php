@@ -2,9 +2,11 @@
 @section("seo")
     {!! seo($seoData) !!}
 @endsection
+
 @push("scripts")
     @vite("resources/website/js/reports.ts")
 @endpush
+
 @section("title", "Relatórios")
 @section("content")
     @include("Website.partials.hero_reports")
@@ -66,6 +68,4 @@
         </div>
     </section>
     @include("Website.partials.reports")
-
-
 @endsection

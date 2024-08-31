@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\concerns\AuthorizeAdmins;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use App\Models\Role;
 class CreateUser
 {
 
+    use AuthorizeAdmins;
 
     public function handle(array $userData): User
     {

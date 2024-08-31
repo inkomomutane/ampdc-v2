@@ -1,3 +1,12 @@
+import {
+    ArticleData, DistrictData, NeighborhoodData, OrganizationData, PerpetratorData, ProvinceData,
+    Roles, SupposedReasonOfViolenceData, UserData,
+    VictimCaseData,
+    ViolenceIncidentLocationData, ViolenceTypeData,
+    WebsiteMessageData
+} from "@/types/generated";
+
+
 export interface PaginatedData {
     data: Array;
     links: Array;
@@ -28,49 +37,49 @@ export enum OrderDataBy {
     desc = "desc",
 }
 export interface Organizations extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.OrganizationData>;
+    data: Array<OrganizationData>;
 }
 
 export interface Provinces extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.ProvinceData>;
+    data: Array<ProvinceData>;
 }
 
 export interface Districts extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.DistrictData>;
+    data: Array<DistrictData>;
 }
 
 export interface Neighborhoods extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.NeighborhoodData>;
+    data: Array<NeighborhoodData>;
 }
 
 export interface Users extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.UserData>;
+    data: Array<UserData>;
 }
 
 export interface ViolenceTypes extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.ViolenceTypeData>;
+    data: Array<ViolenceTypeData>;
 }
 export interface Perpetrators extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.PerpetratorData>;
+    data: Array<PerpetratorData>;
 }
 
 export interface SupposedReasonOfViolences extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.SupposedReasonOfViolenceData>;
+    data: Array<SupposedReasonOfViolenceData>;
 }
 export interface ViolenceIncidentLocations extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.ViolenceIncidentLocationData>;
+    data: Array<ViolenceIncidentLocationData>;
 }
 
 export interface VictimCasesHistories extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.VictimCaseData>;
+    data: Array<VictimCaseData>;
 }
 
 export interface Articles extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.ArticleData>;
+    data: Array<ArticleData>;
 }
 
 export interface WebsiteMessages extends Omit<PaginatedData, "data"> {
-    data: Array<App.Data.WebsiteMessageData>;
+    data: Array<WebsiteMessageData>;
 }
 
 export interface User {
@@ -88,4 +97,5 @@ export type PageProps<
     auth: {
         user: User;
     };
+    role : Roles
 };

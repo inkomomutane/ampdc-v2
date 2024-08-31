@@ -3,6 +3,7 @@ import { Head, Link, router } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { ref, watch } from "vue";
 import DeleteVictimCase from "@/Pages/Victim/DeleteVictimCase.vue";
+import { VictimCaseData } from "@/types/generated";
 
 const props = defineProps({
     cases: {
@@ -19,7 +20,7 @@ const props = defineProps({
 const searchTerm = ref("");
 const links = ref(props.cases.links);
 const deletingCaseTrigger = ref(false);
-const deletingCase = ref<App.Data.VictimCaseData | null>(null);
+const deletingCase = ref<VictimCaseData | null>(null);
 
 watch(
     () => props.cases.links,
@@ -41,7 +42,7 @@ watch(searchTerm, (value) => {
     );
 });
 
-function openDeleteCaseModal(vCase: App.Data.VictimCaseData) {
+function openDeleteCaseModal(vCase: VictimCaseData) {
     deletingCase.value = vCase;
     deletingCaseTrigger.value = true;
 }
@@ -213,7 +214,12 @@ function closeDeleteCaseModal() {
 
                                     <td class="px-4 py-3 w-32">
                                         <Link
-                                            :href="route('victim.case.info', { victim: caseVictim.victim.id })"
+                                            :href="
+                                                route('victim.case.info', {
+                                                    victim: caseVictim.victim
+                                                        .id,
+                                                })
+                                            "
                                             class="flex items-center w-fit justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                         >
                                             <svg
@@ -272,9 +278,7 @@ function closeDeleteCaseModal() {
                                         <button
                                             type="button"
                                             @click="
-                                                openDeleteCaseModal(
-                                                    caseVictim,
-                                                )
+                                                openDeleteCaseModal(caseVictim)
                                             "
                                             class="flex items-center justify-center text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                         >
@@ -388,7 +392,6 @@ function closeDeleteCaseModal() {
                 </div>
             </div>
         </template>
-
     </AuthenticatedLayout>
     <DeleteVictimCase
         v-if="deletingCase"

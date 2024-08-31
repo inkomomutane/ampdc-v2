@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Enums\Roles;
 use App\Http\Controllers\Article\CreateArticleController;
 use App\Http\Controllers\Article\DeleteArticleController;
 use App\Http\Controllers\Article\EditArticleController;
@@ -78,7 +79,16 @@ Auth::routes([
 include 'website.php';
 
 
-Route::get('/dashboard', static fn () => to_route('victim.create'))->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', static function () {
+
+    $role = Auth::user()?->roles()->first()->name;
+
+    if (Roles::WRITER->value === $role ) {
+        return to_route('article.create');
+    }
+   return to_route('victim.create');
+}
+)->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 use App\Data\OrganizationData;
 use App\Data\UserData;
+use App\Http\Controllers\concerns\AuthorizeAdmins;
 use App\Models\Organization;
 use App\Models\User;
 use Auth;
@@ -10,7 +11,7 @@ use Inertia\Inertia;
 
 class GetUsers
 {
-
+    use AuthorizeAdmins;
 
     public function handle(?string $term = null)
     {

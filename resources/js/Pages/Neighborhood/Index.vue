@@ -2,13 +2,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-import { Neighborhoods } from "@/types";
+import { Neighborhoods } from "./types/index.d.ts";
 import { ref, watch, PropType } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import CreateNeighborhood from "./CreateNeighborhood.vue";
 import EditNeighborhood from "./EditNeighborhood.vue";
 import DeleteNeighborhood from "./DeleteNeighborhood.vue";
+import { DistrictData, NeighborhoodData } from "@/types/generated";
 
 const props = defineProps({
     neighborhoods: {
@@ -16,7 +17,7 @@ const props = defineProps({
         required: true,
     },
     districts: {
-        type: Array<App.Data.DistrictData>,
+        type: Array<DistrictData>,
         required: true,
     },
     search: String,
@@ -26,10 +27,10 @@ const props = defineProps({
 const links = ref(props.neighborhoods.links);
 
 const editingNeighborhoodTrigger = ref(false);
-const editingNeighborhood = ref<App.Data.NeighborhoodData | null>(null);
+const editingNeighborhood = ref<NeighborhoodData | null>(null);
 
 const deletingNeighborhoodTrigger = ref(false);
-const deletingNeighborhood = ref<App.Data.NeighborhoodData | null>(null);
+const deletingNeighborhood = ref<NeighborhoodData | null>(null);
 
 const searchTerm = ref("");
 
@@ -65,7 +66,7 @@ watch(searchTerm, (value) => {
     );
 });
 
-function openEditNeighborhoodModal(neighborhood: App.Data.NeighborhoodData) {
+function openEditNeighborhoodModal(neighborhood: NeighborhoodData) {
     editingNeighborhood.value = neighborhood;
     editingNeighborhoodTrigger.value = true;
 }
@@ -75,7 +76,7 @@ function closeEditNeighborhoodModal() {
     editingNeighborhoodTrigger.value = false;
 }
 
-function openDeleteNeighborhoodModal(neighborhood: App.Data.NeighborhoodData) {
+function openDeleteNeighborhoodModal(neighborhood: NeighborhoodData) {
     deletingNeighborhood.value = neighborhood;
     deletingNeighborhoodTrigger.value = true;
 }

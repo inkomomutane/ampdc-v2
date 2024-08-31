@@ -4,7 +4,7 @@ import { PropType } from "vue";
 
 const props = defineProps({
     responsive: {
-        type: Object as PropType<App.Data.MediaData>,
+        type: Object as PropType<MediaData>,
     },
     class: String,
     className: String,

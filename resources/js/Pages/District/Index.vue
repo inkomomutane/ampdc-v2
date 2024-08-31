@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
-import { Districts } from "@/types";
+import { Districts } from "./types/index.d.ts";
 import { ref, watch, PropType } from "vue";
 import Flasher from "@/helprs";
 import { FlasherResponse } from "@flasher/flasher";
 import CreateDistrict from "./CreateDistrict.vue";
 import EditDistrict from "./EditDistrict.vue";
 import DeleteDistrict from "./DeleteDistrict.vue";
+import { DistrictData, ProvinceData } from "@/types/generated";
 
 const props = defineProps({
     districts: {
@@ -15,7 +16,7 @@ const props = defineProps({
         required: true,
     },
     provinces: {
-        type: Array<App.Data.ProvinceData>,
+        type: Array<ProvinceData>,
         required: true,
     },
     search: String,
@@ -25,10 +26,10 @@ const props = defineProps({
 const links = ref(props.districts.links);
 
 const editingDistrictTrigger = ref(false);
-const editingDistrict = ref<App.Data.DistrictData | null>(null);
+const editingDistrict = ref<DistrictData | null>(null);
 
 const deletingDistrictTrigger = ref(false);
-const deletingDistrict = ref<App.Data.DistrictData | null>(null);
+const deletingDistrict = ref<DistrictData | null>(null);
 
 const searchTerm = ref("");
 
@@ -64,7 +65,7 @@ watch(searchTerm, (value) => {
     );
 });
 
-function openEditDistrictModal(district: App.Data.DistrictData) {
+function openEditDistrictModal(district: DistrictData) {
     editingDistrict.value = district;
     editingDistrictTrigger.value = true;
 }
@@ -74,7 +75,7 @@ function closeEditDistrictModal() {
     editingDistrictTrigger.value = false;
 }
 
-function openDeleteDistrictModal(district: App.Data.DistrictData) {
+function openDeleteDistrictModal(district: DistrictData) {
     deletingDistrict.value = district;
     deletingDistrictTrigger.value = true;
 }

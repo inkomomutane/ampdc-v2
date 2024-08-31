@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Article;
 
 use App\Data\ArticleData;
+use App\Http\Controllers\concerns\AuthorizeWriters;
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Builder;
 use Inertia\Inertia;
 
 class ListArticlesController
 {
+    use AuthorizeWriters;
+
     public function __invoke(){
+        $this->authorizeAction();
         return Inertia::render('Website/ListArticles',[
             'articles' => static::handle(request()->search),
             'search' => request()->search

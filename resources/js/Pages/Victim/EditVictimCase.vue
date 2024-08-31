@@ -8,25 +8,32 @@ import {
     KeyPair,
     PeriodOfViolenceAct,
 } from "@/types/casestatus";
+import {
+    PerpetratorData,
+    SupposedReasonOfViolenceData,
+    VictimCaseData,
+    ViolenceIncidentLocationData,
+    ViolenceTypeData
+} from "@/types/generated";
 const props = defineProps({
     victimCase: {
-        type: Object as PropType<App.Data.VictimCaseData>,
+        type: Object as PropType<VictimCaseData>,
         required: true,
     },
     violenceTypes: {
-        type: Array<App.Data.ViolenceTypeData>,
+        type: Array<ViolenceTypeData>,
         required: true,
     },
     perpetrators: {
-        type: Array<App.Data.PerpetratorData>,
+        type: Array<PerpetratorData>,
         required: true,
     },
     supposedReasonsOfViolence: {
-        type: Array<App.Data.SupposedReasonOfViolenceData>,
+        type: Array<SupposedReasonOfViolenceData>,
         required: true,
     },
     violenceIncidentLocations: {
-        type: Array<App.Data.ViolenceIncidentLocationData>,
+        type: Array<ViolenceIncidentLocationData>,
         required: true,
     },
 });
@@ -128,13 +135,13 @@ const updateVictimCase = () => {
                                 <v-select
                                     v-model="form.violence_type_id"
                                     :get-option-label="
-                                        (violence: App.Data.ViolenceTypeData) =>
+                                        (violence: ViolenceTypeData) =>
                                             violence.name
                                     "
                                     :options="violenceTypes"
                                     placeholder="Selecione o tipo de violência"
                                     :reduce="
-                                        (violence: App.Data.ViolenceTypeData) =>
+                                        (violence: ViolenceTypeData) =>
                                             violence.id
                                     "
                                 ></v-select>
@@ -155,14 +162,14 @@ const updateVictimCase = () => {
                                     "
                                     :get-option-label="
                                         (
-                                            key: App.Data.SupposedReasonOfViolenceData,
+                                            key: SupposedReasonOfViolenceData,
                                         ) => key.name
                                     "
                                     :options="supposedReasonsOfViolence"
                                     placeholder="Suposto motivo da violência"
                                     :reduce="
                                         (
-                                            value: App.Data.SupposedReasonOfViolenceData,
+                                            value: SupposedReasonOfViolenceData,
                                         ) => value.id
                                     "
                                 ></v-select>
@@ -207,14 +214,14 @@ const updateVictimCase = () => {
                                     v-model="form.violence_incident_location_id"
                                     :get-option-label="
                                         (
-                                            key: App.Data.ViolenceIncidentLocationData,
+                                            key: ViolenceIncidentLocationData,
                                         ) => key.name
                                     "
                                     :options="violenceIncidentLocations"
                                     placeholder="Local onde ocorreu a violência"
                                     :reduce="
                                         (
-                                            value: App.Data.ViolenceIncidentLocationData,
+                                            value: ViolenceIncidentLocationData,
                                         ) => value.id
                                     "
                                 ></v-select>
@@ -235,13 +242,13 @@ const updateVictimCase = () => {
                                 <v-select
                                     v-model="form.perpetrator_id"
                                     :get-option-label="
-                                        (key: App.Data.PerpetratorData) =>
+                                        (key: PerpetratorData) =>
                                             key.name
                                     "
                                     :options="perpetrators"
                                     placeholder="Perpetrador da violência"
                                     :reduce="
-                                        (value: App.Data.PerpetratorData) =>
+                                        (value: PerpetratorData) =>
                                             value.id
                                     "
                                 ></v-select>

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\concerns\AuthorizeAdmins;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class DeleteUser
 {
-
+    use AuthorizeAdmins;
     public function handle(User $user, bool $status)
     {
         $user->active = $status;
