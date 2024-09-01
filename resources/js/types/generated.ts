@@ -168,6 +168,12 @@ export type VictimCaseData = {
     areLastCasesResolved: boolean;
     lastCasesResolutionDetails: string | null;
 };
+export type VictimCaseShortDto = {
+    id: string | null;
+    caseCode: string | null;
+    isCausedDeath: boolean;
+    isTerminated: boolean;
+};
 export type VictimData = {
     id: string | null;
     name: string | null;

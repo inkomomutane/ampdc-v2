@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { Head, Link, router } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { ref, watch } from "vue";
+import { PropType, ref, watch } from "vue";
 import DeleteVictimCase from "@/Pages/Victim/DeleteVictimCase.vue";
 import { VictimCaseData } from "@/types/generated";
+import { VictimCases } from "@/types";
 
 const props = defineProps({
     cases: {
-        type: Object,
+        type: Object as PropType<VictimCases>,
         required: true,
     },
     search: {
@@ -174,7 +175,7 @@ function closeDeleteCaseModal() {
                                         <span
                                             class="bg-gray-200 text-gray-700 dark:bg-gray-900 dark:text-white p-2 rounded-md"
                                         >
-                                            {{ caseVictim.case_code }}
+                                            {{ caseVictim.caseCode }}
                                         </span>
                                     </td>
                                     <td
@@ -190,7 +191,7 @@ function closeDeleteCaseModal() {
                                     <td
                                         class="px-4 py-3 text-gray-900 whitespace-nowrap dark:text-white"
                                     >
-                                        {{ caseVictim.violence_type.name }}
+                                        {{ caseVictim.violenceType?.name }}
                                     </td>
                                     <td
                                         class="px-4 py-3 text-gray-900 whitespace-nowrap dark:text-white"
@@ -199,7 +200,7 @@ function closeDeleteCaseModal() {
                                             :class="{
                                                 'bg-blue-600':
                                                     !caseVictim.isTerminated,
-                                                'bg-green-600':
+                                                'bg-green-500':
                                                     caseVictim.isTerminated,
                                             }"
                                             class="my-4 w-fit rounded-[2px] p-1 px-4 text-sm font-semibold text-white"

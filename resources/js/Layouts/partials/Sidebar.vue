@@ -15,9 +15,12 @@ const inactiveClass = ref(
     "border-gray-900 text-gray-100 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100",
 );
 const role = usePage().props.role;
-const onlyAdmins = (role: Roles) => [Roles.ADMIN,Roles.SUPER_ADMIN].includes(role);
-const onlyWriter = (role: Roles) => [Roles.SUPER_ADMIN,Roles.WRITER].includes(role);
-const onlyFocalPoint =  (role : Roles) => [Roles.SUPER_ADMIN , Roles.ADMIN,Roles.FOCAL_POINT ].includes(role);
+const onlyAdmins = (role: Roles) =>
+    [Roles.ADMIN, Roles.SUPER_ADMIN].includes(role);
+const onlyWriter = (role: Roles) =>
+    [Roles.SUPER_ADMIN, Roles.WRITER].includes(role);
+const onlyFocalPoint = (role: Roles) =>
+    [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.FOCAL_POINT].includes(role);
 </script>
 
 <template>
@@ -174,7 +177,11 @@ const onlyFocalPoint =  (role : Roles) => [Roles.SUPER_ADMIN , Roles.ADMIN,Roles
                     <span class="mx-4 font-medium text-sm">Registo</span>
                 </Link>
                 <Link
-                    v-if="(route().current('victim.edit') || route().current('victim.case.info')) && onlyFocalPoint(role)"
+                    v-if="
+                        (route().current('victim.edit') ||
+                            route().current('victim.case.info')) &&
+                        onlyFocalPoint(role)
+                    "
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
                     href=""
                     :class="activeClass"

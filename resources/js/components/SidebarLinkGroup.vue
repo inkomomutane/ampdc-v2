@@ -1,6 +1,11 @@
 <template>
     <li
-        :class="isDropdownOpen ? 'bg-slate-900 ' + classOptions : classOptions + 'border-gray-900 text-gray-100 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100'"
+        :class="
+            isDropdownOpen
+                ? 'bg-slate-900 ' + classOptions
+                : classOptions +
+                  'border-gray-900 text-gray-100 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100'
+        "
         class="list-none items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
         @click="toggleDropdown"
     >

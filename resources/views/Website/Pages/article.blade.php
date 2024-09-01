@@ -26,9 +26,7 @@
                             data-sizes="(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 70vw,(max-width: 1200px) 60vw,(max-width: 1600px) 50vw,  40vw"
                             data-srcset="{{ $article->cover->getSrcset() }}"
                         >
-                            {{
-                                $article->cover?->img()?->attributes(["class" => " absolute inset-0 w-full h-full object-cover object-top", "alt" => $article->title])
-                            }}
+                            {{ $article->cover?->img()?->attributes(["class" => " absolute inset-0 w-full h-full object-cover object-top", "alt" => $article->title]) }}
                             <div class="glightbox-desc desc_article">
                                 <div
                                     class="h-fit group-odd:md:-ml-28 group-even:md:-mr-28 group-even:md:order-1 z-10"
@@ -117,15 +115,13 @@
                                 >
                                     <a class="group-even:md:order-2">
                                         {{
-                                            $section->cover
-                                                ?->img()
-                                                ?->attributes([
-                                                    "class" => "cursor-pointer gallery h-full object-cover object-top rounded hover:scale-105  transition-transform duration-500 ease-in-out",
-                                                    "alt" => $section->title,
-                                                    "data-glightbox" => "description: .desc_$loop->index ;descPosition: left ",
-                                                    "data-sizes" => "(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 70vw,(max-width: 1200px) 60vw,(max-width: 1600px) 50vw,  40vw",
-                                                    "data-srcset" => $section->cover->getSrcset(),
-                                                ])
+                                            $section->cover?->img()?->attributes([
+                                                "class" => "cursor-pointer gallery h-full object-cover object-top rounded hover:scale-105  transition-transform duration-500 ease-in-out",
+                                                "alt" => $section->title,
+                                                "data-glightbox" => "description: .desc_$loop->index ;descPosition: left ",
+                                                "data-sizes" => "(max-width: 480px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 70vw,(max-width: 1200px) 60vw,(max-width: 1600px) 50vw,  40vw",
+                                                "data-srcset" => $section->cover->getSrcset(),
+                                            ])
                                         }}
 
                                         <div

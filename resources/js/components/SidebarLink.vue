@@ -30,7 +30,7 @@ const unauthorizedCss = " bg-slate-700 text-slate-50";
             <slot name="icon"></slot>
             <span
                 class="ml-1 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100"
-            >{{ title }}</span
+                >{{ title }}</span
             >
         </div>
     </Link>
@@ -44,7 +44,7 @@ const unauthorizedCss = " bg-slate-700 text-slate-50";
             <slot name="icon"></slot>
             <span
                 class="ml-2 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100"
-            >{{ title }}</span
+                >{{ title }}</span
             >
         </div>
     </div>

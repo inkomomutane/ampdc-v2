@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, useForm,Link } from "@inertiajs/vue3";
 import InputError from "@components/InputError.vue";
 import { PropType, watch } from "vue";
 import { FlasherResponse } from "@flasher/flasher";
@@ -13,11 +13,15 @@ import {
     PeriodOfViolenceAct,
     EducationLevel,
 } from "@/types/casestatus";
-import { VictimData } from "@/types/generated";
+import { VictimCaseShortDto, VictimData } from "@/types/generated";
 
 const props = defineProps({
     victim: {
         type: Object as PropType<VictimData>,
+        required: true,
+    },
+    cases : {
+        type: Array<VictimCaseShortDto>,
         required: true,
     },
     messages: {
@@ -80,7 +84,7 @@ const registerVictim = () => {
                         <h1
                             class="text-xl font-semibold text-gray-900 dark:text-white"
                         >
-                            Editar dados da víctima
+                            Editar dados da vítima
                         </h1>
                     </div>
                 </div>
@@ -321,6 +325,37 @@ const registerVictim = () => {
                             Actualizar
                         </button>
                     </div>
+                </div>
+                <div class="max-w-7xl mx-auto py-6 lg:py-8 my-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                    <Link :href="route('victim.case.edit',{
+                        case: vCase.id,
+                    })" v-for="vCase in cases" class="
+                    shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out hover:shadow-2xl hover:cursor-pointer
+" >
+                        <div class="flex flex-col rounded-t-xl items-center bg-white">
+                            <svg class="w-32 h-32 text-slate-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 3)"><path d="m12.5 12.5v-10c0-1.1045695-.8954305-2-2-2h-8c-1.1045695 0-2 .8954305-2 2v10c0 1.1045695.8954305 2 2 2h8c1.1045695 0 2-.8954305 2-2z"></path><path d="m3.5 5.5h5"></path><path d="m3.5 7.5h6"></path><path d="m3.5 9.5h3"></path></g></svg>
+                        </div>
+                        <div class="px-7 py-4 rounded-b  bg-slate-600">
+                            <h1
+                                class="text-xs font-semibold text-gray-50 dark:text-white"
+                            >
+                                {{ vCase.caseCode }}
+                            </h1>
+                            <div class=" ">
+                               <span
+                                   :class="{
+                                       'bg-green-500': vCase.isTerminated,
+                                       'bg-blue-500': !vCase.isTerminated,
+                                   }"
+
+                                      class="text-white text-xs px-2 py-1 rounded-sm"
+
+                               >
+                                      {{ vCase.isTerminated ? 'Encerrado' : 'Em adamento' }}
+                               </span>
+                            </div>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </template>

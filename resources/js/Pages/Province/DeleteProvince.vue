@@ -27,7 +27,7 @@ const form = useForm({
 const deleteProvince = () => {
     form.delete(
         route("province.delete", {
-            province: props.province.id ,
+            province: props.province.id,
         }),
         {
             preserveScroll: true,

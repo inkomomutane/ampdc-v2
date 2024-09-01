@@ -1,11 +1,18 @@
 import {
-    ArticleData, DistrictData, NeighborhoodData, OrganizationData, PerpetratorData, ProvinceData,
-    Roles, SupposedReasonOfViolenceData, UserData,
+    ArticleData,
+    DistrictData,
+    NeighborhoodData,
+    OrganizationData,
+    PerpetratorData,
+    ProvinceData,
+    Roles,
+    SupposedReasonOfViolenceData,
+    UserData,
     VictimCaseData,
-    ViolenceIncidentLocationData, ViolenceTypeData,
-    WebsiteMessageData
+    ViolenceIncidentLocationData,
+    ViolenceTypeData,
+    WebsiteMessageData,
 } from "@/types/generated";
-
 
 export interface PaginatedData {
     data: Array;
@@ -82,6 +89,10 @@ export interface WebsiteMessages extends Omit<PaginatedData, "data"> {
     data: Array<WebsiteMessageData>;
 }
 
+export  interface VictimCases extends Omit<PaginatedData, "data"> {
+    data: Array<VictimCaseData>;
+}
+
 export interface User {
     id: number;
     name: string;
@@ -97,5 +108,5 @@ export type PageProps<
     auth: {
         user: User;
     };
-    role : Roles
+    role: Roles;
 };

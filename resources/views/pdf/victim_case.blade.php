@@ -1,0 +1,3 @@
+
+{{ $victim->name }}
+{{ $victim->age }}

@@ -76,7 +76,7 @@ class DatabaseSeeder extends Seeder
        ]));
 
 
-        $admin->assignRole('01hv1yfks80m74f2j8198t8ger');
+        $admin->assignRole(Roles::SUPER_ADMIN);
 
         Province::updateOrInsert([
             'id' => '01hv76mzhwfpv8e8sttfamwq5w'

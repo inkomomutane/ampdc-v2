@@ -162,6 +162,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/victim/create',RegisterDataOfVictimController::class)->name('victim.create');
     Route::get('/victim/{victim}/edit', EditDataOfVictimController::class)->name('victim.edit');
+    Route::get('/victim/case/{case}/edit',\App\Http\Controllers\Victim\EditDataOfVictimCaseController::class)
+        ->name('victim.case.edit');
 
     Route::get('/victim/{victim}/create/case',CreateVictimCaseController::class)->name('victim.case.create');
     Route::post('/victim/{victim}/store/case', StoreVictimCaseController::class)->name('victim.case.store');
@@ -198,4 +200,5 @@ Route::middleware('auth')->group(function () {
 
 });
 
+require  __DIR__.'/print.php';
 require __DIR__.'/auth.php';

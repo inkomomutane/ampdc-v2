@@ -15,7 +15,7 @@ import {
     SupposedReasonOfViolenceData,
     VictimData,
     ViolenceIncidentLocationData,
-    ViolenceTypeData
+    ViolenceTypeData,
 } from "@/types/generated";
 const props = defineProps({
     victim: {
@@ -153,16 +153,14 @@ const registerVictimCase = () => {
                                         form.supposed_reason_of_violence_id
                                     "
                                     :get-option-label="
-                                        (
-                                            key: SupposedReasonOfViolenceData,
-                                        ) => key.name
+                                        (key: SupposedReasonOfViolenceData) =>
+                                            key.name
                                     "
                                     :options="supposedReasonsOfViolence"
                                     placeholder="Suposto motivo da violência"
                                     :reduce="
-                                        (
-                                            value: SupposedReasonOfViolenceData,
-                                        ) => value.id
+                                        (value: SupposedReasonOfViolenceData) =>
+                                            value.id
                                     "
                                 ></v-select>
                                 <InputError
@@ -205,16 +203,14 @@ const registerVictimCase = () => {
                                 <v-select
                                     v-model="form.violence_incident_location_id"
                                     :get-option-label="
-                                        (
-                                            key: ViolenceIncidentLocationData,
-                                        ) => key.name
+                                        (key: ViolenceIncidentLocationData) =>
+                                            key.name
                                     "
                                     :options="violenceIncidentLocations"
                                     placeholder="Local onde ocorreu a violência"
                                     :reduce="
-                                        (
-                                            value: ViolenceIncidentLocationData,
-                                        ) => value.id
+                                        (value: ViolenceIncidentLocationData) =>
+                                            value.id
                                     "
                                 ></v-select>
                                 <InputError
@@ -234,14 +230,12 @@ const registerVictimCase = () => {
                                 <v-select
                                     v-model="form.perpetrator_id"
                                     :get-option-label="
-                                        (key: PerpetratorData) =>
-                                            key.name
+                                        (key: PerpetratorData) => key.name
                                     "
                                     :options="perpetrators"
                                     placeholder="Perpetrador da violência"
                                     :reduce="
-                                        (value: PerpetratorData) =>
-                                            value.id
+                                        (value: PerpetratorData) => value.id
                                     "
                                 ></v-select>
                                 <InputError

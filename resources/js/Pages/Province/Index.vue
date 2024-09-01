@@ -159,7 +159,7 @@ function closeDeleteProvinceModal() {
                                 <tr
                                     class="border-b dark:border-gray-700"
                                     v-for="province in provinces.data"
-                                    :key="province.id "
+                                    :key="province.id"
                                 >
                                     <td class="px-4 py-3">
                                         {{ province.name }}

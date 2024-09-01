@@ -1,13 +1,12 @@
 <?php
 
+use App\Models\Article;
 use App\Models\District;
 use App\Models\Neighborhood;
 use App\Models\Organization;
 use App\Models\Victim;
-use App\Models\VictimCase;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
-use Illuminate\Support\Facades\Route;
 
 
 Breadcrumbs::for('victim.create', function (BreadcrumbTrail $trail) {
@@ -114,9 +113,6 @@ Breadcrumbs::for('user.all', function (BreadcrumbTrail $trail) {
     $trail->push('Utilizadores', route('user.all'));
 });
 
-
-
-
 Breadcrumbs::for('violenceType.list', function (BreadcrumbTrail $trail) {
     $trail->parent('victim.create');
     $trail->push('Tipos de violência', route('violenceType.list'));
@@ -149,6 +145,7 @@ Breadcrumbs::for('victim.edit', static function (BreadcrumbTrail $trail, Victim 
         'victim' => $victim
     ]));
 });
+#
 
 Breadcrumbs::for('victim.case.info', static function (BreadcrumbTrail $trail, Victim $victim) {
     $trail->parent('victim.cases.list');
@@ -157,65 +154,32 @@ Breadcrumbs::for('victim.case.info', static function (BreadcrumbTrail $trail, Vi
     ]));
 });
 
-//Breadcrumbs::for('victim.received.cases.list', function (BreadcrumbTrail $trail) {
-//    $trail->parent('victim.create');
-//    $trail->push('Casos Recebidos', route('victim.received.cases.list'));
-//});
-//
-//Breadcrumbs::for('victim.forwarded.cases.list', function (BreadcrumbTrail $trail) {
-//    $trail->parent('victim.create');
-//    $trail->push('Casos Encaminhados', route('victim.forwarded.cases.list'));
-//});
+
+Breadcrumbs::for('victim.case.edit', static function (BreadcrumbTrail $trail, \App\Models\VictimCase $case) {
+    $trail->parent('victim.edit', $case->victim);
+    $trail->push('Editar caso ' , route('victim.case.edit',[
+        'case' => $case
+    ]));
+});
 
 
-
-//Breadcrumbs::for('victim.case.info', function (BreadcrumbTrail $trail, VictimCase $case) {
-//
-//    if($case->is_forwarded && $case->forwarded_to_organization_id === auth()->user()->organization_id){
-//        $trail->parent('victim.received.cases.list');
-//    }else if($case->is_forwarded && $case->forwarded_from_organization_id === auth()->user()->organization_id){
-//        $trail->parent('victim.forwarded.cases.list');
-//    }
-//    else{
-//        $trail->parent('victim.cases.list');
-//    }
-//
-//    $trail->push('Informação do caso - ' . $case->case_code, route('victim.case.info',[
-//        'case' => $case
-//    ]));
-//});
-
-//Breadcrumbs::for('victim.case.edit', static function (BreadcrumbTrail $trail, VictimCase $case) {
-//    if($case->is_forwarded && $case->forwarded_to_organization_id === auth()->user()->organization_id){
-//        $trail->parent('victim.received.cases.list');
-//    }else if($case->is_forwarded && $case->forwarded_from_organization_id === auth()->user()->organization_id){
-//        $trail->parent('victim.forwarded.cases.list');
-//    }
-//    else{
-//        $trail->parent('victim.cases.list');
-//    }
-//    $trail->push('Editar caso - ' . $case->case_code, route('victim.case.edit',[
-//        'case' => $case
-//    ]));
-//});
-
-Breadcrumbs::for('dashboard.reports', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('dashboard.reports', static function (BreadcrumbTrail $trail) {
     $trail->push('Relatórios', route('dashboard.reports'));
 });
 
 
 Breadcrumbs::for('article.create',static function (BreadcrumbTrail $trail) {
-    $trail->push('Criar post',\route('article.create'));
+    $trail->push('Criar post', route('article.create'));
 });
 
 Breadcrumbs::for('article.list',static function (BreadcrumbTrail $trail) {
     $trail->parent('article.create');
-    $trail->push('Postagens',\route('article.list'));
+    $trail->push('Postagens', route('article.list'));
 });
 
-Breadcrumbs::for('article.edit',static function (BreadcrumbTrail $trail, \App\Models\Article $article) {
+Breadcrumbs::for('article.edit',static function (BreadcrumbTrail $trail, Article $article) {
     $trail->parent('article.list');
-    $trail->push('Editar post',\route('article.edit',[
+    $trail->push('Editar post', route('article.edit',[
         'article' => $article->slug
     ]));
 });

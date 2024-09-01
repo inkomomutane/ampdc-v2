@@ -49,6 +49,13 @@ class VictimCaseFactory extends Factory
             'is_the_first_time' => $this->faker->boolean,
             'is_the_last_cases_reported_to_authorities' => $this->faker->boolean,
             'are_last_cases_resolved' => $this->faker->boolean,
+            'perpetrator_address' => $this->faker->address,
+            'perpetrator_contact' => $this->faker->phoneNumber,
+            'perpetrator_profession' => $this->faker->jobTitle,
+            'perpetrator_name' => $this->faker->name,
+            'live_with_perpetrator' => $this->faker->boolean,
+            'last_cases_resolution_details' => $this->faker->text,
+            'last_violences_description' => $this->faker->text,
             'created_at' => $registered,
             'updated_at' => $registered,
         ];

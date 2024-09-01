@@ -10,6 +10,6 @@ trait AuthorizeAdmins
 {
     public function authorizeAction():void
     {
-        \Gate::allowIf(\Auth::user()?->hasAnyRole([Roles::ADMIN]),code: 401);
+        \Gate::allowIf(\Auth::user()?->hasAnyRole([Roles::ADMIN,Roles::SUPER_ADMIN]),code: 401);
     }
 }

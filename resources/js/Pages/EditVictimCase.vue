@@ -5,7 +5,11 @@ import InputError from "@components/InputError.vue";
 import { PropType, watch } from "vue";
 import { FlasherResponse } from "@flasher/flasher";
 import Flasher from "@/helprs";
-import { NeighborhoodData, OrganizationData, ViolenceTypeData } from "@/types/generated";
+import {
+    NeighborhoodData,
+    OrganizationData,
+    ViolenceTypeData,
+} from "@/types/generated";
 
 const props = defineProps({
     neighborhoods: {

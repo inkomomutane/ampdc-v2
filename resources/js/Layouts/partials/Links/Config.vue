@@ -2,8 +2,8 @@
     <!--    -->
     <SidebarLinkGroup
         :class-options="
-          isActive()
-                ?  'bg-gray-900  text-gray-100  border-l-white border-l-2 rounded-l-none'
+            isActive()
+                ? 'bg-gray-900  text-gray-100  border-l-white border-l-2 rounded-l-none'
                 : ''
         "
         :dropdown-open-state="isActive()"
@@ -27,7 +27,7 @@
                 </svg>
                 <span
                     class="ml-2 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100"
-                >{{ "Definições" }}</span
+                    >{{ "Definições" }}</span
                 >
             </div>
         </template>
@@ -115,19 +115,20 @@
                     :authorized="true"
                     :href="route('violenceType.list')"
                     title="Tipos de violência"
-                > <template v-slot:icon>
-                    <svg
-                        class="w-4 h-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="M4.47.22A.75.75 0 015 0h6a.75.75 0 01.53.22l4.25 4.25c.141.14.22.331.22.53v6a.75.75 0 01-.22.53l-4.25 4.25A.75.75 0 0111 16H5a.75.75 0 01-.53-.22L.22 11.53A.75.75 0 010 11V5a.75.75 0 01.22-.53L4.47.22zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5H5.31zM8 4a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 018 4zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                        ></path>
-                    </svg>
-                </template>
+                >
+                    <template v-slot:icon>
+                        <svg
+                            class="w-4 h-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 16 16"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M4.47.22A.75.75 0 015 0h6a.75.75 0 01.53.22l4.25 4.25c.141.14.22.331.22.53v6a.75.75 0 01-.22.53l-4.25 4.25A.75.75 0 0111 16H5a.75.75 0 01-.53-.22L.22 11.53A.75.75 0 010 11V5a.75.75 0 01.22-.53L4.47.22zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5H5.31zM8 4a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 018 4zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                            ></path>
+                        </svg>
+                    </template>
                 </SidebarLink>
                 <SidebarLink
                     :active="route().current('user.all')"
@@ -285,7 +286,6 @@
                     </template>
                 </SidebarLink>
             </div>
-
         </template>
     </SidebarLinkGroup>
 </template>
@@ -296,14 +296,14 @@ import { routerCheck } from "@/helprs";
 import { Link } from "@inertiajs/vue3";
 const isActive = () =>
     routerCheck([
-        'perpetrator.list',
-        'supposedReasonOfViolence.list',
-        'violenceIncidentLocation.list',
-        'violenceType.list',
-        'user.all',
-        'organization.list',
-        'province.list',
-        'district.list',
-        'neighborhood.list'
+        "perpetrator.list",
+        "supposedReasonOfViolence.list",
+        "violenceIncidentLocation.list",
+        "violenceType.list",
+        "user.all",
+        "organization.list",
+        "province.list",
+        "district.list",
+        "neighborhood.list",
     ]);
 </script>
