@@ -167,6 +167,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/victim/{victim}/create/case',CreateVictimCaseController::class)->name('victim.case.create');
     Route::post('/victim/{victim}/store/case', StoreVictimCaseController::class)->name('victim.case.store');
+    Route::match(['put','patch','post'],'/victim/{case}/update', \App\Http\Controllers\Victim\UpdateVictimCaseController::class)->name('victim.case.update');
 
     Route::delete('/victim/{case}/delete', DeleteVictimCase::class)->name('victim.case.delete');
 

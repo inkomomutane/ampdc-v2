@@ -326,7 +326,16 @@ const registerVictim = () => {
                         </button>
                     </div>
                 </div>
-                <div class="max-w-7xl mx-auto py-6 lg:py-8 my-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+
+                <div class="max-w-7xl mx-auto py-8">
+                    <h1
+                        class="text-xl font-semibold text-gray-900 dark:text-white"
+                    >
+                        — Casos da vítima
+                    </h1>
+                </div>
+
+                <div class="max-w-7xl mx-auto pb-6 lg:pb-8 my-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                     <Link :href="route('victim.case.edit',{
                         case: vCase.id,
                     })" v-for="vCase in cases" class="

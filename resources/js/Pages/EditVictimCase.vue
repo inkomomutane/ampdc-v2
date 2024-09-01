@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, useForm, usePage } from "@inertiajs/vue3";
 import InputError from "@components/InputError.vue";
-import { PropType, watch } from "vue";
+import { PropType, ref, watch } from "vue";
 import { FlasherResponse } from "@flasher/flasher";
 import Flasher from "@/helprs";
 import {
@@ -26,7 +26,7 @@ const props = defineProps({
     },
     messages: {
         type: Object as PropType<FlasherResponse>,
-        required: false,
+        required: true,
     },
 });
 
@@ -41,6 +41,9 @@ const form = useForm({
     requires_forwards: false,
     forward_to_organizations: [],
 });
+
+
+
 
 watch(
     () => props.messages,

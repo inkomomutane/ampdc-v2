@@ -52,12 +52,11 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
             $row->victim->address,
             $row->violenceType?->name,
             $row->perpetrator?->name,
-            $row->perpetrator_relationship,
-             $row->perpetrator_name,
-              $row->perpetrator_profession,
-              $row->perpetrator_address,
-              $row->perpetrator_contact,
-          $row->perpetrator_contact_alternative,
+            $row->perpetrator_name,
+            $row->perpetrator_profession,
+            $row->perpetrator_address,#X
+            $row->perpetrator_contact,
+            $row->perpetrator_contact_alternative,
             $row->period_of_violence_act?->value,
             $row->violenceIncidentLocation?->name,
             $row->supposedReasonOfViolence?->name,
@@ -155,7 +154,6 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
     {
         return [
             'J' => NumberFormat::FORMAT_NUMBER,
-            'N' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 

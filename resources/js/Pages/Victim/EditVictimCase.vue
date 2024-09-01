@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType } from "vue";
+import { PropType, watch } from "vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputError from "@components/InputError.vue";
@@ -15,6 +15,8 @@ import {
     ViolenceIncidentLocationData,
     ViolenceTypeData,
 } from "@/types/generated";
+import Flasher from "@/helprs";
+import { FlasherOptions } from "@flasher/flasher";
 const props = defineProps({
     victimCase: {
         type: Object as PropType<VictimCaseData>,
@@ -35,6 +37,10 @@ const props = defineProps({
     violenceIncidentLocations: {
         type: Array<ViolenceIncidentLocationData>,
         required: true,
+    },
+    messages: {
+        type: Object as PropType<FlasherOptions>,
+        required: false,
     },
 });
 
@@ -95,8 +101,20 @@ const onClickAreLastCasesResolved = () => {
 };
 
 const updateVictimCase = () => {
-    form.post(route("victim.case.update", { victimCase: props.victimCase.id }));
+    form.post(route("victim.case.update", { case: props.victimCase.id }));
 };
+
+watch(
+    () => props.messages,
+    (value) => {
+        value?.envelopes.forEach((element) => {
+            Flasher.flash(
+                element.notification.type,
+                element.notification.message,
+            );
+        });
+    },
+);
 </script>
 
 <template>

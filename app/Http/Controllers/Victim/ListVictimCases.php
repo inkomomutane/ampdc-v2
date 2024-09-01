@@ -23,6 +23,6 @@ class ListVictimCases
                     ->orWhereHas('victim', function (Builder $query) use ($search) {
                         $query->whereAny(['name','address','contact'], 'like', '%'.$search.'%');
                     });
-            })->paginate(10)->withQueryString());
+            })->paginate(5)->withQueryString());
     }
 }
