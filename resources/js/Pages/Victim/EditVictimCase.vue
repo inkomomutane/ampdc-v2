@@ -70,6 +70,7 @@ const form = useForm({
         props.victimCase?.isTheLastCasesReportedToAuthorities,
     are_last_cases_resolved: props.victimCase?.areLastCasesResolved,
     last_cases_resolution_details: props.victimCase?.lastCasesResolutionDetails,
+    occurred_at: props.victimCase?.occurredAt ?? null,
 });
 
 const onClickIsViolenceCausedDeath = () => {
@@ -217,6 +218,25 @@ watch(
                                         form.errors.period_of_violence_act
                                     "
                                 />
+                            </div>
+
+                            <div>
+                                <label
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    for="occurred_at"
+                                >Data da ocorrência da violência
+                                    <span class="text-red-500">*</span>
+                                </label>
+                                <VueDatePicker
+                                    v-model="form.occurred_at"
+                                    :enable-time-picker="false"
+                                    :format="'dd/MM/yyyy'"
+                                    :placeholder="('Data da ocorrência da violência')"
+                                    :text-input="{format: 'dd.MM.yyyy',}"
+                                    auto-apply
+                                    class="absolute"
+                                />
+                                <InputError :message="form.errors.occurred_at"/>
                             </div>
 
                             <div>

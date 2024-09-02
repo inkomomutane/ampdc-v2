@@ -12,7 +12,8 @@ import PrimeVue from "primevue/config";
 import "@/components/select/select.css";
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
-
+import VueDatePicker from "@vuepic/vue-datepicker";
+import '../css/datetime.css';
 import.meta.glob(["../images/**", "../fonts/**"]);
 const appName = import.meta.env.VITE_APP_NAME || "Donations";
 
@@ -28,6 +29,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(VueApexCharts)
+            .component("VueDatePicker", VueDatePicker)
             .component("QuillEditor", QuillEditor)
             .component("v-select", VueSelect)
             .use(PrimeVue)

@@ -31,6 +31,7 @@ class StoreVictimCaseController
              'is_the_last_cases_reported_to_authorities' => ['nullable','bool'],
              'are_last_cases_resolved' => ['required_if:is_the_last_cases_reported_to_authorities,true','nullable','bool'],
              'last_cases_resolution_details' => ['required_if:are_last_cases_resolved,true','nullable','string'],
+             'occurred_at' => 'nullable|date',
         ];
     }
 
@@ -72,6 +73,7 @@ class StoreVictimCaseController
      *     case_registered_agent?:string,
      *     case_registered_city?:string,
      *     case_registered_province?:string,
+     *     occurred_at?:string,
      * } $data
      * @param User $user
      * @return bool

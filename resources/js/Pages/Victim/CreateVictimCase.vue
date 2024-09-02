@@ -62,6 +62,7 @@ const form = useForm({
     is_the_last_cases_reported_to_authorities: false,
     are_last_cases_resolved: false,
     last_cases_resolution_details: "",
+    occurred_at: null,
 });
 
 const onClickIsViolenceCausedDeath = () => {
@@ -192,7 +193,24 @@ const registerVictimCase = () => {
                                     "
                                 />
                             </div>
-
+                            <div>
+                                <label
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    for="occurred_at"
+                                    >Data da ocorrência da violência
+                                    <span class="text-red-500">*</span>
+                                </label>
+                                <VueDatePicker
+                                    v-model="form.occurred_at"
+                                    :enable-time-picker="false"
+                                    :format="'dd/MM/yyyy'"
+                                    :placeholder="('Data da ocorrência da violência')"
+                                    :text-input="{format: 'dd.MM.yyyy',}"
+                                    auto-apply
+                                    class="absolute"
+                                />
+                                <InputError :message="form.errors.occurred_at"/>
+                            </div>
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

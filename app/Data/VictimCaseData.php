@@ -5,6 +5,7 @@ namespace App\Data;
 use App\Enums\CaseProgressStatus;
 use App\Enums\PeriodOfViolenceAct;
 use App\Models\VictimCase;
+use Illuminate\Support\Carbon;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Lazy;
 
@@ -45,6 +46,7 @@ class VictimCaseData extends  Data
         public bool $isTheLastCasesReportedToAuthorities,
         public bool $areLastCasesResolved,
         public ?string $lastCasesResolutionDetails,
+        public \DateTime|Carbon|null|string $occurredAt,
     ) {}
 
     public static function fromModel(VictimCase $victimCase) : self
@@ -83,6 +85,7 @@ class VictimCaseData extends  Data
                 isTheLastCasesReportedToAuthorities: $victimCase->is_the_last_cases_reported_to_authorities,
                 areLastCasesResolved: $victimCase->are_last_cases_resolved,
                 lastCasesResolutionDetails: $victimCase->last_cases_resolution_details,
+                occurredAt: $victimCase->occurred_at,
 
        );
     }

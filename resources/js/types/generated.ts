@@ -167,6 +167,7 @@ export type VictimCaseData = {
     isTheLastCasesReportedToAuthorities: boolean;
     areLastCasesResolved: boolean;
     lastCasesResolutionDetails: string | null;
+    occurredAt: string | any | null;
 };
 export type VictimCaseShortDto = {
     id: string | null;

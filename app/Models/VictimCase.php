@@ -6,7 +6,6 @@ use App\Data\VictimCaseData;
 use App\Enums\PeriodOfViolenceAct;
 use Database\Factories\VictimCaseFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use RalphJSmit\Helpers\Laravel\Concerns\HasFactory;
@@ -42,7 +41,8 @@ class VictimCase extends Model
         'is_violence_reported_to_authorities' => 'boolean',
         'is_the_first_time' => 'boolean',
         'is_the_last_cases_reported_to_authorities' => 'boolean',
-        'are_last_cases_resolved' => 'boolean'
+        'are_last_cases_resolved' => 'boolean',
+        'occurred_at' => 'date'
     ];
 
     protected $fillable = [
@@ -76,7 +76,8 @@ class VictimCase extends Model
         'last_violences_description',
         'is_the_last_cases_reported_to_authorities',
         'are_last_cases_resolved',
-        'last_cases_resolution_details'
+        'last_cases_resolution_details',
+        'occurred_at'
     ];
 
 
