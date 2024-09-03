@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Victim;
+namespace App\Http\Controllers\Victim\Cases;
 
 use App\Data\VictimCaseData;
 use App\Data\VictimData;
 use App\Models\Victim;
-use App\Models\VictimCase;
 use Inertia\Inertia;
 
 class ShowVictimCaseData

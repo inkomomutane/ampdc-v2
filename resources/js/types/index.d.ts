@@ -1,6 +1,7 @@
 import {
     ArticleData,
     DistrictData,
+    ForwardedCaseData,
     NeighborhoodData,
     OrganizationData,
     PerpetratorData,
@@ -89,8 +90,12 @@ export interface WebsiteMessages extends Omit<PaginatedData, "data"> {
     data: Array<WebsiteMessageData>;
 }
 
-export  interface VictimCases extends Omit<PaginatedData, "data"> {
+export interface VictimCases extends Omit<PaginatedData, "data"> {
     data: Array<VictimCaseData>;
+}
+
+export interface ForwardedCases extends Omit<PaginatedData, "data"> {
+    data: Array<ForwardedCaseData>;
 }
 
 export interface User {

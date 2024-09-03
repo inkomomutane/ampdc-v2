@@ -232,6 +232,60 @@ const onlyFocalPoint = (role: Roles) =>
                     </svg>
                     <span class="mx-4 font-medium text-sm">Casos</span>
                 </Link>
+                <Link
+                    v-if="onlyFocalPoint(role)"
+                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
+                    :href="route('forwarded.cases')"
+                    :class="[
+                        route().current('forwarded.cases')
+                            ? activeClass
+                            : inactiveClass,
+                    ]"
+                >
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M11 14l4 -4l-4 -4"></path>
+                        <path d="M16 14l4 -4l-4 -4"></path>
+                        <path d="M15 10h-7a4 4 0 1 0 0 8h1"></path>
+                    </svg>
+                    <span class="mx-4 font-medium text-sm">Encaminhamento</span>
+                </Link>
+                <Link
+                    v-if="onlyFocalPoint(role)"
+                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
+                    :href="route('received.cases')"
+                    :class="[
+                        route().current('received.cases')
+                            ? activeClass
+                            : inactiveClass,
+                    ]"
+                >
+                    <svg
+                        class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M5 18.25c-.19 0-.38-.07-.53-.22a.754.754 0 010-1.06l14-14c.29-.29.77-.29 1.06 0 .29.29.29.77 0 1.06l-14 14c-.15.15-.34.22-.53.22z"
+                        ></path>
+                        <path
+                            d="M15.27 18.25H5c-.41 0-.75-.34-.75-.75V7.23c0-.41.34-.75.75-.75s.75.34.75.75v9.52h9.52c.41 0 .75.34.75.75s-.34.75-.75.75zM20.5 22.75h-17c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h17c.41 0 .75.34.75.75s-.34.75-.75.75z"
+                        ></path>
+                    </svg>
+                    <span class="mx-4 font-medium text-sm">Recebidos</span>
+                </Link>
                 <Config v-if="onlyAdmins(role)" />
             </nav>
         </div>

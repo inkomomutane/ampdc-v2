@@ -13,7 +13,7 @@ import "@/components/select/select.css";
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import VueDatePicker from "@vuepic/vue-datepicker";
-import '../css/datetime.css';
+import "../css/datetime.css";
 import.meta.glob(["../images/**", "../fonts/**"]);
 const appName = import.meta.env.VITE_APP_NAME || "Donations";
 

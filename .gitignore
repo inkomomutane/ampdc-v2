@@ -27,3 +27,4 @@ ngix.conf
 php-fpm.conf
 nginx.config
 Caddyfile
+package-lock.json

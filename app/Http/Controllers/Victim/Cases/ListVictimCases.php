@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Victim;
+namespace App\Http\Controllers\Victim\Cases;
 
 use App\Data\VictimCaseData;
 use App\Models\VictimCase;

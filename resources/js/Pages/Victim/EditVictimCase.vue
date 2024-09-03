@@ -224,19 +224,21 @@ watch(
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="occurred_at"
-                                >Data da ocorrência da violência
+                                    >Data da ocorrência da violência
                                     <span class="text-red-500">*</span>
                                 </label>
                                 <VueDatePicker
                                     v-model="form.occurred_at"
                                     :enable-time-picker="false"
                                     :format="'dd/MM/yyyy'"
-                                    :placeholder="('Data da ocorrência da violência')"
-                                    :text-input="{format: 'dd.MM.yyyy',}"
+                                    :placeholder="'Data da ocorrência da violência'"
+                                    :text-input="{ format: 'dd.MM.yyyy' }"
                                     auto-apply
                                     class="absolute"
                                 />
-                                <InputError :message="form.errors.occurred_at"/>
+                                <InputError
+                                    :message="form.errors.occurred_at"
+                                />
                             </div>
 
                             <div>

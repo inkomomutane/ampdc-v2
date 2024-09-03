@@ -139,20 +139,26 @@ const props = defineProps({
                             <span
                                 class="text-sm bg-blue-800 dark:bg-slate-100 w-fit rounded-sm font-semibold my-4 text-white dark:text-slate-900 p-2"
                             >
-                            {{ vCase.caseCode }}
-                        </span>
+                                {{ vCase.caseCode }}
+                            </span>
                         </h2>
-                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                        <p
+                            class="mt-1 text-sm text-gray-600 dark:text-gray-400"
+                        >
                             Informações detalhadas do caso de violência.
                         </p>
                         <p
                             :class="{
-                            'bg-green-500': vCase.isTerminated,
-                            'bg-blue-500': !vCase.isTerminated,
-                        }"
+                                'bg-green-500': vCase.isTerminated,
+                                'bg-blue-500': !vCase.isTerminated,
+                            }"
                             class="p-1 text-sm w-fit rounded-sm font-semibold my-4 text-white px-4"
                         >
-                            {{ vCase.isTerminated ? "Encerrado" : "Em andamento" }}
+                            {{
+                                vCase.isTerminated
+                                    ? "Encerrado"
+                                    : "Em andamento"
+                            }}
                         </p>
                     </header>
                     <div class="grid gap-6">
@@ -165,11 +171,13 @@ const props = defineProps({
                             </div>
 
                             <div>
-                                <InputLabel value="Suposto motivo da violência" />
+                                <InputLabel
+                                    value="Suposto motivo da violência"
+                                />
                                 <DisabledTextInput
                                     :model-value="
-                                    vCase.supposedReasonOfViolence?.name
-                                "
+                                        vCase.supposedReasonOfViolence?.name
+                                    "
                                 />
                             </div>
 
@@ -188,8 +196,8 @@ const props = defineProps({
                                 />
                                 <DisabledTextInput
                                     :model-value="
-                                    vCase.violenceIncidentLocation?.name
-                                "
+                                        vCase.violenceIncidentLocation?.name
+                                    "
                                 />
                             </div>
                             <div>
@@ -238,7 +246,11 @@ const props = defineProps({
                                     value="A violência resultou em morte?"
                                 />
                                 <DisabledTextInput
-                                    :model-value="vCase.isViolenceCausedDeath ? 'Sim' : 'Não'"
+                                    :model-value="
+                                        vCase.isViolenceCausedDeath
+                                            ? 'Sim'
+                                            : 'Não'
+                                    "
                                 />
                             </div>
                             <div>
@@ -246,7 +258,9 @@ const props = defineProps({
                                     value="É primeira vez a sofrer violência?"
                                 />
                                 <DisabledTextInput
-                                    :model-value="vCase.isTheFirstTime ? 'Sim' : 'Não'"
+                                    :model-value="
+                                        vCase.isTheFirstTime ? 'Sim' : 'Não'
+                                    "
                                 />
                             </div>
                             <div>
@@ -254,17 +268,21 @@ const props = defineProps({
                                     value="Reportou o caso nas autoridades?"
                                 />
                                 <DisabledTextInput
-                                    :model-value="vCase.isTheFirstTime ? 'Sim' : 'Não'"
+                                    :model-value="
+                                        vCase.isTheFirstTime ? 'Sim' : 'Não'
+                                    "
                                 />
                             </div>
                             <div
                                 class="sm:col-span-2 md:col-span-3 grid sm:grid-cols-2 md:grid-cols-3 gap-4"
                                 :class="{
-                             'hidden': vCase.isTheFirstTime,
-                            }"
+                                    hidden: vCase.isTheFirstTime,
+                                }"
                             >
                                 <div class="sm:col-span-2 md:col-span-3">
-                                    <InputLabel value="Detalhes da ultima violência sofrida" />
+                                    <InputLabel
+                                        value="Detalhes da ultima violência sofrida"
+                                    />
                                     <div
                                         class="bg-zinc-200 p-4 py-6"
                                         v-html="vCase.lastViolencesDescription"
@@ -275,22 +293,35 @@ const props = defineProps({
                                         value="O último caso foi reportado as autoridades?"
                                     />
                                     <DisabledTextInput
-                                        :model-value="vCase.isTheLastCasesReportedToAuthorities ? 'Sim' : 'Não'"
+                                        :model-value="
+                                            vCase.isTheLastCasesReportedToAuthorities
+                                                ? 'Sim'
+                                                : 'Não'
+                                        "
                                     />
                                 </div>
                                 <div>
-                                    <InputLabel
-                                        value="O caso foi resolvido?"
-                                    />
+                                    <InputLabel value="O caso foi resolvido?" />
                                     <DisabledTextInput
-                                        :model-value="vCase.areLastCasesResolved ? 'Sim' : 'Não'"
+                                        :model-value="
+                                            vCase.areLastCasesResolved
+                                                ? 'Sim'
+                                                : 'Não'
+                                        "
                                     />
                                 </div>
-                                <div  v-if="vCase.areLastCasesResolved" class="sm:col-span-2 md:col-span-3">
-                                    <InputLabel value="Detalhes da ultima violência sofrida" />
+                                <div
+                                    v-if="vCase.areLastCasesResolved"
+                                    class="sm:col-span-2 md:col-span-3"
+                                >
+                                    <InputLabel
+                                        value="Detalhes da ultima violência sofrida"
+                                    />
                                     <div
                                         class="bg-zinc-200 p-4 py-6"
-                                        v-html="vCase.lastCasesResolutionDetails"
+                                        v-html="
+                                            vCase.lastCasesResolutionDetails
+                                        "
                                     />
                                 </div>
                             </div>

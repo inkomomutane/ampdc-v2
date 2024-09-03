@@ -1,3 +1,2 @@
-
 {{ $victim->name }}
 {{ $victim->age }}

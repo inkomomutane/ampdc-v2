@@ -61,6 +61,16 @@ export enum EducationLevel {
     "NONE" = "Nenhuma",
     "NOT_SPECIFIED" = "Não Especificado",
 }
+export type ForwardedCaseData = {
+    id: string;
+    victim: VictimCaseData;
+    status: CaseProgressStatus | string;
+    organizationName: string;
+    forwardedTo: string;
+    caseUpdates: Array<any> | string | null;
+    conclusion: string;
+    caseDetails: string;
+};
 export enum Gender {
     "FEMALE" = "Feminino",
     "MALE" = "Masculino",

@@ -163,6 +163,17 @@ Breadcrumbs::for('victim.case.edit', static function (BreadcrumbTrail $trail, \A
 });
 
 
+Breadcrumbs::for('forwarded.cases', static function (BreadcrumbTrail $trail) {
+    $trail->push('Casos encaminhados', route('forwarded.cases'));
+});
+
+//received
+
+Breadcrumbs::for('received.cases', static function (BreadcrumbTrail $trail) {
+    $trail->push('Casos recebidos', route('received.cases'));
+});
+
+
 Breadcrumbs::for('dashboard.reports', static function (BreadcrumbTrail $trail) {
     $trail->push('Relatórios', route('dashboard.reports'));
 });

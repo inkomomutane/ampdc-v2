@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Victim;
+namespace App\Http\Controllers\Victim\Cases;
 
 use App\Enums\PeriodOfViolenceAct;
-use App\Models\User;
 use App\Models\Victim;
 use App\Models\VictimCase;
 use DB;

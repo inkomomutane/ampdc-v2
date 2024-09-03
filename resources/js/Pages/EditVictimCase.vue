@@ -42,9 +42,6 @@ const form = useForm({
     forward_to_organizations: [],
 });
 
-
-
-
 watch(
     () => props.messages,
     (value) => {

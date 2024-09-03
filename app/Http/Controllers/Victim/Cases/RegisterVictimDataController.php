@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Victim;
+namespace App\Http\Controllers\Victim\Cases;
 
 use App\Enums\CivilState;
 use App\Enums\EducationLevel;
