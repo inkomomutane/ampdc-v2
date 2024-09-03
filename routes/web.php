@@ -45,7 +45,9 @@ use App\Http\Controllers\Victim\Cases\ListVictimCases;
 use App\Http\Controllers\Victim\Cases\RegisterVictimDataController;
 use App\Http\Controllers\Victim\Cases\ShowVictimCaseData;
 use App\Http\Controllers\Victim\Cases\StoreVictimCaseController;
+use App\Http\Controllers\Victim\Cases\UpdateVictimCaseController;
 use App\Http\Controllers\Victim\EditDataOfVictimController;
+use App\Http\Controllers\Victim\Forwarded\ListOfForwardedCases;
 use App\Http\Controllers\Victim\Forwarded\ListOfReceivedCases;
 use App\Http\Controllers\Victim\RegisterDataOfVictimController;
 use App\Http\Controllers\Victim\UpdateVictimDataController;
@@ -57,6 +59,9 @@ use App\Http\Controllers\ViolenceType\DeleteViolenceTypeController;
 use App\Http\Controllers\ViolenceType\ListViolenceTypesController;
 use App\Http\Controllers\ViolenceType\StoreViolenceTypeController;
 use App\Http\Controllers\ViolenceType\UpdateViolenceTypeController;
+use App\Http\Controllers\WebsiteMessage\ChangeWebsiteReadMessageStateController;
+use App\Http\Controllers\WebsiteMessage\DeleteWebsiteMessageController;
+use App\Http\Controllers\WebsiteMessage\GetWebsiteMessagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -167,13 +172,13 @@ Route::middleware('auth')->group(callback: function () {
 
     Route::get('/victim/{victim}/create/case',CreateVictimCaseController::class)->name('victim.case.create');
     Route::post('/victim/{victim}/store/case', StoreVictimCaseController::class)->name('victim.case.store');
-    Route::match(['put','patch','post'],'/victim/{case}/update', \App\Http\Controllers\Victim\Cases\UpdateVictimCaseController::class)->name('victim.case.update');
+    Route::match(['put','patch','post'],'/victim/{case}/update', UpdateVictimCaseController::class)->name('victim.case.update');
 
     Route::delete('/victim/{case}/delete', DeleteVictimCase::class)->name('victim.case.delete');
 
     // forwarded cases
 
-    Route::get('forwarded/cases',\App\Http\Controllers\Victim\Forwarded\ListOfForwardedCases::class)
+    Route::get('forwarded/cases', ListOfForwardedCases::class)
         ->name('forwarded.cases');
     Route::get('received/cases', ListOfReceivedCases::class)
         ->name('received.cases');
@@ -202,9 +207,9 @@ Route::middleware('auth')->group(callback: function () {
 
     #--- website messages ---#
 
-    Route::get('/website/messages', \App\Http\Controllers\WebsiteMessage\GetWebsiteMessagesController::class)->name('website.message.list');
-    Route::delete('/website/message/{message}', \App\Http\Controllers\WebsiteMessage\DeleteWebsiteMessageController::class)->name('website.message.delete');
-    Route::match(['put','patch','post'],'/website/message/{message}/change', \App\Http\Controllers\WebsiteMessage\ChangeWebsiteReadMessageStateController::class)->name('website.message.update');
+    Route::get('/website/messages', GetWebsiteMessagesController::class)->name('website.message.list');
+    Route::delete('/website/message/{message}', DeleteWebsiteMessageController::class)->name('website.message.delete');
+    Route::match(['put','patch','post'],'/website/message/{message}/change', ChangeWebsiteReadMessageStateController::class)->name('website.message.update');
 
 });
 

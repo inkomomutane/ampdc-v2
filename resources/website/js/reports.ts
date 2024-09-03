@@ -109,4 +109,175 @@ document.addEventListener("DOMContentLoaded", function () {
             chart.render();
         });
     }
+
+    if (document.querySelector("#period-of-act") !== null){
+        const jsonPeriodOfAct = axios.get(routeFn("api.reports.period-of-act"));
+
+        jsonPeriodOfAct.then((response) => {
+        var options = {
+            series: response.data.values,
+            chart: {
+                width: '100%',
+                height: '100%',
+                type: 'pie',
+            },
+            colors: ['#ea1a58', '#b70c59', '#39539E', '#0077B5'],
+            labels: response.data.labels,
+            responsive: [
+                {
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 600,
+                        },
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                },
+            ],
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        offset: -5,
+                    },
+                },
+            },
+            grid: {
+                padding: {
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                },
+            },
+            dataLabels: {
+                formatter(val :any, opts:any
+                ) {
+                    const name = opts.w.globals.labels[opts.seriesIndex]
+                    return [name, val.toFixed(1) + '%']
+                },
+            },
+            legend: {
+                show: false,
+            },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#period-of-act"), options);
+        chart.render();
+
+    });
+    }
+
+
+    if (document.querySelector("#violence_reason") !== null){
+        const jsonPeriodOfAct = axios.get(routeFn("api.reports.violence-reason"));
+
+        jsonPeriodOfAct.then((response) => {
+            var options = {
+                series: response.data.values,
+                chart: {
+                    width: '100%',
+                    height: '100%',
+                    type: 'pie',
+                },
+                colors: ['#ea1a58', '#b70c59', '#39539E', '#0077B5'], labels: response.data.labels,
+                responsive: [
+                    {
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                width: 600,
+                            },
+                            legend: {
+                                position: 'bottom',
+                            },
+                        },
+                    },
+                ],
+
+                grid: {
+                    padding: {
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                    },
+                },
+                dataLabels: {
+                    formatter(val :any, opts:any
+                    ) {
+                        const name = opts.w.globals.labels[opts.seriesIndex]
+                        return [name, val.toFixed(1) + '%']
+                    },
+                },
+                legend: {
+                    show: false,
+                },
+            };
+
+            let chartJ = new ApexCharts(document.querySelector("#violence_reason"), options);
+            chartJ.render();
+
+        });
+    }
+
+    if (document.querySelector("#violence_location") !== null){
+        const jsonPeriodOfAct = axios.get(routeFn("api.reports.violence-location"));
+
+        jsonPeriodOfAct.then((response) => {
+            var options = {
+                series: response.data.values,
+                chart: {
+                    width: '100%',
+                    height: '100%',
+                    type: 'pie',
+                },
+                colors: ['#ea1a58', '#b70c59', '#39539E', '#0077B5'],
+                labels: response.data.labels,
+                responsive: [
+                    {
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                width: 600,
+                            },
+                            legend: {
+                                position: 'bottom',
+                            },
+                        },
+                    },
+                ],
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            offset: -5,
+                        },
+                    },
+                },
+                grid: {
+                    padding: {
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                    },
+                },
+                dataLabels: {
+                    formatter(val :any, opts:any
+                    ) {
+                        const name = opts.w.globals.labels[opts.seriesIndex]
+                        return [name, val.toFixed(1) + '%']
+                    },
+                },
+                legend: {
+                    show: false,
+                },
+            };
+
+            let chartJ = new ApexCharts(document.querySelector("#violence_location"), options);
+            chartJ.render();
+
+        });
+    }
 });

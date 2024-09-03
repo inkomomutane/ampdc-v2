@@ -16,7 +16,7 @@
         >
             <div
                 data-aos="fade-up"
-                class="grid sm:grid-cols-2 gap-4 w-full sm:gap-2 flex-row mb-0.5 rounded hover:cursor-pointer aos-init aos-animate"
+                class="grid  gap-4 w-full sm:gap-2 flex-row mb-0.5 rounded hover:cursor-pointer aos-init aos-animate"
             >
                 <div class="flex-col content-center space-y-2 p-6 sm:px-2">
                     <img
@@ -67,5 +67,33 @@
             </div>
         </div>
     </section>
+     <section class="bg-gradient-to-b from-red-200 via-white to-red-200">
+         <div
+             class="grid sm:grid-cols-2 md:grid-cols-3 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:px-16 justify-items-center "
+         >
+
+             <div class="p-6">
+                 <div id="violence_location" class="h-56 md:h-72">
+                 </div>
+                   <div>
+                       <h6 class="text-center text-xl font-bold text-red-600 mt-6">Locais das ocorrências</h6>
+                   </div>
+             </div>
+
+             <div class="p-6">
+                  <div id="period-of-act" class="h-56 md:h-72">
+            </div>
+            <h6 class="text-center text-xl font-bold text-red-600 mt-6">Período das ocorrências</h6>
+        </div>
+
+             <div class="p-6">
+                   <div id="violence_reason" class="h-56 md:h-72">
+                   </div>
+                    <div>
+                        <h6 class="text-center text-xl font-bold text-red-600 mt-6">Motivos das ocorrências</h6>
+                    </div>
+             </div>
+         </div>
+     </section>
     @include("Website.partials.reports")
 @endsection
