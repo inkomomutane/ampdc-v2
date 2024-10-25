@@ -293,7 +293,7 @@
                 Copyright &copy;
                 <strong class="text-red-400">AMPDC</strong>
                 {{ now()->year }}.
-                <span>Unidos pela segurança e justiça</span>
+                <span>Developed by <a href="https://inkomomutane.github.io" class="text-red-400 font-bold">Nelson Alexandre Mutane</a></span>
             </p>
         </div>
     </div>
