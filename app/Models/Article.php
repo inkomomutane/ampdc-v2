@@ -34,6 +34,13 @@ class Article extends Model implements HasMedia
         'location',
         'posted_at',
         'status',
+        'slug',
+        'posted_on_facebook',
+        'posted_on_twitter',
+        'posted_on_linkedin',
+        'posted_on_instagram',
+        'posted_on_whatsapp',
+        'posted_on_youtube',
     ];
 
 
@@ -54,6 +61,13 @@ class Article extends Model implements HasMedia
 
     protected $casts = [
         'posted_at' => 'date',
+        'posted_on_youtube' => 'boolean',
+        'posted_on_facebook' => 'boolean',
+        'posted_on_twitter' => 'boolean',
+        'posted_on_linkedin' => 'boolean',
+        'posted_on_instagram' => 'boolean',
+        'posted_on_whatsapp' => 'boolean',
+
     ];
 
     public function sections(): HasMany
