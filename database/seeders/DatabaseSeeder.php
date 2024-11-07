@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
         ],[
             'name' => 'Admin',
             'email' => 'administrator@ampdc.org',
-            'password' => \Hash::make(config('admin.admin_password')),
+            'password' => app()->isProduction() ? \Hash::make(config('admin.admin_password')) : \Hash::make('password'),
             'email_verified_at' => now(),
             'organization_id' => '01hv77xvhb4n8xfx36k1z1khjn'
         ]);

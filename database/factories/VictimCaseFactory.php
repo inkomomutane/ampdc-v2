@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\CaseProgressStatus;
 use App\Enums\PeriodOfViolenceAct;
+use App\Models\ForwardingCase;
 use App\Models\Organization;
 use App\Models\Perpetrator;
 use App\Models\SupposedReasonOfViolence;
@@ -11,6 +13,8 @@ use App\Models\Victim;
 use App\Models\VictimCase;
 use App\Models\ViolenceIncidentLocation;
 use App\Models\ViolenceType;
+use Closure;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -31,7 +35,7 @@ class VictimCaseFactory extends Factory
         $registered = $this->faker->dateTimeBetween('-1 year', 'now');
 
         return [
-            'case_code' => $this->faker->unique()->uuid,
+            'case_code' => incrementCode(),
             'victim_id' => Victim::factory(),
             'violence_type_id' => ViolenceType::all()->random()->id,
             'perpetrator_id' => Perpetrator::all()->random()->id,
@@ -59,5 +63,25 @@ class VictimCaseFactory extends Factory
             'created_at' => $registered,
             'updated_at' => $registered,
         ];
+    }
+
+
+
+    public function configure() :static
+    {
+        return $this->afterCreating(function (VictimCase $victimCase){
+            if($this->faker->boolean){
+                    ForwardingCase::create([
+                        'status' => $victimCase->is_terminated ? CaseProgressStatus::SOLVED : CaseProgressStatus::FORWARDED,
+                        'created_at' => $victimCase->created_at->addDays($this->faker->randomElement([1,2,3,4])),
+                        'case_updates' => Json::encode([$this->faker->text]),
+                        'organization_id'  => $victimCase->case_registered_by_organization_id,
+                        'forwarded_to' => Organization::whereNot('id', $victimCase->case_registered_by_organization_id)->get()->random()->id,
+                        'conclusion' => $victimCase->is_terminated ? $this->faker->text : '',
+                        'case_id' => $victimCase->id,
+                        'case_details' => $this->faker->sentence(),
+                    ]);
+            }
+        });
     }
 }

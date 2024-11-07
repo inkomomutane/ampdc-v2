@@ -38,8 +38,7 @@ const submit = () => {
                 <h2
                     class="text-white font-bold text-2xl font-sans uppercase text-center"
                 >
-                    SISTEMA UNIFICADO DE PREVENÇÃO E RESPOSTA À VIOLÊNCIA
-                    BASEADA NO GÊNERO
+                    SISTEMA UNIFICADO DE ACOMPANHAMENTO E RESPOSTA À VIOLÊNCIA BASEADA NO GÊNERO
                 </h2>
                 <div
                     class="absolute border-rose-200 -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"
@@ -84,7 +83,7 @@ const submit = () => {
                                         id="email"
                                         v-model="form.email"
                                         class="border border-rose-400 text-gray-900 sm:text-sm rounded-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Ex: comercial@cliquecv.com"
+                                        placeholder="femi@ampdc.org"
                                         required
                                     />
                                     <InputError

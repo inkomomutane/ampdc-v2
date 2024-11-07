@@ -15,7 +15,7 @@ import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "../css/datetime.css";
 import.meta.glob(["../images/**", "../fonts/**"]);
-const appName = import.meta.env.VITE_APP_NAME || "Donations";
+const appName = import.meta.env.VITE_APP_NAME || "SUARVBG";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

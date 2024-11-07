@@ -23,6 +23,14 @@ class ListVictimCases
                     ->orWhereHas('victim', function (Builder $query) use ($search) {
                         $query->whereAny(['name','address','contact'], 'like', '%'.$search.'%');
                     });
-            })->paginate(5)->withQueryString());
+            })
+             ->where('case_registered_by_organization_id',auth()->user()?->organization_id)
+             ->orWhereHas('forwardingCases',function (Builder $query){
+                 $query->where('organization_id',auth()->user()?->organization_id);
+             })
+            ->orWhereHas('forwardingCases',function (Builder $query){
+                $query->where('forwarded_to',auth()->user()?->organization_id);
+            })
+            ->paginate(5)->withQueryString());
     }
 }

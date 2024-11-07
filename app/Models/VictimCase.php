@@ -8,6 +8,7 @@ use Database\Factories\VictimCaseFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use RalphJSmit\Helpers\Laravel\Concerns\HasFactory;
 use Spatie\LaravelData\WithData;
 
@@ -119,5 +120,10 @@ class VictimCase extends Model
     public static function newFactory(): VictimCaseFactory
     {
         return new VictimCaseFactory();
+    }
+
+    public function forwardingCases(): HasMany
+    {
+        return $this->hasMany(ForwardingCase::class, 'case_id');
     }
 }

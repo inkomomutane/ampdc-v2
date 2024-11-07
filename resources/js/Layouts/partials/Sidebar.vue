@@ -43,7 +43,7 @@ const onlyFocalPoint = (role: Roles) =>
                 <a href="/" class="flex items-center">
                     <img :src="logo" class="w-12 rounded-full" alt="logo" />
                     <span class="text-white text-lg font-medium mx-2"
-                        >Ofeminicídio</span
+                        >SUARVBG</span
                     >
                 </a>
             </div>
