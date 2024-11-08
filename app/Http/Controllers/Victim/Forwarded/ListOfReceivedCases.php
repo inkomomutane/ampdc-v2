@@ -36,6 +36,7 @@ class ListOfReceivedCases
                         ->orWhereRelation('case.victim', 'age', 'like', '%' . $term . '%');
                 })->where('forwarded_to', $organization->id);
             })
+               ->orderByDesc('updated_at')
                ->whereForwardedTo($organization->id)->paginate(5)->withQueryString()
        );
     }

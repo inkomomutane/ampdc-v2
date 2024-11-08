@@ -35,7 +35,9 @@ class ListOfForwardedCases
                         ->orWhereRelation('case.victim', 'name', 'like', '%' . $term . '%')
                         ->orWhereRelation('case.victim', 'age', 'like', '%' . $term . '%');
                 })->where('organization_id', $organization->id);
-            })->whereOrganizationId($organization->id)->paginate(5)->withQueryString()
+            })->whereOrganizationId($organization->id)
+                ->orderByDesc('updated_at')
+               ->paginate(5)->withQueryString()
        );
     }
 }

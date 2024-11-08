@@ -31,6 +31,8 @@ class ListVictimCases
             ->orWhereHas('forwardingCases',function (Builder $query){
                 $query->where('forwarded_to',auth()->user()?->organization_id);
             })
+            ->orderByDesc('case_registered_at')
+            ->orderByDesc('updated_at')
             ->paginate(5)->withQueryString());
     }
 }

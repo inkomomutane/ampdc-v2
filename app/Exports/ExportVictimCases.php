@@ -6,6 +6,7 @@ namespace App\Exports;
 use App\Enums\Gender;
 use App\Models\Organization;
 use App\Models\VictimCase;
+use Illuminate\Database\Eloquent\Builder;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -21,11 +22,16 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
  class ExportVictimCases implements FromQuery,WithHeadings,WithStyles,ShouldAutoSize,WithColumnFormatting,WithMapping
 {
 
-
-
-    public function query()
+    public function __construct(public Organization $organization)
     {
-        return VictimCase::query();
+    }
+
+
+     public function query()
+    {
+        return VictimCase::
+                whereCaseRegisteredByOrganizationId($this->organization->id)
+            ->orWhereHas('forwardingCases')->orderByDesc('case_registered_at')->newQuery();
     }
 
     public function map(mixed $row): array
