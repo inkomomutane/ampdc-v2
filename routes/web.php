@@ -41,8 +41,10 @@ use App\Http\Controllers\User\UpdateUser;
 use App\Http\Controllers\Victim\Cases\CreateVictimCaseController;
 use App\Http\Controllers\Victim\Cases\DeleteVictimCase;
 use App\Http\Controllers\Victim\Cases\ExportVictimCasesController;
+use App\Http\Controllers\Victim\Cases\ForwardCaseController;
 use App\Http\Controllers\Victim\Cases\ListVictimCases;
 use App\Http\Controllers\Victim\Cases\RegisterVictimDataController;
+use App\Http\Controllers\Victim\Cases\ResolveCaseController;
 use App\Http\Controllers\Victim\Cases\ShowVictimCaseData;
 use App\Http\Controllers\Victim\Cases\StoreVictimCaseController;
 use App\Http\Controllers\Victim\Cases\UpdateVictimCaseController;
@@ -185,12 +187,10 @@ Route::middleware('auth')->group(callback: function () {
 
 
     Route::get('/victims/cases',ListVictimCases::class)->name('victim.cases.list');
-//    Route::get('/victims/received-cases', GetReceivedVictimCasesController::class)->name('victim.received.cases.list');
-//    Route::get('/victims/forwarded-cases', GetForwardedVictimCasesController::class)->name('victim.forwarded.cases.list');
     Route::get('/export/victims/cases', ExportVictimCasesController::class)->name('export.victims.cases');
     Route::get('/show/victimCase/{victim}/info', ShowVictimCaseData::class)->name('victim.case.info');
-//    Route::match(['put','patch','post'],'/update/victimCase/{case}', UpdateDataOfVictimCaseController::class)->name('victim.case.update');
-
+    Route::match(['post','put'],'/forward/case/{case}/to/{organization}', ForwardCaseController::class)->name('forward.case.to');
+    Route::match(['post','put'],'/resolve/case/{case}', ResolveCaseController::class)->name('resolve.case');
     #--- Reports ---#
 
     Route::get('/dashboard/reports', ReportsController::class)->name('dashboard.reports');

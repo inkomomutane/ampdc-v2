@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\ForwardedCases;
+use App\Events\ResolveCaseEvent;
 use App\Listeners\ForwardCasesListener;
+use App\Listeners\ResolveCase;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -23,6 +25,10 @@ class EventServiceProvider extends ServiceProvider
 
         ForwardedCases::class => [
             ForwardCasesListener::class,
+        ],
+
+        ResolveCaseEvent::class => [
+            ResolveCase::class,
         ],
 
     ];

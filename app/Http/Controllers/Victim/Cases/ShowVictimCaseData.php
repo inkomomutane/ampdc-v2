@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Victim\Cases;
 
+use App\Data\OrganizationData;
 use App\Data\VictimCaseData;
 use App\Data\VictimData;
+use App\Models\Organization;
 use App\Models\Victim;
 use Inertia\Inertia;
 
@@ -14,6 +16,7 @@ class ShowVictimCaseData
         return Inertia::render('Victim/ShowVictimData', [
             'victim' => VictimData::fromModel($victim),
             'cases' => VictimCaseData::collection($victim->cases),
+            'organizations' => OrganizationData::collection(Organization::all()),
         ]);
     }
 }

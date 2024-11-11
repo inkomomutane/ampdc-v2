@@ -1,10 +1,14 @@
 <script lang="ts" setup>
-import { PropType } from "vue";
+import { PropType, ref, watch } from "vue";
 import { Head } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputLabel from "@components/InputLabel.vue";
 import DisabledTextInput from "@components/DisabledTextInput.vue";
-import { VictimCaseData, VictimData } from "@/types/generated";
+import { OrganizationData, UserData, VictimCaseData, VictimData } from "@/types/generated";
+import ForwardCase from "@/Pages/Victim/ForwardCase.vue";
+import Flasher from "@/helprs";
+import { FlasherResponse } from "@flasher/flasher";
+import ResolveCase from "@/Pages/Victim/ResolveCase.vue";
 
 const props = defineProps({
     victim: {
@@ -15,7 +19,52 @@ const props = defineProps({
         type: Array<VictimCaseData>,
         required: true,
     },
+    organizations: {
+        type: Array<OrganizationData>,
+        default: Array<OrganizationData>(),
+    },
+    messages: Object as PropType<FlasherResponse>,
 });
+
+const caseToForward = ref<VictimCaseData | null>(null);
+const caseToForwardTrigger = ref(false);
+
+function openForwardCaseModal(caseId: String) {
+    caseToForward.value = caseId;
+    caseToForwardTrigger.value = true;
+}
+
+function closeForwardCaseModal() {
+    caseToForward.value = null;
+    caseToForwardTrigger.value = false;
+}
+
+const caseToResolve = ref(null);
+const caseToResolveTrigger = ref(false);
+
+function openResolveCaseModal(caseId: String) {
+    caseToResolve.value = caseId;
+    caseToResolveTrigger.value = true;
+}
+
+function closeResolveCaseModal() {
+    caseToResolve.value = null;
+    caseToResolveTrigger.value = false;
+}
+
+
+
+watch(
+    () => props.messages,
+    (value) => {
+        value?.envelopes.forEach((element) => {
+            Flasher.flash(
+                element.notification.type,
+                element.notification.message,
+            );
+        });
+    },
+);
 </script>
 <template>
     <Head title="Dados de vítima" />
@@ -128,10 +177,11 @@ const props = defineProps({
                 </p>
 
                 <div
-                    v-for="vCase in cases"
+                    v-for="vCase in cases as VictimCaseData[]"
                     class="max-w-7xl mx-auto p-6 lg:p-8 bg-white dark:bg-slate-800 mb-5"
                 >
-                    <header>
+                    <header class="flex flex-row justify-between">
+                    <div>
                         <h2
                             class="text-lg font-medium text-gray-900 dark:text-gray-100"
                         >
@@ -160,6 +210,25 @@ const props = defineProps({
                                     : "Em andamento"
                             }}
                         </p>
+                    </div>
+                        <div class="grid grid-cols-2 justify-end ">
+                            <button
+                                 v-if="!vCase.isTerminated"
+                                @click="openForwardCaseModal(vCase.id)"
+                                class="flex items-center w-fit h-fit justify-center text-white bg-green-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
+                            >
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path d="m9 10l3.258 2.444a1 1 0 0 0 1.353-.142L20 5"></path><path d="M21 12a9 9 0 1 1-6.67-8.693"></path></g></svg>
+                                <span class="ms-4">Encaminhar caso</span>
+                            </button>
+
+                            <button
+                                @click="openResolveCaseModal(vCase.id)"
+                                class="flex items-center h-fit w-fit justify-center text-white bg-blue-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
+                            >
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none"><path d="M14.3536 1.64663C13.4679 0.761016 12.0321 0.761019 11.1465 1.64664L6.89646 5.89664C6.84157 5.95152 6.80022 6.01844 6.77567 6.09207L5.52567 9.84207C5.46578 10.0217 5.51254 10.2198 5.64646 10.3537C5.78038 10.4877 5.97846 10.5344 6.15813 10.4745L9.90813 9.22453C9.98177 9.19998 10.0487 9.15863 10.1036 9.10374L14.3536 4.85374C15.2392 3.96813 15.2392 2.53225 14.3536 1.64663ZM12.9868 7.63468C12.9956 7.7554 13 7.8773 13 8.00024C13 10.7617 10.7614 13.0002 8 13.0002C5.23858 13.0002 3 10.7617 3 8.00024C3 5.23882 5.23858 3.00024 8 3.00024C8.12291 3.00024 8.24479 3.00468 8.36548 3.0134L9.24855 2.13033C8.8458 2.04509 8.42814 2.00024 8 2.00024C4.68629 2.00024 2 4.68654 2 8.00024C2 11.314 4.68629 14.0002 8 14.0002C11.3137 14.0002 14 11.314 14 8.00024C14 7.57208 13.9552 7.15439 13.8699 6.75162L12.9868 7.63468Z" fill="currentColor"></path></svg>
+                                <span class="ms-4">Actualizar estado do caso</span>
+                            </button>
+                        </div>
                     </header>
                     <div class="grid gap-6">
                         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -329,6 +398,9 @@ const props = defineProps({
                     </div>
                 </div>
             </div>
+
+            <ForwardCase v-if="caseToForwardTrigger" :open-modal="caseToForwardTrigger" :close="closeForwardCaseModal" :organizations="organizations" :case="caseToForward" />
+            <ResolveCase v-if="caseToResolveTrigger" :open-modal="caseToResolveTrigger" :close="closeResolveCaseModal" :case="caseToResolve" />
         </template>
     </AuthenticatedLayout>
 </template>
