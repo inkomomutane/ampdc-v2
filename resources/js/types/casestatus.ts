@@ -37,7 +37,6 @@ export enum EducationLevel {
 }
 export enum Gender {
     "FEMALE" = "Feminino",
-    "MALE" = "Masculino",
     "LGBTQ_OTHER" = "LGBTQ+/Outro",
 }
 export enum PeriodOfViolenceAct {
