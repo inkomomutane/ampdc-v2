@@ -22,9 +22,7 @@ class ReportByAgeRange
 
         foreach ($ranges as $range) {
             $rangeLabel = static::getRangeLabel($range);
-    
-
-            foreach (['Feminino','LGBTQ+/Outro'] as $gender) {
+            foreach (Gender::getValues() as $gender) {
                 $response[$rangeLabel][(string)$gender] = VictimCase::whereRelation('victim', 'age', '>=', $range[0])
                     ->whereRelation('victim', 'age', '<=', $range[1])
                     ->whereRelation('victim', 'gender', $gender)
