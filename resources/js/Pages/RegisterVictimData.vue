@@ -21,7 +21,7 @@ const props = defineProps({
     },
 });
 
-const genderOptions = getArrayFromEnum(Gendgit loger);
+const genderOptions = getArrayFromEnum(Gender);
 const civilStateOptions = getArrayFromEnum(CivilState);
 const educationLevelOptions = getArrayFromEnum(EducationLevel);
 
