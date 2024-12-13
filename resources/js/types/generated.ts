@@ -73,7 +73,6 @@ export type ForwardedCaseData = {
 };
 export enum Gender {
     "FEMALE" = "Feminino",
-    "MALE" = "Masculino",
     "LGBTQ_OTHER" = "LGBTQ+/Outro",
 }
 export type MediaData = {
